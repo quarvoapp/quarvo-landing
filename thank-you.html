@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QUARVO — You're In</title>
+  <meta name="robots" content="noindex"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:     #08080F;
+      --bg-2:   #0E0E1A;
+      --bg-3:   #141428;
+      --violet: #7B2FFF;
+      --cyan:   #00F5FF;
+      --white:  #F0F0F8;
+      --muted:  #6A6A88;
+      --muted2: #9090B0;
+      --border: rgba(123,47,255,0.2);
+      --border-s: rgba(255,255,255,0.07);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* BG ORBS */
+    .bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+    }
+    .orb-1 { width: 500px; height: 500px; background: var(--violet); opacity: .25; top: -150px; right: -100px; animation: o1 12s ease-in-out infinite; }
+    .orb-2 { width: 350px; height: 350px; background: var(--cyan);   opacity: .08; bottom: -80px; left: -80px;  animation: o2 10s ease-in-out infinite; }
+    .orb-3 { width: 300px; height: 300px; background: #2A0A6E;        opacity: .4;  top: 50%; left: 40%;        animation: o3 14s ease-in-out infinite; }
+    @keyframes o1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,30px)} }
+    @keyframes o2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(15px,-20px)} }
+    @keyframes o3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-15px,15px)} }
+
+    .grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(123,47,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123,47,255,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+    }
+
+    /* MAIN */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      width: 100%;
+      padding: 40px 24px;
+      text-align: center;
+      animation: fadeUp .8s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* LOGO */
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 48px;
+      text-decoration: none;
+    }
+    .logo-wordmark {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: .05em;
+      color: var(--white);
+    }
+
+    /* SUCCESS ICON */
+    .success-ring {
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+    .success-ring svg {
+      animation: ringPop .6s cubic-bezier(.34,1.56,.64,1) .2s both;
+    }
+    @keyframes ringPop {
+      from { opacity: 0; transform: scale(.5); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .success-ring::after {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,245,255,.15) 0%, transparent 70%);
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.15); opacity: .6; }
+    }
+
+    /* TAG */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(0,245,255,.07);
+      border: 1px solid rgba(0,245,255,.2);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      animation: fadeUp .6s ease .3s both;
+    }
+    .tag-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .5; transform: scale(.8); }
+    }
+
+    /* HEADLINE */
+    .headline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 8vw, 52px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      animation: fadeUp .6s ease .4s both;
+    }
+    .headline span {
+      background: linear-gradient(135deg, var(--white) 30%, var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* SUBTEXT */
+    .subtext {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted2);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      animation: fadeUp .6s ease .5s both;
+    }
+
+    /* INFO CARDS */
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+      animation: fadeUp .6s ease .6s both;
+    }
+    .card {
+      background: var(--bg-2);
+      border: 1px solid var(--border-s);
+      border-radius: 14px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-align: left;
+      transition: border-color .2s;
+    }
+    .card:hover { border-color: var(--border); }
+    .card-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: var(--bg-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted2);
+      font-weight: 300;
+    }
+
+    /* SHARE */
+    .share-section {
+      margin-bottom: 40px;
+      animation: fadeUp .6s ease .7s both;
+    }
+    .share-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .share-btns {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--bg-2);
+      border: 1px solid var(--border-s);
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted2);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .share-btn:hover { border-color: var(--violet); color: var(--white); transform: translateY(-1px); }
+    .share-btn--copy.copied { border-color: var(--cyan); color: var(--cyan); }
+
+    /* TAGLINE */
+    .tagline {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      color: var(--muted);
+      animation: fadeUp .6s ease .8s both;
+    }
+    .tagline span { color: var(--white); }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+      animation: fadeUp .6s ease .9s both;
+    }
+    .back-link:hover { color: var(--white); }
+
+    @media (max-width: 480px) {
+      .share-btns { flex-direction: column; align-items: center; }
+      .share-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- LOGO -->
+    <a href="/" class="logo">
+      <svg width="28" height="28" viewBox="0 0 64 64" fill="none">
+        <defs>
+          <linearGradient id="tyG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#7B2FFF"/>
+            <stop offset="100%" stop-color="#00F5FF"/>
+          </linearGradient>
+          <mask id="tyM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+        </defs>
+        <circle cx="30" cy="30" r="22" fill="url(#tyG)" mask="url(#tyM)"/>
+        <line x1="44" y1="44" x2="57" y2="57" stroke="url(#tyG)" stroke-width="8" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-wordmark">QUARVO</span>
+    </a>
+
+    <!-- SUCCESS ICON -->
+    <div class="success-ring">
+      <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
+        <defs>
+          <linearGradient id="checkG" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#7B2FFF"/>
+            <stop offset="100%" stop-color="#00F5FF"/>
+          </linearGradient>
+          <mask id="checkM"><rect width="96" height="96" fill="white"/><circle cx="46" cy="46" r="20" fill="black"/></mask>
+        </defs>
+        <circle cx="46" cy="46" r="34" fill="url(#checkG)" mask="url(#checkM)"/>
+        <line x1="66" y1="66" x2="82" y2="82" stroke="url(#checkG)" stroke-width="10" stroke-linecap="round"/>
+        <!-- check mark in center -->
+        <path d="M35 46l8 8 14-14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+      </svg>
+    </div>
+
+    <!-- TAG -->
+    <div class="tag">
+      <span class="tag-dot"></span>
+      Founding Member · Confirmed
+    </div>
+
+    <!-- HEADLINE -->
+    <h1 class="headline">
+      <span>You're in.</span><br/>
+      Welcome aboard.
+    </h1>
+
+    <!-- SUBTEXT -->
+    <p class="subtext">
+      Your spot is locked. Check your inbox for a confirmation<br/>
+      from the QUARVO team — you're first in line.
+    </p>
+
+    <!-- WHAT TO EXPECT -->
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="1" y="4" width="16" height="11" rx="2.5" stroke="#7B2FFF" stroke-width="1.5"/>
+            <path d="M1 7l8 5 8-5" stroke="#7B2FFF" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-title">Check your inbox</div>
+          <div class="card-desc">A welcome email from <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2e464b4242416e5f5b4f5c5841004741">[email&#160;protected]</a> is on its way to you right now.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <circle cx="9" cy="9" r="7.5" stroke="#00F5FF" stroke-width="1.5"/>
+            <path d="M9 5v4l3 2" stroke="#00F5FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-title">Early access is coming</div>
+          <div class="card-desc">We're building fast. You'll be first through the door — ahead of the general launch.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 1l2 5.5H17l-4.5 3.5 1.5 5.5L9 12.5 4 15.5l1.5-5.5L1 6.5h6L9 1z" stroke="#7B2FFF" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-title">Founding member pricing</div>
+          <div class="card-desc">As an early member you'll get exclusive access to our founding member rate when we launch.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHARE -->
+    <div class="share-section">
+      <div class="share-label">Know someone who shops smart? Share QUARVO</div>
+      <div class="share-btns">
+        <a
+          href="https://twitter.com/intent/tweet?text=Just%20joined%20the%20waitlist%20for%20%40quarvo%20%E2%80%94%20split%20any%20purchase%20across%20your%20existing%20cards.%20No%20new%20credit%2C%20no%20loans.%20Smart.%20quarvo.io&url=https://quarvo.io"
+          target="_blank"
+          class="share-btn"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Share on X
+        </a>
+        <a
+          href="https://www.linkedin.com/sharing/share-offsite/?url=https://quarvo.io"
+          target="_blank"
+          class="share-btn"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2" fill="currentColor"/></svg>
+          Share on LinkedIn
+        </a>
+        <button class="share-btn share-btn--copy" onclick="copyLink(this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          <span id="copyText">Copy link</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAGLINE -->
+    <div class="tagline">
+      <span>Split smart.</span> Buy bold.
+    </div>
+
+    <!-- BACK -->
+    <a href="/" class="back-link">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to quarvo.io
+    </a>
+
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function copyLink(btn) {
+      navigator.clipboard.writeText('https://quarvo.io').then(() => {
+        btn.classList.add('copied');
+        document.getElementById('copyText').tex

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QUARVO — Split Smart. Buy Bold.</title>
+  <meta name="description" content="Unlock bigger purchases with the credit you already have. Split any high-value purchase across your cards — intelligently, instantly, seamlessly."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <svg class="logo-icon" width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="navG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#7B2FFF"/>
+              <stop offset="100%" stop-color="#00F5FF"/>
+            </linearGradient>
+            <mask id="navM">
+              <rect width="64" height="64" fill="white"/>
+              <circle cx="30" cy="30" r="13" fill="black"/>
+            </mask>
+          </defs>
+          <circle cx="30" cy="30" r="22" fill="url(#navG)" mask="url(#navM)"/>
+          <line x1="44" y1="44" x2="57" y2="57" stroke="url(#navG)" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-wordmark">QUARVO</span>
+      </a>
+      <div class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
+        <a href="/investors.html" style="color:var(--cyan);">Investors</a>
+      </div>
+      <a href="#waitlist" class="btn-nav">Get Early Access</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Credit Combination Technology
+        </div>
+
+        <h1 class="hero-title">
+          Unlock bigger<br/>
+          <span class="title-accent">purchases</span><br/>
+          with the credit<br/>
+          you already have.
+        </h1>
+
+        <p class="hero-sub">
+          Split any high-value purchase across your cards —<br/>
+          intelligently, instantly, seamlessly.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#waitlist" class="btn-primary">
+            Get Early Access
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#how" class="btn-ghost">See how it works</a>
+        </div>
+
+        <div class="hero-trust">
+          <span>Not a loan</span>
+          <span class="trust-dot">·</span>
+          <span>No new credit</span>
+          <span class="trust-dot">·</span>
+          <span>Your cards. Your power.</span>
+        </div>
+      </div>
+
+      <!-- CARD VISUAL -->
+      <div class="hero-visual">
+        <div class="purchase-card">
+          <div class="purchase-header">
+            <span class="purchase-label">Purchase total</span>
+            <span class="purchase-tag">✓ Approved</span>
+          </div>
+          <div class="purchase-amount">$3,480<span class="purchase-cents">.00</span></div>
+
+          <div class="split-label">Split across 3 cards</div>
+
+          <div class="cards-list">
+            <div class="card-item card-item--1">
+              <div class="card-chip"></div>
+              <div class="card-info">
+                <span class="card-name">Visa Platinum</span>
+                <span class="card-last">•••• 4821</span>
+              </div>
+              <div class="card-amount">$1,400</div>
+              <div class="card-bar">
+                <div class="card-bar-fill" style="width: 40%"></div>
+              </div>
+            </div>
+
+            <div class="card-item card-item--2">
+              <div class="card-chip"></div>
+              <div class="card-info">
+                <span class="card-name">Mastercard Gold</span>
+                <span class="card-last">•••• 7293</span>
+              </div>
+              <div class="card-amount">$1,080</div>
+              <div class="card-bar">
+                <div class="card-bar-fill" style="width: 31%"></div>
+              </div>
+            </div>
+
+            <div class="card-item card-item--3">
+              <div class="card-chip"></div>
+              <div class="card-info">
+                <span class="card-name">Amex Blue</span>
+                <span class="card-last">•••• 1156</span>
+              </div>
+              <div class="card-amount">$1,000</div>
+              <div class="card-bar">
+                <div class="card-bar-fill" style="width: 29%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="purchase-footer">
+            <svg width="16" height="16" viewBox="0 0 64 64" fill="none">
+              <defs>
+                <linearGradient id="cardG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+                </linearGradient>
+                <mask id="cardM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+              </defs>
+              <circle cx="30" cy="30" r="22" fill="url(#cardG)" mask="url(#cardM)"/>
+              <line x1="44" y1="44" x2="57" y2="57" stroke="url(#cardG)" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+            <span>Powered by QUARVO QuantumSplit™</span>
+          </div>
+        </div>
+
+        <!-- Floating elements -->
+        <div class="float-badge float-1">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1l1.5 3.5L12 5.5 9.5 8l.5 3.5L7 10l-3 1.5.5-3.5L2 5.5l3.5-1L7 1z" fill="#00F5FF"/></svg>
+          Smart allocation
+        </div>
+        <div class="float-badge float-2">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="#7B2FFF" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="#7B2FFF" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Done in seconds
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-num">$122B</span>
+        <span class="stat-label">US credit card market</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">3 cards</span>
+        <span class="stat-label">Average cards per American</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">1 checkout</span>
+        <span class="stat-label">That still limits you to one</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item stat-item--accent">
+        <span class="stat-num">QUARVO</span>
+        <span class="stat-label">Changes everything</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem" id="problem">
+    <div class="section-inner">
+      <div class="section-tag">The Problem</div>
+      <h2 class="section-title">
+        The real limitation isn't<br/>your total credit.<br/>
+        <span class="title-muted">It's how fragmented it is.</span>
+      </h2>
+
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="13" stroke="#7B2FFF" stroke-width="1.5" opacity="0.4"/>
+              <path d="M10 16l4 4 8-8" stroke="#7B2FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>You have the power</h3>
+          <p>Most professionals carry $8,000–$15,000 in available credit across multiple cards. The buying power is already there.</p>
+        </div>
+        <div class="problem-card problem-card--highlight">
+          <div class="problem-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect x="2" y="9" width="28" height="16" rx="4" stroke="rgba(255,80,80,0.7)" stroke-width="1.5"/>
+              <path d="M10 17h12" stroke="rgba(255,80,80,0.8)" stroke-width="2" stroke-linecap="round"/>
+              <path d="M20 13l4 4-4 4" stroke="rgba(255,80,80,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>But checkout says no</h3>
+          <p>Every checkout is built for one card. One limit. One ceiling. Your real purchasing power — invisible to the system.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M16 4L3 27h26L16 4z" stroke="#7B2FFF" stroke-width="1.5" stroke-linejoin="round" opacity="0.6"/>
+              <path d="M16 13v6" stroke="#7B2FFF" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="16" cy="22" r="1.5" fill="#7B2FFF"/>
+            </svg>
+          </div>
+          <h3>The cost of fragmentation</h3>
+          <p>Missed flights. Lost hotel deals. Delayed purchases. All because the system can't see what you actually have.</p>
+        </div>
+      </div>
+
+      <div class="problem-quote">
+        <div class="quote-line"></div>
+        <blockquote>
+          "Large purchases fail not because people lack purchasing power,<br/>
+          but because that power is <em>spread across multiple cards</em><br/>
+          while checkout still depends on one."
+        </blockquote>
+        <div class="quote-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="solution" id="solution">
+    <div class="solution-bg">
+      <div class="sol-orb sol-orb-1"></div>
+      <div class="sol-orb sol-orb-2"></div>
+    </div>
+    <div class="section-inner">
+      <div class="section-tag">The Solution</div>
+      <h2 class="section-title">
+        Not more credit.<br/>
+        <span class="title-accent">Just a smarter way<br/>to use what you have.</span>
+      </h2>
+
+      <div class="solution-grid">
+        <div class="solution-feature">
+          <div class="feature-number">01</div>
+          <h3>Use your existing credit intelligently</h3>
+          <p>QUARVO reads your available credit across cards and builds the optimal split automatically. No guesswork. No manual math.</p>
+        </div>
+        <div class="solution-feature">
+          <div class="feature-number">02</div>
+          <h3>Move beyond the one-card limit</h3>
+          <p>Every high-value purchase deserves to see your full financial picture. QUARVO makes that possible for the first time.</p>
+        </div>
+        <div class="solution-feature">
+          <div class="feature-number">03</div>
+          <h3>Buy with total confidence</h3>
+          <p>Approach any purchase knowing exactly how it will be covered. Clarity, control, and zero surprises at checkout.</p>
+        </div>
+        <div class="solution-feature">
+          <div class="feature-number">04</div>
+          <h3>This is not a loan</h3>
+          <p>No debt. No interest on new credit. No new accounts. Just your existing cards, working together for the first time.</p>
+        </div>
+      </div>
+
+      <div class="vs-block">
+        <div class="vs-col">
+          <div class="vs-label vs-label--bad">Others</div>
+          <ul class="vs-list vs-list--bad">
+            <li>Give you new debt</li>
+            <li>Add another credit line</li>
+            <li>Charge interest on new loans</li>
+            <li>Require credit checks</li>
+            <li>Limit you to their network</li>
+          </ul>
+        </div>
+        <div class="vs-divider">
+          <div class="vs-atom">
+            <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="vsG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#7B2FFF"/>
+                  <stop offset="100%" stop-color="#00F5FF"/>
+                </linearGradient>
+                <mask id="vsM">
+                  <rect width="64" height="64" fill="white"/>
+                  <circle cx="30" cy="30" r="13" fill="black"/>
+                </mask>
+              </defs>
+              <circle cx="30" cy="30" r="22" fill="url(#vsG)" mask="url(#vsM)"/>
+              <line x1="44" y1="44" x2="57" y2="57" stroke="url(#vsG)" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="vs-col">
+          <div class="vs-label vs-label--good">QUARVO</div>
+          <ul class="vs-list vs-list--good">
+            <li>Uses credit you already have</li>
+            <li>Zero new accounts needed</li>
+            <li>No new interest charges</li>
+            <li>No hard credit pulls</li>
+            <li>Works with your existing cards</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="section-inner">
+      <div class="section-tag">How It Works</div>
+      <h2 class="section-title">
+        Simple on the surface.<br/>
+        <span class="title-muted">Powerful underneath.</span>
+      </h2>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <div class="step-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                <rect width="36" height="36" rx="10" fill="rgba(123,47,255,0.15)"/>
+                <path d="M18 8v20M8 18h20" stroke="#7B2FFF" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="18" cy="18" r="5" stroke="#00F5FF" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3>Enter your purchase</h3>
+            <p>Tell QUARVO what you want to buy and the total amount. That's all we need to start.</p>
+          </div>
+          <div class="step-connector"></div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <div class="step-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                <rect width="36" height="36" rx="10" fill="rgba(123,47,255,0.15)"/>
+                <defs>
+                  <linearGradient id="stepG2" x1="4" y1="4" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#7B2FFF"/>
+                    <stop offset="100%" stop-color="#00F5FF"/>
+                  </linearGradient>
+                  <mask id="stepM2"><rect width="36" height="36" fill="white"/><circle cx="17" cy="17" r="7" fill="black"/></mask>
+                </defs>
+                <circle cx="17" cy="17" r="12" fill="url(#stepG2)" mask="url(#stepM2)"/>
+                <line x1="25" y1="25" x2="31" y2="31" stroke="url(#stepG2)" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>QuantumSplit™ goes to work</h3>
+            <p>Our algorithm analyzes your available credit across all cards and builds the optimal split in milliseconds.</p>
+          </div>
+          <div class="step-connector"></div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <div class="step-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                <rect width="36" height="36" rx="10" fill="rgba(0,245,255,0.1)"/>
+                <path d="M10 18l5 5 11-10" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="18" cy="18" r="11" stroke="#00F5FF" stroke-width="1.5" opacity="0.4"/>
+              </svg>
+            </div>
+            <h3>Purchase complete</h3>
+            <p>Review the split, confirm, and move forward. Done in seconds. Your cards do the rest.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="use-cases">
+        <div class="use-cases-label">Built for purchases that matter</div>
+        <div class="use-cases-grid">
+          <div class="use-case">✈️ International flights</div>
+          <div class="use-case">🏨 Hotel bookings</div>
+          <div class="use-case">💻 Tech & electronics</div>
+          <div class="use-case">🛋️ Home & furniture</div>
+          <div class="use-case">🎓 Education & courses</div>
+          <div class="use-case">🏥 Medical expenses</div>
+          <div class="use-case">🚗 Auto purchases</div>
+          <div class="use-case">🎉 Events & experiences</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="manifesto-bg">
+      <div class="man-orb man-orb-1"></div>
+    </div>
+    <div class="section-inner">
+      <div class="manifesto-content">
+        <div class="manifesto-symbol">
+          <svg width="72" height="72" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="manG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#7B2FFF"/>
+                <stop offset="100%" stop-color="#00F5FF"/>
+              </linearGradient>
+              <mask id="manM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+            </defs>
+            <circle cx="30" cy="30" r="22" fill="url(#manG)" mask="url(#manM)"/>
+            <line x1="44" y1="44" x2="57" y2="57" stroke="url(#manG)" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="manifesto-text">
+          In quantum physics, a quark is the most fundamental particle in the universe —<br/>
+          invisible alone, but <em>unstoppable when combined.</em><br/><br/>
+          Your credit is the same.<br/>
+          Distributed. Fragmented. Waiting to be unified.<br/><br/>
+          <strong>QUARVO is the force that combines it.</strong>
+        </p>
+        <div class="manifesto-tagline">Split smart. Buy bold.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="section-inner">
+      <div class="section-tag">FAQ</div>
+      <h2 class="section-title">Questions, answered.</h2>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-q">Is this a new loan?</div>
+          <div class="faq-a">No. QUARVO doesn't lend you money. It helps you use the credit you already have across your existing cards. No new debt. No interest on new credit lines.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Do I need to open new accounts?</div>
+          <div class="faq-a">Never. QUARVO works with the cards already in your wallet. We just help them work together for the first time.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Will this affect my credit score?</div>
+          <div class="faq-a">No hard credit pulls. No new inquiries. Your credit profile stays exactly as it is — we're just optimizing how you use existing available credit.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What kinds of purchases can I make?</div>
+          <div class="faq-a">Any high-value purchase where one card's limit falls short — travel, electronics, furniture, experiences, medical, and more. If it matters, QUARVO can help.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">How is QUARVO different from BNPL?</div>
+          <div class="faq-a">BNPL services like Klarna or Affirm give you new credit and charge interest or fees. QUARVO activates credit you already own. Fundamentally different — and fundamentally better.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">When will it launch?</div>
+          <div class="faq-a">We're building now. Join the waitlist for early access, product updates, and first invitations when we open the doors.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST -->
+  <section class="waitlist" id="waitlist">
+    <div class="waitlist-bg">
+      <div class="wl-orb wl-orb-1"></div>
+      <div class="wl-orb wl-orb-2"></div>
+    </div>
+    <div class="section-inner">
+      <div class="waitlist-content">
+        <div class="waitlist-badge">
+          <span class="badge-dot badge-dot--pulse"></span>
+          Now accepting early access requests
+        </div>
+        <h2 class="waitlist-title">
+          Be first to unlock<br/>
+          <span class="title-accent">your full purchasing power.</span>
+        </h2>
+        <p class="waitlist-sub">
+          Join smart spenders already on the list. Get product updates,<br/>
+          first access, and a founding member spot when we launch.
+        </p>
+
+        <form
+          class="waitlist-form"
+          id="waitlistForm"
+          name="quarvo-waitlist"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          onsubmit="handleSubmit(event)"
+        >
+          <!-- Honeypot anti-spam (hidden) -->
+          <input type="hidden" name="form-name" value="quarvo-waitlist"/>
+          <p style="display:none"><input name="bot-field"/></p>
+
+          <div class="form-row">
+            <input
+              type="email"
+              id="emailInput"
+              name="email"
+              placeholder="your@email.com"
+              required
+              class="form-input"
+            />
+            <button type="submit" class="btn-primary btn-submit">
+              <span id="btnText">Join Waitlist</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <div class="form-note">No spam. No credit checks. Just early access.</div>
+          <div class="form-success" id="formSuccess">
+            <svg width="18" height="18" viewBox="0 0 64 64" fill="none">
+              <defs>
+                <linearGradient id="sucG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+                </linearGradient>
+                <mask id="sucM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+              </defs>
+              <circle cx="30" cy="30" r="22" fill="url(#sucG)" mask="url(#sucM)"/>
+              <line x1="44" y1="44" x2="57" y2="57" stroke="url(#sucG)" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+            You're on the list. We'll be in touch soon.
+          </div>
+        </form>
+
+        <div class="waitlist-trust">
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.5 3.5L13 5.5 10.5 8l.5 3.5L8 10.5 5 12l.5-3.5L3 6l3.5-.5L8 2z" stroke="#00F5FF" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            Free to join
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#00F5FF" stroke-width="1.2"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#00F5FF" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Zero obligations
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#00F5FF" stroke-width="1.2"/><path d="M5.5 8l2 2 3-3" stroke="#00F5FF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            No credit check
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg class="logo-icon" width="28" height="28" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="footG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+            </linearGradient>
+            <mask id="footM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+          </defs>
+          <circle cx="30" cy="30" r="22" fill="url(#footG)" mask="url(#footM)"/>
+          <line x1="44" y1="44" x2="57" y2="57" stroke="url(#footG)" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-wordmark">QUARVO</span>
+      </div>
+      <div class="footer-tagline">Split smart. Buy bold.</div>
+      <div class="footer-links">
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
+        <a href="#waitlist">Early Access</a>
+        <a href="/investors.html" style="color:var(--cyan);">Investors</a>
+      </div>
+      <div class="footer-legal">
+        © 2026 QUARVO. All rights reserved. · QUARVO is not a lender. No new credit is issued. ·
+        <a href="/privacy.html" style="color:inherit;text-decoration:underline;opacity:.6;">Privacy Policy</a> ·
+        <a href="/terms.html" style="color:inherit;text-decoration:underline;opacity:.6;">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

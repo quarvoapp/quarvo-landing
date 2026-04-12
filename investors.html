@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QUARVO — Investor Access</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08080F; --bg-2: #0E0E1A; --bg-3: #141428;
+      --violet: #7B2FFF; --cyan: #00F5FF;
+      --white: #F0F0F8; --muted: #6A6A88; --muted2: #9090B0;
+      --border: rgba(123,47,255,0.22); --border-s: rgba(255,255,255,0.07);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg); color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      overflow: hidden; -webkit-font-smoothing: antialiased;
+    }
+
+    /* BG */
+    .bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); }
+    .orb-1 { width: 600px; height: 600px; background: var(--violet); opacity: .2; top: -200px; right: -100px; animation: f1 14s ease-in-out infinite; }
+    .orb-2 { width: 400px; height: 400px; background: var(--cyan); opacity: .07; bottom: -100px; left: -80px; animation: f2 11s ease-in-out infinite; }
+    @keyframes f1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-25px,35px)} }
+    @keyframes f2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,-25px)} }
+    .grid { position: fixed; inset: 0; background-image: linear-gradient(rgba(123,47,255,0.05) 1px,transparent 1px), linear-gradient(90deg,rgba(123,47,255,0.05) 1px,transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%); }
+
+    /* CONTAINER */
+    .wrap {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 480px; padding: 32px 24px;
+      animation: up .7s ease both;
+    }
+    @keyframes up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* LOGO */
+    .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 48px; justify-content: center; }
+    .logo-wm { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: .05em; color: var(--white); }
+
+    /* CARD */
+    .card {
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.5), 0 0 60px rgba(123,47,255,.12);
+    }
+
+    .card-eyebrow {
+      font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--cyan);
+      background: rgba(0,245,255,.07); border: 1px solid rgba(0,245,255,.18);
+      padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 20px;
+    }
+    .card h1 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; line-height: 1.2; }
+    .card p { font-size: 14px; font-weight: 300; color: var(--muted2); line-height: 1.7; margin-bottom: 28px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .form-input {
+      background: var(--bg-3); border: 1px solid var(--border-s); border-radius: 10px;
+      padding: 13px 16px; font-size: 14px; color: var(--white); outline: none;
+      font-family: 'DM Sans', sans-serif; transition: border-color .2s, box-shadow .2s;
+    }
+    .form-input::placeholder { color: var(--muted); }
+    .form-input:focus { border-color: var(--violet); box-shadow: 0 0 0 3px rgba(123,47,255,.15); }
+
+    .btn-submit {
+      width: 100%; background: var(--violet); color: #fff; border: none; border-radius: 10px;
+      padding: 14px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px;
+      cursor: pointer; transition: transform .2s, box-shadow .2s, opacity .2s;
+      box-shadow: 0 4px 24px rgba(123,47,255,.4); display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 36px rgba(123,47,255,.55); }
+    .btn-submit:disabled { opacity: .6; transform: none; }
+
+    .form-note { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: .06em; text-align: center; margin-top: 12px; }
+
+    /* SUCCESS */
+    .success { display: none; text-align: center; padding: 8px 0; }
+    .success.show { display: block; }
+    .success-icon { font-size: 40px; margin-bottom: 16px; }
+    .success h2 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+    .success p { font-size: 14px; color: var(--muted2); font-weight: 300; line-height: 1.7; margin-bottom: 20px; }
+    .deck-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--violet); color: #fff; text-decoration: none;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px;
+      padding: 13px 28px; border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(123,47,255,.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .deck-link:hover { transform: translateY(-1px); box-shadow: 0 8px 36px rgba(123,47,255,.55); }
+
+    .divider { height: 1px; background: var(--border-s); margin: 28px 0; }
+    .bottom-note { text-align: center; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: .06em; }
+    .bottom-note a { color: var(--muted); text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="grid"></div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="logo">
+      <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
+        <defs>
+          <linearGradient id="gG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+          </linearGradient>
+          <mask id="gM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+        </defs>
+        <circle cx="30" cy="30" r="22" fill="url(#gG)" mask="url(#gM)"/>
+        <line x1="44" y1="44" x2="57" y2="57" stroke="url(#gG)" stroke-width="8" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-wm">QUARVO</span>
+    </div>
+
+    <div class="card">
+
+      <!-- FORM STATE -->
+      <div id="formState">
+        <div class="card-eyebrow">Investor Access · Pre-Seed</div>
+        <h1>Request access to our pitch deck</h1>
+        <p>Share your details and we'll send you the full QUARVO pitch deck immediately. All information is kept strictly confidential.</p>
+
+        <form
+          id="investorForm"
+          name="quarvo-investors"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          onsubmit="handleGate(event)"
+        >
+          <input type="hidden" name="form-name" value="quarvo-investors"/>
+          <p style="display:none"><input name="bot-field"/></p>
+
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Full name" required class="form-input"/>
+            <input type="email" name="email" placeholder="Work email" required class="form-input"/>
+            <input type="text" name="firm" placeholder="Firm / Fund name (or 'Independent')" required class="form-input"/>
+          </div>
+
+          <button type="submit" class="btn-submit" id="gateBtn">
+            <span id="gateBtnText">Access Pitch Deck</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="form-note">Confidential · Not for distribution · NDA available on request</div>
+        </form>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success" id="successState">
+        <div class="success-icon">
+          <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+            <defs>
+              <linearGradient id="sG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+              </linearGradient>
+              <mask id="sM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+            </defs>
+            <circle cx="30" cy="30" r="22" fill="url(#sG)" mask="url(#sM)"/>
+            <path d="M22 30l6 6 14-14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="44" y1="44" x2="57" y2="57" stroke="url(#sG)" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2>You're in. View the deck below.</h2>
+        <p>A copy has also been sent to your email. We'll follow up within 24 hours.</p>
+        <a href="/deck.html" class="deck-link">
+          View Pitch Deck
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+    <div class="bottom-note">
+      <a href="/">quarvo.io</a> · Confidential · © 2026 QUARVO
+    </div>
+
+  </div>
+
+  <script>
+    function handleGate(e) {
+      e.preventDefault();
+      const btn = document.getElementById('gateBtn');
+      document.getElementById('gateBtnText').textContent = 'Sending...';
+      btn.disabled = true;
+
+      const form = document.getElementById('investorForm');
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString(),
+      })
+      .then(() => {
+        document.getElementById('formState').style.display = 'none';
+        document.getElementById('successState').classList.add('show');
+      })
+      .catch(() => {
+        document.getElementById('formState').style.display = 'none';
+        document.getElementById('successState').classList.add('show');
+      });
+    }
+  </script>
+</body>
+</html>
