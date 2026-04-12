@@ -199,10 +199,14 @@
       btn.disabled = true;
 
       const form = document.getElementById('investorForm');
-      fetch('/', {
+      fetch('https://app.quarvo.io/api/investors/register', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form)).toString(),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.querySelector('[name=name]').value,
+          email: form.querySelector('[name=email]').value,
+          firm: form.querySelector('[name=firm]').value,
+        }),
       })
       .then(() => {
         document.getElementById('formState').style.display = 'none';
