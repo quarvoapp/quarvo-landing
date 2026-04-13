@@ -1777,3 +1777,65 @@ blockquote em {
   color: var(--violet);
   font-style: normal;
 }
+
+/* ══ SHARE BUTTONS ════════════════════════════════════════════════════════ */
+.share-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+.share-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+.share-btn--whatsapp {
+  background: rgba(37,211,102,0.15);
+  border-color: rgba(37,211,102,0.3);
+  color: #25D366;
+}
+.share-btn--email {
+  background: rgba(123,47,255,0.15);
+  border-color: rgba(123,47,255,0.3);
+  color: var(--violet);
+}
+.share-btn--linkedin {
+  background: rgba(0,119,181,0.15);
+  border-color: rgba(0,119,181,0.3);
+  color: #0077B5;
+}
+.share-btn--twitter {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.12);
+  color: var(--white);
+}
+.share-btn--copy {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.1);
+  color: var(--muted-2);
+}
