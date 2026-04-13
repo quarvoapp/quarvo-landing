@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Quarvo — Investor Deck 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #08080F; --bg2: #0E0E1A; --bg3: #13131F;
+    --violet: #7B2FFF; --cyan: #00F5FF; --cyan2: #00C8FF;
+    --text: #F0F0F8; --soft: #9090B0; --muted: #6A6A88;
+    --border: rgba(255,255,255,0.07);
+    --font-d: 'Syne', sans-serif;
+    --font-b: 'DM Sans', sans-serif;
+    --font-m: 'DM Mono', monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-b); line-height: 1.6; }
+
+  /* Nav */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 56px;
+    background: rgba(8,8,15,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--font-d); font-weight: 800; font-size: 18px; letter-spacing: .06em; background: linear-gradient(90deg,var(--violet),var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .nav-tag { font-family: var(--font-m); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .nav-links { display: flex; gap: 20px; }
+  .nav-links a { font-family: var(--font-m); font-size: 11px; letter-spacing: .1em; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color .2s; }
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* Slides */
+  .slide {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 80px 48px; position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .slide-inner { max-width: 1100px; width: 100%; }
+
+  /* Typography */
+  .slide-tag { display: inline-flex; align-items: center; gap: 8px; padding: 5px 14px; border-radius: 999px; background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.2); font-family: var(--font-m); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 24px; }
+  .slide-tag.violet { background: rgba(123,47,255,0.1); border-color: rgba(123,47,255,0.25); color: var(--violet); }
+  h1.hero { font-family: var(--font-d); font-weight: 800; font-size: clamp(48px,7vw,88px); letter-spacing: -.03em; line-height: 1; margin-bottom: 24px; }
+  h2.title { font-family: var(--font-d); font-weight: 800; font-size: clamp(36px,5vw,60px); letter-spacing: -.02em; line-height: 1.1; margin-bottom: 16px; }
+  h3.sub { font-family: var(--font-d); font-weight: 700; font-size: clamp(22px,3vw,34px); letter-spacing: -.01em; margin-bottom: 12px; }
+  p.body { font-size: 17px; color: var(--soft); line-height: 1.75; max-width: 640px; }
+  .grad { background: linear-gradient(90deg,var(--violet),var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+  /* Orbs */
+  .orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px); }
+  .orb-v { background: rgba(123,47,255,0.18); }
+  .orb-c { background: rgba(0,245,255,0.1); }
+
+  /* Cards */
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 28px 24px; }
+  .card-lg { background: var(--bg2); border: 1px solid var(--border); border-radius: 24px; padding: 36px 32px; }
+
+  /* Grid */
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+
+  /* Metric */
+  .metric-val { font-family: var(--font-d); font-weight: 800; font-size: 48px; letter-spacing: -.02em; line-height: 1; }
+  .metric-lbl { font-family: var(--font-m); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+  /* Timeline */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item { display: flex; gap: 20px; padding-bottom: 28px; position: relative; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-line { width: 1px; background: var(--border); position: absolute; left: 15px; top: 32px; bottom: 0; }
+  .tl-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-m); font-size: 11px; font-weight: 500; flex-shrink: 0; }
+  .tl-dot.live { background: var(--violet); border: 1px solid var(--violet); color: #fff; box-shadow: 0 0 16px rgba(123,47,255,.5); }
+  .tl-dot.next { background: rgba(123,47,255,0.15); border: 1px solid rgba(123,47,255,0.3); color: var(--violet); }
+  .tl-dot.future { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--muted); }
+
+  /* Quote */
+  .blockquote { border-left: 3px solid var(--violet); padding: 20px 24px; background: rgba(123,47,255,0.07); border-radius: 0 14px 14px 0; font-family: var(--font-d); font-size: 20px; font-style: italic; line-height: 1.6; margin: 28px 0; }
+
+  /* Table */
+  .comp-table { width: 100%; border-collapse: collapse; }
+  .comp-table th { font-family: var(--font-m); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+  .comp-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table .qrow td { background: rgba(123,47,255,0.06); }
+  .comp-table .qrow td:first-child { font-family: var(--font-d); font-weight: 800; color: var(--cyan); }
+  .check { color: #4ADE80; font-weight: 700; }
+  .cross { color: #F87171; }
+
+  /* Fee model */
+  .fee-box { padding: 24px; border-radius: 16px; }
+  .fee-box.state1 { background: rgba(123,47,255,0.08); border: 1px solid rgba(123,47,255,0.2); }
+  .fee-box.state2 { background: rgba(0,245,255,0.06); border: 1px solid rgba(0,245,255,0.18); }
+
+  /* Print */
+  @media print {
+    .nav { display: none; }
+    .slide { page-break-after: always; min-height: auto; padding: 40px; }
+  }
+  @media (max-width: 768px) {
+    .slide { padding: 80px 24px 48px; }
+    .g2, .g3, .g4 { grid-template-columns: 1fr; }
+    .nav { padding: 0 24px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div>
+    <div class="nav-logo">QUARVO</div>
+  </div>
+  <div class="nav-tag">Investor Deck · Pre-Seed 2026 · Confidential</div>
+  <div class="nav-links">
+    <a href="#problem">Problem</a>
+    <a href="#solution">Solution</a>
+    <a href="#model">Model</a>
+    <a href="#traction">Traction</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#ask">The Ask</a>
+  </div>
+</nav>
+
+<!-- SLIDE 1 — COVER -->
+<section class="slide" id="cover" style="background: radial-gradient(ellipse at 80% 20%, rgba(123,47,255,0.25) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(0,245,255,0.1) 0%, transparent 50%), var(--bg);">
+  <div class="orb orb-v" style="width:500px;height:500px;top:-100px;right:-100px;"></div>
+  <div class="orb orb-c" style="width:300px;height:300px;bottom:-100px;left:-50px;"></div>
+  <div class="slide-inner">
+    <div class="slide-tag">Credit Combination Technology™</div>
+    <h1 class="hero">
+      Your cards.<br/>
+      <span class="grad">One purchase.</span><br/>
+      Infinite power.
+    </h1>
+    <p class="body" style="font-size:20px;margin-bottom:40px;">Quarvo combines the credit you already have across multiple cards to unlock purchases that no single card could cover — intelligently, instantly, seamlessly.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
+      <div style="padding:5px 16px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid var(--border);font-family:var(--font-m);font-size:12px;color:var(--soft);">Not a loan</div>
+      <div style="padding:5px 16px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid var(--border);font-family:var(--font-m);font-size:12px;color:var(--soft);">No new credit</div>
+      <div style="padding:5px 16px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid var(--border);font-family:var(--font-m);font-size:12px;color:var(--soft);">Stripe secured</div>
+      <div style="padding:5px 16px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid var(--border);font-family:var(--font-m);font-size:12px;color:var(--soft);">Pre-Seed 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 2 — PROBLEM -->
+<section class="slide" id="problem">
+  <div class="orb orb-v" style="width:400px;height:400px;top:-80px;left:-80px;"></div>
+  <div class="slide-inner">
+    <div class="slide-tag violet">The Problem</div>
+    <h2 class="title">$2 trillion in credit.<br/><span class="grad">Stranded by fragmentation.</span></h2>
+    <p class="body" style="margin-bottom:40px;">US consumers hold over $2T in approved credit card balances — but that credit is locked in separate accounts, invisible to each other. When a $3,500 purchase exceeds any single card's limit, the transaction fails. Not because the money doesn't exist, but because the system can't combine it.</p>
+    <div class="g3" style="margin-bottom:32px;">
+      <div class="card">
+        <div class="metric-val" style="color:var(--cyan);">34%</div>
+        <div class="metric-lbl">Of high-value carts abandoned due to card limits</div>
+      </div>
+      <div class="card">
+        <div class="metric-val" style="color:var(--violet);">$847B</div>
+        <div class="metric-lbl">High-ticket purchase market per year in the US</div>
+      </div>
+      <div class="card">
+        <div class="metric-val" style="color:#F87171;">$0</div>
+        <div class="metric-lbl">Existing solutions that unlock credit you already own</div>
+      </div>
+    </div>
+    <div class="blockquote">
+      "Klarna and Affirm tell consumers: you don't have enough, so we'll lend you more.<br/>
+      Quarvo tells consumers: you already have enough. Let us show you how to use it."
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3 — SOLUTION -->
+<section class="slide" id="solution" style="background:var(--bg2);">
+  <div class="orb orb-c" style="width:500px;height:500px;top:-100px;right:-100px;"></div>
+  <div class="slide-inner">
+    <div class="slide-tag">The Solution</div>
+    <h2 class="title">Credit Combination<br/><span class="grad">Technology™</span></h2>
+    <div class="g2" style="margin-top:32px;align-items:start;">
+      <div>
+        <p class="body" style="margin-bottom:28px;">Quarvo's QuantumSplit™ algorithm calculates the optimal distribution of a purchase across multiple cards in milliseconds — allocating the right amount to each card based on available limits, fees, and utilization goals.</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <div style="position:relative;">
+              <div class="tl-dot live">01</div>
+              <div class="tl-line"></div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-d);font-weight:700;font-size:16px;margin-bottom:4px;">Enter purchase + merchant</div>
+              <div style="font-size:14px;color:var(--soft);">User inputs the merchant and purchase total. Quarvo checks merchant registration status.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div style="position:relative;">
+              <div class="tl-dot live">02</div>
+              <div class="tl-line"></div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-d);font-weight:700;font-size:16px;margin-bottom:4px;">QuantumSplit™ calculates</div>
+              <div style="font-size:14px;color:var(--soft);">Algorithm distributes the purchase proportionally across available card limits, minimizing utilization impact per card.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div style="position:relative;">
+              <div class="tl-dot live">03</div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-d);font-weight:700;font-size:16px;margin-bottom:4px;">Quantum Virtual Card issued</div>
+              <div style="font-size:14px;color:var(--soft);">After all cards are authorized via Stripe, a virtual card is issued for the full purchase amount. User pays the merchant.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;gap:16px;">
+        <div class="card" style="background:var(--bg3);border-color:rgba(123,47,255,0.2);">
+          <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--violet);margin-bottom:12px;">QuantumSplit™ example</div>
+          <div style="font-size:13px;color:var(--soft);margin-bottom:14px;">Purchase: <strong style="color:var(--text);">$3,500 hotel</strong></div>
+          <div style="display:grid;gap:8px;">
+            {["Chase Sapphire → $1,400","Amex Gold → $1,080","Citi Double Cash → $1,020"].map((l,i) => `
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--bg2);border-radius:10px;font-size:13px;">
+              <span style="color:var(--soft);">${["Chase Sapphire","Amex Gold","Citi Double Cash"][i]}</span>
+              <span style="font-family:var(--font-d);font-weight:700;color:var(--cyan);">${["$1,400","$1,080","$1,020"][i]}</span>
+            </div>`).join("")}
+          </div>
+          <div style="margin-top:12px;padding:10px 12px;background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.15);border-radius:10px;text-align:center;">
+            <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Quantum Virtual Card issued</div>
+            <div style="font-family:var(--font-d);font-weight:800;font-size:24px;background:linear-gradient(90deg,var(--violet),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$3,500</div>
+          </div>
+        </div>
+        <div class="card" style="text-align:center;padding:20px;">
+          <div style="font-family:var(--font-d);font-weight:800;font-size:36px;background:linear-gradient(90deg,var(--violet),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">3 steps</div>
+          <div style="font-family:var(--font-m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px;">Maximum. Every time.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4 — COMPETITION -->
+<section class="slide" id="competition">
+  <div class="slide-inner">
+    <div class="slide-tag violet">Competitive Landscape</div>
+    <h2 class="title">A <span class="grad">new category.</span><br/>Zero direct competitors.</h2>
+    <p class="body" style="margin-bottom:36px;">Quarvo is not BNPL. Not a credit card. Not a payment processor. It's the first Credit Combination platform — and it has no direct competitors.</p>
+    <div class="card-lg" style="overflow-x:auto;">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Category</th>
+            <th>Uses existing cards</th>
+            <th>No new debt</th>
+            <th>No credit check</th>
+            <th>Works at any merchant</th>
+            <th>Free for user</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="qrow">
+            <td>Quarvo ⚛</td>
+            <td>Credit Combination</td>
+            <td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓ (partner)</td>
+          </tr>
+          <tr>
+            <td>Klarna</td><td>BNPL</td>
+            <td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td><td class="cross">✗</td>
+          </tr>
+          <tr>
+            <td>Affirm</td><td>BNPL</td>
+            <td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td><td class="cross">✗</td>
+          </tr>
+          <tr>
+            <td>Apple Pay Later</td><td>BNPL</td>
+            <td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>Splitit</td><td>Installments</td>
+            <td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5 — BUSINESS MODEL -->
+<section class="slide" id="model" style="background:var(--bg2);">
+  <div class="orb orb-v" style="width:400px;height:400px;bottom:-100px;right:-100px;"></div>
+  <div class="slide-inner">
+    <div class="slide-tag">Business Model</div>
+    <h2 class="title">Two revenue streams.<br/><span class="grad">Both proven.</span></h2>
+    <div class="g2" style="margin-top:32px;align-items:start;">
+      <div class="fee-box state1">
+        <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--violet);margin-bottom:16px;">State 1 — Any merchant</div>
+        <div style="font-family:var(--font-d);font-weight:800;font-size:36px;margin-bottom:8px;">$3.99<span style="font-size:18px;font-weight:400;color:var(--soft);"> flat fee</span></div>
+        <p style="font-size:14px;color:var(--soft);line-height:1.6;margin-bottom:16px;">User pays Quarvo $3.99 + Stripe processing per card. Works with any merchant worldwide from day one. No merchant integration required.</p>
+        <div style="padding:12px;background:rgba(123,47,255,0.08);border-radius:10px;font-family:var(--font-m);font-size:12px;color:var(--soft);">
+          Example: $1,000 purchase → $3.99 + ~$30 Stripe → user pays $1,033.99 total
+        </div>
+      </div>
+      <div class="fee-box state2">
+        <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;">State 2 — Registered merchant</div>
+        <div style="font-family:var(--font-d);font-weight:800;font-size:36px;margin-bottom:8px;">2%<span style="font-size:18px;font-weight:400;color:var(--soft);"> per transaction</span></div>
+        <p style="font-size:14px;color:var(--soft);line-height:1.6;margin-bottom:16px;">Merchant pays 2% via Stripe Connect. User pays $0 in fees. Payment goes directly to the merchant. Quarvo earns 2% net on every transaction.</p>
+        <div style="padding:12px;background:rgba(0,245,255,0.06);border-radius:10px;font-family:var(--font-m);font-size:12px;color:var(--soft);">
+          Example: $3,500 hotel → merchant pays $70 → user pays $0 → Quarvo earns $70 net
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:28px;padding:24px;background:var(--bg3);border:1px solid var(--border);border-radius:16px;">
+      <div style="font-family:var(--font-d);font-weight:700;font-size:16px;margin-bottom:16px;">Unit economics at scale</div>
+      <div class="g4">
+        {[["$200","Avg. transaction"],["$4–$14","Revenue per transaction"],["~70%","Gross margin"],["$0","CAC (viral + organic)"]].map(([v,l]) => `
+        <div>
+          <div style="font-family:var(--font-d);font-weight:800;font-size:28px;color:var(--cyan);">${v}</div>
+          <div style="font-family:var(--font-m);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;">${l}</div>
+        </div>`).join("")}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6 — TRACTION -->
+<section class="slide" id="traction">
+  <div class="slide-inner">
+    <div class="slide-tag">Traction</div>
+    <h2 class="title">Built. Deployed.<br/><span class="grad">Live today.</span></h2>
+    <div class="g3" style="margin-top:32px;">
+      <div class="card">
+        <div style="font-size:28px;margin-bottom:12px;">⚡</div>
+        <h3 class="sub" style="font-size:18px;margin-bottom:8px;">Full product live</h3>
+        <p style="font-size:14px;color:var(--soft);line-height:1.6;">Complete payment splitting flow deployed at app.quarvo.io. QuantumSplit™ engine, Stripe integration, Quantum Virtual Card issuance. Zero infrastructure debt.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:28px;margin-bottom:12px;">💳</div>
+        <h3 class="sub" style="font-size:18px;margin-bottom:8px;">Two revenue streams active</h3>
+        <p style="font-size:14px;color:var(--soft);line-height:1.6;">State 1 ($3.99 flat) and State 2 (2% merchant fee) both functional in production. Real Stripe processing. Real authorizations.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:28px;margin-bottom:12px;">🏪</div>
+        <h3 class="sub" style="font-size:18px;margin-bottom:8px;">Merchant pipeline open</h3>
+        <p style="font-size:14px;color:var(--soft);line-height:1.6;">Early access form live at quarvo.io/merchants. First conversations with boutique hotels, luxury travel, and high-ticket retail underway.</p>
+      </div>
+    </div>
+    <div class="blockquote" style="margin-top:36px;">
+      "Quarvo is to credit cards what quantum physics is to particles — unlocking massive power from what already exists."
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7 — ROADMAP -->
+<section class="slide" id="roadmap" style="background:var(--bg2);">
+  <div class="orb orb-c" style="width:400px;height:400px;top:-100px;left:-100px;"></div>
+  <div class="slide-inner">
+    <div class="slide-tag violet">Roadmap</div>
+    <h2 class="title">Built to scale.<br/><span class="grad">Regulated when ready.</span></h2>
+    <p class="body" style="margin-bottom:40px;">Quarvo's strategy is to build maximum product value with minimum regulatory exposure — scaling to millions of users before requiring banking licenses.</p>
+    <div style="display:grid;gap:20px;">
+      {[
+        { v:"V2 — LIVE NOW", title:"QuantumSplit™ + Quantum Virtual Card", body:"Manual limit entry, any merchant globally, $3.99 or 2% fee model. Full Stripe integration. Live at app.quarvo.io.", status:"live" },
+        { v:"V3 — NEXT", title:"Plaid + AI Optimization (requires EIN)", body:"Auto-detect card limits via Plaid. QuantumSplit™ AI optimizes splits for rewards, interest rates, and billing cycles.", status:"next" },
+        { v:"V4 — GROWTH", title:"Chrome Extension", body:"One-click split at any checkout online. No merchant integration required. Massive distribution play.", status:"future" },
+        { v:"V5 — SCALE", title:"Quarvo Card — physical + permanent", body:"Stripe Issuing. Fully automated split in background. Requires money transmitter license post Series A.", status:"future" },
+      ].map(({ v, title, body, status }) => `
+      <div style="display:flex;gap:20px;align-items:flex-start;padding:20px 24px;background:var(--bg3);border:1px solid ${status==="live"?"rgba(123,47,255,0.3)":"var(--border)"};border-radius:14px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:${status==="live"?"var(--violet)":status==="next"?"rgba(123,47,255,0.15)":"rgba(255,255,255,0.04)"};border:1px solid ${status==="live"?"var(--violet)":status==="next"?"rgba(123,47,255,0.3)":"var(--border)"};display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:${status==="live"?"0 0 16px rgba(123,47,255,0.4)":"none"};">${status==="live"?"✓":"·"}</div>
+        <div>
+          <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:${status==="live"?"var(--cyan)":status==="next"?"var(--violet)":"var(--muted)"};margin-bottom:4px;">${v}</div>
+          <div style="font-family:var(--font-d);font-weight:700;font-size:17px;margin-bottom:4px;">${title}</div>
+          <div style="font-size:14px;color:var(--soft);">${body}</div>
+        </div>
+      </div>`).join("")}
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8 — MARKET -->
+<section class="slide" id="market">
+  <div class="slide-inner">
+    <div class="slide-tag">Market Size</div>
+    <h2 class="title">Enormous market.<br/><span class="grad">Zero penetration.</span></h2>
+    <div class="g3" style="margin-top:32px;">
+      <div class="card" style="text-align:center;padding:36px 24px;">
+        <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">TAM</div>
+        <div class="metric-val" style="color:var(--cyan);font-size:52px;">$2T+</div>
+        <div style="font-size:14px;color:var(--soft);margin-top:10px;">Stranded credit in US credit card accounts</div>
+      </div>
+      <div class="card" style="text-align:center;padding:36px 24px;">
+        <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">SAM</div>
+        <div class="metric-val" style="color:var(--violet);font-size:52px;">$847B</div>
+        <div style="font-size:14px;color:var(--soft);margin-top:10px;">High-ticket purchases per year where limits are the bottleneck</div>
+      </div>
+      <div class="card" style="text-align:center;padding:36px 24px;">
+        <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">SOM (Y3)</div>
+        <div class="metric-val" style="color:#4ADE80;font-size:52px;">$85M</div>
+        <div style="font-size:14px;color:var(--soft);margin-top:10px;">1% of SAM at $85 avg. transaction × 2% fee</div>
+      </div>
+    </div>
+    <div style="margin-top:28px;padding:24px 28px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;">
+      <div style="font-family:var(--font-d);font-weight:700;font-size:16px;margin-bottom:14px;">Why now</div>
+      <div class="g2">
+        <div style="font-size:14px;color:var(--soft);line-height:1.7;">BNPL market hit $560B in 2024 — proving consumers desperately want flexible payment options. But BNPL created new debt. Quarvo activates existing credit. The consumer education is already done.</div>
+        <div style="font-size:14px;color:var(--soft);line-height:1.7;">Stripe's infrastructure maturity (Connect, Issuing, Checkout) now makes multi-party payment splitting technically trivial. Two years ago this product cost $5M to build. Today: $0 in infrastructure cost.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 9 — TEAM / ASK -->
+<section class="slide" id="ask" style="background: radial-gradient(ellipse at 20% 80%, rgba(123,47,255,0.2) 0%, transparent 60%), var(--bg);">
+  <div class="orb orb-v" style="width:600px;height:600px;top:-200px;right:-200px;opacity:0.5;"></div>
+  <div class="slide-inner">
+    <div class="slide-tag">The Ask</div>
+    <h2 class="title">Pre-seed round.<br/><span class="grad">$500K target.</span></h2>
+    <div class="g2" style="margin-top:32px;align-items:start;">
+      <div>
+        <p class="body" style="margin-bottom:28px;">We're raising a $500K pre-seed to accelerate merchant acquisition, complete entity formation, and launch Plaid integration (V3) within 90 days of close.</p>
+        <div style="display:grid;gap:12px;">
+          {[
+            ["40%","Merchant sales & partnerships"],
+            ["30%","Plaid + AI integration (V3)"],
+            ["20%","Legal + entity formation"],
+            ["10%","Marketing & growth"],
+          ].map(([pct,label]) => `
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="font-family:var(--font-d);font-weight:800;font-size:22px;color:var(--violet);width:52px;">${pct}</div>
+            <div>
+              <div style="height:4px;background:linear-gradient(90deg,var(--violet),var(--cyan));border-radius:2px;width:${pct};" ></div>
+              <div style="font-size:14px;color:var(--soft);margin-top:6px;">${label}</div>
+            </div>
+          </div>`).join("")}
+        </div>
+      </div>
+      <div style="display:grid;gap:16px;">
+        <div class="card" style="border-color:rgba(0,245,255,0.2);">
+          <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;">90-day milestones</div>
+          <div style="display:grid;gap:10px;">
+            {["10 registered merchants","Plaid integration live","$50K ARR","Entity + EIN finalized"].map(m => `
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px;">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;"></div>
+              <div>${m}</div>
+            </div>`).join("")}
+          </div>
+        </div>
+        <div class="card" style="text-align:center;padding:28px;">
+          <div style="font-family:var(--font-m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Get in touch</div>
+          <a href="mailto:support@quarvo.io" style="font-family:var(--font-d);font-weight:700;font-size:18px;color:var(--cyan);text-decoration:none;">support@quarvo.io</a>
+          <div style="margin-top:8px;font-family:var(--font-m);font-size:12px;color:var(--muted);">quarvo.io/investors</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:32px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+  <div style="font-family:var(--font-d);font-weight:800;font-size:16px;background:linear-gradient(90deg,var(--violet),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">QUARVO</div>
+  <div style="font-family:var(--font-m);font-size:11px;color:var(--muted);">Confidential · Pre-Seed 2026 · Not for distribution</div>
+  <a href="https://quarvo.io" style="font-family:var(--font-m);font-size:11px;color:var(--muted);text-decoration:none;">quarvo.io</a>
+</footer>
+
+</body>
+</html>
