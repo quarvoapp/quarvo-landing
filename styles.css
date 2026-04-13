@@ -1839,3 +1839,35 @@ blockquote em {
   border-color: rgba(255,255,255,0.1);
   color: var(--muted-2);
 }
+
+/* ══ ADDITIONAL MOBILE BREAKPOINTS ═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  /* About section */
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+
+  /* Ambassador section */
+  .amb-card { grid-template-columns: 1fr; gap: 36px; padding: 36px 28px; }
+  .amb-right { flex-direction: row; flex-wrap: wrap; gap: 12px; }
+  .amb-stat-card { flex: 1; min-width: 140px; }
+  .amb-quote { width: 100%; }
+  .share-buttons { gap: 8px; }
+  .share-btn { padding: 9px 12px; font-size: 12px; }
+
+  /* VS block v2 */
+  .vs-block--v2 { grid-template-columns: 1fr; }
+  .vs-divider { display: none; }
+}
+
+@media (max-width: 480px) {
+  /* Ambassador */
+  .amb-card { padding: 28px 20px; }
+  .amb-title { font-size: 28px; }
+  .amb-right { flex-direction: column; }
+  .share-btn { font-size: 11px; padding: 8px 10px; }
+
+  /* Pricing section */
+  .amb-stat-icon { font-size: 40px; }
+
+  /* Section inner padding */
+  .section-inner { padding: 0 16px; }
+}
