@@ -1279,3 +1279,173 @@ blockquote em {
   .hero-title { font-size: 38px; }
   .hero-sub { font-size: 16px; }
 }
+
+/* ═══════════════════════════════════════════════════ ABOUT */
+.about {
+  padding: 100px 0;
+  background: var(--bg-2);
+  position: relative;
+  overflow: hidden;
+}
+.about::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,47,255,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.about-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(0,245,255,0.08);
+  border: 1px solid rgba(0,245,255,0.2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 40px;
+}
+.tag-dot { font-size: 14px; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.about-left { }
+
+.about-body {
+  font-size: 16px;
+  color: var(--muted-2);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.about-quote {
+  margin-top: 28px;
+  padding: 20px 24px;
+  border-left: 3px solid var(--violet);
+  background: rgba(123,47,255,0.08);
+  border-radius: 0 12px 12px 0;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.65;
+}
+
+.about-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-card {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+}
+
+.about-card-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--violet);
+  margin-bottom: 20px;
+}
+
+.about-pillars {
+  display: grid;
+  gap: 18px;
+}
+
+.pillar {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.pillar-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(123,47,255,0.15);
+  border: 1px solid rgba(123,47,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  color: var(--violet);
+}
+
+.pillar-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.pillar-body {
+  font-size: 13px;
+  color: var(--muted-2);
+  line-height: 1.6;
+}
+
+.about-vs {
+  background: var(--surface, #1A1A30);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+}
+
+.about-vs-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.about-vs-arrow {
+  font-size: 20px;
+  color: var(--cyan);
+  text-align: center;
+}
+
+.about-vs-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.about-vs-bad .about-vs-text {
+  font-size: 13px;
+  color: var(--muted-2);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.about-vs-good .about-vs-text {
+  font-size: 13px;
+  color: var(--white);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.about-vs-good .about-vs-label { color: var(--cyan); }
