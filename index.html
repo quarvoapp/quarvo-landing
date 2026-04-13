@@ -74,8 +74,8 @@
         </p>
 
         <div class="hero-ctas">
-          <a href="https://app.quarvo.io" class="btn-primary">
-            Get Early Access
+          <a href="https://app.quarvo.io" class="btn-primary" style="background:linear-gradient(135deg,#7B2FFF,#00C8FF);box-shadow:0 8px 32px rgba(123,47,255,0.5);">
+            Launch App
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="#how" class="btn-ghost">See how it works</a>
@@ -289,44 +289,63 @@
         </div>
       </div>
 
-      <div class="vs-block">
-        <div class="vs-col">
-          <div class="vs-label vs-label--bad">Others</div>
+      <!-- VS COMPARISON — upgraded visual -->
+      <div class="vs-block vs-block--v2">
+        <!-- OTHERS column -->
+        <div class="vs-col vs-col--bad">
+          <div class="vs-col-header">
+            <div class="vs-header-icon vs-header-icon--bad">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="vs-label vs-label--bad">BNPL &amp; Others</div>
+          </div>
           <ul class="vs-list vs-list--bad">
-            <li>Give you new debt</li>
-            <li>Add another credit line</li>
-            <li>Charge interest on new loans</li>
-            <li>Require credit checks</li>
-            <li>Limit you to their network</li>
+            <li><span class="vs-x">&#x2715;</span> Give you new debt</li>
+            <li><span class="vs-x">&#x2715;</span> Add another credit line</li>
+            <li><span class="vs-x">&#x2715;</span> Charge interest on new credit</li>
+            <li><span class="vs-x">&#x2715;</span> Require hard credit checks</li>
+            <li><span class="vs-x">&#x2715;</span> Lock you into their network</li>
           </ul>
+          <div class="vs-bottom-tag vs-bottom-tag--bad">More debt. Less freedom.</div>
         </div>
+
+        <!-- CENTER divider -->
         <div class="vs-divider">
           <div class="vs-atom">
-            <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="44" height="44" viewBox="0 0 64 64" fill="none">
               <defs>
-                <linearGradient id="vsG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <linearGradient id="vsG2" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
                   <stop offset="0%" stop-color="#7B2FFF"/>
                   <stop offset="100%" stop-color="#00F5FF"/>
                 </linearGradient>
-                <mask id="vsM">
+                <mask id="vsM2">
                   <rect width="64" height="64" fill="white"/>
                   <circle cx="30" cy="30" r="13" fill="black"/>
                 </mask>
               </defs>
-              <circle cx="30" cy="30" r="22" fill="url(#vsG)" mask="url(#vsM)"/>
-              <line x1="44" y1="44" x2="57" y2="57" stroke="url(#vsG)" stroke-width="8" stroke-linecap="round"/>
+              <circle cx="30" cy="30" r="22" fill="url(#vsG2)" mask="url(#vsM2)"/>
+              <line x1="44" y1="44" x2="57" y2="57" stroke="url(#vsG2)" stroke-width="8" stroke-linecap="round"/>
             </svg>
+            <div class="vs-vs-label">VS</div>
           </div>
         </div>
-        <div class="vs-col">
-          <div class="vs-label vs-label--good">QUARVO</div>
+
+        <!-- QUARVO column -->
+        <div class="vs-col vs-col--good">
+          <div class="vs-col-header">
+            <div class="vs-header-icon vs-header-icon--good">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9l5 5 7-8" stroke="#00F5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="vs-label vs-label--good">QUARVO</div>
+          </div>
           <ul class="vs-list vs-list--good">
-            <li>Uses credit you already have</li>
-            <li>Zero new accounts needed</li>
-            <li>No new interest charges</li>
-            <li>No hard credit pulls</li>
-            <li>Works with your existing cards</li>
+            <li><span class="vs-check">&#x2713;</span> Uses credit you already own</li>
+            <li><span class="vs-check">&#x2713;</span> Zero new accounts needed</li>
+            <li><span class="vs-check">&#x2713;</span> No new interest charges ever</li>
+            <li><span class="vs-check">&#x2713;</span> No hard credit pulls</li>
+            <li><span class="vs-check">&#x2713;</span> Works with every card you have</li>
           </ul>
+          <div class="vs-bottom-tag vs-bottom-tag--good">Same wallet. Infinite power.</div>
         </div>
       </div>
     </div>
@@ -375,7 +394,7 @@
                 <line x1="25" y1="25" x2="31" y2="31" stroke="url(#stepG2)" stroke-width="4" stroke-linecap="round"/>
               </svg>
             </div>
-            <h3>QuantumSplit™ goes to work</h3>
+            <h3>QuantumSplit&#8482; calculates your split</h3>
             <p>Our algorithm analyzes your available credit across all cards and builds the optimal split in milliseconds.</p>
           </div>
           <div class="step-connector"></div>
@@ -474,7 +493,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-q">When will it launch?</div>
-          <div class="faq-a">We're building now. Join the waitlist for early access, product updates, and first invitations when we open the doors.</div>
+          <div class="faq-a">Quarvo is live now at app.quarvo.io. Create your first split today — no account needed to get started.</div>
         </div>
       </div>
     </div>
@@ -490,72 +509,39 @@
       <div class="waitlist-content">
         <div class="waitlist-badge">
           <span class="badge-dot badge-dot--pulse"></span>
-          Now accepting early access requests
+          Live now &mdash; no account needed
         </div>
         <h2 class="waitlist-title">
-          Be first to unlock<br/>
-          <span class="title-accent">your full purchasing power.</span>
+          Ready to unlock<br/>
+          <span class="title-accent">your full purchasing power?</span>
         </h2>
         <p class="waitlist-sub">
-          Join smart spenders already on the list. Get product updates,<br/>
-          first access, and a founding member spot when we launch.
+          Quarvo is live. Split your first purchase today &mdash;<br/>
+          works with any merchant, any card, right now.
         </p>
 
-        <form
-          class="waitlist-form"
-          id="waitlistForm"
-          name="quarvo-waitlist"
-          method="POST"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          onsubmit="handleSubmit(event)"
-        >
-          <!-- Honeypot anti-spam (hidden) -->
-          <input type="hidden" name="form-name" value="quarvo-waitlist"/>
-          <p style="display:none"><input name="bot-field"/></p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+          <a href="https://app.quarvo.io" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;padding:18px 40px;font-size:17px;text-decoration:none;border-radius:14px;background:linear-gradient(135deg,#7B2FFF,#00C8FF);box-shadow:0 8px 40px rgba(123,47,255,0.55);font-family:var(--font-display);font-weight:700;color:#fff;letter-spacing:.02em;">
+            Launch App
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://app.quarvo.io/merchants" style="display:inline-flex;align-items:center;gap:8px;padding:18px 32px;font-size:15px;text-decoration:none;border-radius:14px;border:1px solid rgba(255,255,255,0.12);color:#9090B0;font-family:var(--font-display);font-weight:600;letter-spacing:.02em;">
+            For Merchants
+          </a>
+        </div>
 
-          <div class="form-row">
-            <input
-              type="email"
-              id="emailInput"
-              name="email"
-              placeholder="your@email.com"
-              required
-              class="form-input"
-            />
-            <button type="submit" class="btn-primary btn-submit">
-              <span id="btnText">Join Waitlist</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
-          <div class="form-note">No spam. No credit checks. Just early access.</div>
-          <div class="form-success" id="formSuccess">
-            <svg width="18" height="18" viewBox="0 0 64 64" fill="none">
-              <defs>
-                <linearGradient id="sucG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
-                </linearGradient>
-                <mask id="sucM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
-              </defs>
-              <circle cx="30" cy="30" r="22" fill="url(#sucG)" mask="url(#sucM)"/>
-              <line x1="44" y1="44" x2="57" y2="57" stroke="url(#sucG)" stroke-width="8" stroke-linecap="round"/>
-            </svg>
-            You're on the list. We'll be in touch soon.
-          </div>
-        </form>
-
-        <div class="waitlist-trust">
+        <div class="waitlist-trust" style="margin-top:36px;">
           <div class="trust-item">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.5 3.5L13 5.5 10.5 8l.5 3.5L8 10.5 5 12l.5-3.5L3 6l3.5-.5L8 2z" stroke="#00F5FF" stroke-width="1.2" stroke-linejoin="round"/></svg>
-            Free to join
+            No account needed
           </div>
           <div class="trust-item">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#00F5FF" stroke-width="1.2"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#00F5FF" stroke-width="1.2" stroke-linecap="round"/></svg>
-            Zero obligations
+            Stripe secured
           </div>
           <div class="trust-item">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#00F5FF" stroke-width="1.2"/><path d="M5.5 8l2 2 3-3" stroke="#00F5FF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            No credit check
+            No new credit
           </div>
         </div>
       </div>
