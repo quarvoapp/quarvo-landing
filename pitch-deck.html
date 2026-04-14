@@ -165,7 +165,7 @@
         <div class="metric-lbl">High-ticket purchase market per year in the US</div>
       </div>
       <div class="card">
-        <div class="metric-val" style="color:#F87171;">$0</div>
+        <div class="metric-val" style="color:#F87171;font-size:52px;">ZERO</div>
         <div class="metric-lbl">Existing solutions that unlock credit you already own</div>
       </div>
     </div>
@@ -222,11 +222,18 @@
           <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--violet);margin-bottom:12px;">QuantumSplit™ example</div>
           <div style="font-size:13px;color:var(--soft);margin-bottom:14px;">Purchase: <strong style="color:var(--text);">$3,500 hotel</strong></div>
           <div style="display:grid;gap:8px;">
-            {["Chase Sapphire → $1,400","Amex Gold → $1,080","Citi Double Cash → $1,020"].map((l,i) => `
             <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--bg2);border-radius:10px;font-size:13px;">
-              <span style="color:var(--soft);">${["Chase Sapphire","Amex Gold","Citi Double Cash"][i]}</span>
-              <span style="font-family:var(--font-d);font-weight:700;color:var(--cyan);">${["$1,400","$1,080","$1,020"][i]}</span>
-            </div>`).join("")}
+              <span style="color:var(--soft);">Chase Sapphire</span>
+              <span style="font-family:var(--font-d);font-weight:700;color:var(--cyan);">$1,400</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--bg2);border-radius:10px;font-size:13px;">
+              <span style="color:var(--soft);">Amex Gold</span>
+              <span style="font-family:var(--font-d);font-weight:700;color:var(--cyan);">$1,080</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--bg2);border-radius:10px;font-size:13px;">
+              <span style="color:var(--soft);">Citi Double Cash</span>
+              <span style="font-family:var(--font-d);font-weight:700;color:var(--cyan);">$1,020</span>
+            </div>
           </div>
           <div style="margin-top:12px;padding:10px 12px;background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.15);border-radius:10px;text-align:center;">
             <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Quantum Virtual Card issued</div>
@@ -316,11 +323,22 @@
     <div style="margin-top:28px;padding:24px;background:var(--bg3);border:1px solid var(--border);border-radius:16px;">
       <div style="font-family:var(--font-d);font-weight:700;font-size:16px;margin-bottom:16px;">Unit economics at scale</div>
       <div class="g4">
-        {[["$200","Avg. transaction"],["$4–$14","Revenue per transaction"],["~70%","Gross margin"],["$0","CAC (viral + organic)"]].map(([v,l]) => `
         <div>
-          <div style="font-family:var(--font-d);font-weight:800;font-size:28px;color:var(--cyan);">${v}</div>
-          <div style="font-family:var(--font-m);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;">${l}</div>
-        </div>`).join("")}
+          <div style="font-family:var(--font-d);font-weight:800;font-size:28px;color:var(--cyan);">$200</div>
+          <div style="font-family:var(--font-m);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;">Avg. transaction</div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-d);font-weight:800;font-size:28px;color:var(--cyan);">$4–$14</div>
+          <div style="font-family:var(--font-m);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;">Revenue per transaction</div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-d);font-weight:800;font-size:28px;color:var(--cyan);">~70%</div>
+          <div style="font-family:var(--font-m);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;">Gross margin</div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-d);font-weight:800;font-size:28px;color:var(--cyan);">$0</div>
+          <div style="font-family:var(--font-m);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;">CAC (viral + organic)</div>
+        </div>
       </div>
     </div>
   </div>
@@ -362,20 +380,38 @@
     <h2 class="title">Built to scale.<br/><span class="grad">Regulated when ready.</span></h2>
     <p class="body" style="margin-bottom:40px;">Quarvo's strategy is to build maximum product value with minimum regulatory exposure — scaling to millions of users before requiring banking licenses.</p>
     <div style="display:grid;gap:20px;">
-      {[
-        { v:"V2 — LIVE NOW", title:"QuantumSplit™ + Quantum Virtual Card", body:"Manual limit entry, any merchant globally, $3.99 or 2% fee model. Full Stripe integration. Live at app.quarvo.io.", status:"live" },
-        { v:"V3 — NEXT", title:"Plaid + AI Optimization (requires EIN)", body:"Auto-detect card limits via Plaid. QuantumSplit™ AI optimizes splits for rewards, interest rates, and billing cycles.", status:"next" },
-        { v:"V4 — GROWTH", title:"Chrome Extension", body:"One-click split at any checkout online. No merchant integration required. Massive distribution play.", status:"future" },
-        { v:"V5 — SCALE", title:"Quarvo Card — physical + permanent", body:"Stripe Issuing. Fully automated split in background. Requires money transmitter license post Series A.", status:"future" },
-      ].map(({ v, title, body, status }) => `
-      <div style="display:flex;gap:20px;align-items:flex-start;padding:20px 24px;background:var(--bg3);border:1px solid ${status==="live"?"rgba(123,47,255,0.3)":"var(--border)"};border-radius:14px;">
-        <div style="width:36px;height:36px;border-radius:50%;background:${status==="live"?"var(--violet)":status==="next"?"rgba(123,47,255,0.15)":"rgba(255,255,255,0.04)"};border:1px solid ${status==="live"?"var(--violet)":status==="next"?"rgba(123,47,255,0.3)":"var(--border)"};display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:${status==="live"?"0 0 16px rgba(123,47,255,0.4)":"none"};">${status==="live"?"✓":"·"}</div>
+      <div style="display:flex;gap:20px;align-items:flex-start;padding:20px 24px;background:var(--bg3);border:1px solid rgba(123,47,255,0.3);border-radius:14px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--violet);border:1px solid var(--violet);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 0 16px rgba(123,47,255,0.4);">✓</div>
         <div>
-          <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:${status==="live"?"var(--cyan)":status==="next"?"var(--violet)":"var(--muted)"};margin-bottom:4px;">${v}</div>
-          <div style="font-family:var(--font-d);font-weight:700;font-size:17px;margin-bottom:4px;">${title}</div>
-          <div style="font-size:14px;color:var(--soft);">${body}</div>
+          <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">V2 — LIVE NOW</div>
+          <div style="font-family:var(--font-d);font-weight:700;font-size:17px;margin-bottom:4px;">QuantumSplit™ + Quantum Virtual Card</div>
+          <div style="font-size:14px;color:var(--soft);">Manual limit entry, any merchant globally, $3.99 or 2% fee model. Full Stripe integration. Live at app.quarvo.io.</div>
         </div>
-      </div>`).join("")}
+      </div>
+      <div style="display:flex;gap:20px;align-items:flex-start;padding:20px 24px;background:var(--bg3);border:1px solid var(--border);border-radius:14px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(123,47,255,0.15);border:1px solid rgba(123,47,255,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">·</div>
+        <div>
+          <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);margin-bottom:4px;">V3 — NEXT</div>
+          <div style="font-family:var(--font-d);font-weight:700;font-size:17px;margin-bottom:4px;">Plaid + AI Optimization (requires EIN)</div>
+          <div style="font-size:14px;color:var(--soft);">Auto-detect card limits via Plaid. QuantumSplit™ AI optimizes splits for rewards, interest rates, and billing cycles.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:20px;align-items:flex-start;padding:20px 24px;background:var(--bg3);border:1px solid var(--border);border-radius:14px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:var(--muted);">·</div>
+        <div>
+          <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">V4 — GROWTH</div>
+          <div style="font-family:var(--font-d);font-weight:700;font-size:17px;margin-bottom:4px;">Chrome Extension</div>
+          <div style="font-size:14px;color:var(--soft);">One-click split at any checkout online. No merchant integration required. Massive distribution play.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:20px;align-items:flex-start;padding:20px 24px;background:var(--bg3);border:1px solid var(--border);border-radius:14px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:var(--muted);">·</div>
+        <div>
+          <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">V5 — SCALE</div>
+          <div style="font-family:var(--font-d);font-weight:700;font-size:17px;margin-bottom:4px;">Quarvo Card — physical + permanent</div>
+          <div style="font-size:14px;color:var(--soft);">Stripe Issuing. Fully automated split in background. Requires money transmitter license post Series A.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -421,31 +457,45 @@
     <div class="g2" style="margin-top:32px;align-items:start;">
       <div>
         <p class="body" style="margin-bottom:28px;">We're raising a $500K pre-seed to accelerate merchant acquisition, complete entity formation, and launch Plaid integration (V3) within 90 days of close.</p>
-        <div style="display:grid;gap:12px;">
-          {[
-            ["40%","Merchant sales & partnerships"],
-            ["30%","Plaid + AI integration (V3)"],
-            ["20%","Legal + entity formation"],
-            ["10%","Marketing & growth"],
-          ].map(([pct,label]) => `
+        <div style="display:grid;gap:14px;">
           <div style="display:flex;align-items:center;gap:16px;">
-            <div style="font-family:var(--font-d);font-weight:800;font-size:22px;color:var(--violet);width:52px;">${pct}</div>
-            <div>
-              <div style="height:4px;background:linear-gradient(90deg,var(--violet),var(--cyan));border-radius:2px;width:${pct};" ></div>
-              <div style="font-size:14px;color:var(--soft);margin-top:6px;">${label}</div>
+            <div style="font-family:var(--font-d);font-weight:800;font-size:22px;color:var(--violet);width:52px;">40%</div>
+            <div style="flex:1;">
+              <div style="height:4px;background:linear-gradient(90deg,var(--violet),var(--cyan));border-radius:2px;width:40%;"></div>
+              <div style="font-size:14px;color:var(--soft);margin-top:6px;">Merchant sales &amp; partnerships</div>
             </div>
-          </div>`).join("")}
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="font-family:var(--font-d);font-weight:800;font-size:22px;color:var(--violet);width:52px;">30%</div>
+            <div style="flex:1;">
+              <div style="height:4px;background:linear-gradient(90deg,var(--violet),var(--cyan));border-radius:2px;width:30%;"></div>
+              <div style="font-size:14px;color:var(--soft);margin-top:6px;">Plaid + AI integration (V3)</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="font-family:var(--font-d);font-weight:800;font-size:22px;color:var(--violet);width:52px;">20%</div>
+            <div style="flex:1;">
+              <div style="height:4px;background:linear-gradient(90deg,var(--violet),var(--cyan));border-radius:2px;width:20%;"></div>
+              <div style="font-size:14px;color:var(--soft);margin-top:6px;">Legal + entity formation</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="font-family:var(--font-d);font-weight:800;font-size:22px;color:var(--violet);width:52px;">10%</div>
+            <div style="flex:1;">
+              <div style="height:4px;background:linear-gradient(90deg,var(--violet),var(--cyan));border-radius:2px;width:10%;"></div>
+              <div style="font-size:14px;color:var(--soft);margin-top:6px;">Marketing &amp; growth</div>
+            </div>
+          </div>
         </div>
       </div>
       <div style="display:grid;gap:16px;">
         <div class="card" style="border-color:rgba(0,245,255,0.2);">
           <div style="font-family:var(--font-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;">90-day milestones</div>
           <div style="display:grid;gap:10px;">
-            {["10 registered merchants","Plaid integration live","$50K ARR","Entity + EIN finalized"].map(m => `
-            <div style="display:flex;align-items:center;gap:10px;font-size:14px;">
-              <div style="width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;"></div>
-              <div>${m}</div>
-            </div>`).join("")}
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px;"><div style="width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;"></div><div>10 registered merchants</div></div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px;"><div style="width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;"></div><div>Plaid integration live</div></div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px;"><div style="width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;"></div><div>$50K ARR</div></div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px;"><div style="width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;"></div><div>Entity + EIN finalized</div></div>
           </div>
         </div>
         <div class="card" style="text-align:center;padding:28px;">
