@@ -86,11 +86,18 @@
   <div class="page">
 
     <div class="doc-header">
-      <div class="doc-tag">Legal</div>
+      <span>← Back</span>
+    </a>
+  </nav>
+
+  <div class="page">
+
+    <div class="doc-header">
+      <span class="doc-tag">Legal</span>
       <h1 class="doc-title">Privacy Policy</h1>
       <div class="doc-meta">
         Effective date: <span>April 11, 2026</span><br/>
-        Last updated: <span>April 11, 2026</span><br/>
+        Last updated: <span>April 16, 2026</span><br/>
         Jurisdiction: <span>United States</span>
       </div>
     </div>
@@ -103,24 +110,25 @@
         <li><a href="#s2">2. Information we collect</a></li>
         <li><a href="#s3">3. How we use your information</a></li>
         <li><a href="#s4">4. Payment processing</a></li>
-        <li><a href="#s5">5. How we share your information</a></li>
-        <li><a href="#s6">6. Cookies and tracking</a></li>
-        <li><a href="#s7">7. Data retention</a></li>
-        <li><a href="#s8">8. Your rights</a></li>
-        <li><a href="#s9">9. Children's privacy</a></li>
-        <li><a href="#s10">10. Changes to this policy</a></li>
-        <li><a href="#s11">11. Contact us</a></li>
+        <li><a href="#s4b">5. Financial data (Plaid integration)</a></li>
+        <li><a href="#s5">6. How we share your information</a></li>
+        <li><a href="#s6">7. Cookies and tracking</a></li>
+        <li><a href="#s7">8. Data retention</a></li>
+        <li><a href="#s8">9. Your rights</a></li>
+        <li><a href="#s9">10. Children's privacy</a></li>
+        <li><a href="#s10">11. Changes to this policy</a></li>
+        <li><a href="#s11">12. Contact us</a></li>
       </ul>
     </div>
 
     <div class="highlight-box">
-      <p><strong style="color:var(--white)">Plain language summary:</strong> QUARVO helps you split purchases across your existing credit cards. We collect only what we need to provide that service, we never sell your data, and we never store your full card numbers — that's handled by Stripe, our PCI-compliant payment processor.</p>
+      <p><strong style="color:var(--white)">Plain language summary:</strong> QUARVO helps you split purchases across your existing credit cards. We collect only what we need to provide that service, we never sell your data, and we never store your full card numbers — that's handled by Stripe. When you connect your bank via Plaid, we only read your available credit balance. We never access your transaction history, income, or bank account data.</p>
     </div>
 
     <!-- SECTIONS -->
     <div class="doc-section" id="s1">
       <h2>1. Who We Are</h2>
-      <p>QUARVO ("we," "us," or "our") operates the web application available at quarvo.io. QUARVO is a Credit Combination Technology platform that enables users to split high-value purchases across multiple existing credit cards.</p>
+      <p>QUARVO ("we," "us," or "our") operates the web application available at app.quarvo.io. QUARVO is a Credit Combination Technology platform that enables users to split high-value purchases across multiple existing credit cards.</p>
       <p>QUARVO is not a lender, bank, or financial institution. We do not issue credit, provide loans, or create new credit lines. We are a technology platform that facilitates the use of existing credit.</p>
     </div>
 
@@ -128,24 +136,29 @@
       <h2>2. Information We Collect</h2>
       <h3>Information you provide directly</h3>
       <ul>
-        <li>Email address (when you join the waitlist or create an account)</li>
-        <li>Name (when you create an account)</li>
+        <li>Email address and name (when you create an account)</li>
         <li>Payment method tokens provided by Stripe (never raw card numbers)</li>
         <li>Purchase amounts and transaction details you enter when using our service</li>
+      </ul>
+      <h3>Financial data via Plaid (when you connect your bank)</h3>
+      <ul>
+        <li>Available credit balance on connected credit cards — read-only, in real time</li>
+        <li>Account names and last 4 digits for identification purposes</li>
+        <li>Account ownership information to verify the account belongs to you</li>
       </ul>
       <h3>Information collected automatically</h3>
       <ul>
         <li>IP address and approximate location (city/state level)</li>
         <li>Browser type, device type, and operating system</li>
-        <li>Pages visited, features used, and time spent on the platform</li>
-        <li>Referring URL and session data</li>
+        <li>Pages visited, features used, and session data</li>
       </ul>
       <h3>Information we do NOT collect</h3>
       <ul>
         <li>Full credit card numbers (handled entirely by Stripe)</li>
+        <li>Bank account credentials (handled entirely by Plaid)</li>
+        <li>Transaction history, income, or investment data via Plaid</li>
         <li>Social Security Numbers or government ID numbers</li>
         <li>Your full credit history or credit score</li>
-        <li>Bank account credentials</li>
       </ul>
     </div>
 
@@ -154,89 +167,150 @@
       <p>We use the information we collect to:</p>
       <ul>
         <li>Provide, operate, and improve the QUARVO platform</li>
+        <li>Read your available credit balance to calculate optimal split distributions (QuantumSplit™)</li>
         <li>Process split payment transactions across your connected cards</li>
-        <li>Send you service-related communications (transaction confirmations, support)</li>
-        <li>Send you product updates and early access notifications (you can opt out at any time)</li>
+        <li>Send you transaction confirmation emails with full split details</li>
         <li>Detect and prevent fraud and unauthorized access</li>
+        <li>Maintain an immutable evidence log for chargeback protection (24-month retention)</li>
         <li>Comply with applicable laws and regulations</li>
-        <li>Analyze aggregate usage to improve our product</li>
       </ul>
       <p>We will never use your information for purposes incompatible with those stated above without your explicit consent.</p>
     </div>
 
     <div class="doc-section" id="s4">
-      <h2>4. Payment Processing</h2>
+      <h2>4. Payment Processing (Stripe)</h2>
       <p>All payment processing is handled by <strong style="color:var(--white)">Stripe, Inc.</strong>, a PCI-DSS Level 1 certified payment processor. When you add a credit card to QUARVO:</p>
       <ul>
         <li>Your card details are transmitted directly to Stripe — QUARVO never sees or stores your full card number, CVV, or expiration date</li>
         <li>Stripe returns a secure token that we use to reference your payment method</li>
-        <li>Stripe's processing fees apply to each transaction in addition to QUARVO's flat platform fee of $5.99 per split transaction</li>
         <li>Stripe's privacy policy governs how they handle your payment data: <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a></li>
       </ul>
       <div class="highlight-box">
-        <p><strong style="color:var(--white)">Fee transparency:</strong> QUARVO charges a flat fee of $5.99 per split transaction. This is disclosed clearly before you confirm any split. Standard Stripe processing fees also apply and are passed through at cost.</p>
+        <p><strong style="color:var(--white)">Fee transparency:</strong> QUARVO charges a platform fee per split transaction, disclosed clearly before you confirm any split. Standard Stripe processing fees also apply and are shown upfront.</p>
+      </div>
+    </div>
+
+    <div class="doc-section" id="s4b">
+      <h2>5. Financial Data (Plaid Integration)</h2>
+      <p>QUARVO uses <strong style="color:var(--white)">Plaid Technologies, Inc.</strong> ("Plaid") to read available credit balances from your connected credit card accounts. By connecting your bank through Plaid, you authorize QUARVO to receive read-only access to your credit card balance information.</p>
+
+      <h3>What we access via Plaid</h3>
+      <ul>
+        <li>Available credit balance on connected credit cards (real-time)</li>
+        <li>Account names and last 4 digits for identification</li>
+        <li>Account ownership information to verify the account belongs to you</li>
+      </ul>
+
+      <h3>What we do NOT access via Plaid</h3>
+      <ul>
+        <li>Transaction history or spending data</li>
+        <li>Income or employment information</li>
+        <li>Checking or savings account (bank account) data</li>
+        <li>Investment portfolio or retirement account data</li>
+        <li>Any data not directly needed to calculate your credit split</li>
+      </ul>
+
+      <h3>How we use Plaid data</h3>
+      <p>Your available credit balance data is used solely to power the QuantumSplit™ algorithm, which calculates the optimal distribution of your purchase across your connected cards. This data is never sold or shared with third parties for any purpose.</p>
+
+      <h3>How we store Plaid data</h3>
+      <ul>
+        <li>Your Plaid connection credentials (access tokens) are encrypted with AES-256-GCM encryption before storage</li>
+        <li>Balance data is cached for up to 7 days and refreshed each time you initiate a split</li>
+        <li>Plaid access tokens that have been inactive for 90 days are automatically deleted</li>
+        <li>All Plaid data is stored on servers located in the United States</li>
+      </ul>
+
+      <h3>Your rights regarding Plaid data</h3>
+      <ul>
+        <li><strong style="color:var(--white)">Disconnect at any time</strong> — you can disconnect any connected bank from within the QUARVO app. Upon disconnection, your Plaid access token is immediately revoked and deleted from our systems</li>
+        <li><strong style="color:var(--white)">Data deletion</strong> — request full deletion of your Plaid data by emailing support@quarvo.io</li>
+        <li><strong style="color:var(--white)">Plaid Portal</strong> — manage all your Plaid connections at <a href="https://my.plaid.com" target="_blank">my.plaid.com</a></li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong style="color:var(--white)">Plaid's Privacy Policy:</strong> Plaid's collection and use of your financial data is also governed by Plaid's Privacy Policy, available at <a href="https://plaid.com/legal/#privacy-policy" target="_blank">plaid.com/legal/#privacy-policy</a>. By connecting your bank, you also agree to Plaid's End User Privacy Policy.</p>
       </div>
     </div>
 
     <div class="doc-section" id="s5">
-      <h2>5. How We Share Your Information</h2>
+      <h2>6. How We Share Your Information</h2>
       <p>We do not sell, rent, or trade your personal information. We share your information only in the following circumstances:</p>
       <h3>Service providers</h3>
       <ul>
-        <li><strong style="color:var(--white)">Stripe</strong> — payment processing</li>
-        <li><strong style="color:var(--white)">Netlify</strong> — web hosting and form collection</li>
-        <li><strong style="color:var(--white)">Loops</strong> — transactional and marketing email delivery</li>
-        <li><strong style="color:var(--white)">Resend</strong> — transactional email infrastructure</li>
+        <li><strong style="color:var(--white)">Stripe</strong> — payment processing (PCI-DSS Level 1)</li>
+        <li><strong style="color:var(--white)">Plaid</strong> — read-only access to credit card available balances</li>
+        <li><strong style="color:var(--white)">Supabase</strong> — database and authentication infrastructure</li>
+        <li><strong style="color:var(--white)">Vercel</strong> — web hosting and edge network</li>
+        <li><strong style="color:var(--white)">Resend</strong> — transactional email delivery</li>
       </ul>
       <p>All service providers are contractually bound to use your data only as necessary to provide services to QUARVO and in compliance with applicable law.</p>
       <h3>Legal requirements</h3>
       <p>We may disclose your information if required to do so by law, court order, or governmental authority, or to protect the rights, property, or safety of QUARVO, our users, or others.</p>
       <h3>Business transfers</h3>
-      <p>If QUARVO is acquired, merged, or sells substantially all of its assets, your information may be transferred as part of that transaction. We will notify you via email before your information is transferred and becomes subject to a different privacy policy.</p>
+      <p>If QUARVO is acquired, merged, or sells substantially all of its assets, your information may be transferred as part of that transaction. We will notify you via email before your information is transferred.</p>
     </div>
 
     <div class="doc-section" id="s6">
-      <h2>6. Cookies and Tracking</h2>
-      <p>We use essential cookies required for the platform to function (session management, security). We may also use analytics tools to understand how users interact with our platform.</p>
+      <h2>7. Cookies and Tracking</h2>
+      <p>We use essential cookies required for the platform to function (session management, security tokens). We do not use advertising cookies or sell your browsing data to third parties.</p>
       <p>You can control cookies through your browser settings. Disabling certain cookies may affect the functionality of the QUARVO platform.</p>
     </div>
 
     <div class="doc-section" id="s7">
-      <h2>7. Data Retention</h2>
-      <p>We retain your personal information for as long as your account is active or as needed to provide you services. If you close your account, we will delete or anonymize your personal data within 90 days, except where we are required to retain it for legal or regulatory compliance (typically up to 7 years for financial transaction records).</p>
-      <p>Waitlist email addresses are retained until you unsubscribe or request deletion.</p>
+      <h2>8. Data Retention</h2>
+      <p>We retain different types of data for different periods based on legal requirements and operational necessity:</p>
+      <ul>
+        <li><strong style="color:var(--white)">Plaid access tokens (active)</strong> — retained while your bank connection is active, maximum 24 months</li>
+        <li><strong style="color:var(--white)">Plaid access tokens (inactive/disconnected)</strong> — deleted within 90 days</li>
+        <li><strong style="color:var(--white)">Balance snapshots from Plaid</strong> — deleted after 7 days (stale data is not useful)</li>
+        <li><strong style="color:var(--white)">Split transaction records</strong> — retained for 7 years (financial record requirement)</li>
+        <li><strong style="color:var(--white)">Split evidence logs</strong> — retained for 24 months minimum (chargeback defense window)</li>
+        <li><strong style="color:var(--white)">Account data</strong> — retained until account deletion, then anonymized within 30 days</li>
+      </ul>
+      <p>If you close your account, we will delete or anonymize your personal data within 30 days, except where we are required to retain it for legal or regulatory compliance.</p>
     </div>
 
     <div class="doc-section" id="s8">
-      <h2>8. Your Rights</h2>
+      <h2>9. Your Rights</h2>
       <p>Depending on your location, you may have the following rights regarding your personal data:</p>
       <ul>
         <li><strong style="color:var(--white)">Access</strong> — request a copy of the personal data we hold about you</li>
         <li><strong style="color:var(--white)">Correction</strong> — request that we correct inaccurate or incomplete data</li>
-        <li><strong style="color:var(--white)">Deletion</strong> — request that we delete your personal data ("right to be forgotten")</li>
-        <li><strong style="color:var(--white)">Opt-out of marketing</strong> — unsubscribe from marketing emails at any time using the link in any email we send</li>
+        <li><strong style="color:var(--white)">Deletion</strong> — request that we delete your personal data. Submit a deletion request at any time by emailing support@quarvo.io with subject "Data Deletion Request"</li>
+        <li><strong style="color:var(--white)">Disconnect Plaid</strong> — revoke Plaid access for any connected bank at any time from within the app</li>
+        <li><strong style="color:var(--white)">Opt-out of marketing</strong> — unsubscribe from marketing emails at any time</li>
         <li><strong style="color:var(--white)">Data portability</strong> — request your data in a machine-readable format</li>
         <li><strong style="color:var(--white)">California residents (CCPA)</strong> — you have the right to know, delete, and opt out of the sale of personal information. QUARVO does not sell personal information.</li>
       </ul>
-      <p>To exercise any of these rights, contact us at <a href="/cdn-cgi/l/email-protection#3545475c4354564c7544405447435a1b5c5a"><span class="__cf_email__" data-cfemail="10606279667173695061657162667f3e797f">[email&#160;protected]</span></a>.</p>
+      <p>To exercise any of these rights, contact us at <a href="mailto:support@quarvo.io">support@quarvo.io</a>.</p>
     </div>
 
     <div class="doc-section" id="s9">
-      <h2>9. Children's Privacy</h2>
-      <p>QUARVO is not directed at children under the age of 18. We do not knowingly collect personal information from anyone under 18. If you believe we have inadvertently collected information from a minor, please contact us immediately at <a href="/cdn-cgi/l/email-protection#90e0e2f9e6f1f3e9d0e1e5f1e2e6ffbef9ff"><span class="__cf_email__" data-cfemail="f181839887909288b180849083879edf989e">[email&#160;protected]</span></a> and we will delete it promptly.</p>
+      <h2>10. Children's Privacy</h2>
+      <p>QUARVO is not directed at children under the age of 18. We do not knowingly collect personal information from anyone under 18. If you believe we have inadvertently collected information from a minor, please contact us immediately at <a href="mailto:support@quarvo.io">support@quarvo.io</a> and we will delete it promptly.</p>
     </div>
 
     <div class="doc-section" id="s10">
-      <h2>10. Changes to This Policy</h2>
+      <h2>11. Changes to This Policy</h2>
       <p>We may update this Privacy Policy from time to time. When we make material changes, we will notify you by email (at the address associated with your account) and by posting the updated policy on this page with a new effective date.</p>
       <p>Your continued use of QUARVO after any changes constitutes your acceptance of the updated policy.</p>
     </div>
 
     <div class="doc-section" id="s11">
-      <h2>11. Contact Us</h2>
+      <h2>12. Contact Us</h2>
     </div>
 
     <div class="contact-block">
       <h3>Questions about your privacy?</h3>
       <p>
-        We're h
+        We're here to help. Email us at <a href="mailto:support@quarvo.io">support@quarvo.io</a> and we'll respond within 2 business days.<br/><br/>
+        <strong style="color:var(--white)">Quarvo, Inc.</strong><br/>
+        Delaware LLC · United States<br/>
+        support@quarvo.io
+      </p>
+    </div>
+
+  </div><!-- /page -->
+</body>
+</html>
