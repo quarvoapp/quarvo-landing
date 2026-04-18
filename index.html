@@ -71,15 +71,16 @@
         <span class="logo-wordmark">QUARVO</span>
       </a>
       <div class="nav-links">
-        <a href="#problem">Problem</a>
-        <a href="#solution">Solution</a>
         <a href="#how">How it works</a>
+        <a href="#solution">Why Quarvo</a>
         <a href="#faq">FAQ</a>
-        <a href="#about">About</a>
         <a href="https://app.quarvo.io/merchants" style="color:var(--cyan);">For Merchants</a>
         <a href="https://app.quarvo.io/investors">Investors</a>
       </div>
-      <a href="https://app.quarvo.io" class="btn-nav">Launch App</a>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <a href="https://app.quarvo.io/auth" class="btn-nav" style="background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--text-muted);">Sign in</a>
+        <a href="https://app.quarvo.io" class="btn-nav">Get started</a>
+      </div>
     </div>
   </nav>
 
@@ -107,8 +108,9 @@
         </h1>
 
         <p class="hero-sub">
-          Split any high-value purchase across your cards —<br/>
-          intelligently, instantly, seamlessly.
+          Split any high-value purchase across your existing cards.<br/>
+          Let AI do it for you — or take full manual control.<br/>
+          No new credit. No loans. No BNPL traps.
         </p>
 
         <div class="hero-ctas">
@@ -432,8 +434,8 @@
                 <line x1="25" y1="25" x2="31" y2="31" stroke="url(#stepG2)" stroke-width="4" stroke-linecap="round"/>
               </svg>
             </div>
-            <h3>QuantumSplit&#8482; calculates your split</h3>
-            <p>Our algorithm analyzes your available credit across all cards and builds the optimal split in milliseconds.</p>
+            <h3>QuantumSplit&#8482; builds your split — automatically</h3>
+            <p>Connect your bank and our AI reads your real credit limits, then calculates the optimal split instantly. Prefer manual? Enter your limits yourself — you're always in control.</p>
           </div>
           <div class="step-connector"></div>
         </div>
@@ -454,17 +456,41 @@
         </div>
       </div>
 
+      <!-- AI vs Manual Split -->
+      <div style="max-width:720px;margin:0 auto 64px;background:rgba(123,47,255,0.06);border:1px solid rgba(123,47,255,0.2);border-radius:24px;padding:36px 40px;">
+        <div style="text-align:center;margin-bottom:28px;">
+          <div style="font-family:var(--font-display);font-size:1.4rem;font-weight:700;margin-bottom:8px;">Two ways to split. You choose.</div>
+          <div style="color:var(--text-muted);font-size:.95rem;">Whether you want full control or let AI handle it — Quarvo adapts to you.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div style="background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.2);border-radius:16px;padding:24px;">
+            <div style="font-size:1.5rem;margin-bottom:12px;">⚡</div>
+            <div style="font-family:var(--font-display);font-weight:700;font-size:1.05rem;color:var(--cyan);margin-bottom:10px;">QuantumSplit™ AI</div>
+            <div style="font-size:.9rem;color:var(--text-muted);line-height:1.65;">Connect your bank with Plaid and our algorithm reads your real available credit, then builds the optimal split automatically. Zero math required.</div>
+            <div style="margin-top:14px;font-size:.8rem;color:var(--cyan);opacity:.8;">Best for: first-time users, complex splits</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;">
+            <div style="font-size:1.5rem;margin-bottom:12px;">✏️</div>
+            <div style="font-family:var(--font-display);font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:10px;">Manual Split</div>
+            <div style="font-size:.9rem;color:var(--text-muted);line-height:1.65;">Enter your card limits yourself and decide exactly how much goes on each card. Full control, full transparency. No bank connection needed.</div>
+            <div style="margin-top:14px;font-size:.8rem;color:rgba(255,255,255,0.35);">Best for: privacy-first users, quick splits</div>
+          </div>
+        </div>
+      </div>
+
       <div class="use-cases">
         <div class="use-cases-label">Built for purchases that matter</div>
         <div class="use-cases-grid">
           <div class="use-case">✈️ International flights</div>
           <div class="use-case">🏨 Hotel bookings</div>
-          <div class="use-case">💻 Tech & electronics</div>
-          <div class="use-case">🛋️ Home & furniture</div>
-          <div class="use-case">🎓 Education & courses</div>
+          <div class="use-case">💻 Tech &amp; electronics</div>
+          <div class="use-case">🛋️ Home &amp; furniture</div>
+          <div class="use-case">🎓 Education &amp; courses</div>
           <div class="use-case">🏥 Medical expenses</div>
           <div class="use-case">🚗 Auto purchases</div>
-          <div class="use-case">🎉 Events & experiences</div>
+          <div class="use-case">💒 Weddings &amp; events</div>
+          <div class="use-case">🏖️ Vacation packages</div>
+          <div class="use-case">🎁 Luxury gifts</div>
         </div>
       </div>
     </div>
