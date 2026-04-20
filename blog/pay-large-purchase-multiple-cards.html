@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SEO META ═══════════════════════════════════════════════════════ -->
+  <title>How to Pay for a Large Purchase With Multiple Credit Cards (2026 Guide)</title>
+  <meta name="description" content="Flight, laptop, medical bill, furniture — large purchases that exceed a single card's limit. Here's exactly how to complete them using the credit you already have across multiple cards." />
+  <meta name="keywords" content="pay large purchase with multiple cards, pay large purchase multiple credit cards, large purchase credit card limit, split large purchase credit cards" />
+  <link rel="canonical" href="https://quarvo.io/blog/pay-large-purchase-multiple-cards" />
+
+  <meta property="og:title" content="How to Pay for a Large Purchase With Multiple Credit Cards" />
+  <meta property="og:description" content="The $2,400 flight. The $1,800 laptop. The $3,000 medical bill. Here's how to complete any large purchase using credit you already have — without BNPL, without new debt." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://quarvo.io/blog/pay-large-purchase-multiple-cards" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Large Purchase? Use the Credit You Already Have." />
+  <meta name="twitter:description" content="Your card limit isn't your limit. Your combined credit across all cards is. Here's how to use it — on any purchase, today." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Pay for a Large Purchase With Multiple Credit Cards",
+    "description": "Complete guide to using multiple existing credit cards on a single large purchase without creating new debt or losing rewards.",
+    "totalTime": "PT10M",
+    "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "5.99" },
+    "step": [
+      { "@type": "HowToStep", "name": "Assess your combined available credit", "text": "Check the available balance across 2–4 of your credit cards. Add them together. This is your real purchasing power for this transaction — not the limit on any single card." },
+      { "@type": "HowToStep", "name": "Connect your cards to Quarvo", "text": "Connect your credit cards via Quarvo's secure vault. One-time setup, about 2 minutes. Supports Visa, Mastercard, Amex, and Discover." },
+      { "@type": "HowToStep", "name": "Allocate the purchase across your cards", "text": "Enter the total purchase amount. Choose how to split it across your cards — manually, or let QuantumSplit™ suggest the optimal allocation based on available credit and rewards potential." },
+      { "@type": "HowToStep", "name": "Confirm and complete the purchase", "text": "Quarvo executes all card authorizations simultaneously. The merchant receives the full amount. Each card shows its portion. Zero-Risk: if any card fails, everything reverses. Fee of $5.99 charged only after full confirmation." }
+    ],
+    "author": { "@type": "Person", "name": "Marcelo", "url": "https://quarvo.io" },
+    "publisher": { "@type": "Organization", "name": "Quarvo", "url": "https://quarvo.io" },
+    "datePublished": "2026-04-21",
+    "dateModified": "2026-04-21"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you pay for a large purchase when your credit card limit is too low?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If your credit card limit is too low for a single large purchase, you have four options: ask the merchant to split the charge across two cards manually (works rarely, mostly in-store), request a credit limit increase (takes 5–10 days), use BNPL like Klarna (creates new debt, now on your credit report), or use Quarvo to combine your available credit across multiple existing cards on a single transaction ($5.99 flat fee, no new debt)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you split a large purchase across two credit cards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not through standard checkout systems. Most e-commerce platforms and in-store POS systems only support one credit card authorization per transaction. The only way to reliably split a large purchase across two credit cards is through Quarvo, which executes concurrent partial authorizations with atomic commitment logic — meaning both cards confirm before either is charged, with automatic rollback if one fails."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best way to pay for large purchases with credit cards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The best way to pay for large purchases with credit cards — especially when the amount exceeds any single card's available limit — is to split the purchase across multiple existing cards using Quarvo. This lets you: (1) use credit you already have approved, (2) earn rewards on each card based on its category bonuses, (3) avoid BNPL and its new credit reporting requirements, and (4) keep the purchase off high-APR revolving balances."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it better to use BNPL or multiple credit cards for large purchases?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For consumers who already carry multiple credit cards with available credit, using those cards via a split-payment service is almost always better than BNPL. BNPL creates new debt, now reports to credit bureaus (Affirm as of April 2025), earns zero rewards, and can carry 0–36% APR. Splitting across existing cards uses credit already approved, preserves all rewards, generates no credit events, and costs $5.99 flat per transaction."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you pay for travel, medical bills, or furniture when one card isn't enough?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For large purchases in travel, healthcare, or home categories where a single card's limit is insufficient: connect 2–4 of your existing credit cards to Quarvo, enter the purchase amount, allocate across your cards, and confirm. The full amount settles to the merchant in under 10 seconds. Each card earns its category rewards normally. The fee is $5.99 per split."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060C;
+      --surface: #0E0E18;
+      --card: #101018;
+      --border: #1A1A2E;
+      --accent: #4F6EF7;
+      --bright: #7B93FF;
+      --gold: #F5C518;
+      --green: #3DD68C;
+      --red: #F75454;
+      --orange: #F5873A;
+      --teal: #2DD4BF;
+      --text: #E8E8F2;
+      --soft: #9090B0;
+      --muted: #50506A;
+      --max: 720px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.75; }
+
+    .site-header { border-bottom: 1px solid var(--border); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; background: linear-gradient(135deg, #4F6EF7, #7B93FF); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; }
+    .logo-text { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.06em; }
+    .nav-cta { background: rgba(79,110,247,0.12); border: 1px solid #4F6EF7; color: #7B93FF; font-size: 12px; padding: 6px 16px; border-radius: 20px; text-decoration: none; }
+    .nav-cta:hover { background: rgba(79,110,247,0.2); }
+
+    .article-wrapper { max-width: var(--max); margin: 0 auto; padding: 56px 24px 80px; }
+
+    .article-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+    .tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
+    .tag-guide { background: rgba(45,212,191,0.1); color: var(--teal); border: 1px solid rgba(45,212,191,0.25); }
+    .tag-updated { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+    .reading-time { font-size: 12px; color: var(--muted); }
+
+    h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px; color: var(--text); }
+    h1 em { font-style: normal; color: var(--teal); }
+    .deck { font-size: 18px; color: var(--soft); line-height: 1.6; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; font-weight: 700; margin: 48px 0 16px; color: var(--text); letter-spacing: -0.01em; }
+    h3 { font-size: 17px; font-weight: 700; margin: 32px 0 12px; color: var(--text); }
+    p { margin-bottom: 18px; color: var(--text); }
+    strong { color: #fff; font-weight: 700; }
+    em { color: var(--soft); font-style: italic; }
+    ul, ol { padding-left: 20px; margin-bottom: 18px; }
+    li { color: var(--soft); margin-bottom: 8px; line-height: 1.65; }
+    li strong { color: var(--text); }
+
+    /* PURCHASE SCENARIOS GRID */
+    .scenarios-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 28px 0; }
+    @media (max-width: 520px) { .scenarios-grid { grid-template-columns: 1fr; } }
+    .scenario-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .scenario-card .icon { font-size: 22px; margin-bottom: 10px; display: block; }
+    .scenario-card .category { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; font-weight: 700; }
+    .scenario-card .purchase { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .scenario-card .amount { font-size: 22px; font-weight: 800; color: var(--accent); margin-bottom: 6px; display: block; }
+    .scenario-card .problem { font-size: 12px; color: var(--soft); line-height: 1.5; }
+    .scenario-card .problem span { color: var(--red); font-weight: 700; }
+
+    /* CREDIT REALITY */
+    .credit-reality { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px; margin: 28px 0; }
+    .cr-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; font-family: monospace; }
+    .cr-row { display: grid; grid-template-columns: 1fr 90px 80px; gap: 8px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .cr-row:last-child { border-bottom: none; font-weight: 700; font-size: 15px; }
+    .cr-card { color: var(--soft); }
+    .cr-amount { font-weight: 700; color: var(--green); text-align: right; }
+    .cr-status { font-size: 10px; text-align: right; }
+    .status-ok { color: var(--green); }
+    .status-block { color: var(--red); }
+    .cr-total { color: var(--text); }
+    .cr-total-amount { color: var(--green); text-align: right; }
+
+    /* CATEGORIES DEEP DIVE */
+    .category-section { margin: 28px 0; }
+    .cat-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin-bottom: 12px; }
+    .cat-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .cat-icon { font-size: 20px; width: 40px; height: 40px; background: var(--card); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .cat-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .cat-range { font-size: 12px; color: var(--muted); }
+    .cat-body { font-size: 14px; color: var(--soft); line-height: 1.65; }
+    .cat-body strong { color: var(--text); }
+    .cat-reward { display: inline-block; background: rgba(245,197,24,0.1); border: 1px solid rgba(245,197,24,0.25); color: var(--gold); font-size: 11px; padding: 2px 8px; border-radius: 20px; margin-left: 6px; }
+
+    /* MATH BOX */
+    .math-box { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; margin: 14px 0; font-family: "SFMono-Regular", "Consolas", monospace; font-size: 12px; }
+    .math-row { display: flex; justify-content: space-between; padding: 4px 0; color: var(--soft); }
+    .math-row.total { color: var(--green); font-weight: 700; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px; font-size: 13px; }
+    .math-row.fee { color: var(--muted); }
+    .math-row.savings { color: var(--teal); font-weight: 700; }
+
+    /* STEP LIST */
+    .steps { margin: 24px 0; }
+    .step { display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; }
+    .step-num { width: 34px; height: 34px; background: rgba(45,212,191,0.12); border: 1px solid rgba(45,212,191,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+    .step-body { flex: 1; }
+    .step-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+    .step-desc { font-size: 14px; color: var(--soft); line-height: 1.65; }
+    .step-tip { font-size: 12px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 8px 12px; margin-top: 8px; }
+
+    /* DATA BLOCK */
+    .data-block { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 18px 22px; margin: 28px 0; }
+    .data-block .stat { font-size: 28px; font-weight: 800; color: var(--teal); display: block; margin-bottom: 4px; }
+    .data-block p { font-size: 14px; color: var(--soft); margin: 0; }
+
+    /* BLOCKQUOTE */
+    blockquote { border-left: 3px solid var(--teal); margin: 28px 0; padding: 16px 20px; background: var(--surface); border-radius: 0 8px 8px 0; }
+    blockquote p { font-size: 16px; font-style: italic; color: var(--soft); margin: 0; }
+
+    /* WARNING */
+    .warning-box { background: rgba(245,135,58,0.06); border: 1px solid rgba(245,135,58,0.28); border-radius: 8px; padding: 16px 20px; margin: 28px 0; }
+    .w-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); font-weight: 700; margin-bottom: 8px; }
+    .warning-box p { color: var(--soft); font-size: 14px; margin: 0; }
+
+    /* INLINE CTA */
+    .inline-cta { background: linear-gradient(135deg, rgba(79,110,247,0.12) 0%, rgba(79,110,247,0.05) 100%); border: 1px solid rgba(79,110,247,0.35); border-radius: 12px; padding: 28px; margin: 40px 0; text-align: center; }
+    .inline-cta h3 { font-size: 20px; font-weight: 800; color: var(--text); margin: 0 0 10px; }
+    .inline-cta p { font-size: 14px; color: var(--soft); margin: 0 0 20px; max-width: 440px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-size: 14px; font-weight: 700; padding: 12px 28px; border-radius: 8px; text-decoration: none; transition: background 0.15s, transform 0.1s; }
+    .cta-btn:hover { background: var(--bright); transform: translateY(-1px); }
+    .cta-note { font-size: 11px; color: var(--muted); margin-top: 10px !important; }
+
+    /* FAQ */
+    .faq-section { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .faq-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+    summary { padding: 16px 18px; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; background: var(--surface); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 18px; color: var(--accent); font-weight: 300; flex-shrink: 0; margin-left: 12px; }
+    details[open] summary::after { content: "−"; }
+    .faq-answer { padding: 16px 18px; font-size: 14px; color: var(--soft); line-height: 1.7; border-top: 1px solid var(--border); }
+
+    /* FOOTER CTA */
+    .footer-cta { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--accent); border-radius: 0 0 12px 12px; padding: 36px; margin-top: 56px; text-align: center; }
+    .footer-cta h2 { font-size: 24px; margin: 0 0 12px; }
+    .footer-cta p { color: var(--soft); font-size: 15px; max-width: 460px; margin: 0 auto 24px; }
+
+    .article-footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 14px; }
+    .author-avatar { width: 44px; height: 44px; background: rgba(79,110,247,0.15); border: 1px solid rgba(79,110,247,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+    .author-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .author-role { font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 600px) { .article-wrapper { padding: 32px 16px 60px; } h1 { font-size: 24px; } }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="https://quarvo.io" class="logo">
+    <div class="logo-mark">Q</div>
+    <span class="logo-text">QUARVO</span>
+  </a>
+  <a href="https://quarvo.io#waitlist" class="nav-cta">Get early access →</a>
+</header>
+
+<article class="article-wrapper">
+
+  <div class="article-meta">
+    <span class="tag tag-guide">Practical Guide</span>
+    <span class="tag tag-updated">Updated April 2026</span>
+    <span class="reading-time">8 min read · 2,100 words</span>
+  </div>
+
+  <!-- H1 — Hormozi Type 5: Brutal Promise — specific purchase, specific solution -->
+  <h1>How to Pay for a<br/><em>Large Purchase</em><br/>With Multiple Credit Cards</h1>
+
+  <p class="deck">
+    The flight. The laptop. The dental bill. The couch. The moment your single card comes up short on something you genuinely need — and can genuinely afford across all your cards combined. This is the complete guide to completing those purchases using the credit you already have.
+  </p>
+
+  <!-- PURCHASE SCENARIOS — emotional anchors -->
+  <div class="scenarios-grid">
+    <div class="scenario-card">
+      <span class="icon">✈️</span>
+      <div class="category">Travel</div>
+      <div class="purchase">International flight</div>
+      <span class="amount">$2,400</span>
+      <div class="problem">Chase available: $1,800 <span>→ Declined</span><br/>Combined with Amex: $3,000 → Approved</div>
+    </div>
+    <div class="scenario-card">
+      <span class="icon">💻</span>
+      <div class="category">Tech</div>
+      <div class="purchase">MacBook Pro M4</div>
+      <span class="amount">$2,499</span>
+      <div class="problem">Single card limit: $2,000 <span>→ Declined</span><br/>Two cards combined: $3,600 → Approved</div>
+    </div>
+    <div class="scenario-card">
+      <span class="icon">🏥</span>
+      <div class="category">Healthcare</div>
+      <div class="purchase">Medical procedure</div>
+      <span class="amount">$3,100</span>
+      <div class="problem">Best card available: $2,400 <span>→ Declined</span><br/>Three cards combined: $5,200 → Approved</div>
+    </div>
+    <div class="scenario-card">
+      <span class="icon">🛋️</span>
+      <div class="category">Home</div>
+      <div class="purchase">Sofa + dining set</div>
+      <span class="amount">$2,800</span>
+      <div class="problem">Amex available: $1,600 <span>→ Declined</span><br/>Combined with Visa: $3,800 → Approved</div>
+    </div>
+  </div>
+
+  <p>
+    Four different categories. Same underlying problem. The purchase amount is real. Your credit is real. The checkout just can't see past one card at a time.
+  </p>
+
+  <!-- ── SECTION 1 ─────────────────────────────────────────────────────── -->
+  <h2>Your Real Purchasing Power — What It Actually Is</h2>
+
+  <p>
+    Most people think about their credit limit the wrong way. They think about the limit on their best card — the one they reach for first. When that card falls short, they feel like they've hit a ceiling.
+  </p>
+
+  <p>
+    That's not your ceiling. That's one card's ceiling.
+  </p>
+
+  <p>
+    Your real purchasing power for any single transaction is the <strong>sum of available credit across every card you carry</strong> — if you had a way to use them together. Here's what that looks like for a typical multi-card holder:
+  </p>
+
+  <div class="credit-reality">
+    <div class="cr-label">Your actual available credit — vs. what any checkout sees</div>
+    <div class="cr-row">
+      <span class="cr-card">Chase Sapphire Reserve</span>
+      <span class="cr-amount">$1,800</span>
+      <span class="cr-status status-ok">✓ Available</span>
+    </div>
+    <div class="cr-row">
+      <span class="cr-card">Amex Gold</span>
+      <span class="cr-amount">$1,200</span>
+      <span class="cr-status status-ok">✓ Available</span>
+    </div>
+    <div class="cr-row">
+      <span class="cr-card">Citi Double Cash</span>
+      <span class="cr-amount">$900</span>
+      <span class="cr-status status-ok">✓ Available</span>
+    </div>
+    <div class="cr-row">
+      <span class="cr-card">Capital One Venture</span>
+      <span class="cr-amount">$1,400</span>
+      <span class="cr-status status-ok">✓ Available</span>
+    </div>
+    <div class="cr-row cr-total">
+      <span class="cr-card cr-total">Your combined available credit</span>
+      <span class="cr-total-amount">$5,300</span>
+      <span class="cr-status status-ok">✓ Real</span>
+    </div>
+    <div class="cr-row" style="font-size:13px; padding-top:12px;">
+      <span style="color:var(--muted)">What the checkout sees (per card, best case)</span>
+      <span style="color:var(--red); font-weight:700">$1,800</span>
+      <span class="cr-status status-block">✗ Limited</span>
+    </div>
+  </div>
+
+  <p>
+    The gap between $5,300 and $1,800 is not a credit gap. It's a system gap. The technology to bridge it has existed since multi-party payment systems were built — the consumer-facing tool to use it hadn't been built until now.
+  </p>
+
+  <div class="data-block">
+    <span class="stat">$300 billion</span>
+    <p>In annual US purchase value that goes unrealized because the checkout can only see one card at a time. Not declined due to bad credit — declined because the system can't look across multiple cards simultaneously.</p>
+  </div>
+
+  <!-- ── SECTION 2 ─────────────────────────────────────────────────────── -->
+  <h2>The Four Categories Where This Matters Most</h2>
+
+  <p>
+    The credit fragmentation problem hits hardest in high-ticket purchase categories where a single card's limit is most likely to fall short. Here are the four where we see it most.
+  </p>
+
+  <div class="category-section">
+
+    <div class="cat-item">
+      <div class="cat-header">
+        <div class="cat-icon">✈️</div>
+        <div>
+          <div class="cat-name">Travel — flights, hotels, packages</div>
+          <div class="cat-range">Typical range: $800–$5,000+</div>
+        </div>
+      </div>
+      <p class="cat-body">
+        International flights and hotel bookings are the most common large-purchase declines. A $2,400 round-trip business class ticket or a $3,200 hotel stay for a family trip regularly exceeds a single card's available limit — especially after recent travel spend on that card.
+      </p>
+      <p class="cat-body">
+        Travel is also the category with the <strong>highest rewards stakes</strong>. Chase Sapphire earns 3x on travel. <span class="cat-reward">3x points</span> Amex Platinum earns 5x on flights booked directly. <span class="cat-reward">5x points</span> Putting a $2,400 flight entirely on Chase when you could split it — $1,400 on Amex (5x) + $1,000 on Chase (3x) — means leaving $28 in rewards on the table. Every trip.
+      </p>
+      <div class="math-box">
+        <div class="math-row"><span>$2,400 flight on Chase only (3x)</span><span>≈ $43 in rewards</span></div>
+        <div class="math-row"><span>$1,400 Amex (5x) + $1,000 Chase (3x)</span><span>≈ $75 in rewards</span></div>
+        <div class="math-row fee"><span>Quarvo fee</span><span>−$5.99</span></div>
+        <div class="math-row savings"><span>Net reward gain per trip</span><span>+$26</span></div>
+      </div>
+    </div>
+
+    <div class="cat-item">
+      <div class="cat-header">
+        <div class="cat-icon">💻</div>
+        <div>
+          <div class="cat-name">Technology — laptops, phones, home office</div>
+          <div class="cat-range">Typical range: $1,200–$3,500</div>
+        </div>
+      </div>
+      <p class="cat-body">
+        A MacBook Pro, a high-end monitor setup, or a camera system routinely hits the $2,000–$3,500 range. Apple and major electronics retailers process payments through standard single-card checkout — no split option, no secondary card field.
+      </p>
+      <p class="cat-body">
+        Tech purchases also carry <strong>purchase protection and extended warranty</strong> benefits through premium credit cards. When you're forced to use BNPL instead of your Amex Platinum (which offers 90-day purchase protection and extended warranty), you lose those benefits on top of losing the rewards. Splitting across cards lets you keep both.
+      </p>
+    </div>
+
+    <div class="cat-item">
+      <div class="cat-header">
+        <div class="cat-icon">🏥</div>
+        <div>
+          <div class="cat-name">Healthcare — procedures, dental, elective</div>
+          <div class="cat-range">Typical range: $1,500–$8,000+</div>
+        </div>
+      </div>
+      <p class="cat-body">
+        Medical and dental bills are where the credit fragmentation problem is most acute — and most stressful. A $3,000 dental procedure, a $2,500 specialist visit, or a $4,000 elective procedure can easily exceed a single card's available limit, especially if that card has been used recently.
+      </p>
+      <div class="warning-box">
+        <div class="w-label">⚠ Healthcare + BNPL — the hidden danger</div>
+        <p>BNPL in healthcare (CareCredit, Affirm's healthcare vertical, Afterpay Health) now reports to credit bureaus and can carry deferred interest up to 26.99% APR if the balance isn't paid in full. Splitting across existing cards costs $5.99 flat and reports nothing.</p>
+      </div>
+    </div>
+
+    <div class="cat-item">
+      <div class="cat-header">
+        <div class="cat-icon">🏠</div>
+        <div>
+          <div class="cat-name">Home — furniture, appliances, renovation</div>
+          <div class="cat-range">Typical range: $1,500–$6,000</div>
+        </div>
+      </div>
+      <p class="cat-body">
+        Furniture retailers and appliance stores are among the most aggressive BNPL pushers — because they know the checkout limit problem is real and they've structured BNPL partnerships to capture that revenue. When a $2,800 sofa set exceeds your Amex's available limit, the salesperson's next move is to show you the store's BNPL option.
+      </p>
+      <p class="cat-body">
+        You don't need it. <strong>You have the credit.</strong> It's just on two cards instead of one.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ── INLINE CTA ──────────────────────────────────────────────────────── -->
+  <div class="inline-cta">
+    <h3>Your cards have the credit.<br/>Now they have a tool.</h3>
+    <p>Quarvo combines your available credit across multiple cards on any purchase — travel, tech, healthcare, home. First 500 users get their first split free.</p>
+    <a href="https://quarvo.io#waitlist" class="cta-btn">Get early access — first split free →</a>
+    <p class="cta-note">500 early access spots · Beta opens Q2 2026 · $5.99 per split</p>
+  </div>
+
+  <!-- ── SECTION 3 ─────────────────────────────────────────────────────── -->
+  <h2>Why "Just Use BNPL" Is the Wrong Answer in 2026</h2>
+
+  <p>
+    Every time a large purchase exceeds your single-card limit, someone — the salesperson, the checkout page, your Google search — will tell you to use BNPL. Klarna. Affirm. Afterpay. "Pay in 4."
+  </p>
+
+  <p>
+    BNPL was designed for people without sufficient credit. You have sufficient credit. You just have it distributed across multiple cards. Using BNPL when you already have the credit approved is borrowing money you don't need — and paying in ways you don't always see immediately.
+  </p>
+
+  <blockquote>
+    <p>BNPL's entire business model depends on you not being able to combine your existing cards. The moment you can, BNPL loses its reason to exist for anyone with good credit.</p>
+  </blockquote>
+
+  <p>Three specific costs BNPL extracts that most people don't calculate:</p>
+
+  <ul>
+    <li><strong>Rewards cost.</strong> Every BNPL split earns zero rewards. For a $2,400 purchase on cards earning 3–4x, that's $50–$90 in points you never get. Four large purchases a year = $200–$360 in invisible annual losses.</li>
+    <li><strong>Credit report cost (2025+).</strong> Affirm now reports to all three bureaus. Your BNPL activity is visible to mortgage lenders, auto loan issuers, and new card applications. A pattern of BNPL use signals to underwriters that you needed credit you didn't have — even if you made every payment.</li>
+    <li><strong>Cognitive cost.</strong> Four separate BNPL "plans" across Klarna, Afterpay, and Affirm creates a debt management problem most people underestimate. Studies show BNPL users are 40% more likely to miss a payment than traditional card users — because tracking multiple biweekly schedules is genuinely hard.</li>
+  </ul>
+
+  <!-- ── SECTION 4 ─────────────────────────────────────────────────────── -->
+  <h2>Step-by-Step: How to Complete Any Large Purchase With Multiple Cards</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Calculate your combined available credit</div>
+        <div class="step-desc">Open your banking apps and add up available credit across your cards. This is your real ceiling for this purchase — not what any single card shows.</div>
+        <div class="step-tip">Pro tip: if your combined available credit comfortably covers the purchase, you're good. You don't need the highest limit card — you need the right split between 2–3 cards.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Connect your cards to Quarvo (one time, ~2 min)</div>
+        <div class="step-desc">Add 2–4 credit cards via Quarvo's secure vault. Encrypted, bank-grade integration. You do this once — every future split uses the same connected cards.</div>
+        <div class="step-tip">Supports Visa, Mastercard, American Express, and Discover. Up to 4 cards on Pay-Per-Split, 8 on Pro.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Choose your split — manually or optimized</div>
+        <div class="step-desc">Enter the total purchase amount. Set how much goes on each card, or use QuantumSplit™ to automatically allocate based on available credit and rewards potential. The Rewards Intelligence overlay shows projected points and cashback per card before you confirm.</div>
+        <div class="step-tip">For travel and dining, maximize points by front-loading Amex Gold (4x) and Chase Sapphire (3x). Put the remainder on a flat-cashback card.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Confirm — purchase completes in under 10 seconds</div>
+        <div class="step-desc">All card authorizations execute simultaneously. Merchant receives the full amount as one settlement. Each card posts its charge. Rewards accrue on each card normally.</div>
+        <div class="step-tip">Zero-Risk Guarantee: if any card authorization fails, everything reverses automatically. The $5.99 fee only posts after full confirmation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 5 ─────────────────────────────────────────────────────── -->
+  <h2>The Real Math: $5.99 vs. Every Alternative</h2>
+
+  <p>
+    The $5.99 fee sounds like a cost. Run the actual numbers and it's the cheapest option on the table — by a significant margin.
+  </p>
+
+  <div class="math-box">
+    <div class="math-row"><span>Revolving $2,400 at 25.2% APR for 1 month</span><span style="color:var(--red)">$50.40</span></div>
+    <div class="math-row"><span>Affirm 12-month plan at 15% APR on $2,400</span><span style="color:var(--red)">$198.00</span></div>
+    <div class="math-row"><span>Klarna Pay in 4 — missed one payment (late fee)</span><span style="color:var(--red)">$7.00+</span></div>
+    <div class="math-row"><span>Balance transfer to higher-limit card (3% fee)</span><span style="color:var(--red)">$72.00</span></div>
+    <div class="math-row"><span>Rewards lost using BNPL on a 3x travel card</span><span style="color:var(--red)">$54.00+</span></div>
+    <div class="math-row savings"><span>Quarvo split — $5.99 flat, rewards preserved</span><span>$5.99</span></div>
+  </div>
+
+  <p>
+    The comparison is starker when you factor in what you keep: all rewards, all purchase protections, no new debt on your credit file, no new accounts. The question isn't whether $5.99 is worth it. The question is why you'd pay $50–$200 for a worse outcome.
+  </p>
+
+  <!-- ── SECTION 6 ─────────────────────────────────────────────────────── -->
+  <h2>The Tier 1 Rule for Large Purchases</h2>
+
+  <p>
+    If you carry multiple premium credit cards, there's a simple rule that maximizes every large purchase:
+  </p>
+
+  <p>
+    <strong>Never let a single card's limit determine what you can buy.</strong> Your purchasing power is the sum of your cards, not the maximum of any one. The checkout's one-card slot is a constraint of the payment infrastructure — not a constraint of your credit.
+  </p>
+
+  <p>
+    For purchases over $1,000 where you carry multiple cards, the calculation should always be: what's my combined available credit, how do I split to maximize rewards, and what does the $5.99 cost relative to the alternatives?
+  </p>
+
+  <p>
+    In nearly every scenario — especially travel and tech — the math resolves the same way. The split is cheaper, earns more, and leaves nothing on your credit report.
+  </p>
+
+  <!-- ── FOOTER CTA ──────────────────────────────────────────────────────── -->
+  <div class="footer-cta">
+    <h2>Large purchase. Multiple cards.<br/>One transaction. Under 10 seconds.</h2>
+    <p>Join the Quarvo waitlist. Complete any large purchase using the credit you already have across all your cards. First 500 users get their first split free.</p>
+    <a href="https://quarvo.io#waitlist" class="cta-btn">Get early access — first split free →</a>
+    <p style="font-size:12px; color:var(--muted); margin-top:12px;">Beta opens Q2 2026 · $5.99 per split after the first · No subscription required</p>
+  </div>
+
+  <!-- ── FAQ ─────────────────────────────────────────────────────────────── -->
+  <div class="faq-section">
+    <div class="faq-label">Frequently asked questions</div>
+
+    <details>
+      <summary>How do you pay for a large purchase when your credit card limit is too low?</summary>
+      <div class="faq-answer">You have four options: ask the merchant to split the charge manually (works rarely in-store, never online), request a limit increase (5–10 days, hard inquiry), use BNPL (creates new debt, now on your credit report), or use Quarvo to combine available credit across your existing cards on a single transaction — $5.99 flat fee, no new debt, rewards preserved.</div>
+    </details>
+
+    <details>
+      <summary>Can you split a large purchase across two credit cards?</summary>
+      <div class="faq-answer">Not through standard checkout systems. Most e-commerce platforms only support one credit card authorization per transaction. The only reliable method is Quarvo, which runs concurrent partial authorizations with atomic commitment logic — both cards confirm before either is charged, with automatic rollback if one fails.</div>
+    </details>
+
+    <details>
+      <summary>What is the best way to pay for large purchases with credit cards?</summary>
+      <div class="faq-answer">For purchases exceeding a single card's available limit: split across multiple existing cards using Quarvo. This lets you use credit you already have, earn rewards on each card based on its category bonuses, avoid BNPL and credit reporting, and keep the purchase off high-APR revolving balances. $5.99 flat per split.</div>
+    </details>
+
+    <details>
+      <summary>Is it better to use BNPL or multiple credit cards for large purchases?</summary>
+      <div class="faq-answer">For consumers with multiple cards and available credit, splitting across cards is almost always better. BNPL creates new debt, now reports to credit bureaus, earns zero rewards, and can carry 0–36% APR. Splitting across existing cards costs $5.99 flat, generates no credit events, and preserves all rewards.</div>
+    </details>
+
+    <details>
+      <summary>How do you pay for travel, medical bills, or furniture when one card isn't enough?</summary>
+      <div class="faq-answer">Connect 2–4 of your existing credit cards to Quarvo, enter the purchase amount, choose your split, and confirm. The full amount settles to the merchant in under 10 seconds. Each card earns its category rewards normally. The fee is $5.99 per split — charged only after full confirmation.</div>
+    </details>
+  </div>
+
+  <div class="article-footer">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Marcelo</div>
+      <div class="author-role">Founder, Quarvo · Building Credit Combination Technology</div>
+    </div>
+  </div>
+
+</article>
+</body>
+</html>
