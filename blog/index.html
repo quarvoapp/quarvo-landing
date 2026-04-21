@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quarvo Blog — Credit cards, split payments, and smarter spending</title>
+  <meta name="description" content="Deep-dives on credit limits, checkout failures, and how to use the buying power you already have across multiple cards."/>
+  <link rel="canonical" href="https://quarvo.io/blog"/>
+  <link rel="icon" type="image/svg+xml" href="/icon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css"/>
+  <style>
+    .blog-hero { padding: 100px 0 60px; text-align: center; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 48px; }
+    .article-card { text-decoration: none; display: flex; flex-direction: column; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+    .article-card:hover { border-color: rgba(123,47,255,0.45); transform: translateY(-3px); }
+    .article-thumb { aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 28px; }
+    .article-body { padding: 22px 24px; flex: 1; display: flex; flex-direction: column; }
+    .article-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; color: #F0F0F8; line-height: 1.45; margin-bottom: 10px; }
+    .article-desc { font-size: 0.85rem; color: #6A6A88; line-height: 1.6; flex: 1; margin-bottom: 16px; }
+    .article-meta { display: flex; align-items: center; justify-content: space-between; }
+    .article-time { font-size: 11px; color: #6A6A88; font-family: 'DM Mono', monospace; }
+    .article-cta { font-size: 13px; font-family: 'Syne', sans-serif; font-weight: 600; }
+    .tag-badge { margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; border-radius: 20px; padding: 4px 12px; }
+    .tag-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; }
+    .tag-text { font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(40px); pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <svg class="logo-icon" width="32" height="32" viewBox="0 0 64 64" fill="none">
+          <defs>
+            <linearGradient id="navG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+            </linearGradient>
+            <mask id="navM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+          </defs>
+          <circle cx="30" cy="30" r="22" fill="url(#navG)" mask="url(#navM)"/>
+          <line x1="44" y1="44" x2="57" y2="57" stroke="url(#navG)" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-wordmark">QUARVO</span>
+      </a>
+      <div class="nav-links">
+        <a href="/#how">How it works</a>
+        <a href="/#solution">Why Quarvo</a>
+        <a href="/blog" style="color:var(--cyan);">Blog</a>
+        <a href="/#faq">FAQ</a>
+        <a href="https://app.quarvo.io/merchants" style="color:var(--cyan);">For Merchants</a>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <a href="https://app.quarvo.io/auth" class="btn-nav" style="background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--text-muted);">Sign in</a>
+        <a href="https://app.quarvo.io" class="btn-nav">Get started</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="blog-hero">
+    <div class="section-inner">
+      <div class="section-tag">From the blog</div>
+      <h1 class="section-title" style="margin-bottom:12px;">
+        The real reason your card<br/>
+        <span class="title-muted">keeps getting declined.</span>
+      </h1>
+      <p style="color:#9090B0;font-size:1rem;max-width:520px;margin:0 auto;">Deep-dives on credit limits, checkout failures, and how to use the buying power you already have.</p>
+
+      <div class="blog-grid">
+
+        <a href="/blog/how-to-pay-with-two-credit-cards-at-once" class="article-card">
+          <div class="article-thumb" style="background:linear-gradient(135deg,#0D0A1A 0%,#1A0D33 100%);">
+            <div class="orb" style="top:-40px;right:-40px;width:160px;height:160px;background:rgba(123,47,255,0.18);"></div>
+            <div style="text-align:center;position:relative;z-index:1;">
+              <div style="font-size:2.4rem;margin-bottom:10px;">&#x1F4B3;</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Pay With Two Cards at Once</div>
+              <div class="tag-badge" style="background:rgba(123,47,255,0.2);border:1px solid rgba(123,47,255,0.4);">
+                <span class="tag-dot" style="background:#9B6FFF;"></span>
+                <span class="tag-text" style="color:#B09FFF;">TECHNICAL GUIDE</span>
+              </div>
+            </div>
+          </div>
+          <div class="article-body">
+            <h2 class="article-title">How to Pay With Two Credit Cards at Once (And Why No Checkout Lets You)</h2>
+            <p class="article-desc">You have $14,000 in credit. The checkout sees $4,000. Here's the technical reason why — and the only fix.</p>
+            <div class="article-meta">
+              <span class="article-time">8 min read</span>
+              <span class="article-cta" style="color:#9B6FFF;">Read &#x2192;</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/blog/split-purchase-across-multiple-credit-cards" class="article-card">
+          <div class="article-thumb" style="background:linear-gradient(135deg,#031A1A 0%,#062828 100%);">
+            <div class="orb" style="bottom:-40px;left:-40px;width:160px;height:160px;background:rgba(0,245,255,0.1);"></div>
+            <div style="text-align:center;position:relative;z-index:1;">
+              <div style="font-size:2.4rem;margin-bottom:10px;">&#x2702;&#xFE0F;</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Split Across Multiple Cards</div>
+              <div class="tag-badge" style="background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.3);">
+                <span class="tag-dot" style="background:#00F5FF;"></span>
+                <span class="tag-text" style="color:#00F5FF;">STEP-BY-STEP</span>
+              </div>
+            </div>
+          </div>
+          <div class="article-body">
+            <h2 class="article-title">How to Split a Purchase Across Multiple Credit Cards in 2026</h2>
+            <p class="article-desc">Why merchants won't split payments, why BNPL is the wrong answer, and the one tool that actually works.</p>
+            <div class="article-meta">
+              <span class="article-time">10 min read</span>
+              <span class="article-cta" style="color:#00F5FF;">Read &#x2192;</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/blog/credit-card-limit-not-enough-for-purchase" class="article-card">
+          <div class="article-thumb" style="background:linear-gradient(135deg,#1A0808 0%,#2D1010 100%);">
+            <div class="orb" style="top:-30px;left:50%;transform:translateX(-50%);width:200px;height:120px;background:rgba(239,68,68,0.12);"></div>
+            <div style="text-align:center;position:relative;z-index:1;">
+              <div style="font-size:2.4rem;margin-bottom:10px;">&#x1F6AB;</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Card Declined But Credit Is Fine</div>
+              <div class="tag-badge" style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);">
+                <span class="tag-dot" style="background:#EF4444;"></span>
+                <span class="tag-text" style="color:#F87171;">DEEP DIVE</span>
+              </div>
+            </div>
+          </div>
+          <div class="article-body">
+            <h2 class="article-title">Your Credit Card Was Declined. But Your Credit Is Fine. Here's Exactly Why.</h2>
+            <p class="article-desc">Getting declined with available credit isn't a credit problem. It's a 30-year-old system design failure.</p>
+            <div class="article-meta">
+              <span class="article-time">7 min read</span>
+              <span class="article-cta" style="color:#F87171;">Read &#x2192;</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/blog/use-two-credit-cards-one-transaction" class="article-card">
+          <div class="article-thumb" style="background:linear-gradient(135deg,#141005 0%,#201A08 100%);">
+            <div class="orb" style="bottom:-20px;right:-20px;width:140px;height:140px;background:rgba(251,191,36,0.1);"></div>
+            <div style="text-align:center;position:relative;z-index:1;">
+              <div style="font-size:2.4rem;margin-bottom:10px;">&#x1F504;</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Two Cards, One Transaction</div>
+              <div class="tag-badge" style="background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.28);">
+                <span class="tag-dot" style="background:#FBBF24;"></span>
+                <span class="tag-text" style="color:#FCD34D;">WORKAROUNDS</span>
+              </div>
+            </div>
+          </div>
+          <div class="article-body">
+            <h2 class="article-title">How to Use Two Credit Cards in One Transaction (Why 99% of Checkouts Block It)</h2>
+            <p class="article-desc">Three workarounds that partially work — and the one method that actually completes the transaction.</p>
+            <div class="article-meta">
+              <span class="article-time">9 min read</span>
+              <span class="article-cta" style="color:#FBBF24;">Read &#x2192;</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/blog/pay-large-purchase-multiple-cards" class="article-card">
+          <div class="article-thumb" style="background:linear-gradient(135deg,#031509 0%,#07200E 100%);">
+            <div class="orb" style="top:-30px;left:-30px;width:150px;height:150px;background:rgba(52,211,153,0.1);"></div>
+            <div style="text-align:center;position:relative;z-index:1;">
+              <div style="font-size:2.4rem;margin-bottom:10px;">&#x1F4B0;</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Large Purchase, Multiple Cards</div>
+              <div class="tag-badge" style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.28);">
+                <span class="tag-dot" style="background:#34D399;"></span>
+                <span class="tag-text" style="color:#6EE7B7;">2026 GUIDE</span>
+              </div>
+            </div>
+          </div>
+          <div class="article-body">
+            <h2 class="article-title">How to Pay for a Large Purchase With Multiple Credit Cards (2026 Guide)</h2>
+            <p class="article-desc">Flight, laptop, medical bill, furniture — complete large purchases using the credit you already have.</p>
+            <div class="article-meta">
+              <span class="article-time">11 min read</span>
+              <span class="article-cta" style="color:#34D399;">Read &#x2192;</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg class="logo-icon" width="28" height="28" viewBox="0 0 64 64" fill="none">
+          <defs>
+            <linearGradient id="footG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+            </linearGradient>
+            <mask id="footM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+          </defs>
+          <circle cx="30" cy="30" r="22" fill="url(#footG)" mask="url(#footM)"/>
+          <line x1="44" y1="44" x2="57" y2="57" stroke="url(#footG)" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-wordmark">QUARVO</span>
+      </div>
+      <div class="footer-tagline">Your credit was always enough. Now it works like it.</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/#solution">Why Quarvo</a>
+        <a href="/blog">Blog</a>
+        <a href="/#faq">FAQ</a>
+        <a href="https://app.quarvo.io">Launch App</a>
+        <a href="https://app.quarvo.io/merchants">For Merchants</a>
+      </div>
+      <div class="footer-legal">
+        © 2026 QUARVO. All rights reserved. · QUARVO is not a lender. No new credit is issued. ·
+        <a href="/privacy" style="color:inherit;text-decoration:underline;opacity:.6;">Privacy Policy</a> ·
+        <a href="/terms" style="color:inherit;text-decoration:underline;opacity:.6;">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/main.js"></script>
+</body>
+</html>
