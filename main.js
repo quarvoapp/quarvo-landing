@@ -21,12 +21,17 @@ function handleSubmit(e) {
 
   if (!email || !email.includes('@')) return;
 
-  // Loading state
   btnText.textContent = 'Joining...';
   btn.disabled = true;
   btn.style.opacity = '0.7';
 
-  fetch('/api/subscribe', {
+  // Use absolute URL with www to avoid redirect (quarvo.io → www.quarvo.io
+  // turns POST into GET, breaking the serverless function)
+  const apiUrl = window.location.hostname === 'localhost'
+    ? '/api/subscribe'
+    : 'https://www.quarvo.io/api/subscribe';
+
+  fetch(apiUrl, {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
     body:    JSON.stringify({ email }),
@@ -34,7 +39,6 @@ function handleSubmit(e) {
   .then(res => res.json())
   .then(data => {
     if (data.ok || data.message) {
-      // Success — redirect to thank you page
       window.location.href = '/thank-you.html';
     } else {
       throw new Error(data.error || 'Unknown error');
@@ -42,20 +46,9 @@ function handleSubmit(e) {
   })
   .catch(err => {
     console.error('Subscribe error:', err);
-    // Fallback — show inline success so user isn't stuck
-    if (btn) {
-      btn.style.display = 'none';
-    }
-    if (document.querySelector('.form-row')) {
-      document.querySelector('.form-row').style.opacity = '0.4';
-    }
-    if (success) {
-      success.style.display = 'block';
-    }
-    // Still redirect after a moment
-    setTimeout(() => {
-      window.location.href = '/thank-you.html';
-    }, 1500);
+    if (btn) btn.style.display = 'none';
+    if (success) success.style.display = 'block';
+    setTimeout(() => { window.location.href = '/thank-you.html'; }, 1500);
   });
 }
 
