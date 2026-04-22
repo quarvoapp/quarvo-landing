@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>QUARVO — Your card wasn't declined. The checkout failed you.</title>
-  <meta name="description" content="You have the credit. The checkout says no. Quarvo splits any purchase across your existing cards in 3 steps. No new debt. No credit check. No new accounts."/>
+  <meta name="description" content="Unlock bigger purchases with the credit you already have. Split any high-value purchase across your cards — intelligently, instantly, seamlessly."/>
   <!-- ═══ SEO + Open Graph ═══════════════════════════════════════ -->
-  <meta name="description" content="You have the credit. The checkout says no. Quarvo splits any high-value purchase across your existing cards — instantly, in 3 steps. No new debt. No credit check. No new accounts."/>
+  <meta name="description" content="Split any high-value purchase across your existing cards — intelligently, instantly, seamlessly. Not a loan. No new credit. Just smarter spending."/>
   <meta name="keywords" content="split payment, multi-card payment, credit card split, buy now pay later alternative, purchase splitting"/>
   <meta name="author" content="Quarvo"/>
   <meta name="robots" content="index, follow"/>
@@ -14,8 +14,8 @@
   <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://quarvo.io/"/>
-  <meta property="og:title" content="QUARVO — Your card wasn't declined. The checkout failed you."/>
-  <meta property="og:description" content="You have the credit. The checkout says no. Quarvo splits any purchase across your existing cards in 3 steps. No new debt. No credit check. No new accounts. Not a loan. No new credit."/>
+  <meta property="og:title" content="QUARVO — Split Smart. Buy Bold."/>
+  <meta property="og:description" content="Unlock bigger purchases with the credit you already have. Split any high-value purchase across your cards — intelligently, instantly, seamlessly. Not a loan. No new credit."/>
   <meta property="og:image" content="https://quarvo.io/og-image.png"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
@@ -25,8 +25,8 @@
   <!-- Twitter/X Card -->
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:site" content="@quarvoapp"/>
-  <meta name="twitter:title" content="QUARVO — Your card wasn't declined. The checkout failed you."/>
-  <meta name="twitter:description" content="You have the credit. The checkout says no. Quarvo splits any purchase across your existing cards in 3 steps. No new debt. No credit check. No new accounts."/>
+  <meta name="twitter:title" content="QUARVO — Split Smart. Buy Bold."/>
+  <meta name="twitter:description" content="Unlock bigger purchases with the credit you already have. Split any high-value purchase across your cards — intelligently, instantly, seamlessly."/>
   <meta name="twitter:image" content="https://quarvo.io/og-image.png"/>
 
   <!-- WhatsApp specific -->
@@ -47,6 +47,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css"/>
+  <style>
+    @media (max-width: 768px) {
+      .hero-visual { display: none !important; }
+      .hero-inner { justify-content: center; }
+      .hero-content { text-align: center; max-width: 100%; }
+      .hero-ctas { justify-content: center; }
+      .hero-trust { justify-content: center; }
+    }
+  </style>
 </head>
 <body>
 
@@ -80,7 +89,7 @@
       </div>
       <div style="display:flex;gap:10px;align-items:center;">
         <a href="https://app.quarvo.io/auth" class="btn-nav" style="background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--text-muted);">Sign in</a>
-        <a href="#waitlist" class="btn-nav">Get early access</a>
+        <a href="https://app.quarvo.io" class="btn-nav">Get started</a>
       </div>
     </div>
   </nav>
@@ -115,7 +124,7 @@
 
         <div class="hero-ctas">
           <a href="https://app.quarvo.io" class="btn-primary" style="background:linear-gradient(135deg,#7B2FFF,#00C8FF);box-shadow:0 8px 32px rgba(123,47,255,0.5);">
-            Launch App
+            Split my first purchase
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="#how" class="btn-ghost">See how it works →</a>
@@ -216,22 +225,22 @@
   <section class="stats-bar">
     <div class="stats-inner">
       <div class="stat-item">
-        <span class="stat-num">$122B</span>
+        <span class="stat-num" data-target="122" data-prefix="$" data-suffix="B">$122B</span>
         <span class="stat-label">US credit card market</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
-        <span class="stat-num">3 cards</span>
+        <span class="stat-num" data-target="3" data-suffix=" cards">3 cards</span>
         <span class="stat-label">Average cards per American</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
-        <span class="stat-num">1 checkout</span>
+        <span class="stat-num" data-target="1" data-suffix=" checkout">1 checkout</span>
         <span class="stat-label">That still limits you to one</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item stat-item--accent">
-        <span class="stat-num">0 tools</span>
+        <span class="stat-num" data-target="0" data-suffix=" tools">0 tools</span>
         <span class="stat-label">existed to fix this. Until now.</span>
       </div>
     </div>
@@ -496,37 +505,6 @@
     </div>
   </section>
 
-  <!-- MANIFESTO -->
-  <section class="manifesto">
-    <div class="manifesto-bg">
-      <div class="man-orb man-orb-1"></div>
-    </div>
-    <div class="section-inner">
-      <div class="manifesto-content">
-        <div class="manifesto-symbol">
-          <svg width="72" height="72" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="manG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#7B2FFF"/>
-                <stop offset="100%" stop-color="#00F5FF"/>
-              </linearGradient>
-              <mask id="manM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
-            </defs>
-            <circle cx="30" cy="30" r="22" fill="url(#manG)" mask="url(#manM)"/>
-            <line x1="44" y1="44" x2="57" y2="57" stroke="url(#manG)" stroke-width="8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <p class="manifesto-text">
-          In quantum physics, a quark is the most fundamental particle in the universe —<br/>
-          invisible alone, but <em>unstoppable when combined.</em><br/><br/>
-          Your credit is the same.<br/>
-          Distributed. Fragmented. Waiting to be unified.<br/><br/>
-          <strong>QUARVO is the force that combines it.</strong>
-        </p>
-        <div class="manifesto-tagline">Split smart. Buy bold.</div>
-      </div>
-    </div>
-  </section>
 
   <!-- FAQ -->
   <section class="faq" id="faq">
@@ -565,7 +543,77 @@
 
   <!-- WAITLIST -->
 
-  <!-- ═══════════════════════════ AMBASSADOR / REFERRAL -->
+  <section class="waitlist" id="waitlist">
+    <div class="waitlist-bg">
+      <div class="wl-orb wl-orb-1"></div>
+      <div class="wl-orb wl-orb-2"></div>
+    </div>
+    <div class="section-inner">
+      <div class="waitlist-content">
+        <div class="waitlist-badge">
+          <span class="badge-dot badge-dot--pulse"></span>
+          Live now &mdash; no account needed
+        </div>
+        <h2 class="waitlist-title">
+          That purchase you've been<br/>
+          <span class="title-accent">putting off? Do it today.</span>
+        </h2>
+        <p class="waitlist-sub">
+          Quarvo is live. Split your first purchase today &mdash;<br/>
+          works with any merchant, any card, right now.
+        </p>
+
+        <!-- Social proof counter -->
+        <div style="max-width:420px;margin:0 auto 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-family:'DM Mono',monospace;font-size:11px;color:#9090B0;letter-spacing:0.08em;">847 people already waiting</span>
+            <span style="font-family:'DM Mono',monospace;font-size:11px;color:#7B2FFF;letter-spacing:0.08em;">69% full</span>
+          </div>
+          <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;">
+            <div style="height:100%;width:69%;background:linear-gradient(90deg,#7B2FFF,#00C8FF);border-radius:4px;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px;">
+            <span style="font-family:'DM Mono',monospace;font-size:10px;color:#505068;">500 founding spots</span>
+            <span style="font-family:'DM Mono',monospace;font-size:10px;color:#F5873A;">153 remaining</span>
+          </div>
+        </div>
+
+        <form id="waitlistForm" onsubmit="handleSubmit(event)" style="max-width:460px;margin:0 auto 24px;">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <input type="email" id="emailInput" name="email" required placeholder="your@email.com"
+              style="flex:1;min-width:220px;padding:14px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:#F0F0F8;font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='rgba(123,47,255,0.6)'"
+              onblur="this.style.borderColor='rgba(255,255,255,0.12)'"/>
+            <button type="submit" style="display:inline-flex;align-items:center;gap:8px;padding:14px 24px;background:linear-gradient(135deg,#7B2FFF,#00C8FF);border:none;border-radius:12px;color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;cursor:pointer;white-space:nowrap;box-shadow:0 6px 24px rgba(123,47,255,0.4);">
+              <span id="btnText">Get early access</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <p style="font-size:12px;color:#6A6A88;margin-top:10px;font-family:'DM Mono',monospace;letter-spacing:0.04em;text-align:center;">No spam. Unsubscribe anytime. We'll email you when your access is ready.</p>
+          <div id="formSuccess" style="display:none;padding:16px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);border-radius:12px;color:#6EE7B7;font-size:14px;text-align:center;margin-top:12px;">
+            &#x2713; You're on the list! Check your inbox.
+          </div>
+        </form>
+
+        <div class="waitlist-trust" style="margin-top:36px;">
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.5 3.5L13 5.5 10.5 8l.5 3.5L8 10.5 5 12l.5-3.5L3 6l3.5-.5L8 2z" stroke="#00F5FF" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            No account needed
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#00F5FF" stroke-width="1.2"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#00F5FF" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Stripe secured
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#00F5FF" stroke-width="1.2"/><path d="M5.5 8l2 2 3-3" stroke="#00F5FF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            No new credit
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- ═══════════════════════════ AMBASSADOR / REFERRAL -->
   <section class="ambassador" id="spread">
     <div class="section-inner">
       <div class="amb-card">
@@ -647,62 +695,7 @@
     </div>
   </section>
 
-  <section class="waitlist" id="waitlist">
-    <div class="waitlist-bg">
-      <div class="wl-orb wl-orb-1"></div>
-      <div class="wl-orb wl-orb-2"></div>
-    </div>
-    <div class="section-inner">
-      <div class="waitlist-content">
-        <div class="waitlist-badge">
-          <span class="badge-dot badge-dot--pulse"></span>
-          Early access &mdash; join the waitlist
-        </div>
-        <h2 class="waitlist-title">
-          That purchase you've been<br/>
-          <span class="title-accent">putting off? Do it today.</span>
-        </h2>
-        <p class="waitlist-sub">
-          Join the waitlist and be first when we open access.<br/>
-          No spam. We'll email you when you're in.
-        </p>
 
-        <form id="waitlistForm" name="quarvo-waitlist" netlify netlify-honeypot="bot-field" onsubmit="handleSubmit(event)" style="max-width:460px;margin:0 auto 28px;">
-          <input type="hidden" name="form-name" value="quarvo-waitlist" />
-          <div style="display:none;"><input name="bot-field" /></div>
-          <div class="form-row" style="display:flex;gap:10px;flex-wrap:wrap;">
-            <input type="email" id="emailInput" name="email" required placeholder="your@email.com"
-              style="flex:1;min-width:220px;padding:14px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:#F0F0F8;font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:border-color 0.2s;"
-              onfocus="this.style.borderColor='rgba(123,47,255,0.6)'"
-              onblur="this.style.borderColor='rgba(255,255,255,0.12)'"/>
-            <button type="submit" class="btn-submit" style="display:inline-flex;align-items:center;gap:8px;padding:14px 24px;background:linear-gradient(135deg,#7B2FFF,#00C8FF);border:none;border-radius:12px;color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;cursor:pointer;white-space:nowrap;box-shadow:0 6px 24px rgba(123,47,255,0.4);">
-              <span id="btnText">Join the waitlist</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
-          <p style="font-size:12px;color:#6A6A88;margin-top:10px;font-family:'DM Mono',monospace;letter-spacing:0.04em;">No spam. Unsubscribe anytime. We'll email you when your access is ready.</p>
-          <div id="formSuccess" style="display:none;padding:16px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);border-radius:12px;color:#6EE7B7;font-size:14px;text-align:center;margin-top:12px;">
-            &#x2713; You're on the list! We'll reach out soon.
-          </div>
-        </form>
-
-        <div class="waitlist-trust" style="margin-top:8px;">
-          <div class="trust-item">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.5 3.5L13 5.5 10.5 8l.5 3.5L8 10.5 5 12l.5-3.5L3 6l3.5-.5L8 2z" stroke="#00F5FF" stroke-width="1.2" stroke-linejoin="round"/></svg>
-            No credit check
-          </div>
-          <div class="trust-item">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#00F5FF" stroke-width="1.2"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#00F5FF" stroke-width="1.2" stroke-linecap="round"/></svg>
-            Stripe secured
-          </div>
-          <div class="trust-item">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#00F5FF" stroke-width="1.2"/><path d="M5.5 8l2 2 3-3" stroke="#00F5FF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            No new debt
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- FOOTER -->
 
@@ -798,38 +791,28 @@
       </h2>
       <p style="color:#9090B0;font-size:1rem;margin-bottom:48px;max-width:560px;">Deep-dives on credit limits, checkout failures, and how to use the buying power you already have.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-bottom:48px;">
-
         <a href="/blog/how-to-pay-with-two-credit-cards-at-once" style="text-decoration:none;display:flex;flex-direction:column;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='rgba(123,47,255,0.45)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)'">
-          <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#0D0A1A,#1A0D33);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:28px;"><div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(123,47,255,0.18);filter:blur(40px);pointer-events:none;"></div><div style="text-align:center;position:relative;z-index:1;"><div style="font-size:2.4rem;margin-bottom:10px;">&#x1F4B3;</div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Pay With Two Cards at Once</div><div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(123,47,255,0.2);border:1px solid rgba(123,47,255,0.4);border-radius:20px;padding:4px 12px;"><span style="width:5px;height:5px;border-radius:50%;background:#9B6FFF;display:inline-block;"></span><span style="font-size:10px;color:#B09FFF;font-family:'DM Mono',monospace;letter-spacing:0.08em;">TECHNICAL GUIDE</span></div></div></div>
+          <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#0D0A1A,#1A0D33);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:28px;"><div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(123,47,255,0.18);filter:blur(40px);"></div><div style="text-align:center;position:relative;z-index:1;"><div style="font-size:2.4rem;margin-bottom:10px;">&#x1F4B3;</div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Pay With Two Cards at Once</div><div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(123,47,255,0.2);border:1px solid rgba(123,47,255,0.4);border-radius:20px;padding:4px 12px;"><span style="width:5px;height:5px;border-radius:50%;background:#9B6FFF;display:inline-block;"></span><span style="font-size:10px;color:#B09FFF;font-family:'DM Mono',monospace;letter-spacing:0.08em;">TECHNICAL GUIDE</span></div></div></div>
           <div style="padding:22px 24px;flex:1;display:flex;flex-direction:column;"><h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#F0F0F8;line-height:1.45;margin-bottom:10px;">How to Pay With Two Credit Cards at Once (And Why No Checkout Lets You)</h3><p style="font-size:0.85rem;color:#6A6A88;line-height:1.6;flex:1;margin-bottom:16px;">You have $14,000 in credit. The checkout sees $4,000. Here's the technical reason why — and the only fix.</p><div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:11px;color:#6A6A88;font-family:'DM Mono',monospace;">8 min read</span><span style="font-size:13px;color:#9B6FFF;font-family:'Syne',sans-serif;font-weight:600;">Read &#x2192;</span></div></div>
         </a>
-
         <a href="/blog/split-purchase-across-multiple-credit-cards" style="text-decoration:none;display:flex;flex-direction:column;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='rgba(0,245,255,0.35)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)'">
-          <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#031A1A,#062828);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:28px;"><div style="position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:rgba(0,245,255,0.1);filter:blur(40px);pointer-events:none;"></div><div style="text-align:center;position:relative;z-index:1;"><div style="font-size:2.4rem;margin-bottom:10px;">&#x2702;&#xFE0F;</div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Split Across Multiple Cards</div><div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.3);border-radius:20px;padding:4px 12px;"><span style="width:5px;height:5px;border-radius:50%;background:#00F5FF;display:inline-block;"></span><span style="font-size:10px;color:#00F5FF;font-family:'DM Mono',monospace;letter-spacing:0.08em;">STEP-BY-STEP</span></div></div></div>
+          <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#031A1A,#062828);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:28px;"><div style="position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:rgba(0,245,255,0.1);filter:blur(40px);"></div><div style="text-align:center;position:relative;z-index:1;"><div style="font-size:2.4rem;margin-bottom:10px;">&#x2702;&#xFE0F;</div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Split Across Multiple Cards</div><div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.3);border-radius:20px;padding:4px 12px;"><span style="width:5px;height:5px;border-radius:50%;background:#00F5FF;display:inline-block;"></span><span style="font-size:10px;color:#00F5FF;font-family:'DM Mono',monospace;letter-spacing:0.08em;">STEP-BY-STEP</span></div></div></div>
           <div style="padding:22px 24px;flex:1;display:flex;flex-direction:column;"><h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#F0F0F8;line-height:1.45;margin-bottom:10px;">How to Split a Purchase Across Multiple Credit Cards in 2026</h3><p style="font-size:0.85rem;color:#6A6A88;line-height:1.6;flex:1;margin-bottom:16px;">Why merchants won't split payments, why BNPL is the wrong answer, and the one tool that actually works.</p><div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:11px;color:#6A6A88;font-family:'DM Mono',monospace;">10 min read</span><span style="font-size:13px;color:#00F5FF;font-family:'Syne',sans-serif;font-weight:600;">Read &#x2192;</span></div></div>
         </a>
-
         <a href="/blog/credit-card-limit-not-enough-for-purchase" style="text-decoration:none;display:flex;flex-direction:column;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='rgba(239,68,68,0.35)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)'">
-          <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#1A0808,#2D1010);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:28px;"><div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:200px;height:120px;border-radius:50%;background:rgba(239,68,68,0.12);filter:blur(40px);pointer-events:none;"></div><div style="text-align:center;position:relative;z-index:1;"><div style="font-size:2.4rem;margin-bottom:10px;">&#x1F6AB;</div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Card Declined But Credit Is Fine</div><div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);border-radius:20px;padding:4px 12px;"><span style="width:5px;height:5px;border-radius:50%;background:#EF4444;display:inline-block;"></span><span style="font-size:10px;color:#F87171;font-family:'DM Mono',monospace;letter-spacing:0.08em;">DEEP DIVE</span></div></div></div>
+          <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#1A0808,#2D1010);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:28px;"><div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:200px;height:120px;border-radius:50%;background:rgba(239,68,68,0.12);filter:blur(40px);"></div><div style="text-align:center;position:relative;z-index:1;"><div style="font-size:2.4rem;margin-bottom:10px;">&#x1F6AB;</div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Card Declined But Credit Is Fine</div><div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);border-radius:20px;padding:4px 12px;"><span style="width:5px;height:5px;border-radius:50%;background:#EF4444;display:inline-block;"></span><span style="font-size:10px;color:#F87171;font-family:'DM Mono',monospace;letter-spacing:0.08em;">DEEP DIVE</span></div></div></div>
           <div style="padding:22px 24px;flex:1;display:flex;flex-direction:column;"><h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#F0F0F8;line-height:1.45;margin-bottom:10px;">Your Credit Card Was Declined. But Your Credit Is Fine. Here's Exactly Why.</h3><p style="font-size:0.85rem;color:#6A6A88;line-height:1.6;flex:1;margin-bottom:16px;">Getting declined with available credit isn't a credit problem. It's a 30-year-old system design failure.</p><div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:11px;color:#6A6A88;font-family:'DM Mono',monospace;">7 min read</span><span style="font-size:13px;color:#F87171;font-family:'Syne',sans-serif;font-weight:600;">Read &#x2192;</span></div></div>
         </a>
-
         <a href="/blog/use-two-credit-cards-one-transaction" style="text-decoration:none;display:flex;flex-direction:column;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='rgba(251,191,36,0.35)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)'">
-          <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#141005,#201A08);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:28px;"><div style="position:absolute;bottom:-20px;right:-20px;width:140px;height:140px;border-radius:50%;background:rgba(251,191,36,0.1);filter:blur(35px);pointer-events:none;"></div><div style="text-align:center;position:relative;z-index:1;"><div style="font-size:2.4rem;margin-bottom:10px;">&#x1F504;</div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Two Cards, One Transaction</div><div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.28);border-radius:20px;padding:4px 12px;"><span style="width:5px;height:5px;border-radius:50%;background:#FBBF24;display:inline-block;"></span><span style="font-size:10px;color:#FCD34D;font-family:'DM Mono',monospace;letter-spacing:0.08em;">WORKAROUNDS</span></div></div></div>
+          <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#141005,#201A08);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:28px;"><div style="position:absolute;bottom:-20px;right:-20px;width:140px;height:140px;border-radius:50%;background:rgba(251,191,36,0.1);filter:blur(35px);"></div><div style="text-align:center;position:relative;z-index:1;"><div style="font-size:2.4rem;margin-bottom:10px;">&#x1F504;</div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Two Cards, One Transaction</div><div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.28);border-radius:20px;padding:4px 12px;"><span style="width:5px;height:5px;border-radius:50%;background:#FBBF24;display:inline-block;"></span><span style="font-size:10px;color:#FCD34D;font-family:'DM Mono',monospace;letter-spacing:0.08em;">WORKAROUNDS</span></div></div></div>
           <div style="padding:22px 24px;flex:1;display:flex;flex-direction:column;"><h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#F0F0F8;line-height:1.45;margin-bottom:10px;">How to Use Two Credit Cards in One Transaction (Why 99% of Checkouts Block It)</h3><p style="font-size:0.85rem;color:#6A6A88;line-height:1.6;flex:1;margin-bottom:16px;">Three workarounds that partially work — and the one method that actually completes the transaction.</p><div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:11px;color:#6A6A88;font-family:'DM Mono',monospace;">9 min read</span><span style="font-size:13px;color:#FBBF24;font-family:'Syne',sans-serif;font-weight:600;">Read &#x2192;</span></div></div>
         </a>
-
         <a href="/blog/pay-large-purchase-multiple-cards" style="text-decoration:none;display:flex;flex-direction:column;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='rgba(52,211,153,0.35)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)'">
-          <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#031509,#07200E);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:28px;"><div style="position:absolute;top:-30px;left:-30px;width:150px;height:150px;border-radius:50%;background:rgba(52,211,153,0.1);filter:blur(40px);pointer-events:none;"></div><div style="text-align:center;position:relative;z-index:1;"><div style="font-size:2.4rem;margin-bottom:10px;">&#x1F4B0;</div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Large Purchase, Multiple Cards</div><div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.28);border-radius:20px;padding:4px 12px;"><span style="width:5px;height:5px;border-radius:50%;background:#34D399;display:inline-block;"></span><span style="font-size:10px;color:#6EE7B7;font-family:'DM Mono',monospace;letter-spacing:0.08em;">2026 GUIDE</span></div></div></div>
+          <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#031509,#07200E);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:28px;"><div style="position:absolute;top:-30px;left:-30px;width:150px;height:150px;border-radius:50%;background:rgba(52,211,153,0.1);filter:blur(40px);"></div><div style="text-align:center;position:relative;z-index:1;"><div style="font-size:2.4rem;margin-bottom:10px;">&#x1F4B0;</div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:200px;">Large Purchase, Multiple Cards</div><div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.28);border-radius:20px;padding:4px 12px;"><span style="width:5px;height:5px;border-radius:50%;background:#34D399;display:inline-block;"></span><span style="font-size:10px;color:#6EE7B7;font-family:'DM Mono',monospace;letter-spacing:0.08em;">2026 GUIDE</span></div></div></div>
           <div style="padding:22px 24px;flex:1;display:flex;flex-direction:column;"><h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#F0F0F8;line-height:1.45;margin-bottom:10px;">How to Pay for a Large Purchase With Multiple Credit Cards (2026 Guide)</h3><p style="font-size:0.85rem;color:#6A6A88;line-height:1.6;flex:1;margin-bottom:16px;">Flight, laptop, medical bill, furniture — complete large purchases using the credit you already have.</p><div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:11px;color:#6A6A88;font-family:'DM Mono',monospace;">11 min read</span><span style="font-size:13px;color:#34D399;font-family:'Syne',sans-serif;font-weight:600;">Read &#x2192;</span></div></div>
         </a>
-
       </div>
-      <div style="text-align:center;">
-        <a href="/blog" style="display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:#9090B0;font-family:'Syne',sans-serif;font-weight:600;font-size:14px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(123,47,255,0.5)';this.style.color='#B09FFF'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#9090B0'">
-          View all articles &#x2192;
-        </a>
-      </div>
+      <div style="text-align:center;"><a href="/blog" style="display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:#9090B0;font-family:'Syne',sans-serif;font-weight:600;font-size:14px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(123,47,255,0.5)';this.style.color='#B09FFF'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#9090B0'">View all articles &#x2192;</a></div>
     </div>
   </section>
 
@@ -855,6 +838,7 @@
         <a href="#how">How it works</a>
         <a href="#blog">Blog</a>
         <a href="#faq">FAQ</a>
+        <a href="https://app.quarvo.io">Launch App</a>
         <a href="https://app.quarvo.io/merchants">For Merchants</a>
         <a href="https://app.quarvo.io/investors">Investors</a>
         <a href="#about">About</a>
@@ -871,48 +855,53 @@
   <script>
     function handleSubmit(e) {
       e.preventDefault();
-      var email = document.getElementById('emailInput').value;
-      var btn = document.querySelector('.btn-submit');
+      var email = document.getElementById('emailInput').value.trim();
       var btnText = document.getElementById('btnText');
+      var submitBtn = document.getElementById('waitlistForm').querySelector('button[type="submit"]');
+      if (!email || !email.includes('@')) return;
       btnText.textContent = 'Joining...';
-      btn.disabled = true;
-      fetch('/', {
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.7'; }
+      var apiUrl = window.location.hostname === 'localhost' ? '/api/subscribe' : 'https://www.quarvo.io/api/subscribe';
+      fetch(apiUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ 'form-name': 'quarvo-waitlist', 'email': email }).toString(),
-      }).then(function() {
-        window.location.href = '/thank-you.html';
-      }).catch(function() {
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      }).then(function(r){ return r.json(); }).then(function(d){
+        if (d.ok || d.message) { window.location.href = '/thank-you.html'; }
+        else { throw new Error(d.error); }
+      }).catch(function(){
         document.getElementById('formSuccess').style.display = 'block';
+        setTimeout(function(){ window.location.href = '/thank-you.html'; }, 1500);
       });
     }
-  </script>
-
-  <script>
+    function animateCount(el) {
+      var target = parseFloat(el.dataset.target), prefix = el.dataset.prefix||'', suffix = el.dataset.suffix||'', start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts-start)/1500,1), ease = 1-Math.pow(1-p,3);
+        el.textContent = prefix+(target===0?0:Math.round(ease*target))+suffix;
+        if (p<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    var so = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting&&e.target.dataset.target!==undefined){animateCount(e.target);so.unobserve(e.target);} });
+    },{threshold:0.5});
+    document.querySelectorAll('.stat-num[data-target]').forEach(function(el){so.observe(el);});
     function copyMerchantLink() {
-      const url = 'https://quarvo.io/merchants';
-      navigator.clipboard.writeText(url).then(() => {
-        const btn = document.getElementById('copyBtn');
-        if (btn) {
-          btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
-          btn.style.background = 'rgba(34,197,94,0.15)';
-          btn.style.borderColor = 'rgba(34,197,94,0.3)';
-          btn.style.color = '#4ADE80';
-          setTimeout(() => {
-            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg> Copy link';
-            btn.style.background = '';
-            btn.style.borderColor = '';
-            btn.style.color = '';
-          }, 2500);
+      var url = 'https://quarvo.io/merchants';
+      navigator.clipboard.writeText(url).then(function(){
+        var btn = document.getElementById('copyBtn');
+        if(btn){
+          btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+          btn.style.background='rgba(34,197,94,0.15)';btn.style.borderColor='rgba(34,197,94,0.3)';btn.style.color='#4ADE80';
+          setTimeout(function(){
+            btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg> Copy link';
+            btn.style.background='';btn.style.borderColor='';btn.style.color='';
+          },2500);
         }
-      }).catch(() => {
-        // Fallback
-        const ta = document.createElement('textarea');
-        ta.value = 'https://quarvo.io/merchants';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
+      }).catch(function(){
+        var ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
       });
     }
   </script>
