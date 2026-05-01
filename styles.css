@@ -5,32 +5,68 @@
 ============================================= */
 
 :root {
-  --bg:        #08080F;
-  --bg-2:      #0E0E1A;
-  --bg-3:      #141428;
-  --surface:   #1A1A30;
-  --border:    rgba(123,47,255,0.18);
-  --border-subtle: rgba(255,255,255,0.06);
+  /* ===== Surfaces ===== */
+  --bg:            #06060A;        /* deeper terminal black */
+  --bg-2:          #0E0E1A;
+  --bg-3:          #141428;
+  --surface:       #1A1A30;
+  --border:        rgba(123, 47, 255, 0.18);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-data:   rgba(0, 245, 255, 0.12);
 
-  --violet:    #7B2FFF;
-  --violet-soft: rgba(123,47,255,0.15);
-  --cyan:      #00F5FF;
-  --cyan-soft: rgba(0,245,255,0.1);
-  --white:     #F0F0F8;
-  --muted:     #6A6A88;
-  --muted-2:   #9090B0;
+  /* ===== Brand ===== */
+  --violet:        #7B2FFF;
+  --violet-soft:   rgba(123, 47, 255, 0.15);
+  --violet-deep:   #5A1FCC;
+  --cyan:          #00F5FF;
+  --cyan-soft:     rgba(0, 245, 255, 0.1);
+  --teal:          #00C8CC;        /* secondary accent */
 
-  --font-display: 'Syne', sans-serif;
-  --font-body:    'DM Sans', sans-serif;
-  --font-mono:    'DM Mono', monospace;
+  /* ===== Data semantics ===== */
+  --data-green:    #34D399;        /* recovered / positive */
+  --data-warn:     #F97316;        /* lost / declined */
+  --data-mute:     #475569;        /* neutral data */
 
+  /* ===== Text ===== */
+  --white:         #F0F0F8;
+  --muted:         #6A6A88;
+  --muted-2:       #9090B0;
+
+  /* ===== Type ===== */
+  --font-display:    'Syne', sans-serif;                        /* h1, brand */
+  --font-display-2:  'Tomorrow', 'Syne', sans-serif;            /* h2 secondary, geometric futuristic */
+  --font-body:       'DM Sans', sans-serif;
+  --font-mono:       'JetBrains Mono', 'DM Mono', monospace;    /* terminal/data feel */
+
+  /* ===== Geometry ===== */
   --radius:    12px;
   --radius-lg: 20px;
   --radius-xl: 28px;
+  --radius-data: 4px;              /* sharp corners for data containers */
 
-  --shadow-violet: 0 0 40px rgba(123,47,255,0.25);
-  --shadow-cyan:   0 0 40px rgba(0,245,255,0.15);
-  --shadow-card:   0 24px 80px rgba(0,0,0,0.6);
+  /* ===== Shadow ===== */
+  --shadow-violet: 0 0 40px rgba(123, 47, 255, 0.25);
+  --shadow-cyan:   0 0 40px rgba(0, 245, 255, 0.15);
+  --shadow-card:   0 24px 80px rgba(0, 0, 0, 0.6);
+  --shadow-data:   inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 16px 48px rgba(0, 0, 0, 0.5);
+
+  /* ===== Motion tokens (per ui-animation skill) ===== */
+  --ease-enter:    cubic-bezier(0.22, 1, 0.36, 1);              /* entrances, hovers */
+  --ease-move:     cubic-bezier(0.25, 1, 0.5, 1);               /* slides, drawers */
+  --ease-drawer:   cubic-bezier(0.32, 0.72, 0, 1);              /* iOS-like sheet */
+  --ease-exit:     cubic-bezier(0.4, 0, 1, 1);                  /* fast exits */
+
+  --t-press:       140ms;
+  --t-tooltip:     180ms;
+  --t-dropdown:    220ms;
+  --t-modal:       320ms;
+  --t-move:        260ms;
+  --t-hover:       200ms;
+  --t-marketing:   800ms;
+
+  /* Cursor spotlight defaults — overridden by JS */
+  --spot-x:        50%;
+  --spot-y:        50%;
 }
 
 /* RESET */
@@ -1985,6 +2021,318 @@ input[type="text"]:focus-visible {
   transition: top 150ms ease-out;
 }
 .skip-link:focus { top: 12px; }
+
+/* =============================================
+   MOTION INFRASTRUCTURE (Phase 2.1)
+   - Per ui-animation skill: animate transform/opacity only
+   - Off-screen pause via IntersectionObserver
+   - prefers-reduced-motion zeroes everything (already handled above)
+   - Durations + easings come from :root tokens
+============================================= */
+
+/* ----------------------------------------------------
+   1) REVEAL ON SCROLL — fade-up driven by .is-visible
+   Element starts hidden; JS toggles .is-visible via IO.
+   Use on any block: <section class="reveal"> ... </section>
+---------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity var(--t-marketing) var(--ease-enter),
+    transform var(--t-marketing) var(--ease-enter);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal.is-visible {
+  /* Cleanup will-change after animation runs */
+  animation: m-clear-will-change var(--t-marketing) var(--ease-enter) forwards;
+}
+@keyframes m-clear-will-change {
+  to { will-change: auto; }
+}
+
+/* Reveal variants */
+.reveal--left  { transform: translateX(-32px); }
+.reveal--right { transform: translateX(32px); }
+.reveal--scale { transform: scale(0.96); transform-origin: center; }
+.reveal--left.is-visible,
+.reveal--right.is-visible,
+.reveal--scale.is-visible { transform: none; }
+
+/* Stagger groups: parent has .reveal-group, children get --i index from JS.
+   Children animate individually (don't need .reveal class). */
+.reveal-group > * {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 700ms var(--ease-enter),
+    transform 700ms var(--ease-enter);
+  transition-delay: calc(var(--i, 0) * 60ms);
+  will-change: opacity, transform;
+}
+.reveal-group.is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+.reveal-group.is-visible > * {
+  animation: m-clear-will-change 800ms var(--ease-enter) forwards;
+}
+
+/* ----------------------------------------------------
+   2) WORD STAGGER — JS wraps each word in <span class="word">
+   Then sets --i index. Each word fades+rises sequentially.
+---------------------------------------------------- */
+.split-words .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  transition:
+    opacity 600ms var(--ease-enter),
+    transform 600ms var(--ease-enter);
+  transition-delay: calc(var(--i, 0) * 50ms);
+  will-change: opacity, transform;
+}
+.split-words.is-visible .word {
+  opacity: 1;
+  transform: none;
+}
+
+/* ----------------------------------------------------
+   3) MAGNETIC HOVER — element pulled by cursor proximity
+   JS sets --mx / --my via mousemove on parent.
+   Only enables on devices with hover + fine pointer.
+---------------------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  .magnetic {
+    transition: transform var(--t-hover) var(--ease-enter);
+    will-change: transform;
+  }
+  .magnetic:not(:hover) {
+    transform: translate(0, 0);
+  }
+  .magnetic:hover {
+    transform: translate(var(--mx, 0px), var(--my, 0px));
+  }
+}
+
+/* ----------------------------------------------------
+   4) 3D TILT ON HOVER — perspective rotate
+   JS sets --rx / --ry from cursor position.
+   Wrapper handles perspective so children compose cleanly.
+---------------------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  .tilt {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+  .tilt-inner {
+    transition: transform var(--t-hover) var(--ease-enter);
+    transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    will-change: transform;
+  }
+  .tilt:hover .tilt-inner {
+    transition-duration: 80ms;  /* responsive while hovering */
+  }
+}
+
+/* ----------------------------------------------------
+   5) CURSOR SPOTLIGHT — radial light follows cursor
+   Apply to a container with position:relative.
+   JS updates --spot-x / --spot-y on mousemove.
+---------------------------------------------------- */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      600px circle at var(--spot-x) var(--spot-y),
+      rgba(123, 47, 255, 0.10),
+      transparent 40%
+    );
+  opacity: 0;
+  transition: opacity var(--t-modal) var(--ease-enter);
+}
+@media (hover: hover) and (pointer: fine) {
+  .spotlight:hover::before { opacity: 1; }
+}
+
+/* ----------------------------------------------------
+   6) SCAN-LINE OVERLAY — subtle CRT-like horizontal sweep
+   Apply to any container; pointer-events:none so it never blocks.
+   8s loop, paused off-screen via IO.
+---------------------------------------------------- */
+.scan-line {
+  position: relative;
+  overflow: hidden;
+}
+.scan-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -120%;
+  height: 80%;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 245, 255, 0.018) 45%,
+    rgba(0, 245, 255, 0.045) 50%,
+    rgba(0, 245, 255, 0.018) 55%,
+    transparent 100%
+  );
+  animation: m-scan 8s linear infinite;
+  animation-play-state: paused;
+}
+.scan-line.is-visible::after {
+  animation-play-state: running;
+}
+@keyframes m-scan {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(280vh); }
+}
+
+/* ----------------------------------------------------
+   7) SHIMMER GRADIENT TEXT — slow pass over title accents
+   Apply on top of an existing gradient text element.
+---------------------------------------------------- */
+.shimmer-text {
+  background-image: linear-gradient(
+    100deg,
+    var(--violet) 0%,
+    var(--violet) 30%,
+    var(--cyan) 50%,
+    var(--violet) 70%,
+    var(--violet) 100%
+  );
+  background-size: 250% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: m-shimmer 6s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.shimmer-text.is-visible {
+  animation-play-state: running;
+}
+@keyframes m-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* ----------------------------------------------------
+   8) ANIMATED GRID PARALLAX — bg grid that drifts vs cursor
+   JS sets --grid-x / --grid-y on container's mousemove.
+---------------------------------------------------- */
+.grid-bg {
+  position: absolute;
+  inset: -10%;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(123, 47, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(123, 47, 255, 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  transform: translate3d(var(--grid-x, 0px), var(--grid-y, 0px), 0);
+  transition: transform 600ms var(--ease-move);
+  will-change: transform;
+}
+
+/* ----------------------------------------------------
+   9) NUMBER TICKER — element animated by JS rAF
+   JS swaps textContent over duration; CSS adds tabular nums
+   so digits don't jiggle horizontally during count-up.
+---------------------------------------------------- */
+.tick-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ----------------------------------------------------
+   10) FLOAT (subtle perpetual movement for orbs/badges)
+   Only runs when ancestor has .is-visible (off-screen pause).
+---------------------------------------------------- */
+.float-y {
+  animation: m-float-y 6s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.is-visible .float-y,
+.float-y.is-visible {
+  animation-play-state: running;
+}
+@keyframes m-float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* ----------------------------------------------------
+   11) MAGNETIC + REVEAL combo for primary CTAs
+---------------------------------------------------- */
+.cta-glow {
+  position: relative;
+  isolation: isolate;
+}
+.cta-glow::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  opacity: 0;
+  z-index: -1;
+  filter: blur(18px);
+  transition: opacity var(--t-modal) var(--ease-enter);
+}
+@media (hover: hover) and (pointer: fine) {
+  .cta-glow:hover::after,
+  .cta-glow:focus-visible::after { opacity: 0.5; }
+}
+
+/* ----------------------------------------------------
+   Reduced motion: hard-stop anything we just added
+---------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--left,
+  .reveal--right,
+  .reveal--scale,
+  .split-words .word {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .scan-line::after,
+  .shimmer-text,
+  .float-y,
+  .grid-bg {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  .magnetic,
+  .tilt-inner {
+    transform: none !important;
+    transition: none !important;
+  }
+  .spotlight::before,
+  .cta-glow::after {
+    opacity: 0 !important;
+  }
+}
 
 /* =============================================
    ICON SYSTEM (Pro Max rule: SVG, never emoji)

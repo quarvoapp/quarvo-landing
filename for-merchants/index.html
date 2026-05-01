@@ -32,7 +32,7 @@
   <!-- Fonts + shared styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Tomorrow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css"/>
 
   <style>
@@ -464,15 +464,15 @@
   <main class="m-main" id="m-main">
 
     <!-- ============ HERO (left column) ============ -->
-    <section class="m-hero" aria-labelledby="m-hero-title">
+    <section class="m-hero reveal" aria-labelledby="m-hero-title">
       <div class="m-eyebrow">
         <span class="m-eyebrow-dot"></span>
         For merchants
       </div>
 
-      <h1 class="m-h1" id="m-hero-title">
-        Recover the<br/>
-        <span class="m-h1-accent">high-ticket sales</span><br/>
+      <h1 class="m-h1 split-words" id="m-hero-title">
+        Recover the
+        <span class="m-h1-accent shimmer-text">high-ticket sales</span>
         your checkout is losing.
       </h1>
 
@@ -480,7 +480,7 @@
         Customers with $12,000+ across 3 cards get declined because your checkout sees only one. QUARVO splits any purchase across their existing cards. <strong>You get paid in full. They complete the purchase.</strong>
       </p>
 
-      <ul class="m-bullets">
+      <ul class="m-bullets reveal-group">
         <li>
           <svg class="m-bullets-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           <span>
@@ -521,8 +521,8 @@
     </section>
 
     <!-- ============ FORM (right column) ============ -->
-    <section aria-labelledby="m-form-title">
-      <div class="m-form-card" id="merchantFormCard">
+    <section aria-labelledby="m-form-title" class="reveal reveal--right">
+      <div class="m-form-card spotlight" id="merchantFormCard">
         <h2 class="m-form-title" id="m-form-title">Connect your store</h2>
         <p class="m-form-subtitle">Tell us about your business. We'll reach out within 48 hours to get you set up.</p>
 
@@ -609,7 +609,7 @@
             </div>
           </div>
 
-          <button type="submit" class="m-submit" id="merchantSubmit">
+          <button type="submit" class="m-submit cta-glow magnetic" id="merchantSubmit" data-magnetic="0.25" data-magnetic-max="10">
             <span id="merchantSubmitText">Connect your store — Free</span>
             <span class="m-submit-spinner" aria-hidden="true"></span>
             <svg class="m-submit-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -650,6 +650,7 @@
     <p style="margin-top:8px;">© 2026 QUARVO LLC · Credit Combination Technology™</p>
   </footer>
 
+  <script src="/motion.js" defer></script>
   <script>
     (function () {
       var form    = document.getElementById('merchantForm');
