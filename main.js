@@ -52,6 +52,125 @@ function handleSubmit(e) {
   });
 }
 
+// =============================================
+// ROI CALCULATOR (Phase 2.3)
+//   lost      = AOV × monthly_orders × 0.065  (industry decline rate)
+//   recovered = lost × 0.60                    (QUARVO recovery rate)
+//   fee       = recovered × 0.02               (2% per recovered sale)
+//   net       = recovered - fee
+//
+// - Number input ↔ slider stay in sync
+// - Slider track fill % shown via --p custom property
+// - Outputs animate via window.QM.tick() (rAF, ease-out cubic)
+// - First reveal animates from $0 when section enters viewport
+// =============================================
+(function () {
+  var root = document.querySelector('[data-roi]');
+  if (!root) return;
+
+  var aov     = root.querySelector('#roi-aov');
+  var orders  = root.querySelector('#roi-orders');
+  var aovSld  = root.querySelector('#roi-aov-slider');
+  var ordSld  = root.querySelector('#roi-orders-slider');
+
+  var lostEl  = root.querySelector('[data-roi-out="lost"]');
+  var recvEl  = root.querySelector('[data-roi-out="recovered"]');
+  var feeEl   = root.querySelector('[data-roi-out="fee"]');
+  var netEl   = root.querySelector('[data-roi-out="net"]');
+  var netMo   = root.querySelector('[data-roi-out="net-monthly"]');
+  var netYr   = root.querySelector('[data-roi-out="net-yearly"]');
+
+  function clamp(v, min, max) {
+    return Math.max(min, Math.min(max, v));
+  }
+
+  function fmtCurrency(v) {
+    return '$' + Math.round(v).toLocaleString('en-US');
+  }
+
+  // Update the slider track gradient (% fill via --p custom property)
+  function syncSliderTrack(sl, min, max) {
+    var v = parseFloat(sl.value);
+    var p = ((v - min) / (max - min)) * 100;
+    sl.style.setProperty('--p', p.toFixed(2) + '%');
+  }
+
+  // Compute + update outputs
+  function update(animate) {
+    var a = clamp(parseFloat(aov.value)    || 0, 0, 1000000);
+    var o = clamp(parseFloat(orders.value) || 0, 0, 1000000);
+
+    var lost      = a * o * 0.065;
+    var recovered = lost * 0.60;
+    var fee       = recovered * 0.02;
+    var net       = recovered - fee;
+
+    var QM = window.QM;
+    if (animate && QM && QM.tick) {
+      QM.tick(lostEl,  lost,      { duration: 600, prefix: '$', decimals: 0 });
+      QM.tick(recvEl,  recovered, { duration: 600, prefix: '$', decimals: 0 });
+      QM.tick(feeEl,   fee,       { duration: 600, prefix: '$', decimals: 0 });
+      QM.tick(netEl,   net,       { duration: 750, prefix: '$', decimals: 0 });
+    } else {
+      lostEl.textContent = fmtCurrency(lost);
+      recvEl.textContent = fmtCurrency(recovered);
+      feeEl.textContent  = fmtCurrency(fee);
+      netEl.textContent  = fmtCurrency(net);
+      // Keep dataset in sync so future ticks start from correct value
+      lostEl.dataset.tickFrom = String(lost);
+      recvEl.dataset.tickFrom = String(recovered);
+      feeEl.dataset.tickFrom  = String(fee);
+      netEl.dataset.tickFrom  = String(net);
+    }
+
+    // Net meta (under the big number) updates instantly — too small to tick
+    netMo.textContent = fmtCurrency(net) + ' / month';
+    netYr.textContent = fmtCurrency(net * 12) + ' / year';
+  }
+
+  // Bidirectional sync: number input ↔ slider
+  function bindPair(num, sld, sliderMin, sliderMax) {
+    function fromNum() {
+      var v = clamp(parseFloat(num.value) || 0, sliderMin, sliderMax);
+      sld.value = String(v);
+      syncSliderTrack(sld, sliderMin, sliderMax);
+      update(true);
+    }
+    function fromSlider() {
+      num.value = sld.value;
+      syncSliderTrack(sld, sliderMin, sliderMax);
+      update(true);
+    }
+    num.addEventListener('input', fromNum);
+    sld.addEventListener('input', fromSlider);
+    syncSliderTrack(sld, sliderMin, sliderMax);  // initial paint
+  }
+
+  bindPair(aov,    aovSld, 50, 10000);
+  bindPair(orders, ordSld, 10,  5000);
+
+  // Initial static render so layout doesn't jump (numbers show real values)
+  update(false);
+
+  // First-view animation: re-tick from 0 when section enters viewport
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          // Reset tick-from so we animate from 0
+          [lostEl, recvEl, feeEl, netEl].forEach(function (el) {
+            el.dataset.tickFrom = '0';
+            el.textContent = '$0';
+          });
+          update(true);
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.35 });
+    io.observe(root);
+  }
+})();
+
 // COPY MERCHANT LINK
 function copyMerchantLink() {
   const url = 'https://quarvo.io/merchants';

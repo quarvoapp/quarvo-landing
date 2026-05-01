@@ -2394,6 +2394,427 @@ input[type="text"]:focus-visible {
   }
 }
 
+/* =============================================
+   ROI CALCULATOR (Phase 2.3) — live merchant calc
+============================================= */
+.roi {
+  padding: 100px 0 80px;
+  position: relative;
+}
+.roi .section-inner { max-width: 920px; }
+
+.roi-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.roi-title {
+  margin-bottom: 16px;
+}
+.roi-sub {
+  color: var(--muted-2);
+  font-size: 17px;
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: var(--font-body);
+}
+
+/* The terminal panel */
+.roi-terminal {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(123, 47, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(123, 47, 255, 0.18);
+  border-radius: 24px;
+  padding: 40px 44px 36px;
+  box-shadow: var(--shadow-data);
+  overflow: hidden;
+  isolation: isolate;
+}
+/* Subtle top hairline glow */
+.roi-terminal::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.45), transparent);
+  z-index: 1;
+}
+
+/* Section blocks inside terminal */
+.roi-section { position: relative; }
+
+.roi-section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  margin-bottom: 22px;
+}
+.roi-section-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--cyan-soft);
+  border: 1px solid rgba(0, 245, 255, 0.22);
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  border-radius: 50%;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+/* === INPUTS === */
+.roi-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.roi-input-group {
+  display: flex;
+  flex-direction: column;
+}
+.roi-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.roi-input-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-display-2);
+  font-weight: 500;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  padding-bottom: 12px;
+  transition: border-color 200ms var(--ease-enter);
+}
+.roi-input-row:focus-within {
+  border-color: var(--cyan);
+}
+.roi-prefix {
+  color: var(--muted-2);
+  font-size: 0.7em;
+  font-weight: 400;
+}
+.roi-input {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  font-variant-numeric: tabular-nums;
+  padding: 0;
+  outline: none;
+  letter-spacing: -0.02em;
+  caret-color: var(--cyan);
+}
+.roi-input::-webkit-outer-spin-button,
+.roi-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.roi-input:focus,
+.roi-input:focus-visible {
+  outline: none;
+  color: var(--cyan);
+}
+
+/* Slider — terminal style */
+.roi-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  margin: 16px 0 8px;
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan) 0%,
+      var(--violet) calc(var(--p, 0%) * 1),
+      rgba(255, 255, 255, 0.08) calc(var(--p, 0%) * 1),
+      rgba(255, 255, 255, 0.08) 100%
+    );
+  border-radius: 999px;
+  cursor: pointer;
+  outline: none;
+  transition: box-shadow 150ms var(--ease-enter);
+}
+.roi-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: transparent;
+  border-radius: 999px;
+}
+.roi-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgba(0, 245, 255, 0.18), 0 4px 14px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  border: 2px solid var(--cyan);
+  margin-top: -7px;
+  transition: transform 120ms var(--ease-enter), box-shadow 120ms var(--ease-enter);
+}
+.roi-slider::-moz-range-track {
+  height: 4px;
+  background: transparent;
+  border-radius: 999px;
+}
+.roi-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgba(0, 245, 255, 0.18), 0 4px 14px rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--cyan);
+  cursor: pointer;
+}
+.roi-slider:hover::-webkit-slider-thumb,
+.roi-slider:active::-webkit-slider-thumb {
+  transform: scale(1.12);
+}
+.roi-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 6px rgba(0, 245, 255, 0.32), 0 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+.roi-range {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* === FLOW ARROW === */
+.roi-flow-arrow {
+  display: flex;
+  justify-content: center;
+  margin: 28px 0;
+  color: rgba(123, 47, 255, 0.55);
+  opacity: 0.7;
+}
+.roi-flow-arrow svg {
+  width: 18px;
+  height: 36px;
+}
+
+/* === LOST SECTION === */
+.roi-stat--lost {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.roi-stat--lost .roi-stat-value {
+  font-family: var(--font-display-2);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 600;
+  color: var(--data-warn);
+  letter-spacing: -0.025em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.roi-stat-suffix {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted-2);
+  letter-spacing: 0.06em;
+}
+.roi-stat-note {
+  margin-top: 14px;
+  color: var(--muted-2);
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 520px;
+}
+
+/* === RECOVERED GRID === */
+.roi-recovered-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.roi-stat--recovered,
+.roi-stat--fee {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.roi-stat--recovered {
+  border-color: rgba(52, 211, 153, 0.28);
+  background: linear-gradient(180deg, rgba(52, 211, 153, 0.06) 0%, rgba(52, 211, 153, 0.02) 100%);
+}
+.roi-stat--recovered::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.55), transparent);
+}
+.roi-stat-key {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.roi-stat--recovered .roi-stat-key { color: var(--data-green); }
+.roi-stat--recovered .roi-stat-value,
+.roi-stat--fee .roi-stat-value {
+  font-family: var(--font-display-2);
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--white);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.roi-stat--recovered .roi-stat-value { color: var(--data-green); }
+.roi-stat--fee .roi-stat-value { color: var(--muted-2); }
+.roi-stat-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+/* === NET GAIN — the payoff === */
+.roi-net {
+  margin-top: 36px;
+  padding: 32px 36px;
+  background:
+    linear-gradient(135deg, rgba(0, 245, 255, 0.08) 0%, rgba(123, 47, 255, 0.06) 100%);
+  border: 1px solid rgba(0, 245, 255, 0.28);
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.roi-net::after {
+  content: "";
+  position: absolute;
+  inset: -50% 0 0;
+  background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(0, 245, 255, 0.15), transparent 70%);
+  pointer-events: none;
+}
+.roi-net-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+.roi-net-value {
+  font-family: var(--font-display-2);
+  font-weight: 700;
+  font-size: clamp(48px, 7vw, 84px);
+  letter-spacing: -0.035em;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 14px;
+  font-variant-numeric: tabular-nums;
+  position: relative;
+  z-index: 1;
+}
+.roi-net-meta {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted-2);
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+}
+.roi-net-divider {
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+/* === CTA + DISCLAIMER === */
+.roi-cta {
+  display: inline-flex;
+  margin: 32px auto 0;
+  width: 100%;
+  max-width: 360px;
+  justify-content: center;
+}
+.roi-disclaimer {
+  margin-top: 24px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Center the CTA */
+.roi-terminal { text-align: left; }
+.roi-terminal .roi-cta,
+.roi-terminal .roi-disclaimer { text-align: center; }
+.roi-terminal > .roi-cta { display: flex; }
+
+/* === RESPONSIVE === */
+@media (max-width: 720px) {
+  .roi { padding: 80px 0 60px; }
+  .roi-terminal { padding: 28px 22px 28px; }
+  .roi-input-grid { grid-template-columns: 1fr; gap: 24px; }
+  .roi-recovered-grid { grid-template-columns: 1fr; }
+  .roi-section-label { font-size: 10px; letter-spacing: 0.14em; }
+  .roi-net { padding: 24px 22px; }
+  .roi-net-meta { flex-direction: column; gap: 4px; }
+  .roi-net-divider { display: none; }
+}
+
+/* Reduced motion: still update numbers, just skip ticker */
+@media (prefers-reduced-motion: reduce) {
+  .roi-input-row,
+  .roi-slider,
+  .roi-stat-value,
+  .roi-net-value {
+    transition: none !important;
+  }
+}
+
 /* ----------------------------------------------------
    Reduced motion: hard-stop anything we just added
 ---------------------------------------------------- */

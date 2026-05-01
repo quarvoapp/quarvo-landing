@@ -237,6 +237,109 @@
     </div>
   </section>
 
+  <!-- ROI CALCULATOR (Phase 2.3) — live merchant calc -->
+  <section class="roi" id="roi" aria-labelledby="roi-title">
+    <div class="section-inner">
+      <header class="roi-header reveal">
+        <div class="section-tag">ROI Calculator</div>
+        <h2 class="section-title roi-title" id="roi-title">
+          How much is your
+          <span class="title-accent shimmer-text">checkout losing?</span>
+        </h2>
+        <p class="roi-sub">Plug in your numbers. Watch the math run.</p>
+      </header>
+
+      <div class="roi-terminal reveal" data-roi>
+
+        <!-- 01 — INPUTS -->
+        <div class="roi-section roi-inputs">
+          <div class="roi-section-label">
+            <span class="roi-section-num">01</span>
+            Your checkout today
+          </div>
+          <div class="roi-input-grid">
+            <div class="roi-input-group">
+              <label class="roi-label" for="roi-aov">Average order value</label>
+              <div class="roi-input-row">
+                <span class="roi-prefix">$</span>
+                <input class="roi-input tick-num" type="number" id="roi-aov" min="50" max="50000" step="50" value="1500" inputmode="numeric" aria-describedby="roi-aov-range"/>
+              </div>
+              <input class="roi-slider" type="range" id="roi-aov-slider" min="50" max="10000" step="50" value="1500" aria-label="Average order value slider"/>
+              <div class="roi-range" id="roi-aov-range">$50 — $10,000</div>
+            </div>
+            <div class="roi-input-group">
+              <label class="roi-label" for="roi-orders">Monthly orders</label>
+              <div class="roi-input-row">
+                <input class="roi-input tick-num" type="number" id="roi-orders" min="10" max="100000" step="10" value="200" inputmode="numeric" aria-describedby="roi-orders-range"/>
+              </div>
+              <input class="roi-slider" type="range" id="roi-orders-slider" min="10" max="5000" step="10" value="200" aria-label="Monthly orders slider"/>
+              <div class="roi-range" id="roi-orders-range">10 — 5,000</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="roi-flow-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 36" fill="none"><path d="M12 2v32m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- 02 — LOST -->
+        <div class="roi-section roi-lost-section">
+          <div class="roi-section-label">
+            <span class="roi-section-num">02</span>
+            High-ticket declines &nbsp;·&nbsp; 6.5% industry rate
+          </div>
+          <div class="roi-stat roi-stat--lost">
+            <span class="roi-stat-value tick-num" data-roi-out="lost">$0</span>
+            <span class="roi-stat-suffix">/ month, walking away</span>
+          </div>
+          <p class="roi-stat-note">Customers with combined credit complete the cart&mdash;then bounce when one card isn't enough.</p>
+        </div>
+
+        <div class="roi-flow-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 36" fill="none"><path d="M12 2v32m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- 03 — WITH QUARVO -->
+        <div class="roi-section roi-recovered-section">
+          <div class="roi-section-label">
+            <span class="roi-section-num">03</span>
+            With QUARVO connected
+          </div>
+          <div class="roi-recovered-grid">
+            <div class="roi-stat roi-stat--recovered">
+              <span class="roi-stat-key">Recovered</span>
+              <span class="roi-stat-value tick-num" data-roi-out="recovered">$0</span>
+              <span class="roi-stat-meta">60% recovery rate</span>
+            </div>
+            <div class="roi-stat roi-stat--fee">
+              <span class="roi-stat-key">QUARVO fee</span>
+              <span class="roi-stat-value tick-num" data-roi-out="fee">$0</span>
+              <span class="roi-stat-meta">2% of recovered</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- NET GAIN — the wow -->
+        <div class="roi-net" aria-live="polite">
+          <div class="roi-net-label">Net gain</div>
+          <div class="roi-net-value tick-num" data-roi-out="net">$0</div>
+          <div class="roi-net-meta">
+            <span data-roi-out="net-monthly">$0 / month</span>
+            <span class="roi-net-divider">·</span>
+            <span data-roi-out="net-yearly">$0 / year</span>
+          </div>
+        </div>
+
+        <a href="/for-merchants" class="btn-primary btn-primary--hero cta-glow magnetic roi-cta" data-magnetic="0.20" data-magnetic-max="8">
+          Connect your store — Free
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <p class="roi-disclaimer">Estimates use industry-standard 6.5% high-ticket decline rate and 60% recovery rate from QUARVO early-access merchants. Actuals vary by category.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- STATS BAR -->
   <section class="stats-bar">
     <div class="stats-inner">
@@ -1060,8 +1163,8 @@
     </div>
   </footer>
 
-  <script src="main.js"></script>
-  <script src="motion.js?v=2.2" defer></script>
+  <script src="main.js?v=2.3"></script>
+  <script src="motion.js?v=2.3" defer></script>
   <script>
     function handleSubmit(e) {
       e.preventDefault();
