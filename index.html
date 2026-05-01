@@ -612,69 +612,210 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
+  <!-- HOW IT WORKS — merchant-first sticky-scroll narrative (Phase 2.4) -->
   <section class="how" id="how">
     <div class="section-inner">
-      <div class="section-tag">How It Works</div>
-      <h2 class="section-title">
-        Simple on the surface.<br/>
-        <span class="title-muted">Powerful underneath.</span>
-      </h2>
+      <div class="how-header reveal">
+        <div class="section-tag">How it works</div>
+        <h2 class="section-title">
+          From install to settled,<br/>
+          <span class="title-accent shimmer-text">3 steps.</span>
+        </h2>
+        <p class="how-sub">Stripe Connect handles the money. QUARVO handles the split. You handle the receipts.</p>
+      </div>
 
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">01</div>
-          <div class="step-content">
-            <div class="step-icon">
-              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                <rect width="36" height="36" rx="10" fill="rgba(123,47,255,0.15)"/>
-                <path d="M18 8v20M8 18h20" stroke="#7B2FFF" stroke-width="2.5" stroke-linecap="round"/>
-                <circle cx="18" cy="18" r="5" stroke="#00F5FF" stroke-width="1.5"/>
-              </svg>
+      <div class="how-flow" data-how>
+        <!-- LEFT: sticky visual stage -->
+        <div class="how-stage" aria-hidden="true">
+          <div class="how-stage-inner">
+
+            <!-- VISUAL 01 — CONNECT -->
+            <div class="how-visual is-active" data-visual="0">
+              <div class="how-visual-header">
+                <span class="how-visual-tag">01 / CONNECT</span>
+                <span class="how-visual-status how-visual-status--cyan">
+                  <span class="how-visual-status-dot"></span>READY
+                </span>
+              </div>
+              <div class="how-visual-body how-visual-body--connect">
+                <div class="how-platforms">
+                  <div class="how-platform">
+                    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M22.4 7.5c.3-1.4 1-3.5-.5-3.5-.6 0-1.4.4-2.2 1-2-2-4-1.5-5.5-.5-1 .8-2 2.4-2.5 4-.7 0-1.5.2-2.5.6-2.5 1-3 4.3-3 7.3 0 3 .5 4.5 1.7 6.4 1.4 2.2 4.4 2.2 6.6 2.2 4.7 0 9-1.6 9.7-7 .8-5.4-.7-9.5-1.8-10.5z" fill="currentColor"/></svg>
+                    <span>Shopify</span>
+                  </div>
+                  <div class="how-platform">
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M9 16h14M16 9v14"/></svg>
+                    <span>WooCommerce</span>
+                  </div>
+                  <div class="how-platform">
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="24" height="16" rx="3"/><path d="M4 14h24"/></svg>
+                    <span>Direct API</span>
+                  </div>
+                </div>
+                <svg class="how-connect-line" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M40 10 Q40 40 120 40 T200 40 L200 70" stroke="url(#hcLine)" stroke-width="1.2" fill="none" stroke-dasharray="3 4"/>
+                  <path d="M120 10 L120 40" stroke="url(#hcLine)" stroke-width="1.2" fill="none" stroke-dasharray="3 4"/>
+                  <path d="M200 10 Q200 40 120 40" stroke="url(#hcLine)" stroke-width="1.2" fill="none" stroke-dasharray="3 4"/>
+                  <defs><linearGradient id="hcLine" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(123,47,255,0.6)"/><stop offset="100%" stop-color="rgba(0,245,255,0.6)"/></linearGradient></defs>
+                </svg>
+                <div class="how-quarvo-node">
+                  <svg width="28" height="28" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                    <defs><linearGradient id="qN" x1="0" y1="0" x2="64" y2="64"><stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/></linearGradient><mask id="qNm"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask></defs>
+                    <circle cx="30" cy="30" r="22" fill="url(#qN)" mask="url(#qNm)"/>
+                    <line x1="44" y1="44" x2="57" y2="57" stroke="url(#qN)" stroke-width="8" stroke-linecap="round"/>
+                  </svg>
+                  <span>QUARVO</span>
+                </div>
+                <div class="how-stripe-line">
+                  <span class="how-stripe-line-label">via</span>
+                  <span class="how-stripe-line-name">Stripe Connect</span>
+                </div>
+              </div>
+              <div class="how-visual-footer">
+                <code>quarvo.connect(<span class="code-str">"shopify"</span>)</code>
+              </div>
             </div>
-            <h3>Enter your purchase</h3>
-            <p>Amount, category, merchant. Takes 30 seconds — no account needed to start.</p>
+
+            <!-- VISUAL 02 — SPLIT -->
+            <div class="how-visual" data-visual="1">
+              <div class="how-visual-header">
+                <span class="how-visual-tag">02 / SPLIT</span>
+                <span class="how-visual-status how-visual-status--violet">
+                  <span class="how-visual-status-dot"></span>PROCESSING
+                </span>
+              </div>
+              <div class="how-visual-body how-visual-body--split">
+                <div class="how-split-total">
+                  <span class="how-split-total-label">Cart total</span>
+                  <span class="how-split-total-value">$3,480.<span class="how-split-total-cents">00</span></span>
+                </div>
+                <div class="how-split-allocs">
+                  <div class="how-split-row">
+                    <span class="how-split-card">Visa &bull;&bull;&bull;&bull; 4821</span>
+                    <div class="how-split-bar"><div style="width:40%"></div></div>
+                    <span class="how-split-amt">$1,400</span>
+                  </div>
+                  <div class="how-split-row">
+                    <span class="how-split-card">Mastercard &bull;&bull;&bull;&bull; 7293</span>
+                    <div class="how-split-bar"><div style="width:31%"></div></div>
+                    <span class="how-split-amt">$1,080</span>
+                  </div>
+                  <div class="how-split-row">
+                    <span class="how-split-card">Amex &bull;&bull;&bull;&bull; 1156</span>
+                    <div class="how-split-bar"><div style="width:29%"></div></div>
+                    <span class="how-split-amt">$1,000</span>
+                  </div>
+                </div>
+                <div class="how-split-footer-note">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+                  Authorized via Plaid &middot; Customer never leaves your checkout
+                </div>
+              </div>
+              <div class="how-visual-footer">
+                <code>customer.split(<span class="code-num">$3480</span>, <span class="code-num">3</span>)</code>
+              </div>
+            </div>
+
+            <!-- VISUAL 03 — PAID -->
+            <div class="how-visual" data-visual="2">
+              <div class="how-visual-header">
+                <span class="how-visual-tag">03 / PAID</span>
+                <span class="how-visual-status how-visual-status--green">
+                  <span class="how-visual-status-dot"></span>SETTLED
+                </span>
+              </div>
+              <div class="how-visual-body how-visual-body--paid">
+                <div class="how-paid-icon">
+                  <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                    <circle cx="32" cy="32" r="28" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+                    <circle cx="32" cy="32" r="20" fill="rgba(52,211,153,0.10)" stroke="var(--data-green)" stroke-width="1.5"/>
+                    <path d="M22 32l7 7 13-15" stroke="var(--data-green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  </svg>
+                </div>
+                <div class="how-paid-amount">
+                  <span class="how-paid-prefix">+</span>$3,480<span class="how-paid-cents">.00</span>
+                </div>
+                <div class="how-paid-meta">Deposited to your Stripe account</div>
+                <div class="how-paid-breakdown">
+                  <div class="how-paid-row">
+                    <span>Customer paid</span>
+                    <span>$3,480.00</span>
+                  </div>
+                  <div class="how-paid-row">
+                    <span>QUARVO fee (2%)</span>
+                    <span class="how-paid-fee">−$69.60</span>
+                  </div>
+                  <div class="how-paid-row how-paid-row--total">
+                    <span>Net to you</span>
+                    <span>$3,410.40</span>
+                  </div>
+                </div>
+              </div>
+              <div class="how-visual-footer">
+                <code>stripe.transfer.<span class="code-fn">complete</span>()</code>
+              </div>
+            </div>
+
+            <!-- Step indicator dots -->
+            <div class="how-progress" role="presentation">
+              <span class="how-progress-dot is-active" data-dot="0"></span>
+              <span class="how-progress-dot" data-dot="1"></span>
+              <span class="how-progress-dot" data-dot="2"></span>
+            </div>
           </div>
-          <div class="step-connector"></div>
         </div>
 
-        <div class="step">
-          <div class="step-number">02</div>
-          <div class="step-content">
-            <div class="step-icon">
-              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                <rect width="36" height="36" rx="10" fill="rgba(123,47,255,0.15)"/>
-                <defs>
-                  <linearGradient id="stepG2" x1="4" y1="4" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#7B2FFF"/>
-                    <stop offset="100%" stop-color="#00F5FF"/>
-                  </linearGradient>
-                  <mask id="stepM2"><rect width="36" height="36" fill="white"/><circle cx="17" cy="17" r="7" fill="black"/></mask>
-                </defs>
-                <circle cx="17" cy="17" r="12" fill="url(#stepG2)" mask="url(#stepM2)"/>
-                <line x1="25" y1="25" x2="31" y2="31" stroke="url(#stepG2)" stroke-width="4" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <h3>QuantumSplit&#8482; builds your split — automatically</h3>
-            <p>Connect your bank and our AI reads your real credit limits, then calculates the optimal split instantly. Prefer manual? Enter your limits yourself — you're always in control.</p>
-          </div>
-          <div class="step-connector"></div>
-        </div>
+        <!-- RIGHT: scrolling content (3 steps) -->
+        <div class="how-content">
 
-        <div class="step">
-          <div class="step-number">03</div>
-          <div class="step-content">
-            <div class="step-icon">
-              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                <rect width="36" height="36" rx="10" fill="rgba(0,245,255,0.1)"/>
-                <path d="M10 18l5 5 11-10" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="18" cy="18" r="11" stroke="#00F5FF" stroke-width="1.5" opacity="0.4"/>
-              </svg>
-            </div>
-            <h3>Purchase complete. Cards charged. Done.</h3>
-            <p>Review the split, confirm, and you're done. Each card is authorized via Stripe. One virtual card issued instantly at the merchant.</p>
-          </div>
+          <article class="how-step" data-step="0" aria-labelledby="how-step-1-title">
+            <div class="how-step-num">01</div>
+            <h3 id="how-step-1-title" class="how-step-title">Connect your store</h3>
+            <p class="how-step-body">
+              Install the Shopify app, drop in the WooCommerce plugin, or call the Direct API. Stripe Connect handles auth in 5 minutes &mdash; <strong>zero changes to your existing checkout flow.</strong>
+            </p>
+            <ul class="how-step-bullets">
+              <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Shopify, WooCommerce, BigCommerce, Direct API</li>
+              <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Your existing Stripe account remains source of truth</li>
+              <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Drop-in checkout button or full programmatic control</li>
+            </ul>
+          </article>
+
+          <article class="how-step" data-step="1" aria-labelledby="how-step-2-title">
+            <div class="how-step-num">02</div>
+            <h3 id="how-step-2-title" class="how-step-title">Customer splits at checkout</h3>
+            <p class="how-step-body">
+              When their card alone isn't enough, your customer picks <strong>"Split with QUARVO"</strong>. They authorize each card via Plaid. We split the cart optimally across the credit they already own.
+            </p>
+            <ul class="how-step-bullets">
+              <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Customer never leaves your checkout</li>
+              <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>No new accounts, no new debt, no new credit pulls</li>
+              <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>They keep all their card rewards</li>
+            </ul>
+          </article>
+
+          <article class="how-step" data-step="2" aria-labelledby="how-step-3-title">
+            <div class="how-step-num">03</div>
+            <h3 id="how-step-3-title" class="how-step-title">You get paid in full</h3>
+            <p class="how-step-body">
+              Stripe Connect routes a single payment to your account. QUARVO deducts <strong>2% automatically</strong> &mdash; no invoices, no reconciliation. The decline became a sale.
+            </p>
+            <ul class="how-step-bullets">
+              <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Single Stripe charge &mdash; no reconciliation overhead</li>
+              <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>2% auto-deducted via Stripe Connect, transparent line item</li>
+              <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Failed splits cost you nothing</li>
+            </ul>
+          </article>
+
         </div>
+      </div>
+
+      <div class="how-cta-row reveal">
+        <a href="/for-merchants" class="btn-primary btn-primary--hero cta-glow magnetic" data-magnetic="0.20" data-magnetic-max="8">
+          Start recovering sales — Free
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="/pay-with-quarvo" class="btn-ghost">Read the integration docs &rarr;</a>
       </div>
 
       <!-- AI vs Manual Split -->
@@ -1163,8 +1304,8 @@
     </div>
   </footer>
 
-  <script src="main.js?v=2.3"></script>
-  <script src="motion.js?v=2.3" defer></script>
+  <script src="main.js?v=2.4"></script>
+  <script src="motion.js?v=2.4" defer></script>
   <script>
     function handleSubmit(e) {
       e.preventDefault();

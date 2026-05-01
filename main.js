@@ -171,6 +171,61 @@ function handleSubmit(e) {
   }
 })();
 
+// =============================================
+// HOW IT WORKS — sticky-scroll narrative (Phase 2.4)
+//   The 3 visuals on the LEFT change to match whichever
+//   .how-step on the RIGHT is closest to viewport center.
+//   Uses a single IntersectionObserver tuned with rootMargin
+//   so each step "activates" when it crosses ~40% from top.
+// =============================================
+(function () {
+  var root = document.querySelector('[data-how]');
+  if (!root) return;
+
+  var steps   = Array.prototype.slice.call(root.querySelectorAll('.how-step'));
+  var visuals = Array.prototype.slice.call(root.querySelectorAll('.how-visual'));
+  var dots    = Array.prototype.slice.call(root.querySelectorAll('.how-progress-dot'));
+  if (!steps.length || !visuals.length) return;
+
+  var current = 0;
+
+  function setActive(idx) {
+    if (idx === current) return;
+    current = idx;
+    visuals.forEach(function (v, i) { v.classList.toggle('is-active', i === idx); });
+    dots.forEach(function (d, i)    { d.classList.toggle('is-active', i === idx); });
+    steps.forEach(function (s, i)   { s.classList.toggle('is-active', i === idx); });
+  }
+
+  // Mobile: visuals stack vertically, no sticky scroll. Skip observer logic.
+  function isStacked() {
+    return window.matchMedia('(max-width: 900px)').matches;
+  }
+
+  if (isStacked()) {
+    visuals.forEach(function (v) { v.classList.add('is-active'); });
+    steps.forEach(function (s)   { s.classList.add('is-active'); });
+    return;
+  }
+
+  // Desktop: rootMargin shrinks the viewport so a step is "active" only
+  // when its center crosses near 40% from top. Threshold 0 fires on every
+  // crossing.
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var i = parseInt(entry.target.dataset.step, 10);
+        if (!isNaN(i)) setActive(i);
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  steps.forEach(function (s) { io.observe(s); });
+
+  // First step gets active immediately on load (initial sweep)
+  setActive(0);
+})();
+
 // COPY MERCHANT LINK
 function copyMerchantLink() {
   const url = 'https://quarvo.io/merchants';
