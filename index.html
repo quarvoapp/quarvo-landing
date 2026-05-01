@@ -101,128 +101,137 @@
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-bg">
+  <!-- HERO — merchant-first (2.2) -->
+  <section class="hero spotlight" id="hero" data-grid-bg data-grid-range="22">
+    <div class="hero-bg" aria-hidden="true">
       <div class="orb orb-1"></div>
       <div class="orb orb-2"></div>
       <div class="orb orb-3"></div>
-      <div class="grid-overlay"></div>
+      <div class="grid-bg"></div>
     </div>
 
     <div class="hero-inner">
       <div class="hero-content">
-        <div class="hero-badge">
+        <div class="hero-badge reveal">
           <span class="badge-dot"></span>
-          3 steps. Done in under 5 minutes.
+          2% per recovered sale &nbsp;·&nbsp; $0 monthly on Direct API
         </div>
 
-        <h1 class="hero-title">
-          You have the credit.<br/>
-          <span class="title-accent">The checkout</span><br/>
-          shouldn't say no.
+        <h1 class="hero-title split-words">
+          Recover the
+          <span class="title-accent shimmer-text">high-ticket sales</span>
+          your checkout is losing.
         </h1>
 
-        <p class="hero-sub">
-          Split any high-value purchase across your existing cards.<br/>
-          Let AI do it for you — or take full manual control.<br/>
-          No new debt. No credit check. No new accounts.
+        <p class="hero-sub reveal">
+          Customers with $12,000+ across 3 cards get declined when one isn't enough.
+          QUARVO splits the purchase across their existing cards.
+          <strong>You get paid in full. They complete the purchase.</strong>
         </p>
 
-        <div class="hero-ctas">
-          <a href="#waitlist" class="btn-primary btn-primary--hero">
-            Join the waitlist
+        <div class="hero-ctas reveal">
+          <a href="/for-merchants" class="btn-primary btn-primary--hero cta-glow magnetic" data-magnetic="0.25" data-magnetic-max="10">
+            Connect your store — Free
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="#how" class="btn-ghost">See how it works →</a>
         </div>
 
-        <div class="hero-trust">
-          <span>No new debt</span>
+        <div class="hero-trust reveal-group">
+          <span>Stripe Connect</span>
           <span class="trust-dot">·</span>
-          <span>No credit check</span>
+          <span>5-min setup</span>
           <span class="trust-dot">·</span>
-          <span>No new accounts</span>
+          <span>Zero checkout changes</span>
         </div>
       </div>
 
-      <!-- CARD VISUAL -->
-      <div class="hero-visual">
-        <div class="purchase-card">
-          <div class="purchase-header">
-            <span class="purchase-label">Purchase total</span>
-            <span class="purchase-tag">✓ Approved</span>
-          </div>
-          <div class="purchase-amount">$3,480<span class="purchase-cents">.00</span></div>
-
-          <div class="split-label">Split across 3 cards</div>
-
-          <div class="cards-list">
-            <div class="card-item card-item--1">
-              <div class="card-chip"></div>
-              <div class="card-info">
-                <span class="card-name">Visa Platinum</span>
-                <span class="card-last">•••• 4821</span>
-              </div>
-              <div class="card-amount">$1,400</div>
-              <div class="card-bar">
-                <div class="card-bar-fill" style="width: 40%"></div>
-              </div>
-            </div>
-
-            <div class="card-item card-item--2">
-              <div class="card-chip"></div>
-              <div class="card-info">
-                <span class="card-name">Mastercard Gold</span>
-                <span class="card-last">•••• 7293</span>
-              </div>
-              <div class="card-amount">$1,080</div>
-              <div class="card-bar">
-                <div class="card-bar-fill" style="width: 31%"></div>
-              </div>
-            </div>
-
-            <div class="card-item card-item--3">
-              <div class="card-chip"></div>
-              <div class="card-info">
-                <span class="card-name">Amex Blue</span>
-                <span class="card-last">•••• 1156</span>
-              </div>
-              <div class="card-amount">$1,000</div>
-              <div class="card-bar">
-                <div class="card-bar-fill" style="width: 29%"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="purchase-footer">
-            <svg width="16" height="16" viewBox="0 0 64 64" fill="none">
-              <defs>
-                <linearGradient id="cardG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
-                </linearGradient>
-                <mask id="cardM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
-              </defs>
-              <circle cx="30" cy="30" r="22" fill="url(#cardG)" mask="url(#cardM)"/>
-              <line x1="44" y1="44" x2="57" y2="57" stroke="url(#cardG)" stroke-width="8" stroke-linecap="round"/>
-            </svg>
-            <span>Powered by QUARVO QuantumSplit™</span>
-          </div>
+      <!-- CARD VISUAL — what the customer sees at checkout (tilt 3D + slide-in) -->
+      <div class="hero-visual reveal reveal--right tilt" aria-label="Customer checkout preview">
+        <div class="hero-visual-caption">
+          <span class="hero-visual-caption-dot"></span>
+          What your customer sees at checkout
         </div>
+        <div class="tilt-inner">
+          <div class="purchase-card">
+            <div class="purchase-header">
+              <span class="purchase-label">Purchase total</span>
+              <span class="purchase-tag">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Paid in full
+              </span>
+            </div>
+            <div class="purchase-amount">$3,480<span class="purchase-cents">.00</span></div>
 
-        <!-- Floating elements -->
-        <div class="float-badge float-1">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1l1.5 3.5L12 5.5 9.5 8l.5 3.5L7 10l-3 1.5.5-3.5L2 5.5l3.5-1L7 1z" fill="#00F5FF"/></svg>
-          Smart allocation
-        </div>
-        <div class="float-badge float-2">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="#7B2FFF" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="#7B2FFF" stroke-width="1.5" stroke-linecap="round"/></svg>
-          Done in seconds
+            <div class="split-label">Split across 3 cards</div>
+
+            <div class="cards-list">
+              <div class="card-item card-item--1">
+                <div class="card-chip"></div>
+                <div class="card-info">
+                  <span class="card-name">Visa Platinum</span>
+                  <span class="card-last">•••• 4821</span>
+                </div>
+                <div class="card-amount">$1,400</div>
+                <div class="card-bar">
+                  <div class="card-bar-fill" style="width: 40%"></div>
+                </div>
+              </div>
+
+              <div class="card-item card-item--2">
+                <div class="card-chip"></div>
+                <div class="card-info">
+                  <span class="card-name">Mastercard Gold</span>
+                  <span class="card-last">•••• 7293</span>
+                </div>
+                <div class="card-amount">$1,080</div>
+                <div class="card-bar">
+                  <div class="card-bar-fill" style="width: 31%"></div>
+                </div>
+              </div>
+
+              <div class="card-item card-item--3">
+                <div class="card-chip"></div>
+                <div class="card-info">
+                  <span class="card-name">Amex Blue</span>
+                  <span class="card-last">•••• 1156</span>
+                </div>
+                <div class="card-amount">$1,000</div>
+                <div class="card-bar">
+                  <div class="card-bar-fill" style="width: 29%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="purchase-footer">
+              <svg width="16" height="16" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="cardG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+                  </linearGradient>
+                  <mask id="cardM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+                </defs>
+                <circle cx="30" cy="30" r="22" fill="url(#cardG)" mask="url(#cardM)"/>
+                <line x1="44" y1="44" x2="57" y2="57" stroke="url(#cardG)" stroke-width="8" stroke-linecap="round"/>
+              </svg>
+              <span>Settled to your Stripe — instantly</span>
+            </div>
+          </div>
+
+          <!-- Floating proof badges -->
+          <div class="float-badge float-1">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1l1.5 3.5L12 5.5 9.5 8l.5 3.5L7 10l-3 1.5.5-3.5L2 5.5l3.5-1L7 1z" fill="#00F5FF"/></svg>
+            Smart allocation
+          </div>
+          <div class="float-badge float-2">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M9 4l3 3-3 3" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            You get paid in full
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="hero-scroll">
+    <div class="hero-scroll" aria-hidden="true">
       <div class="scroll-line"></div>
       <span>scroll</span>
     </div>
@@ -1052,7 +1061,7 @@
   </footer>
 
   <script src="main.js"></script>
-  <script src="motion.js" defer></script>
+  <script src="motion.js?v=2.2" defer></script>
   <script>
     function handleSubmit(e) {
       e.preventDefault();

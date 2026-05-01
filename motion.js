@@ -111,7 +111,20 @@
       root.dataset.split = 'done';
 
       var idx = 0;
-      var walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+      // Skip text nodes inside .shimmer-text or [data-no-split] — they need to
+      // remain whole so background-clip: text / gradient effects don't break
+      // due to inline-block reformatting context introduced by .word wrappers.
+      var walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: function (node) {
+          var p = node.parentElement;
+          while (p && p !== root) {
+            if (p.classList && p.classList.contains('shimmer-text')) return NodeFilter.FILTER_REJECT;
+            if (p.dataset && p.dataset.noSplit !== undefined)        return NodeFilter.FILTER_REJECT;
+            p = p.parentElement;
+          }
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
       var textNodes = [];
       var n;
       while ((n = walk.nextNode())) {

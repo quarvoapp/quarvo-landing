@@ -2303,6 +2303,98 @@ input[type="text"]:focus-visible {
 }
 
 /* ----------------------------------------------------
+   HERO 2.2 — merchant-first visual additions
+---------------------------------------------------- */
+
+/* hero-visual now stacks caption above card */
+.hero-visual.tilt {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* Caption above the card mockup */
+.hero-visual-caption {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  background: rgba(0, 245, 255, 0.04);
+  border: 1px solid rgba(0, 245, 255, 0.12);
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+.hero-visual-caption-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  animation: m-pulse-dot 2s ease-in-out infinite;
+}
+@keyframes m-pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.9); }
+}
+
+/* tilt-inner is the rotating layer that holds card + float badges.
+   Needs position:relative so the absolutely-positioned float badges
+   anchor inside it (instead of bubbling to hero-visual). */
+.hero-visual .tilt-inner {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Re-position float badges relative to the new tilt-inner so they
+   still sit at the corners of the card (not the column container). */
+.hero-visual .tilt-inner .float-1 {
+  top: 8%;
+  right: 4%;
+}
+.hero-visual .tilt-inner .float-2 {
+  bottom: 12%;
+  left: 4%;
+}
+
+/* "Paid in full" tag — switch from neutral cyan to merchant-success green */
+.purchase-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--data-green);
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.28);
+}
+
+/* Hero CTA glow override: use the merchant gradient */
+.hero-ctas .btn-primary--hero.cta-glow::after {
+  background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 100%);
+}
+
+/* Hero trust line: flex group so reveal-group stagger works on direct kids */
+.hero-trust.reveal-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;  /* dots already provide spacing */
+}
+
+/* On reduced motion, .tilt should not jump in — flatten */
+@media (prefers-reduced-motion: reduce) {
+  .hero-visual.tilt {
+    flex-direction: column;
+  }
+}
+
+/* ----------------------------------------------------
    Reduced motion: hard-stop anything we just added
 ---------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
