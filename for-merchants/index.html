@@ -706,7 +706,7 @@
     }
   </style>
 </head>
-<body>
+<body data-exit-modal="true">
 
   <a class="skip-link" href="#m-main">Skip to main content</a>
 
@@ -1029,7 +1029,13 @@
     <p style="margin-top:8px;">© 2026 QUARVO LLC · Credit Combination Technology™</p>
   </footer>
 
-  <script src="/motion.js?v=2.8" defer></script>
+  <script src="/motion.js?v=7.0" defer></script>
+  <script src="/conversion.js?v=7.0" defer></script>
+
+  <!-- Vercel Analytics + Speed Insights -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
   <script>
     (function () {
       var form    = document.getElementById('merchantForm');

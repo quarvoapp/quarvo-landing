@@ -54,7 +54,7 @@
     }
   </style>
 </head>
-<body>
+<body data-floating-cta="true">
 
   <!-- Skip-to-content for keyboard / screen-reader users -->
   <a class="skip-link" href="#hero">Skip to main content</a>
@@ -1577,9 +1577,15 @@
     </div>
   </footer>
 
-  <script src="main.js?v=5.0"></script>
-  <script src="motion.js?v=5.0" defer></script>
-  <script src="demo.js?v=5.0" defer></script>
+  <script src="main.js?v=7.0"></script>
+  <script src="motion.js?v=7.0" defer></script>
+  <script src="demo.js?v=7.0" defer></script>
+  <script src="conversion.js?v=7.0" defer></script>
+
+  <!-- Vercel Analytics + Speed Insights (privacy-first) -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
   <script>
     function handleSubmit(e) {
       e.preventDefault();

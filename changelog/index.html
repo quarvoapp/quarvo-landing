@@ -405,6 +405,30 @@
         </div>
         <div class="cl-body">
           <div class="cl-tags">
+            <span class="cl-pill improvement">Improvement</span>
+            <span class="cl-pill infra">Infra</span>
+          </div>
+          <h2 class="cl-title">Conversion optimization layer <span class="cl-phase">PHASE 7</span></h2>
+          <div class="cl-text">
+            <p>Three additions to close out the launch-ready loop:</p>
+            <ul>
+              <li><strong>Vercel Analytics + Speed Insights</strong> — privacy-first, no cookies, GDPR/CCPA compliant. Now active on all 13 indexable pages.</li>
+              <li><strong>Exit-intent modal on <code>/for-merchants</code></strong> — fires when the cursor leaves via the top edge (desktop) or after 30s + 75% scroll on mobile. Offers the "high-AOV decline recovery checklist" with email capture posting to Loops via <code>/api/subscribe</code>. Dismissal persists in localStorage.</li>
+              <li><strong>Floating scroll-depth CTA</strong> — small bottom-right card that appears past 60% scroll on long-form pages (blog index, compare, security). Dismissible, persistent. Active on engaged-reader surfaces only.</li>
+            </ul>
+            <p>All conversion infra is gated on <code>prefers-reduced-motion</code> and respects keyboard accessibility (focus traps in the modal, ESC to close).</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>May 02</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
             <span class="cl-pill brand">Brand</span>
             <span class="cl-pill docs">Docs</span>
             <span class="cl-pill security">Security</span>
@@ -737,5 +761,10 @@
     <a href="/terms">Terms</a>
   </footer>
 
+
+  <!-- Vercel Analytics + Speed Insights -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>

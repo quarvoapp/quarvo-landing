@@ -9,6 +9,16 @@
     <atom:link href="https://quarvo.io/changelog/feed.xml" rel="self" type="application/rss+xml" />
 
     <item>
+      <title>Conversion optimization layer (Phase 7)</title>
+      <link>https://quarvo.io/changelog#may-02-2026-conversion</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-05-02-conversion</guid>
+      <pubDate>Sat, 02 May 2026 20:00:00 +0000</pubDate>
+      <description><![CDATA[Three additions: Vercel Analytics + Speed Insights on all 13 indexable pages (privacy-first, no cookies); exit-intent modal on /for-merchants with email capture for the high-AOV decline recovery checklist; floating scroll-depth CTA on long-form pages (blog index, compare, security). All gated on prefers-reduced-motion and keyboard-accessible.]]></description>
+      <category>Improvement</category>
+      <category>Infra</category>
+    </item>
+
+    <item>
       <title>Trust &amp; launch assets shipped (Phase 6)</title>
       <link>https://quarvo.io/changelog#may-02-2026-trust-launch</link>
       <guid isPermaLink="false">quarvo-changelog-2026-05-02-trust</guid>
