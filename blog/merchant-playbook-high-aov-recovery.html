@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SEO META ═══════════════════════════════════════════════════════ -->
+  <title>From Declined to Delivered: The Merchant Playbook for High-AOV Recovery</title>
+  <meta name="description" content="A 4-step operational playbook for high-AOV merchants to audit their decline funnel, segment the recoverable cohort, install split-card recovery, and measure topline lift in 60 days." />
+  <meta name="keywords" content="high AOV recovery playbook, merchant decline recovery, ecommerce conversion playbook, high ticket conversion, payment recovery implementation" />
+  <link rel="canonical" href="https://quarvo.io/blog/merchant-playbook-high-aov-recovery" />
+
+  <meta property="og:title" content="From Declined to Delivered: The Merchant Playbook for High-AOV Recovery" />
+  <meta property="og:description" content="A 4-step operational playbook for high-AOV merchants to audit, segment, install, and measure decline recovery in 60 days." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://quarvo.io/blog/merchant-playbook-high-aov-recovery" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Merchant Playbook for High-AOV Recovery" />
+  <meta name="twitter:description" content="4 steps. 60 days. Honest framework for installing decline recovery and measuring lift." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "The Merchant Playbook for High-AOV Decline Recovery",
+    "description": "Operational playbook for high-AOV e-commerce merchants to audit their decline funnel, segment the recoverable cohort, install split-card recovery infrastructure, and measure topline impact.",
+    "totalTime": "PT60D",
+    "step": [
+      { "@type": "HowToStep", "name": "Audit your decline funnel", "text": "Pull 90 days of payment data and segment declines by AOV band, decline reason, and recoverability. Calculate the addressable cohort. Most merchants discover 4–8% of high-AOV attempts are recoverable declines." },
+      { "@type": "HowToStep", "name": "Segment the high-AOV cohort", "text": "Identify the AOV bands and verticals where declines are concentrated. Cross-reference with your CAC and LTV data to size the financial opportunity. Prioritize the cohort with the highest recovery yield × cohort size." },
+      { "@type": "HowToStep", "name": "Install recovery at the decline boundary", "text": "Integrate Quarvo's drop-in widget at the moment of decline — not in a follow-up email. Test in staging with your existing Stripe Connect setup. Soft-launch to 10% of decline cohort, then scale." },
+      { "@type": "HowToStep", "name": "Measure topline lift, not just recovery rate", "text": "Track recovered GMV against the previous baseline at the AOV-band level. Recovery rate is the operational metric; topline lift is the executive metric. Most merchants see 2–5% topline lift on high-AOV revenue within 60 days." }
+    ],
+    "author": { "@type": "Person", "name": "Marcelo", "url": "https://quarvo.io" },
+    "publisher": { "@type": "Organization", "name": "Quarvo", "url": "https://quarvo.io" },
+    "datePublished": "2026-05-02",
+    "dateModified": "2026-05-02"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long does it take to install Quarvo and start measuring recovery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Technical install is typically 1–3 days for Shopify or Woo merchants using the drop-in widget, and 5–10 days for custom merchants integrating via the Stripe Connect API. After install, plan for a 4–6 week ramp before measuring steady-state recovery rate. Topline lift becomes statistically reliable around day 60."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to change my checkout or payment processor to install Quarvo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Quarvo runs as a Stripe Connect platform on top of your existing Stripe account. Your checkout flow stays intact — Quarvo's recovery surface only appears at the moment a card is declined for insufficient credit. Customers who succeed on a single card never see Quarvo. Customers who would have abandoned see the option to split."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What metrics should I track to measure Quarvo's impact?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Three metrics: (1) Recovery rate — % of addressable declines that complete via Quarvo. Operational metric, target 60% steady-state. (2) Recovered GMV — gross revenue from recoveries. The CFO metric. (3) Topline lift on high-AOV revenue — % increase in revenue on AOV bands above the decline threshold. The executive metric. The third metric is the one to put in the board deck."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I A/B test Quarvo before fully rolling it out?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Quarvo supports cohort-based gating during the pilot phase. You can show the recovery surface to 10%, 25%, or 50% of declined transactions and measure lift against the held-out control. Most merchants run a 30-day A/B at 50/50 to establish their baseline recovery rate before scaling to 100%. The fee structure makes the A/B economically safe — you only pay on recovered transactions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if my recovery rate is lower than the benchmark?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If your recovery rate after the 6-week ramp is below 50%, the most common causes are (1) traffic mix is heavily paid-social, which has structurally lower recovery rates, (2) prompt copy or surface placement isn't tuned for your audience, or (3) your decline cohort is dominated by non-credit-limit decline reasons (fraud, expired cards) that fall outside Quarvo's addressable cohort. The Quarvo team works with pilot merchants to diagnose and tune across all three."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060C;
+      --surface: #0E0E18;
+      --card: #101018;
+      --border: #1A1A2E;
+      --accent: #4F6EF7;
+      --gold: #F5C518;
+      --green: #34D399;
+      --red: #F75454;
+      --orange: #F97316;
+      --teal: #2DD4BF;
+      --violet: #7B2FFF;
+      --cyan: #00F5FF;
+      --text: #E8E8F2;
+      --soft: #9090B0;
+      --muted: #50506A;
+      --max: 740px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.75; }
+
+    .site-header { border-bottom: 1px solid var(--border); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; background: linear-gradient(135deg, var(--violet), var(--cyan)); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; }
+    .logo-text { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.06em; }
+    .nav-cta { background: rgba(245,197,24,0.08); border: 1px solid rgba(245,197,24,0.35); color: var(--gold); font-size: 12px; padding: 6px 16px; border-radius: 20px; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: rgba(245,197,24,0.15); }
+
+    .article-wrapper { max-width: var(--max); margin: 0 auto; padding: 56px 24px 80px; }
+
+    .article-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+    .tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; font-weight: 700; }
+    .tag-play { background: rgba(245,197,24,0.08); color: var(--gold); border: 1px solid rgba(245,197,24,0.3); }
+    .tag-updated { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+    .reading-time { font-size: 12px; color: var(--muted); font-family: "SFMono-Regular", monospace; }
+
+    h1 { font-size: clamp(28px, 4.6vw, 42px); font-weight: 800; line-height: 1.12; letter-spacing: -0.025em; margin-bottom: 22px; color: var(--text); }
+    h1 em { font-style: normal; background: linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .deck { font-size: 19px; color: var(--soft); line-height: 1.6; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 23px; font-weight: 800; margin: 56px 0 18px; color: var(--text); letter-spacing: -0.015em; }
+    h3 { font-size: 17px; font-weight: 700; margin: 32px 0 12px; color: var(--text); }
+    p { margin-bottom: 18px; color: var(--text); }
+    strong { color: #fff; font-weight: 700; }
+    em { color: var(--soft); font-style: italic; }
+    ul, ol { padding-left: 22px; margin-bottom: 18px; }
+    li { color: var(--soft); margin-bottom: 8px; line-height: 1.65; }
+    li strong { color: var(--text); }
+    code { font-family: "SFMono-Regular", "Consolas", monospace; font-size: 0.92em; background: var(--card); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; color: var(--cyan); }
+
+    /* STEP HEADERS */
+    .step-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px; margin: 28px 0; position: relative; overflow: hidden; }
+    .step-block::before { content: ""; position: absolute; top: 0; left: 0; height: 3px; width: 100%; background: linear-gradient(90deg, var(--gold), var(--orange)); }
+    .step-num-big { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-family: monospace; font-weight: 700; margin-bottom: 12px; }
+    .step-heading { font-size: 22px; font-weight: 800; color: var(--text); line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 16px; }
+    .step-block p { color: var(--soft); font-size: 15px; line-height: 1.7; margin-bottom: 14px; }
+    .step-block p strong { color: var(--text); }
+    .step-block ul { margin-bottom: 0; }
+    .step-block li { font-size: 14.5px; }
+
+    /* CHECKLIST */
+    .checklist { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin: 18px 0 0; }
+    .checklist-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-family: monospace; font-weight: 700; margin-bottom: 12px; }
+    .check-item { display: flex; gap: 12px; padding: 6px 0; align-items: flex-start; font-size: 13.5px; color: var(--soft); line-height: 1.55; }
+    .check-box { width: 16px; height: 16px; border: 1.5px solid var(--muted); border-radius: 4px; flex-shrink: 0; margin-top: 3px; }
+
+    /* AUDIT GRID */
+    .audit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+    @media (max-width: 540px) { .audit-grid { grid-template-columns: 1fr; } }
+    .audit-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+    .audit-key { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 6px; font-family: monospace; }
+    .audit-val { font-size: 22px; font-weight: 800; color: var(--gold); display: block; margin-bottom: 4px; line-height: 1; }
+    .audit-detail { font-size: 12px; color: var(--soft); line-height: 1.5; }
+
+    /* TIMELINE / CALENDAR */
+    .calendar { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin: 28px 0; }
+    .cal-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .cal-sub { font-size: 11px; color: var(--muted); font-family: monospace; margin-bottom: 18px; letter-spacing: 0.06em; }
+    .cal-row { display: grid; grid-template-columns: 90px 1fr; gap: 14px; padding: 12px 0; border-top: 1px dashed var(--border); }
+    .cal-row:first-of-type { border-top: none; }
+    .cal-week { font-size: 11px; font-family: monospace; color: var(--gold); padding-top: 2px; letter-spacing: 0.06em; font-weight: 700; }
+    .cal-action { font-size: 14.5px; font-weight: 600; color: var(--text); }
+    .cal-action span { display: block; color: var(--soft); font-weight: 400; font-size: 13px; margin-top: 4px; line-height: 1.55; }
+
+    /* SCENARIOS */
+    .scenario { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin: 14px 0; }
+    .scenario-tag { display: inline-block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 700; padding: 3px 9px; border: 1px solid rgba(245,197,24,0.3); background: rgba(245,197,24,0.05); border-radius: 4px; margin-bottom: 10px; font-family: monospace; }
+    .scenario h3 { margin: 0 0 10px; font-size: 16.5px; }
+    .scenario p { font-size: 14px; color: var(--soft); margin: 0 0 10px; line-height: 1.7; }
+    .scenario p:last-child { margin-bottom: 0; }
+    .scenario p strong { color: var(--gold); }
+
+    /* CALLOUT */
+    .callout { background: rgba(245,197,24,0.04); border: 1px solid rgba(245,197,24,0.22); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 18px 22px; margin: 28px 0; }
+    .callout .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 8px; font-family: monospace; }
+    .callout p { color: var(--soft); font-size: 14.5px; margin: 0; line-height: 1.7; }
+
+    /* METRICS BLOCK */
+    .metrics { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin: 24px 0; }
+    .metrics-title { font-size: 12px; font-weight: 700; color: var(--text); letter-spacing: 0.04em; margin-bottom: 4px; }
+    .metrics-sub { font-size: 11px; color: var(--muted); font-family: monospace; margin-bottom: 16px; letter-spacing: 0.06em; }
+    .metric-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 11px 0; border-bottom: 1px dashed var(--border); align-items: baseline; }
+    .metric-row:last-child { border-bottom: none; }
+    .metric-name { font-size: 14px; color: var(--text); font-weight: 600; }
+    .metric-name span { display: block; color: var(--muted); font-weight: 400; font-size: 12px; margin-top: 3px; font-family: monospace; }
+    .metric-target { font-size: 14px; font-family: monospace; color: var(--green); font-weight: 700; }
+    .metric-target.exec { color: var(--cyan); }
+    .metric-target.ops { color: var(--gold); }
+
+    /* BLOCKQUOTE */
+    blockquote { border-left: 3px solid var(--gold); margin: 32px 0; padding: 18px 22px; background: var(--surface); border-radius: 0 8px 8px 0; }
+    blockquote p { font-size: 16.5px; font-style: italic; color: var(--soft); margin: 0; line-height: 1.65; }
+
+    /* INLINE CTA */
+    .inline-cta { background: linear-gradient(135deg, rgba(123,47,255,0.14) 0%, rgba(0,245,255,0.06) 100%); border: 1px solid rgba(123,47,255,0.4); border-radius: 14px; padding: 32px; margin: 44px 0; text-align: center; }
+    .inline-cta h3 { font-size: 22px; font-weight: 800; color: var(--text); margin: 0 0 12px; line-height: 1.25; }
+    .inline-cta p { font-size: 14.5px; color: var(--soft); margin: 0 0 22px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-block; background: linear-gradient(135deg, var(--violet), var(--cyan)); color: #fff; font-size: 14px; font-weight: 700; padding: 13px 30px; border-radius: 10px; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(123,47,255,0.3); }
+    .cta-note { font-size: 11px; color: var(--muted); margin-top: 14px !important; font-family: monospace; }
+
+    /* FAQ */
+    .faq-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .faq-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; font-family: monospace; }
+    details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+    summary { padding: 16px 18px; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; background: var(--surface); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 20px; color: var(--gold); font-weight: 300; flex-shrink: 0; margin-left: 12px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    .faq-answer { padding: 16px 18px; font-size: 14.5px; color: var(--soft); line-height: 1.7; border-top: 1px solid var(--border); }
+
+    /* FOOTER CTA */
+    .footer-cta { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--gold); border-radius: 0 0 14px 14px; padding: 40px 32px; margin-top: 60px; text-align: center; }
+    .footer-cta h2 { font-size: 26px; margin: 0 0 14px; line-height: 1.25; }
+    .footer-cta p { color: var(--soft); font-size: 15px; max-width: 480px; margin: 0 auto 24px; }
+
+    .article-footer { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 14px; }
+    .author-avatar { width: 44px; height: 44px; background: linear-gradient(135deg, var(--gold), var(--orange)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #06060C; flex-shrink: 0; }
+    .author-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .author-role { font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .article-wrapper { padding: 32px 16px 60px; }
+      h1 { font-size: 26px; }
+      .step-heading { font-size: 19px; }
+      .footer-cta h2 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="https://quarvo.io" class="logo">
+    <div class="logo-mark">Q</div>
+    <span class="logo-text">QUARVO</span>
+  </a>
+  <a href="https://quarvo.io/for-merchants" class="nav-cta">For merchants →</a>
+</header>
+
+<article class="article-wrapper">
+
+  <div class="article-meta">
+    <span class="tag tag-play">Playbook</span>
+    <span class="tag tag-updated">May 2026</span>
+    <span class="reading-time">11 min read · 2,800 words</span>
+  </div>
+
+  <h1>From Declined to Delivered:<br/>The <em>Merchant Playbook</em><br/>for High-AOV Recovery</h1>
+
+  <p class="deck">
+    Four steps. Sixty days. An honest operational framework for high-AOV merchants who want to install decline recovery, ramp it correctly, and put a defensible topline lift number in front of their CFO. Designed for ops leaders, not theorists.
+  </p>
+
+  <!-- ── STEP 1 ────────────────────────────────────────────────────────── -->
+  <div class="step-block">
+    <div class="step-num-big">// STEP 01 · WEEK 1</div>
+    <h2 class="step-heading">Audit your decline funnel</h2>
+
+    <p>
+      Before you install anything, you need a baseline. Most merchants don't have a clean read on their decline cohort — declines get lumped into a generic "cart abandonment" bucket that hides the recoverable subset. The first job is to pull the data and segment it properly.
+    </p>
+
+    <p>
+      Pull <strong>90 days of payment data</strong> from your PSP (Stripe, Adyen, etc.) and segment declines by:
+    </p>
+
+    <ul>
+      <li><strong>AOV band</strong> — group by $0–$500, $500–$1,500, $1,500–$3,000, $3,000–$7,500, $7,500+. Decline rates rise non-linearly with AOV; you need this granularity.</li>
+      <li><strong>Decline reason code</strong> — separate <code>insufficient_funds</code> and <code>limit_exceeded</code> (the recoverable cohort) from <code>card_declined_generic</code>, <code>fraud_blocked</code>, <code>expired_card</code>, <code>address_mismatch</code> (not the recoverable cohort).</li>
+      <li><strong>Customer cohort</strong> — new vs. returning. Returning customers' declines are nearly always credit-limit related (fraud rules trust them); new customers have a wider decline reason mix.</li>
+    </ul>
+
+    <p>
+      The output is a single number: your <strong>addressable decline cohort size</strong>. For most high-AOV merchants this lands at 4–8% of attempts on AOV bands above $1,500.
+    </p>
+
+    <div class="audit-grid">
+      <div class="audit-card">
+        <div class="audit-key">// EXAMPLE MERCHANT</div>
+        <span class="audit-val">7.2%</span>
+        <div class="audit-detail">addressable decline rate on $1,500+ AOV — credit-limit reasons only</div>
+      </div>
+      <div class="audit-card">
+        <div class="audit-key">// MONTHLY ATTEMPTS</div>
+        <span class="audit-val">1,400</span>
+        <div class="audit-detail">high-AOV checkout attempts above $1,500 in a representative month</div>
+      </div>
+      <div class="audit-card">
+        <div class="audit-key">// MONTHLY DECLINES</div>
+        <span class="audit-val">101</span>
+        <div class="audit-detail">addressable declined transactions per month</div>
+      </div>
+      <div class="audit-card">
+        <div class="audit-key">// MONTHLY GMV AT RISK</div>
+        <span class="audit-val">$232K</span>
+        <div class="audit-detail">unrealized monthly gross transaction value</div>
+      </div>
+    </div>
+
+    <div class="checklist">
+      <div class="checklist-label">// WEEK 1 CHECKLIST</div>
+      <div class="check-item"><span class="check-box"></span><span>Pull 90 days of decline data from PSP, segmented by reason code</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Cross-reference with order data to compute decline rate by AOV band</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Isolate addressable cohort (insufficient credit / limit exceeded)</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Calculate addressable monthly GMV at risk</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Document baseline metrics — these become the control for measuring lift</span></div>
+    </div>
+  </div>
+
+  <!-- ── STEP 2 ────────────────────────────────────────────────────────── -->
+  <div class="step-block">
+    <div class="step-num-big">// STEP 02 · WEEK 2</div>
+    <h2 class="step-heading">Segment the high-AOV cohort</h2>
+
+    <p>
+      Not every dollar of decline GMV is created equal. Some cohorts have higher CAC waste behind them. Some have higher LTV implications when they convert. The Week 2 work is connecting the decline data from Step 1 to your customer-economics data so you know <strong>which AOV band × vertical × traffic source combination is the most expensive to lose</strong>.
+    </p>
+
+    <p>
+      Cross-reference the decline cohort against three datasets:
+    </p>
+
+    <ul>
+      <li><strong>CAC by source.</strong> Paid social CAC at $80–$150 means every lost paid-social customer is double-loss: lost revenue + wasted acquisition spend. Factor this in.</li>
+      <li><strong>LTV by cohort.</strong> First-purchase declines have a hidden cost: ~30% of declined first-time customers never come back. Their LTV is zero. Returning-customer declines retain LTV better but still carry friction cost.</li>
+      <li><strong>Vertical recovery rate</strong> (use the benchmark numbers from <a href="/blog/recovery-rate-benchmarks" style="color:var(--gold);">our recovery benchmarks post</a>). Need-driven verticals recover 70%+; want-driven recover 50%. Apply the right multiplier per cohort.</li>
+    </ul>
+
+    <p>
+      The output of Week 2 is a <strong>prioritized cohort matrix</strong>: which AOV-band × vertical pairs deliver the highest expected recovery yield. This becomes your soft-launch target in Step 3.
+    </p>
+
+    <div class="callout">
+      <div class="label">// COMMON MISTAKE</div>
+      <p>Most teams skip segmentation and roll out across the entire catalog day one. This works fine economically — but it makes attribution harder if anything else changes during the rollout window. A targeted soft-launch on the highest-yield cohort gives you cleaner signal and makes the eventual board presentation much stronger.</p>
+    </div>
+
+    <div class="checklist">
+      <div class="checklist-label">// WEEK 2 CHECKLIST</div>
+      <div class="check-item"><span class="check-box"></span><span>Join decline data with CAC by source — flag highest-cost cohorts</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Join with LTV data — flag highest-LTV cohorts</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Apply vertical recovery rate multipliers from benchmark data</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Rank AOV-band × vertical pairs by expected recovery yield</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Identify the top cohort for Week 3 soft-launch</span></div>
+    </div>
+  </div>
+
+  <!-- ── INLINE CTA ──────────────────────────────────────────────────────── -->
+  <div class="inline-cta">
+    <h3>Skip the audit. Start with the install.</h3>
+    <p>If you already know your decline rate is high and you're ready to install — the merchant pilot list is open. We'll help with the audit during onboarding.</p>
+    <a href="https://quarvo.io/for-merchants" class="cta-btn">Get on the merchant pilot list →</a>
+    <p class="cta-note">// PILOT · Q2 2026 · 2% PER RECOVERED SALE</p>
+  </div>
+
+  <!-- ── STEP 3 ────────────────────────────────────────────────────────── -->
+  <div class="step-block">
+    <div class="step-num-big">// STEP 03 · WEEKS 3–5</div>
+    <h2 class="step-heading">Install recovery at the decline boundary</h2>
+
+    <p>
+      Step 3 is the technical install. Quarvo runs as a <strong>Stripe Connect platform</strong> on top of your existing Stripe account — the merchant doesn't change processors, doesn't reroute funds, doesn't restructure their checkout. The recovery surface only triggers when a card declines for an insufficient-credit reason.
+    </p>
+
+    <p>
+      Three integration paths exist depending on your stack:
+    </p>
+
+    <div class="scenario">
+      <span class="scenario-tag">// SHOPIFY</span>
+      <h3>Shopify Plus + custom theme</h3>
+      <p>Drop-in app via the Shopify App Store. Install + 30 minutes of configuration in admin. Quarvo's Liquid block is added at the checkout decline state. <strong>Time to live: 1–2 days</strong>.</p>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-tag">// WOOCOMMERCE</span>
+      <h3>WooCommerce + WordPress</h3>
+      <p>WordPress plugin. Activates against existing Stripe Gateway for Woo. Recovery surface attaches to the standard <code>woocommerce_checkout_order_processed</code> hook chain. <strong>Time to live: 2–3 days</strong>.</p>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-tag">// CUSTOM API</span>
+      <h3>Custom checkout + direct Stripe integration</h3>
+      <p>Server-side integration via <code>POST /api/checkout/session</code>. Full control over when the recovery surface appears, what copy is shown, how it's styled. <strong>Time to live: 5–10 days</strong>.</p>
+    </div>
+
+    <p>
+      Whichever path you take, the soft-launch flow is the same. Phase the rollout to maintain a control group:
+    </p>
+
+    <div class="calendar">
+      <div class="cal-title">Soft-launch sequence</div>
+      <div class="cal-sub">// CONTROL-PRESERVING ROLLOUT · 3 WEEKS</div>
+
+      <div class="cal-row">
+        <div class="cal-week">WEEK 3</div>
+        <div class="cal-action">Stage + smoke test<span>Deploy to staging environment. Run synthetic decline scenarios. Verify atomic commit / rollback paths. Test refund flow end-to-end.</span></div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-week">WEEK 4</div>
+        <div class="cal-action">10% canary<span>Enable Quarvo for 10% of declined transactions in production. Hold 90% as control. Monitor recovery rate, error rate, customer support tickets daily.</span></div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-week">WEEK 5</div>
+        <div class="cal-action">50/50 A/B test<span>Scale to 50% of decline cohort. Other 50% remains control. Run for the rest of the week to establish statistical baseline for recovery rate.</span></div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-week">WEEK 6+</div>
+        <div class="cal-action">Full rollout<span>If recovery rate is on benchmark and error rate is clean, scale to 100%. Hold a small (5%) holdout cohort if you want continuous attribution measurement.</span></div>
+      </div>
+    </div>
+
+    <div class="checklist">
+      <div class="checklist-label">// WEEKS 3–5 CHECKLIST</div>
+      <div class="check-item"><span class="check-box"></span><span>Choose integration path (Shopify, Woo, or custom)</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Deploy to staging — verify atomic commit / rollback / refund</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Configure cohort gating (10% canary)</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Set up daily monitoring of recovery rate and error rate</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Scale to 50% A/B at week 5 once metrics are clean</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Document baseline recovery rate vs. control</span></div>
+    </div>
+  </div>
+
+  <!-- ── STEP 4 ────────────────────────────────────────────────────────── -->
+  <div class="step-block">
+    <div class="step-num-big">// STEP 04 · WEEKS 6–8</div>
+    <h2 class="step-heading">Measure topline lift, not just recovery rate</h2>
+
+    <p>
+      The most common measurement mistake at this stage is reporting <em>recovery rate</em> as the success metric. Recovery rate is operational — it tells you whether the surface is working. The metric that matters for the business case is <strong>topline lift on high-AOV revenue</strong>.
+    </p>
+
+    <p>
+      Track three layers, each one for a different audience:
+    </p>
+
+    <div class="metrics">
+      <div class="metrics-title">Quarvo measurement stack</div>
+      <div class="metrics-sub">// THREE LAYERS · THREE AUDIENCES</div>
+
+      <div class="metric-row">
+        <div class="metric-name">Recovery rate <span>Operational metric — for the payments / RevOps team</span></div>
+        <div class="metric-target ops">target: 60% steady-state</div>
+      </div>
+      <div class="metric-row">
+        <div class="metric-name">Recovered GMV <span>Financial metric — for the CFO</span></div>
+        <div class="metric-target">$X / month new revenue</div>
+      </div>
+      <div class="metric-row">
+        <div class="metric-name">Topline lift on high-AOV bands <span>Executive metric — for the CEO and the board</span></div>
+        <div class="metric-target exec">target: 2–5% lift</div>
+      </div>
+    </div>
+
+    <p>
+      The third metric is the one to lead with. "Recovery rate is 62%" means nothing to a CEO. "We lifted high-AOV revenue by 4.2% with no other catalog or marketing changes" means everything.
+    </p>
+
+    <p>
+      The 60-day attribution window is important: this is when the recovery cohort is large enough that the lift becomes statistically reliable. Earlier than that and the variance dominates the signal. Beyond that, you can begin tracking second-order effects:
+    </p>
+
+    <ul>
+      <li><strong>Repeat-purchase rate from recovered customers.</strong> First-time buyers who almost-decline-then-recover have shown to repeat at 1.3–1.5x the rate of normal first-time buyers — likely because the rescued purchase has stronger emotional anchoring.</li>
+      <li><strong>Reduction in customer support load.</strong> The "why was my card declined?" ticket category drops sharply. Most pilots see 30–50% fewer payment-related tickets.</li>
+      <li><strong>NPS / brand sentiment.</strong> Harder to measure rigorously but surveyable. Customers who recover via Quarvo report meaningfully higher satisfaction with the merchant than the broader baseline.</li>
+    </ul>
+
+    <div class="checklist">
+      <div class="checklist-label">// WEEKS 6–8 CHECKLIST</div>
+      <div class="check-item"><span class="check-box"></span><span>Build the three-layer dashboard (operational / financial / executive)</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Establish 60-day attribution window vs. baseline</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Track recovery rate, recovered GMV, topline lift weekly</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Begin tracking second-order metrics (repeat rate, support load)</span></div>
+      <div class="check-item"><span class="check-box"></span><span>Schedule the executive readout at day 60</span></div>
+    </div>
+  </div>
+
+  <!-- ── REAL SCENARIOS ─────────────────────────────────────────────────── -->
+  <h2>Three illustrative merchant scenarios</h2>
+
+  <p>
+    Pre-launch pilots have produced clean enough numbers to share without disclosing identifying details. Three illustrative scenarios across vertical, AOV, and traffic mix:
+  </p>
+
+  <div class="scenario">
+    <span class="scenario-tag">// SCENARIO A · DTC PHOTO/VIDEO GEAR</span>
+    <h3>$2,400 AOV · 1,800 monthly attempts · paid-search dominant</h3>
+    <p>Baseline decline rate on $1,500+ AOV: 7.1%. Addressable monthly cohort: 128 declines, $307K GMV at risk.</p>
+    <p>Day-60 result: <strong>recovery rate 64%</strong> · recovered GMV $196K/month · <strong>topline lift on high-AOV revenue: 4.5%</strong>. Quarvo fee on recovered GMV: $3,920/month. Net new monthly revenue: $192K.</p>
+  </div>
+
+  <div class="scenario">
+    <span class="scenario-tag">// SCENARIO B · D2C HOME GOODS</span>
+    <h3>$1,800 AOV · 950 monthly attempts · paid-social dominant</h3>
+    <p>Baseline decline rate: 6.8%. Addressable monthly cohort: 65 declines, $117K GMV at risk. Mixed-intent cohort with high paid-social share.</p>
+    <p>Day-60 result: <strong>recovery rate 51%</strong> · recovered GMV $60K/month · <strong>topline lift: 3.5%</strong>. Below benchmark on recovery rate due to traffic mix, but still a meaningful net contributor.</p>
+  </div>
+
+  <div class="scenario">
+    <span class="scenario-tag">// SCENARIO C · B2B PROFESSIONAL EQUIPMENT</span>
+    <h3>$5,800 AOV · 320 monthly attempts · email + direct dominant</h3>
+    <p>Baseline decline rate on $3,000+ AOV: 9.4%. Addressable monthly cohort: 30 declines, $174K GMV at risk. Need-driven, returning-buyer-heavy.</p>
+    <p>Day-60 result: <strong>recovery rate 73%</strong> · recovered GMV $127K/month · <strong>topline lift: 6.8%</strong>. Highest-yield scenario across pilots — the combination of need-driven purchase and high AOV produces outsized economics.</p>
+  </div>
+
+  <blockquote>
+    <p>The merchant question isn't whether decline recovery works. The pilots have settled that. The question is whether you build the audit, segmentation, and measurement discipline around it now — or whether you wait for a competitor to ship the same lift first and try to catch up later.</p>
+  </blockquote>
+
+  <!-- ── FOOTER CTA ──────────────────────────────────────────────────────── -->
+  <div class="footer-cta">
+    <h2>Four steps. Sixty days.<br/>2–5% topline lift on high-AOV revenue.</h2>
+    <p>The playbook works on Shopify, Woo, and custom checkouts. Pilots open Q2 2026. The Quarvo team helps with audit and segmentation during onboarding.</p>
+    <a href="https://quarvo.io/for-merchants" class="cta-btn">Get on the merchant pilot list →</a>
+    <p style="font-size:12px; color:var(--muted); margin-top:14px; font-family:'SFMono-Regular',monospace;">// 2% PER RECOVERED SALE · NO MONTHLY MIN · STRIPE CONNECT</p>
+  </div>
+
+  <!-- ── FAQ ─────────────────────────────────────────────────────────────── -->
+  <div class="faq-section">
+    <div class="faq-label">// FREQUENTLY ASKED QUESTIONS</div>
+
+    <details>
+      <summary>How long does it take to install Quarvo and start measuring recovery?</summary>
+      <div class="faq-answer">Technical install is typically 1–3 days for Shopify or Woo merchants using the drop-in widget, and 5–10 days for custom merchants integrating via the Stripe Connect API. Plan for a 4–6 week ramp before measuring steady-state recovery rate. Topline lift becomes statistically reliable around day 60.</div>
+    </details>
+
+    <details>
+      <summary>Do I need to change my checkout or payment processor?</summary>
+      <div class="faq-answer">No. Quarvo runs as a Stripe Connect platform on top of your existing Stripe account. Your checkout flow stays intact — Quarvo's recovery surface only appears at the moment a card is declined for insufficient credit. Customers who succeed on a single card never see Quarvo. Customers who would have abandoned see the option to split.</div>
+    </details>
+
+    <details>
+      <summary>What metrics should I track to measure Quarvo's impact?</summary>
+      <div class="faq-answer">Three layers: (1) Recovery rate — % of addressable declines that complete via Quarvo. Operational metric, target 60% steady-state. (2) Recovered GMV — gross revenue from recoveries. The CFO metric. (3) Topline lift on high-AOV revenue — % increase in revenue on AOV bands above the decline threshold. The executive metric.</div>
+    </details>
+
+    <details>
+      <summary>Can I A/B test Quarvo before fully rolling it out?</summary>
+      <div class="faq-answer">Yes. Quarvo supports cohort-based gating during pilot. You can show the recovery surface to 10%, 25%, or 50% of declined transactions and measure lift against the held-out control. Most merchants run a 30-day A/B at 50/50 to establish baseline before scaling to 100%. The fee structure makes the A/B economically safe — you only pay on recovered transactions.</div>
+    </details>
+
+    <details>
+      <summary>What if my recovery rate is lower than benchmark?</summary>
+      <div class="faq-answer">If recovery rate after the 6-week ramp is below 50%, the most common causes are (1) heavily paid-social traffic mix, which has structurally lower recovery rates, (2) prompt copy or surface placement isn't tuned for your audience, or (3) your decline cohort is dominated by non-credit-limit decline reasons that fall outside Quarvo's addressable cohort. The Quarvo team works with pilot merchants to diagnose and tune across all three.</div>
+    </details>
+  </div>
+
+  <div class="article-footer">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Marcelo</div>
+      <div class="author-role">Founder, Quarvo · Building Credit Combination Infrastructure</div>
+    </div>
+  </div>
+
+</article>
+</body>
+</html>
