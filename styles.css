@@ -3711,6 +3711,44 @@ input[type="text"]:focus-visible {
 
 /* Reduced motion already covered by global rule (transitions disabled) */
 
+/* =============================================
+   FOOTER (Phase 2.6) — contact row + legal styling
+============================================= */
+.footer-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+.footer-contact-link {
+  color: var(--muted-2);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 200ms var(--ease-enter), border-color 200ms var(--ease-enter);
+}
+.footer-contact-link:hover,
+.footer-contact-link:focus-visible {
+  color: var(--white);
+  border-color: var(--cyan);
+}
+.footer-contact-divider {
+  color: var(--muted);
+  opacity: 0.5;
+}
+.footer-legal a {
+  color: inherit;
+  text-decoration: underline;
+  opacity: 0.6;
+  transition: opacity 200ms var(--ease-enter);
+}
+.footer-legal a:hover,
+.footer-legal a:focus-visible {
+  opacity: 1;
+}
+
 /* ----------------------------------------------------
    Reduced motion: hard-stop anything we just added
 ---------------------------------------------------- */
