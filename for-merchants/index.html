@@ -396,6 +396,293 @@
     .m-page-footer a:hover,
     .m-page-footer a:focus-visible { color: var(--white); }
 
+    /* ========== PRICING (Phase 2.8) ========== */
+    .m-pricing {
+      position: relative;
+      z-index: 1;
+      padding: 80px 24px 100px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .m-pricing-inner { width: 100%; }
+    .m-pricing-head {
+      text-align: center;
+      margin-bottom: 56px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .m-pricing-h2 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--white);
+      margin: 16px 0 14px;
+    }
+    .m-pricing-sub {
+      color: var(--muted-2);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .m-pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .m-pricing-card {
+      position: relative;
+      padding: 36px 32px 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0%, rgba(255, 255, 255, 0.012) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      transition:
+        border-color 220ms var(--ease-enter),
+        transform 220ms var(--ease-enter);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .m-pricing-card:hover {
+        border-color: rgba(123, 47, 255, 0.32);
+        transform: translateY(-2px);
+      }
+    }
+    .m-pricing-card--featured {
+      background: linear-gradient(180deg, rgba(0, 245, 255, 0.06) 0%, rgba(123, 47, 255, 0.04) 100%);
+      border-color: rgba(0, 245, 255, 0.30);
+      box-shadow:
+        0 0 0 1px rgba(0, 245, 255, 0.10) inset,
+        0 16px 48px rgba(0, 0, 0, 0.4);
+    }
+    .m-pricing-card--featured::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.55), transparent);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .m-pricing-card--featured:hover {
+        border-color: rgba(0, 245, 255, 0.50);
+        box-shadow:
+          0 0 0 1px rgba(0, 245, 255, 0.18) inset,
+          0 24px 60px rgba(0, 0, 0, 0.5),
+          0 0 50px rgba(0, 245, 255, 0.12);
+      }
+    }
+
+    .m-pricing-tag {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(0, 245, 255, 0.10);
+      border: 1px solid rgba(0, 245, 255, 0.32);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .m-pricing-tag-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+      animation: m-pulse-dot 2s ease-in-out infinite;
+    }
+
+    .m-pricing-tier {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      margin-bottom: 18px;
+    }
+    .m-pricing-price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .m-pricing-price-amount {
+      font-family: var(--font-display-2);
+      font-weight: 700;
+      font-size: clamp(48px, 6vw, 60px);
+      letter-spacing: -0.025em;
+      line-height: 1;
+      color: var(--white);
+      font-variant-numeric: tabular-nums;
+    }
+    .m-pricing-card--featured .m-pricing-price-amount {
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .m-pricing-price-unit {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .m-pricing-fee {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      padding: 8px 0 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 22px;
+    }
+    .m-pricing-fee-amount {
+      font-family: var(--font-display-2);
+      font-weight: 600;
+      font-size: 22px;
+      color: var(--data-green);
+      letter-spacing: -0.01em;
+    }
+    .m-pricing-fee-unit {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted-2);
+      letter-spacing: 0.04em;
+    }
+
+    .m-pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+    .m-pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted-2);
+      line-height: 1.5;
+    }
+    .m-pricing-features svg {
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--data-green);
+    }
+    .m-pricing-code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: rgba(0, 245, 255, 0.06);
+      border: 1px solid rgba(0, 245, 255, 0.18);
+      color: var(--cyan);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .m-pricing-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition:
+        background 200ms var(--ease-enter),
+        border-color 200ms var(--ease-enter),
+        transform 200ms var(--ease-enter);
+    }
+    .m-pricing-cta:hover,
+    .m-pricing-cta:focus-visible {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(123, 47, 255, 0.45);
+      transform: translateY(-1px);
+    }
+    .m-pricing-cta--featured {
+      background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 100%);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(123, 47, 255, 0.32);
+    }
+    .m-pricing-cta--featured:hover,
+    .m-pricing-cta--featured:focus-visible {
+      border-color: transparent;
+      box-shadow: 0 10px 28px rgba(123, 47, 255, 0.45), 0 0 28px rgba(0, 245, 255, 0.24);
+      transform: translateY(-2px);
+    }
+    .m-pricing-foot {
+      margin-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .m-pricing-shopper {
+      padding: 20px 24px;
+      background: rgba(0, 245, 255, 0.04);
+      border: 1px solid rgba(0, 245, 255, 0.18);
+      border-radius: 14px;
+    }
+    .m-pricing-shopper-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .m-pricing-shopper-icon {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: rgba(0, 245, 255, 0.10);
+      border: 1px solid rgba(0, 245, 255, 0.30);
+      color: var(--cyan);
+    }
+    .m-pricing-shopper-icon svg { width: 22px; height: 22px; }
+    .m-pricing-shopper-text {
+      flex: 1;
+      min-width: 240px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted-2);
+    }
+    .m-pricing-shopper-text strong {
+      color: var(--white);
+      display: block;
+      margin-bottom: 4px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    @media (max-width: 720px) {
+      .m-pricing-grid { grid-template-columns: 1fr; }
+      .m-pricing-card { padding: 28px 24px 24px; }
+    }
+
     /* ========== RESPONSIVE ========== */
     @media (max-width: 900px) {
       .m-main {
@@ -638,10 +925,102 @@
 
   </main>
 
+  <!-- PRICING (Phase 2.8) — merchant tiers -->
+  <section class="m-pricing reveal" id="pricing" aria-labelledby="m-pricing-title">
+    <div class="m-pricing-inner">
+      <header class="m-pricing-head">
+        <div class="m-eyebrow">
+          <span class="m-eyebrow-dot"></span>
+          Pricing
+        </div>
+        <h2 class="m-pricing-h2" id="m-pricing-title">
+          Two tiers. <span class="m-h1-accent">Both pay only when you do.</span>
+        </h2>
+        <p class="m-pricing-sub">No setup fee. No minimum volume. Failed splits cost you nothing. Pick your stack.</p>
+      </header>
+
+      <div class="m-pricing-grid reveal-group">
+
+        <!-- Direct API tier (FEATURED) -->
+        <article class="m-pricing-card m-pricing-card--featured">
+          <span class="m-pricing-tag">
+            <span class="m-pricing-tag-dot"></span>
+            Recommended
+          </span>
+          <div class="m-pricing-tier">Direct API</div>
+          <div class="m-pricing-price">
+            <span class="m-pricing-price-amount">$0</span>
+            <span class="m-pricing-price-unit">/ month</span>
+          </div>
+          <div class="m-pricing-fee">
+            <span class="m-pricing-fee-amount">+ 2%</span>
+            <span class="m-pricing-fee-unit">per recovered sale</span>
+          </div>
+          <ul class="m-pricing-features">
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Stripe Connect OAuth setup</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg><code class="m-pricing-code">POST /api/checkout/session</code></li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Webhook + per-card breakdown</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Test mode + live mode keys</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Email support</li>
+          </ul>
+          <a href="/pay-with-quarvo" class="m-pricing-cta m-pricing-cta--featured">
+            Read the docs
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <p class="m-pricing-foot">Best for custom checkouts, marketplaces, B2B platforms.</p>
+        </article>
+
+        <!-- Shopify + WooCommerce tier -->
+        <article class="m-pricing-card">
+          <div class="m-pricing-tier">Shopify &amp; WooCommerce</div>
+          <div class="m-pricing-price">
+            <span class="m-pricing-price-amount">$9.99</span>
+            <span class="m-pricing-price-unit">/ month</span>
+          </div>
+          <div class="m-pricing-fee">
+            <span class="m-pricing-fee-amount">+ 2%</span>
+            <span class="m-pricing-fee-unit">per recovered sale</span>
+          </div>
+          <ul class="m-pricing-features">
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Native Shopify App + Woo Plugin</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>One-click install, zero code</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Order webhooks pre-wired</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Compatible with Shopify Payments</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Priority email support</li>
+          </ul>
+          <a href="#merchantForm" class="m-pricing-cta">
+            Connect your store
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <p class="m-pricing-foot">Best for established stores. BigCommerce coming Q2 2026.</p>
+        </article>
+
+      </div>
+
+      <!-- Always-free shopper banner -->
+      <div class="m-pricing-shopper">
+        <div class="m-pricing-shopper-inner">
+          <div class="m-pricing-shopper-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M16 8a4 4 0 0 1-8 0"/>
+              <path d="M9 9.5h.01M15 9.5h.01"/>
+            </svg>
+          </div>
+          <div class="m-pricing-shopper-text">
+            <strong>Always free for shoppers.</strong>
+            <span>Customers never see a Quarvo fee on their statement &mdash; you cover the 2% so the sale actually closes. Each card keeps its own rewards.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer (minimal, page-specific) -->
   <footer class="m-page-footer">
     <p>
       <a href="/">Home</a> ·
+      <a href="#pricing">Pricing</a> ·
       <a href="/pay-with-quarvo">Integration docs</a> ·
       <a href="/privacy.html">Privacy</a> ·
       <a href="/terms.html">Terms</a> ·
@@ -650,7 +1029,7 @@
     <p style="margin-top:8px;">© 2026 QUARVO LLC · Credit Combination Technology™</p>
   </footer>
 
-  <script src="/motion.js?v=2.7" defer></script>
+  <script src="/motion.js?v=2.8" defer></script>
   <script>
     (function () {
       var form    = document.getElementById('merchantForm');
