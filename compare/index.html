@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quarvo vs BNPL — Klarna, Affirm, Afterpay alternatives compared</title>
+  <meta name="description" content="Compare Quarvo against the major BNPL providers — Klarna, Affirm, Afterpay. Honest breakdowns of fees, customer cost, merchant economics, and the right tool for high-AOV checkouts." />
+  <meta name="keywords" content="quarvo vs klarna, quarvo vs affirm, quarvo vs afterpay, BNPL alternative, klarna alternative, affirm alternative, multi-card payment vs BNPL" />
+  <link rel="canonical" href="https://quarvo.io/compare" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css"/>
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://quarvo.io/compare" />
+  <meta property="og:title" content="Quarvo vs BNPL — Honest Comparisons" />
+  <meta property="og:description" content="Side-by-side breakdowns of Quarvo against Klarna, Affirm, and Afterpay — fees, customer cost, merchant economics." />
+  <meta property="og:image" content="https://quarvo.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Quarvo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://quarvo.io/og-image.png" />
+
+  <style>
+    .compare-hero { padding: 100px 0 50px; text-align: center; }
+    .compare-tag { font-family: 'DM Mono', monospace; font-size: 11px; color: #00F5FF; letter-spacing: 0.16em; text-transform: uppercase; padding: 6px 14px; background: rgba(0,245,255,0.06); border: 1px solid rgba(0,245,255,0.25); border-radius: 20px; display: inline-block; margin-bottom: 24px; }
+    .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 48px; }
+    .compare-card { display: flex; flex-direction: column; padding: 28px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; text-decoration: none; transition: transform 0.2s, border-color 0.2s; position: relative; overflow: hidden; }
+    .compare-card:hover { border-color: rgba(123,47,255,0.45); transform: translateY(-3px); }
+    .compare-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .compare-vs { font-family: 'DM Mono', monospace; font-size: 11px; color: #6A6A88; letter-spacing: 0.12em; }
+    .compare-target { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #F0F0F8; }
+    .compare-card-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .compare-meta-pill { font-family: 'DM Mono', monospace; font-size: 10px; padding: 3px 9px; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: #9090B0; letter-spacing: 0.06em; }
+    .compare-card-desc { font-size: 14px; color: #9090B0; line-height: 1.65; flex: 1; margin-bottom: 18px; }
+    .compare-card-cta { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #00F5FF; }
+    .compare-card-orb { position: absolute; pointer-events: none; opacity: 0.4; filter: blur(50px); border-radius: 50%; }
+    .compare-card.bnpl-broad { border-left: 3px solid #F472B6; }
+    .compare-card.bnpl-broad .compare-card-orb { top: -30px; right: -30px; width: 160px; height: 160px; background: rgba(244,114,182,0.2); }
+    .compare-card.bnpl-broad .compare-card-cta { color: #F472B6; }
+    .compare-card.klarna { border-left: 3px solid #FFA8C5; }
+    .compare-card.klarna .compare-card-orb { bottom: -30px; left: -30px; width: 140px; height: 140px; background: rgba(255,168,197,0.2); }
+    .compare-card.klarna .compare-card-cta { color: #FFA8C5; }
+    .compare-card.affirm { border-left: 3px solid #4F6EF7; }
+    .compare-card.affirm .compare-card-orb { top: -20px; left: 40%; width: 180px; height: 120px; background: rgba(79,110,247,0.2); }
+    .compare-card.affirm .compare-card-cta { color: #7B93FF; }
+    .compare-card.afterpay { border-left: 3px solid #34D399; }
+    .compare-card.afterpay .compare-card-orb { bottom: -30px; right: -30px; width: 150px; height: 150px; background: rgba(52,211,153,0.2); }
+    .compare-card.afterpay .compare-card-cta { color: #34D399; }
+
+    .principles-section { padding: 80px 0 100px; }
+    .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 36px; }
+    .principle { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 22px 24px; }
+    .principle-num { font-family: 'DM Mono', monospace; font-size: 11px; color: #6A6A88; letter-spacing: 0.12em; margin-bottom: 10px; }
+    .principle h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: #F0F0F8; margin-bottom: 8px; line-height: 1.3; }
+    .principle p { font-size: 13.5px; color: #9090B0; line-height: 1.65; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <svg class="logo-icon" width="32" height="32" viewBox="0 0 64 64" fill="none">
+          <defs>
+            <linearGradient id="navG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+            </linearGradient>
+            <mask id="navM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+          </defs>
+          <circle cx="30" cy="30" r="22" fill="url(#navG)" mask="url(#navM)"/>
+          <line x1="44" y1="44" x2="57" y2="57" stroke="url(#navG)" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-wordmark">QUARVO</span>
+      </a>
+      <div class="nav-links">
+        <a href="/#how">How it works</a>
+        <a href="/for-merchants">For merchants</a>
+        <a href="/blog">Blog</a>
+        <a href="/compare" style="color:var(--cyan);">Compare</a>
+        <a href="/pay-with-quarvo">Docs</a>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <a href="/#waitlist" class="btn-nav">Join the waitlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="compare-hero">
+    <div class="section-inner">
+      <div class="compare-tag">// QUARVO VS BNPL</div>
+      <h1 class="section-title" style="margin-bottom:14px;">
+        Honest comparisons.<br/>
+        <span class="title-muted">No marketing math.</span>
+      </h1>
+      <p style="color:#9090B0;font-size:1.05rem;max-width:580px;margin:0 auto;">
+        Quarvo isn't BNPL. The two solve different problems for different customers. Here's the side-by-side breakdown — fees, customer cost, merchant economics, and which tool actually fits your checkout.
+      </p>
+
+      <div class="compare-grid">
+
+        <a href="/compare/bnpl" class="compare-card bnpl-broad">
+          <div class="compare-card-orb"></div>
+          <div class="compare-card-header" style="position:relative;">
+            <span class="compare-vs">// QUARVO VS</span>
+            <span class="compare-target">BNPL</span>
+          </div>
+          <div class="compare-card-meta">
+            <span class="compare-meta-pill">BROAD COMPARISON</span>
+            <span class="compare-meta-pill">10 MIN</span>
+          </div>
+          <p class="compare-card-desc">
+            The category-level comparison. When BNPL is the right answer, when multi-card splitting is, and the structural reasons each tool fits a different customer profile.
+          </p>
+          <div class="compare-card-cta">Read the comparison →</div>
+        </a>
+
+        <a href="/compare/klarna" class="compare-card klarna">
+          <div class="compare-card-orb"></div>
+          <div class="compare-card-header" style="position:relative;">
+            <span class="compare-vs">// QUARVO VS</span>
+            <span class="compare-target">Klarna</span>
+          </div>
+          <div class="compare-card-meta">
+            <span class="compare-meta-pill">SIDE-BY-SIDE</span>
+            <span class="compare-meta-pill">8 MIN</span>
+          </div>
+          <p class="compare-card-desc">
+            Klarna's "Pay in 4" vs Quarvo's split-card recovery. Customer fees, merchant fees, late-fee mechanics, credit-bureau reporting, and where each one wins.
+          </p>
+          <div class="compare-card-cta">Read the comparison →</div>
+        </a>
+
+        <a href="/compare/affirm" class="compare-card affirm">
+          <div class="compare-card-orb"></div>
+          <div class="compare-card-header" style="position:relative;">
+            <span class="compare-vs">// QUARVO VS</span>
+            <span class="compare-target">Affirm</span>
+          </div>
+          <div class="compare-card-meta">
+            <span class="compare-meta-pill">SIDE-BY-SIDE</span>
+            <span class="compare-meta-pill">9 MIN</span>
+          </div>
+          <p class="compare-card-desc">
+            Affirm's longer-term financing model vs Quarvo's no-new-debt recovery. APR exposure, credit reporting (mandatory since April 2025), and merchant fee structures compared.
+          </p>
+          <div class="compare-card-cta">Read the comparison →</div>
+        </a>
+
+        <a href="/compare/afterpay" class="compare-card afterpay">
+          <div class="compare-card-orb"></div>
+          <div class="compare-card-header" style="position:relative;">
+            <span class="compare-vs">// QUARVO VS</span>
+            <span class="compare-target">Afterpay</span>
+          </div>
+          <div class="compare-card-meta">
+            <span class="compare-meta-pill">SIDE-BY-SIDE</span>
+            <span class="compare-meta-pill">8 MIN</span>
+          </div>
+          <p class="compare-card-desc">
+            Afterpay (now Cash App Afterpay) vs Quarvo. Late-fee economics, merchant fees of 4–6%, and why "Pay in 4" only addresses half the high-AOV decline cohort.
+          </p>
+          <div class="compare-card-cta">Read the comparison →</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="principles-section">
+    <div class="section-inner">
+      <div class="section-tag">// HOW WE COMPARE</div>
+      <h2 class="section-title" style="margin-bottom:12px;">Three rules<br/><span class="title-muted">we hold ourselves to.</span></h2>
+      <p style="color:#9090B0;font-size:1rem;max-width:520px;margin:0 auto;">Comparison content is usually thinly disguised marketing. We commit to the opposite — accurate, neutral, and honest about when our competitors are the right answer.</p>
+
+      <div class="principles-grid">
+        <div class="principle">
+          <div class="principle-num">// RULE 01</div>
+          <h3>Numbers are sourced and dated</h3>
+          <p>Every fee, rate, and policy claim is sourced from the competitor's published terms or filings, with the version date noted. If they change a fee structure, we update the page.</p>
+        </div>
+        <div class="principle">
+          <div class="principle-num">// RULE 02</div>
+          <h3>Where they win, we say so</h3>
+          <p>BNPL providers genuinely win for some customers — those who don't have sufficient combined credit, or who want fixed-payment plans. We say that explicitly rather than pretending Quarvo replaces them in every scenario.</p>
+        </div>
+        <div class="principle">
+          <div class="principle-num">// RULE 03</div>
+          <h3>The bias is structural, not adversarial</h3>
+          <p>BNPL serves a different customer segment than Quarvo. The comparison's job is to help merchants and customers pick correctly — not to dunk on Klarna for content marketing. Treat it accordingly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg class="logo-icon" width="28" height="28" viewBox="0 0 64 64" fill="none">
+          <defs>
+            <linearGradient id="footG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+            </linearGradient>
+            <mask id="footM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+          </defs>
+          <circle cx="30" cy="30" r="22" fill="url(#footG)" mask="url(#footM)"/>
+          <line x1="44" y1="44" x2="57" y2="57" stroke="url(#footG)" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-wordmark">QUARVO</span>
+      </div>
+      <div class="footer-tagline">Split smart. Buy bold.</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/for-merchants">For merchants</a>
+        <a href="/blog">Blog</a>
+        <a href="/compare">Compare</a>
+        <a href="/pay-with-quarvo">Docs</a>
+        <a href="/#waitlist">Join waitlist</a>
+      </div>
+      <div class="footer-legal">
+        © 2026 QUARVO. All rights reserved. · QUARVO is not a lender. No new credit is issued. ·
+        <a href="/privacy" style="color:inherit;text-decoration:underline;opacity:.6;">Privacy Policy</a> ·
+        <a href="/terms" style="color:inherit;text-decoration:underline;opacity:.6;">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/main.js"></script>
+</body>
+</html>

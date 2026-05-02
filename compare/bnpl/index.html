@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Quarvo vs BNPL — When to Use Multi-Card Splitting Instead of Buy Now, Pay Later</title>
+  <meta name="description" content="Honest comparison of Quarvo's multi-card splitting vs BNPL (Klarna, Affirm, Afterpay). Customer cost, merchant fees, credit reporting, and which tool fits which checkout." />
+  <meta name="keywords" content="BNPL alternative, buy now pay later alternative, multi card payment vs BNPL, quarvo vs bnpl, split payment without bnpl" />
+  <link rel="canonical" href="https://quarvo.io/compare/bnpl" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://quarvo.io/compare/bnpl" />
+  <meta property="og:title" content="Quarvo vs BNPL — Honest Comparison" />
+  <meta property="og:description" content="Multi-card splitting vs Buy Now, Pay Later. The structural differences, the cost breakdown, and when each wins." />
+  <meta property="og:image" content="https://quarvo.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Quarvo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://quarvo.io/og-image.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Quarvo vs BNPL — When to Use Multi-Card Splitting Instead of Buy Now, Pay Later",
+    "description": "Side-by-side comparison of Quarvo's multi-card payment splitting against the BNPL category (Klarna, Affirm, Afterpay), covering customer cost, merchant economics, and credit reporting.",
+    "author": { "@type": "Person", "name": "Marcelo", "url": "https://quarvo.io" },
+    "publisher": { "@type": "Organization", "name": "Quarvo", "url": "https://quarvo.io" },
+    "datePublished": "2026-05-02",
+    "dateModified": "2026-05-02",
+    "mainEntityOfPage": "https://quarvo.io/compare/bnpl"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Quarvo a BNPL service?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Quarvo does not lend money, does not extend new credit, and does not create payment plans. It splits a single transaction across multiple credit cards the customer already has, settling the merchant in full. BNPL providers extend new credit (typically a short-term loan) and the customer repays in installments. The two solve different problems for different customer segments." }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the main differences between Quarvo and BNPL?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Three structural differences. (1) Credit creation: BNPL extends new credit; Quarvo activates existing credit across multiple cards. (2) Customer cost: BNPL ranges from 0% to 36% APR plus late fees; Quarvo charges nothing to the customer. (3) Merchant fees: BNPL providers charge 3–6% of GMV per transaction; Quarvo charges 2% only on recovered transactions. The two also differ on credit-bureau reporting (BNPL reports; Quarvo does not), rewards (BNPL earns none; Quarvo preserves card rewards), and target customer (BNPL targets undercredited buyers; Quarvo targets buyers with sufficient combined credit on multiple cards)." }
+      },
+      {
+        "@type": "Question",
+        "name": "When should a merchant offer Quarvo instead of BNPL?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Quarvo is the better fit at high AOV (typically $1,500+) where the dominant decline reason is single-card credit limit. Customers in this segment usually have sufficient combined credit; they just can't use it across one transaction. BNPL is the better fit when a meaningful share of customers genuinely cannot afford the purchase outright — typically at AOV ranges where customer credit profiles are mixed and many buyers need a financing plan rather than a payment-coordination tool." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can a merchant offer both Quarvo and BNPL?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, and many high-AOV merchants will. The two address different cohorts and the offering can be tiered: Quarvo first for customers with sufficient combined credit (no fee, no new debt, all rewards preserved), BNPL as a secondary option for customers whose combined credit is still insufficient. This gives the merchant the largest possible recovery cohort while routing each customer to the right tool for their situation." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Quarvo cost the customer money?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The customer pays the merchant the same amount they would have paid on a single card — nothing more. Quarvo's 2% fee is paid by the merchant on transactions Quarvo recovered. The customer also keeps all rewards on each card based on its category bonuses, suffers no credit-bureau reporting, and takes on no new debt." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060C; --surface: #0E0E18; --card: #101018; --border: #1A1A2E;
+      --violet: #7B2FFF; --cyan: #00F5FF; --pink: #F472B6;
+      --green: #34D399; --red: #F75454; --gold: #F5C518; --orange: #F97316;
+      --text: #E8E8F2; --soft: #9090B0; --muted: #50506A;
+      --max: 760px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.7; }
+
+    .site-header { border-bottom: 1px solid var(--border); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; background: linear-gradient(135deg, var(--violet), var(--cyan)); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; }
+    .logo-text { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.06em; }
+    .nav-cta { background: rgba(123,47,255,0.12); border: 1px solid rgba(123,47,255,0.4); color: #B09FFF; font-size: 12px; padding: 6px 16px; border-radius: 20px; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: rgba(123,47,255,0.22); }
+
+    .compare-wrap { max-width: var(--max); margin: 0 auto; padding: 56px 24px 80px; }
+
+    .breadcrumb { display: flex; gap: 8px; align-items: center; margin-bottom: 24px; font-size: 12px; font-family: "SFMono-Regular", monospace; color: var(--muted); letter-spacing: 0.04em; }
+    .breadcrumb a { color: var(--soft); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--cyan); }
+    .breadcrumb-sep { opacity: 0.4; }
+
+    .vs-badge { display: inline-flex; align-items: center; gap: 12px; padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; font-family: "SFMono-Regular", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--soft); margin-bottom: 24px; }
+    .vs-quarvo { color: var(--cyan); font-weight: 700; }
+    .vs-other { color: var(--pink); font-weight: 700; }
+    .vs-x { color: var(--muted); font-size: 13px; }
+
+    h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 22px; color: var(--text); }
+    h1 em { font-style: normal; background: linear-gradient(135deg, var(--cyan), var(--violet)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .deck { font-size: 19px; color: var(--soft); line-height: 1.6; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 24px; font-weight: 800; margin: 56px 0 18px; color: var(--text); letter-spacing: -0.015em; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 12px; color: var(--text); }
+    p { margin-bottom: 18px; color: var(--text); }
+    strong { color: #fff; font-weight: 700; }
+    em { color: var(--soft); font-style: italic; }
+    ul, ol { padding-left: 22px; margin-bottom: 18px; }
+    li { color: var(--soft); margin-bottom: 8px; line-height: 1.65; }
+    li strong { color: var(--text); }
+    code { font-family: "SFMono-Regular", monospace; font-size: 0.92em; background: var(--card); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; color: var(--cyan); }
+
+    /* SIDE-BY-SIDE TABLE */
+    .ssbs-table { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin: 32px 0; }
+    .ssbs-head { display: grid; grid-template-columns: 1.4fr 1fr 1fr; background: var(--card); padding: 16px 20px; border-bottom: 1px solid var(--border); align-items: center; }
+    .ssbs-head .ssbs-label { font-family: "SFMono-Regular", monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+    .ssbs-head .ssbs-q { font-size: 15px; font-weight: 800; color: var(--cyan); text-align: center; letter-spacing: 0.02em; }
+    .ssbs-head .ssbs-other { font-size: 15px; font-weight: 800; color: var(--pink); text-align: center; letter-spacing: 0.02em; }
+    .ssbs-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; padding: 14px 20px; border-bottom: 1px dashed var(--border); align-items: center; }
+    .ssbs-row:last-child { border-bottom: none; }
+    .ssbs-key { font-size: 14px; color: var(--text); font-weight: 600; }
+    .ssbs-key span { display: block; font-weight: 400; color: var(--muted); font-size: 11.5px; margin-top: 3px; font-family: "SFMono-Regular", monospace; letter-spacing: 0.04em; }
+    .ssbs-val { font-size: 13.5px; text-align: center; font-family: "SFMono-Regular", monospace; }
+    .ssbs-val.ok { color: var(--green); font-weight: 600; }
+    .ssbs-val.bad { color: var(--red); font-weight: 600; }
+    .ssbs-val.mid { color: var(--gold); font-weight: 600; }
+    .ssbs-val.neutral { color: var(--soft); }
+
+    /* COST SCENARIO */
+    .scenario-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 26px; margin: 28px 0; }
+    .scenario-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .scenario-amount { font-size: 26px; font-weight: 800; color: var(--cyan); font-family: "SFMono-Regular", monospace; letter-spacing: -0.02em; }
+    .scenario-name { font-size: 14px; color: var(--soft); }
+    .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 540px) { .scenario-grid { grid-template-columns: 1fr; } }
+    .scenario-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .scenario-card.q { border-left: 3px solid var(--cyan); }
+    .scenario-card.o { border-left: 3px solid var(--pink); }
+    .scenario-card .top { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-family: "SFMono-Regular", monospace; }
+    .scenario-card .total { font-size: 24px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+    .scenario-card.q .total { color: var(--cyan); }
+    .scenario-card.o .total { color: var(--pink); }
+    .scenario-card .breakdown { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+    .scenario-card .b-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--soft); padding: 3px 0; font-family: "SFMono-Regular", monospace; }
+
+    /* WIN BLOCK */
+    .win-block { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--cyan); border-radius: 0 12px 12px 0; padding: 22px 26px; margin: 24px 0; }
+    .win-block.other { border-left-color: var(--pink); }
+    .win-block .win-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 10px; font-family: "SFMono-Regular", monospace; }
+    .win-block.other .win-label { color: var(--pink); }
+    .win-block h3 { margin: 0 0 12px; font-size: 18px; }
+    .win-block p { font-size: 14.5px; color: var(--soft); margin: 0 0 10px; line-height: 1.7; }
+    .win-block p:last-child { margin-bottom: 0; }
+
+    /* DECISION FRAMEWORK */
+    .decision-table { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin: 28px 0; }
+    .dec-head { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .dec-sub { font-size: 11px; color: var(--muted); font-family: "SFMono-Regular", monospace; margin-bottom: 18px; letter-spacing: 0.06em; }
+    .dec-row { display: grid; grid-template-columns: 1fr 100px; gap: 12px; padding: 11px 0; border-top: 1px dashed var(--border); align-items: center; }
+    .dec-row:first-of-type { border-top: none; }
+    .dec-question { font-size: 14px; color: var(--text); }
+    .dec-pick { font-size: 12px; font-family: "SFMono-Regular", monospace; font-weight: 700; text-align: center; padding: 5px 10px; border-radius: 6px; letter-spacing: 0.04em; }
+    .dec-pick.q { color: var(--cyan); background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.3); }
+    .dec-pick.o { color: var(--pink); background: rgba(244,114,182,0.08); border: 1px solid rgba(244,114,182,0.3); }
+    .dec-pick.both { color: var(--gold); background: rgba(245,197,24,0.08); border: 1px solid rgba(245,197,24,0.3); }
+
+    /* CALLOUT */
+    .callout { background: rgba(0,245,255,0.04); border: 1px solid rgba(0,245,255,0.22); border-left: 3px solid var(--cyan); border-radius: 0 8px 8px 0; padding: 18px 22px; margin: 28px 0; }
+    .callout .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 8px; font-family: "SFMono-Regular", monospace; }
+    .callout p { color: var(--soft); font-size: 14.5px; margin: 0; line-height: 1.7; }
+
+    /* INLINE CTA */
+    .inline-cta { background: linear-gradient(135deg, rgba(123,47,255,0.14) 0%, rgba(0,245,255,0.06) 100%); border: 1px solid rgba(123,47,255,0.4); border-radius: 14px; padding: 32px; margin: 44px 0; text-align: center; }
+    .inline-cta h3 { font-size: 22px; font-weight: 800; color: var(--text); margin: 0 0 12px; line-height: 1.25; }
+    .inline-cta p { font-size: 14.5px; color: var(--soft); margin: 0 0 22px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-block; background: linear-gradient(135deg, var(--violet), var(--cyan)); color: #fff; font-size: 14px; font-weight: 700; padding: 13px 30px; border-radius: 10px; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(123,47,255,0.3); }
+    .cta-note { font-size: 11px; color: var(--muted); margin-top: 14px !important; font-family: "SFMono-Regular", monospace; }
+
+    /* FAQ */
+    .faq-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .faq-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; font-family: "SFMono-Regular", monospace; }
+    details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+    summary { padding: 16px 18px; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; background: var(--surface); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 20px; color: var(--cyan); font-weight: 300; flex-shrink: 0; margin-left: 12px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    .faq-answer { padding: 16px 18px; font-size: 14.5px; color: var(--soft); line-height: 1.7; border-top: 1px solid var(--border); }
+
+    /* FOOTER CTA */
+    .footer-cta { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--cyan); border-radius: 0 0 14px 14px; padding: 40px 32px; margin-top: 60px; text-align: center; }
+    .footer-cta h2 { font-size: 26px; margin: 0 0 14px; line-height: 1.25; }
+    .footer-cta p { color: var(--soft); font-size: 15px; max-width: 480px; margin: 0 auto 24px; }
+
+    .related { margin-top: 60px; }
+    .related-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; font-family: "SFMono-Regular", monospace; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+    .related-card:hover { border-color: rgba(0,245,255,0.4); transform: translateY(-2px); }
+    .related-tag { font-size: 10px; font-family: "SFMono-Regular", monospace; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 6px; }
+    .related-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .related-name span { color: var(--pink); }
+
+    @media (max-width: 600px) {
+      .compare-wrap { padding: 32px 16px 60px; }
+      h1 { font-size: 28px; }
+      .ssbs-head, .ssbs-row { grid-template-columns: 1.3fr 1fr 1fr; padding: 12px 14px; font-size: 12px; }
+      .ssbs-key { font-size: 13px; }
+      .ssbs-val { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="logo">
+    <div class="logo-mark">Q</div>
+    <span class="logo-text">QUARVO</span>
+  </a>
+  <a href="/for-merchants" class="nav-cta">For merchants →</a>
+</header>
+
+<article class="compare-wrap">
+
+  <nav class="breadcrumb">
+    <a href="/">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/compare">Compare</a>
+    <span class="breadcrumb-sep">/</span>
+    <span style="color:var(--text);">BNPL</span>
+  </nav>
+
+  <div class="vs-badge">
+    <span class="vs-quarvo">QUARVO</span>
+    <span class="vs-x">vs.</span>
+    <span class="vs-other">BNPL</span>
+  </div>
+
+  <h1>When to use multi-card splitting<br/>instead of <em>Buy Now, Pay Later</em></h1>
+
+  <p class="deck">
+    BNPL and Quarvo are not the same product. They serve different customer segments, charge different parties differently, and report (or don't report) differently to credit bureaus. This is the structural breakdown — what each one is for, where each one wins, and how to think about offering them on the same checkout.
+  </p>
+
+  <!-- ─ SECTION 1 ─────────────────────────────────────────────────── -->
+  <h2>The structural difference</h2>
+
+  <p>
+    BNPL <strong>extends new credit</strong>. The provider lends the customer a short-term loan, the customer pays the provider back in installments (typically 4 payments over 6 weeks, or longer-term financing at 0–36% APR), and the provider charges the merchant 3–6% of GMV per transaction.
+  </p>
+
+  <p>
+    Quarvo <strong>activates existing credit</strong>. The customer's combined credit across multiple cards they already hold is used to complete one transaction. The customer pays each card normally — same statement, same APR, same rewards — and the merchant settles in full via Stripe Connect. Quarvo charges the merchant 2% only on transactions it recovered.
+  </p>
+
+  <div class="callout">
+    <div class="label">// THE FRAME</div>
+    <p>BNPL is a <strong>credit creation</strong> tool. Quarvo is a <strong>payment coordination</strong> tool. The customer who needs new credit (insufficient combined credit on existing cards) is best served by BNPL. The customer who has the credit but it's distributed across multiple cards is best served by Quarvo.</p>
+  </div>
+
+  <!-- ─ SECTION 2 — TABLE ─────────────────────────────────────────── -->
+  <h2>Side-by-side: every meaningful dimension</h2>
+
+  <div class="ssbs-table">
+    <div class="ssbs-head">
+      <span class="ssbs-label">// DIMENSION</span>
+      <span class="ssbs-q">QUARVO</span>
+      <span class="ssbs-other">BNPL</span>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Creates new debt?<span>// for the customer</span></div>
+      <div class="ssbs-val ok">No</div>
+      <div class="ssbs-val bad">Yes</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Customer fee<span>// per transaction</span></div>
+      <div class="ssbs-val ok">$0</div>
+      <div class="ssbs-val bad">$0–36% APR + late fees</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Merchant fee<span>// % of GMV</span></div>
+      <div class="ssbs-val ok">2% (on recovered only)</div>
+      <div class="ssbs-val bad">3–6% (on every txn)</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Card rewards preserved<span>// points, miles, cashback</span></div>
+      <div class="ssbs-val ok">Yes — on each card</div>
+      <div class="ssbs-val bad">No</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Reports to credit bureaus<span>// hard or soft inquiry</span></div>
+      <div class="ssbs-val ok">No</div>
+      <div class="ssbs-val bad">Affirm yes (Apr 2025+)</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Late fee risk<span>// to customer</span></div>
+      <div class="ssbs-val ok">None</div>
+      <div class="ssbs-val bad">$7–25 per missed payment</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Application required<span>// at checkout</span></div>
+      <div class="ssbs-val ok">No — one card-add field</div>
+      <div class="ssbs-val mid">Yes — soft credit pull</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Settlement to merchant<span>// when do you get paid</span></div>
+      <div class="ssbs-val ok">Same as Stripe — full</div>
+      <div class="ssbs-val mid">Full upfront, less 3–6%</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Underwriting<span>// who carries the risk</span></div>
+      <div class="ssbs-val ok">Card issuers — already done</div>
+      <div class="ssbs-val mid">BNPL provider</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Best customer fit<span>// who it's actually for</span></div>
+      <div class="ssbs-val neutral">Combined credit OK on multiple cards</div>
+      <div class="ssbs-val neutral">Insufficient combined credit</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Best AOV range<span>// where it shines</span></div>
+      <div class="ssbs-val neutral">$1,500+</div>
+      <div class="ssbs-val neutral">$50–$2,500</div>
+    </div>
+  </div>
+
+  <!-- ─ SECTION 3 — SCENARIO ──────────────────────────────────────── -->
+  <h2>Cost scenario: $2,400 purchase, 1-month carry</h2>
+
+  <p>
+    Pricing comparisons get abstract fast. Here's a representative scenario: a customer buying a $2,400 product who carries the balance for one month before paying it off. The customer has $1,800 of available credit on one card and $1,400 on another (a typical multi-card profile).
+  </p>
+
+  <div class="scenario-block">
+    <div class="scenario-head">
+      <span class="scenario-amount">$2,400</span>
+      <span class="scenario-name">total purchase · carried 1 month · paid off in full</span>
+    </div>
+
+    <div class="scenario-grid">
+
+      <div class="scenario-card q">
+        <div class="top">// VIA QUARVO</div>
+        <div class="total">$0</div>
+        <p style="font-size:13px;color:var(--soft);margin:8px 0 0;">customer cost</p>
+        <div class="breakdown">
+          <div class="b-row"><span>Card 1 ($1,800)</span><span>standard APR · paid off</span></div>
+          <div class="b-row"><span>Card 2 ($600)</span><span>standard APR · paid off</span></div>
+          <div class="b-row"><span>Quarvo customer fee</span><span>$0</span></div>
+          <div class="b-row"><span>Rewards earned</span><span style="color:var(--green)">~$48</span></div>
+        </div>
+      </div>
+
+      <div class="scenario-card o">
+        <div class="top">// VIA BNPL (AVG)</div>
+        <div class="total">$96–$200</div>
+        <p style="font-size:13px;color:var(--soft);margin:8px 0 0;">customer cost (1 month avg)</p>
+        <div class="breakdown">
+          <div class="b-row"><span>BNPL principal</span><span>$2,400</span></div>
+          <div class="b-row"><span>APR (varies 0–36%)</span><span>$0–60</span></div>
+          <div class="b-row"><span>Late fee risk</span><span>$0–25</span></div>
+          <div class="b-row"><span>Rewards lost</span><span style="color:var(--red)">−$48</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <p>
+    The customer-cost gap is substantial in absolute terms — but the real divergence is on the <em>credit footprint</em>. Quarvo leaves no record on the customer's credit file beyond the normal card statements. BNPL (especially Affirm, post-April 2025) creates a new tradeline that mortgage lenders, auto-loan issuers, and credit-card underwriters can see. For high-ticket buyers planning future credit applications, that's a meaningful invisible cost.
+  </p>
+
+  <!-- ─ SECTION 4 — WHEN EACH WINS ─────────────────────────────────── -->
+  <h2>When BNPL is the right answer</h2>
+
+  <div class="win-block other">
+    <div class="win-label">// BNPL WINS</div>
+    <h3>Customer's combined credit is genuinely insufficient</h3>
+    <p>If a customer hits checkout on a $1,500 cart and their combined credit across all cards is only $900, Quarvo can't help — there isn't enough credit to combine. BNPL is the right tool here. The provider extends new short-term credit, the customer gets the purchase, and the merchant captures a sale that would otherwise be lost entirely.</p>
+    <p>This is a real and important cohort. Roughly 25–35% of high-ticket declines fall into this category — particularly among younger buyers, thinner credit files, and customers in regions with lower average available credit. BNPL serves them well.</p>
+  </div>
+
+  <div class="win-block other">
+    <div class="win-label">// BNPL WINS</div>
+    <h3>The customer wants a structured payment plan</h3>
+    <p>Some buyers actively prefer fixed-payment plans for budgeting reasons, even when they have sufficient credit. "I'd rather pay $600 four times" is a real preference for a meaningful slice of buyers. Quarvo is a one-shot transaction; the multi-card split posts as N normal card charges. If a customer wants installments, BNPL is the right path.</p>
+  </div>
+
+  <h2>When Quarvo is the right answer</h2>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>Customer has sufficient combined credit, distributed across cards</h3>
+    <p>The exact scenario at the heart of high-AOV declines: the customer has $5,000+ of total available credit, but no single card has enough room for a $2,400 purchase. BNPL would extend new credit they don't need. Quarvo lets them use what they already have, with no fee, no new debt, and full rewards preserved.</p>
+    <p>This is the largest single cohort in high-AOV decline data — typically 50–70% of addressable declines. Quarvo addresses it directly.</p>
+  </div>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>Merchant doesn't want to absorb 3–6% on every transaction</h3>
+    <p>BNPL providers charge merchants 3–6% of GMV per transaction, including transactions that would have completed without BNPL. Quarvo charges only 2%, and only on transactions Quarvo recovered. For high-AOV merchants, that fee structure is meaningfully friendlier — particularly because the customers who use Quarvo are the cohort that would have been lost otherwise.</p>
+  </div>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>The customer is a high-LTV repeat buyer or premium-card holder</h3>
+    <p>Customers carrying Chase Sapphire, Amex Platinum, Capital One Venture etc. care intensely about preserving rewards. BNPL strips all rewards from the transaction. Quarvo preserves them — all category bonuses, all sign-up incentives, all purchase protections. For premium-card cohorts, this difference alone often determines tool preference.</p>
+  </div>
+
+  <!-- ─ INLINE CTA ─────────────────────────────────────────────────── -->
+  <div class="inline-cta">
+    <h3>Run Quarvo first. Route the rest to BNPL.</h3>
+    <p>The smartest high-AOV merchant setup: Quarvo as the primary recovery layer (no fee unless recovered, no new customer debt), BNPL as the fallback for genuinely undercredited buyers. Largest possible recovery cohort, lowest possible cost.</p>
+    <a href="/for-merchants" class="cta-btn">See how Quarvo runs alongside BNPL →</a>
+    <p class="cta-note">// PILOT · Q2 2026 · 2% PER RECOVERED · NO MONTHLY MIN</p>
+  </div>
+
+  <!-- ─ DECISION FRAMEWORK ─────────────────────────────────────────── -->
+  <h2>The 5-question decision framework</h2>
+
+  <p>If you're a merchant trying to decide which tool to install (or both), these are the questions that actually matter:</p>
+
+  <div class="decision-table">
+    <div class="dec-head">Quarvo or BNPL — by question</div>
+    <div class="dec-sub">// QUICK PICK · NORMALIZE FOR YOUR CATALOG</div>
+
+    <div class="dec-row">
+      <div class="dec-question">Is your AOV typically above $1,500?</div>
+      <div class="dec-pick q">Quarvo</div>
+    </div>
+    <div class="dec-row">
+      <div class="dec-question">Does your audience skew premium-card / high-rewards-savvy?</div>
+      <div class="dec-pick q">Quarvo</div>
+    </div>
+    <div class="dec-row">
+      <div class="dec-question">Are most of your decline reasons "insufficient credit on this card"?</div>
+      <div class="dec-pick q">Quarvo</div>
+    </div>
+    <div class="dec-row">
+      <div class="dec-question">Is your AOV typically below $500?</div>
+      <div class="dec-pick o">BNPL</div>
+    </div>
+    <div class="dec-row">
+      <div class="dec-question">Do you want to capture genuinely undercredited buyers?</div>
+      <div class="dec-pick o">BNPL</div>
+    </div>
+    <div class="dec-row">
+      <div class="dec-question">Do you want maximum recovery cohort coverage?</div>
+      <div class="dec-pick both">Both</div>
+    </div>
+  </div>
+
+  <p>
+    The "both" answer is increasingly the default for high-AOV merchants. Quarvo recovers the larger, lower-cost cohort first. BNPL catches the residual cohort that needs new credit. The merchant captures both, the customer gets routed to the right tool, and total recovery yield is maximized.
+  </p>
+
+  <!-- ─ FOOTER CTA ────────────────────────────────────────────────── -->
+  <div class="footer-cta">
+    <h2>Quarvo handles half the cohort BNPL doesn't.<br/>Lower fees. No new debt.</h2>
+    <p>For high-AOV merchants who want to recover the largest possible decline cohort at the lowest cost — and route the rest to BNPL when it's genuinely the right tool.</p>
+    <a href="/for-merchants" class="cta-btn">Get on the merchant pilot list →</a>
+    <p style="font-size:12px; color:var(--muted); margin-top:14px; font-family:'SFMono-Regular',monospace;">// 2% PER RECOVERED · STRIPE CONNECT · NO REPLATFORMING</p>
+  </div>
+
+  <!-- ─ FAQ ────────────────────────────────────────────────────────── -->
+  <div class="faq-section">
+    <div class="faq-label">// FREQUENTLY ASKED QUESTIONS</div>
+
+    <details>
+      <summary>Is Quarvo a BNPL service?</summary>
+      <div class="faq-answer">No. Quarvo does not lend money, does not extend new credit, and does not create payment plans. It splits a single transaction across multiple credit cards the customer already has, settling the merchant in full. BNPL extends new credit and customers repay in installments. The two solve different problems for different customer segments.</div>
+    </details>
+
+    <details>
+      <summary>What are the main differences between Quarvo and BNPL?</summary>
+      <div class="faq-answer">Three structural differences. (1) Credit creation: BNPL extends new credit; Quarvo activates existing credit across multiple cards. (2) Customer cost: BNPL ranges from 0% to 36% APR plus late fees; Quarvo charges nothing to the customer. (3) Merchant fees: BNPL providers charge 3–6% of GMV per transaction; Quarvo charges 2% only on recovered transactions. They also differ on credit-bureau reporting, rewards, and target customer.</div>
+    </details>
+
+    <details>
+      <summary>When should a merchant offer Quarvo instead of BNPL?</summary>
+      <div class="faq-answer">Quarvo is the better fit at high AOV (typically $1,500+) where the dominant decline reason is single-card credit limit. BNPL is the better fit when a meaningful share of customers genuinely cannot afford the purchase outright — typically at AOV ranges where customer credit profiles are mixed and many buyers need a financing plan.</div>
+    </details>
+
+    <details>
+      <summary>Can a merchant offer both Quarvo and BNPL?</summary>
+      <div class="faq-answer">Yes. The two address different cohorts and the offering can be tiered: Quarvo first for customers with sufficient combined credit (no fee unless recovered, no new debt), BNPL as a secondary option for customers whose combined credit is insufficient. This gives the merchant the largest possible recovery cohort.</div>
+    </details>
+
+    <details>
+      <summary>Does Quarvo cost the customer money?</summary>
+      <div class="faq-answer">No. The customer pays the merchant the same amount they would have paid on a single card — nothing more. Quarvo's 2% fee is paid by the merchant on transactions Quarvo recovered. The customer also keeps all rewards, suffers no credit-bureau reporting, and takes on no new debt.</div>
+    </details>
+  </div>
+
+  <!-- ─ RELATED ────────────────────────────────────────────────────── -->
+  <div class="related">
+    <div class="related-label">// MORE COMPARISONS</div>
+    <div class="related-grid">
+      <a href="/compare/klarna" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">Klarna <span>→</span></div>
+      </a>
+      <a href="/compare/affirm" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">Affirm <span>→</span></div>
+      </a>
+      <a href="/compare/afterpay" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">Afterpay <span>→</span></div>
+      </a>
+    </div>
+  </div>
+
+</article>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Quarvo vs Klarna — Multi-Card Splitting vs Pay in 4 (Honest Comparison)</title>
+  <meta name="description" content="Quarvo vs Klarna: customer cost, merchant fees, late-fee mechanics, credit reporting, and where each tool actually fits. The structural breakdown for high-AOV merchants." />
+  <meta name="keywords" content="quarvo vs klarna, klarna alternative, klarna pay in 4, klarna merchant fees, multi card vs klarna, split payment without klarna" />
+  <link rel="canonical" href="https://quarvo.io/compare/klarna" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://quarvo.io/compare/klarna" />
+  <meta property="og:title" content="Quarvo vs Klarna — Honest Comparison" />
+  <meta property="og:description" content="Multi-card splitting vs Klarna's Pay in 4 and Financing. Side-by-side fees and the structural difference." />
+  <meta property="og:image" content="https://quarvo.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Quarvo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://quarvo.io/og-image.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Quarvo vs Klarna — Multi-Card Splitting vs Pay in 4",
+    "description": "Detailed comparison of Quarvo's multi-card payment splitting vs Klarna's Pay in 4 and Financing products, including customer cost, merchant fees, and decision framework.",
+    "author": { "@type": "Person", "name": "Marcelo", "url": "https://quarvo.io" },
+    "publisher": { "@type": "Organization", "name": "Quarvo", "url": "https://quarvo.io" },
+    "datePublished": "2026-05-02",
+    "dateModified": "2026-05-02",
+    "mainEntityOfPage": "https://quarvo.io/compare/klarna"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Is Quarvo cheaper for merchants than Klarna?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, structurally. Klarna charges merchants approximately 5.99% plus $0.30 per transaction on every Klarna-processed sale. Quarvo charges 2% only on transactions it recovered (declines that completed via multi-card splitting). On equivalent recovery volume, Quarvo's effective merchant cost is roughly one-third of Klarna's. The fee structures are also different in nature: Klarna takes a percentage of the entire transaction; Quarvo takes a percentage only on incremental revenue it created." } },
+      { "@type": "Question", "name": "Does Klarna report to credit bureaus?", "acceptedAnswer": { "@type": "Answer", "text": "Klarna's Pay in 4 product does not currently report to US credit bureaus (as of 2026). Klarna Financing — the longer-term installment product — does report. Quarvo does not report to credit bureaus at all, regardless of product. For customers planning a mortgage, auto loan, or new credit card application within 12 months, this is a meaningful difference." } },
+      { "@type": "Question", "name": "What happens if a customer misses a Klarna payment?", "acceptedAnswer": { "@type": "Answer", "text": "Klarna charges $7 per missed installment, capped at 25% of the order value. The missed payment also blocks the customer from making future Klarna purchases until paid. Quarvo has no concept of missed payments — each card in a split posts as a normal card charge to the issuer; the customer's relationship with each card issuer continues unchanged." } },
+      { "@type": "Question", "name": "Can high-AOV customers always use Klarna?", "acceptedAnswer": { "@type": "Answer", "text": "Klarna's Pay in 4 typically caps at $1,500–$2,000 per order; Klarna Financing covers higher amounts but requires a soft credit pull and Klarna underwriting approval. Quarvo's multi-card splitting has no underwriting because the customer's existing card limits already gate the transaction. For large purchases ($3,000+), Quarvo's coverage is structurally broader." } },
+      { "@type": "Question", "name": "Should a merchant offer both Quarvo and Klarna?", "acceptedAnswer": { "@type": "Answer", "text": "For most high-AOV merchants, yes. The two reach different customer cohorts: Quarvo recovers customers who have sufficient combined credit; Klarna captures customers who need new short-term credit. Stacking them maximizes recovery without increasing customer-side friction (each tool only appears when it's the right answer)." } }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060C; --surface: #0E0E18; --card: #101018; --border: #1A1A2E;
+      --violet: #7B2FFF; --cyan: #00F5FF;
+      --klarna: #FFA8C5;
+      --green: #34D399; --red: #F75454; --gold: #F5C518; --orange: #F97316;
+      --text: #E8E8F2; --soft: #9090B0; --muted: #50506A;
+      --max: 760px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.7; }
+
+    .site-header { border-bottom: 1px solid var(--border); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; background: linear-gradient(135deg, var(--violet), var(--cyan)); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; }
+    .logo-text { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.06em; }
+    .nav-cta { background: rgba(123,47,255,0.12); border: 1px solid rgba(123,47,255,0.4); color: #B09FFF; font-size: 12px; padding: 6px 16px; border-radius: 20px; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: rgba(123,47,255,0.22); }
+
+    .compare-wrap { max-width: var(--max); margin: 0 auto; padding: 56px 24px 80px; }
+
+    .breadcrumb { display: flex; gap: 8px; align-items: center; margin-bottom: 24px; font-size: 12px; font-family: "SFMono-Regular", monospace; color: var(--muted); letter-spacing: 0.04em; }
+    .breadcrumb a { color: var(--soft); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--cyan); }
+    .breadcrumb-sep { opacity: 0.4; }
+
+    .vs-badge { display: inline-flex; align-items: center; gap: 12px; padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; font-family: "SFMono-Regular", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--soft); margin-bottom: 24px; }
+    .vs-quarvo { color: var(--cyan); font-weight: 700; }
+    .vs-other { color: var(--klarna); font-weight: 700; }
+    .vs-x { color: var(--muted); font-size: 13px; }
+
+    h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 22px; color: var(--text); }
+    h1 em { font-style: normal; background: linear-gradient(135deg, var(--cyan), var(--klarna)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .deck { font-size: 19px; color: var(--soft); line-height: 1.6; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 24px; font-weight: 800; margin: 56px 0 18px; color: var(--text); letter-spacing: -0.015em; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 12px; color: var(--text); }
+    p { margin-bottom: 18px; color: var(--text); }
+    strong { color: #fff; font-weight: 700; }
+    em { color: var(--soft); font-style: italic; }
+    ul, ol { padding-left: 22px; margin-bottom: 18px; }
+    li { color: var(--soft); margin-bottom: 8px; line-height: 1.65; }
+    li strong { color: var(--text); }
+
+    /* SIDE-BY-SIDE TABLE */
+    .ssbs-table { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin: 32px 0; }
+    .ssbs-head { display: grid; grid-template-columns: 1.4fr 1fr 1fr; background: var(--card); padding: 16px 20px; border-bottom: 1px solid var(--border); align-items: center; }
+    .ssbs-head .ssbs-label { font-family: "SFMono-Regular", monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+    .ssbs-head .ssbs-q { font-size: 15px; font-weight: 800; color: var(--cyan); text-align: center; }
+    .ssbs-head .ssbs-other { font-size: 15px; font-weight: 800; color: var(--klarna); text-align: center; }
+    .ssbs-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; padding: 14px 20px; border-bottom: 1px dashed var(--border); align-items: center; }
+    .ssbs-row:last-child { border-bottom: none; }
+    .ssbs-key { font-size: 14px; color: var(--text); font-weight: 600; }
+    .ssbs-key span { display: block; font-weight: 400; color: var(--muted); font-size: 11.5px; margin-top: 3px; font-family: "SFMono-Regular", monospace; letter-spacing: 0.04em; }
+    .ssbs-val { font-size: 13.5px; text-align: center; font-family: "SFMono-Regular", monospace; }
+    .ssbs-val.ok { color: var(--green); font-weight: 600; }
+    .ssbs-val.bad { color: var(--red); font-weight: 600; }
+    .ssbs-val.mid { color: var(--gold); font-weight: 600; }
+    .ssbs-val.neutral { color: var(--soft); }
+
+    /* PRODUCTS COMPARISON */
+    .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0; }
+    @media (max-width: 540px) { .products-grid { grid-template-columns: 1fr; } }
+    .product-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
+    .product-card h3 { margin: 0 0 6px; font-size: 16px; }
+    .product-card .pc-label { font-family: "SFMono-Regular", monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--klarna); margin-bottom: 10px; font-weight: 700; }
+    .product-card.pay4 { border-left: 3px solid #FFC2D6; }
+    .product-card.fin { border-left: 3px solid #FF8FB3; }
+    .product-card p { font-size: 13px; color: var(--soft); margin: 0 0 10px; line-height: 1.6; }
+    .product-card .pc-stats { background: var(--card); border-radius: 8px; padding: 12px; font-family: "SFMono-Regular", monospace; font-size: 12px; }
+    .product-card .pc-stat { display: flex; justify-content: space-between; padding: 3px 0; color: var(--soft); }
+
+    /* COST SCENARIO */
+    .scenario-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 26px; margin: 28px 0; }
+    .scenario-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .scenario-amount { font-size: 26px; font-weight: 800; color: var(--cyan); font-family: "SFMono-Regular", monospace; letter-spacing: -0.02em; }
+    .scenario-name { font-size: 14px; color: var(--soft); }
+    .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 540px) { .scenario-grid { grid-template-columns: 1fr; } }
+    .scenario-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .scenario-card.q { border-left: 3px solid var(--cyan); }
+    .scenario-card.o { border-left: 3px solid var(--klarna); }
+    .scenario-card .top { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-family: "SFMono-Regular", monospace; }
+    .scenario-card .total { font-size: 24px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+    .scenario-card.q .total { color: var(--cyan); }
+    .scenario-card.o .total { color: var(--klarna); }
+    .scenario-card .breakdown { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+    .scenario-card .b-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--soft); padding: 3px 0; font-family: "SFMono-Regular", monospace; }
+
+    /* MERCHANT FEE BREAKDOWN */
+    .mfee-table { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin: 28px 0; }
+    .mfee-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .mfee-sub { font-size: 11px; color: var(--muted); font-family: "SFMono-Regular", monospace; margin-bottom: 18px; letter-spacing: 0.06em; }
+    .mfee-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 12px; padding: 11px 0; border-top: 1px dashed var(--border); align-items: center; font-size: 13px; }
+    .mfee-row.head { border-top: none; padding-top: 0; padding-bottom: 12px; }
+    .mfee-row.head span { font-family: "SFMono-Regular", monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .mfee-row.total { border-top: 2px solid var(--border); padding-top: 14px; margin-top: 6px; font-weight: 700; }
+    .mfee-name { color: var(--soft); }
+    .mfee-name.b { color: var(--text); font-weight: 700; }
+    .mfee-q { color: var(--cyan); font-family: "SFMono-Regular", monospace; text-align: center; font-weight: 600; }
+    .mfee-o { color: var(--klarna); font-family: "SFMono-Regular", monospace; text-align: center; font-weight: 600; }
+
+    /* WIN BLOCK */
+    .win-block { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--cyan); border-radius: 0 12px 12px 0; padding: 22px 26px; margin: 24px 0; }
+    .win-block.other { border-left-color: var(--klarna); }
+    .win-block .win-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 10px; font-family: "SFMono-Regular", monospace; }
+    .win-block.other .win-label { color: var(--klarna); }
+    .win-block h3 { margin: 0 0 12px; font-size: 18px; }
+    .win-block p { font-size: 14.5px; color: var(--soft); margin: 0 0 10px; line-height: 1.7; }
+    .win-block p:last-child { margin-bottom: 0; }
+
+    /* CALLOUT */
+    .callout { background: rgba(0,245,255,0.04); border: 1px solid rgba(0,245,255,0.22); border-left: 3px solid var(--cyan); border-radius: 0 8px 8px 0; padding: 18px 22px; margin: 28px 0; }
+    .callout .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 8px; font-family: "SFMono-Regular", monospace; }
+    .callout p { color: var(--soft); font-size: 14.5px; margin: 0; line-height: 1.7; }
+
+    /* INLINE CTA */
+    .inline-cta { background: linear-gradient(135deg, rgba(123,47,255,0.14) 0%, rgba(0,245,255,0.06) 100%); border: 1px solid rgba(123,47,255,0.4); border-radius: 14px; padding: 32px; margin: 44px 0; text-align: center; }
+    .inline-cta h3 { font-size: 22px; font-weight: 800; color: var(--text); margin: 0 0 12px; line-height: 1.25; }
+    .inline-cta p { font-size: 14.5px; color: var(--soft); margin: 0 0 22px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-block; background: linear-gradient(135deg, var(--violet), var(--cyan)); color: #fff; font-size: 14px; font-weight: 700; padding: 13px 30px; border-radius: 10px; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(123,47,255,0.3); }
+    .cta-note { font-size: 11px; color: var(--muted); margin-top: 14px !important; font-family: "SFMono-Regular", monospace; }
+
+    /* FAQ */
+    .faq-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .faq-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; font-family: "SFMono-Regular", monospace; }
+    details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+    summary { padding: 16px 18px; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; background: var(--surface); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 20px; color: var(--cyan); font-weight: 300; flex-shrink: 0; margin-left: 12px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    .faq-answer { padding: 16px 18px; font-size: 14.5px; color: var(--soft); line-height: 1.7; border-top: 1px solid var(--border); }
+
+    /* FOOTER CTA */
+    .footer-cta { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--cyan); border-radius: 0 0 14px 14px; padding: 40px 32px; margin-top: 60px; text-align: center; }
+    .footer-cta h2 { font-size: 26px; margin: 0 0 14px; line-height: 1.25; }
+    .footer-cta p { color: var(--soft); font-size: 15px; max-width: 480px; margin: 0 auto 24px; }
+
+    .related { margin-top: 60px; }
+    .related-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; font-family: "SFMono-Regular", monospace; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+    .related-card:hover { border-color: rgba(0,245,255,0.4); transform: translateY(-2px); }
+    .related-tag { font-size: 10px; font-family: "SFMono-Regular", monospace; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 6px; }
+    .related-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .related-name span { color: var(--klarna); }
+
+    @media (max-width: 600px) {
+      .compare-wrap { padding: 32px 16px 60px; }
+      h1 { font-size: 28px; }
+      .ssbs-head, .ssbs-row { grid-template-columns: 1.3fr 1fr 1fr; padding: 12px 14px; font-size: 12px; }
+      .ssbs-key { font-size: 13px; }
+      .ssbs-val { font-size: 12px; }
+      .mfee-row { grid-template-columns: 1.4fr 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="logo">
+    <div class="logo-mark">Q</div>
+    <span class="logo-text">QUARVO</span>
+  </a>
+  <a href="/for-merchants" class="nav-cta">For merchants →</a>
+</header>
+
+<article class="compare-wrap">
+
+  <nav class="breadcrumb">
+    <a href="/">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/compare">Compare</a>
+    <span class="breadcrumb-sep">/</span>
+    <span style="color:var(--text);">Klarna</span>
+  </nav>
+
+  <div class="vs-badge">
+    <span class="vs-quarvo">QUARVO</span>
+    <span class="vs-x">vs.</span>
+    <span class="vs-other">KLARNA</span>
+  </div>
+
+  <h1>Multi-card splitting<br/>vs. <em>Klarna's Pay in 4</em></h1>
+
+  <p class="deck">
+    Klarna and Quarvo both unblock checkouts where one card isn't enough — but they do it from opposite directions. Klarna lends new short-term credit and charges merchants 5.99%. Quarvo activates existing credit across multiple cards and charges merchants 2% only on recovered transactions. Here's the full breakdown.
+  </p>
+
+  <!-- ─ SECTION 1 — Klarna products ───────────────────────────────── -->
+  <h2>What Klarna actually is, in 2026</h2>
+
+  <p>
+    Klarna is not one product. It's a family of three closely related ones, with different fee structures and different customer-side mechanics. Comparison only makes sense once those are clear.
+  </p>
+
+  <div class="products-grid">
+    <div class="product-card pay4">
+      <div class="pc-label">// PRODUCT 01</div>
+      <h3>Pay in 4</h3>
+      <p>Klarna's flagship product. Customer pays 25% at checkout, then three more equal installments every 2 weeks. No interest, but late fees apply.</p>
+      <div class="pc-stats">
+        <div class="pc-stat"><span>Customer APR</span><span>0%</span></div>
+        <div class="pc-stat"><span>Late fee</span><span>$7 / payment</span></div>
+        <div class="pc-stat"><span>Cap on order</span><span>~$1,500–$2,000</span></div>
+        <div class="pc-stat"><span>Credit pull</span><span>Soft only</span></div>
+      </div>
+    </div>
+    <div class="product-card fin">
+      <div class="pc-label">// PRODUCT 02</div>
+      <h3>Klarna Financing</h3>
+      <p>Longer-term installments, 6–36 months. Interest rates from 0% (promotional) to 24.99% APR. Used for higher-AOV purchases.</p>
+      <div class="pc-stats">
+        <div class="pc-stat"><span>Customer APR</span><span>0–24.99%</span></div>
+        <div class="pc-stat"><span>Term</span><span>6–36 months</span></div>
+        <div class="pc-stat"><span>Cap on order</span><span>$10K+</span></div>
+        <div class="pc-stat"><span>Credit pull</span><span>Soft + reports</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p>
+    The third product, <em>Pay in 30</em>, defers payment by 30 days and is only available in select markets. We'll focus on Pay in 4 (the largest product by volume) and Financing (the relevant comparison at high AOV).
+  </p>
+
+  <!-- ─ SECTION 2 — Side-by-side ─────────────────────────────────── -->
+  <h2>Side-by-side: Quarvo vs. Klarna Pay in 4</h2>
+
+  <div class="ssbs-table">
+    <div class="ssbs-head">
+      <span class="ssbs-label">// DIMENSION</span>
+      <span class="ssbs-q">QUARVO</span>
+      <span class="ssbs-other">KLARNA</span>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Product type<span>// what it actually does</span></div>
+      <div class="ssbs-val neutral">Card splitting</div>
+      <div class="ssbs-val neutral">New short-term loan</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Customer fee<span>// for using it</span></div>
+      <div class="ssbs-val ok">$0</div>
+      <div class="ssbs-val mid">0% APR + $7 late fee</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Merchant fee<span>// % per transaction</span></div>
+      <div class="ssbs-val ok">2% (recovered only)</div>
+      <div class="ssbs-val bad">5.99% + $0.30</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Cap on order size<span>// max single transaction</span></div>
+      <div class="ssbs-val ok">No cap (your card limits)</div>
+      <div class="ssbs-val mid">$1,500–$2,000</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Card rewards preserved<span>// points, miles, cashback</span></div>
+      <div class="ssbs-val ok">Yes — on each card</div>
+      <div class="ssbs-val bad">No</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Credit reporting<span>// to bureaus</span></div>
+      <div class="ssbs-val ok">No</div>
+      <div class="ssbs-val ok">No (Pay in 4)</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Late fees<span>// to customer</span></div>
+      <div class="ssbs-val ok">None</div>
+      <div class="ssbs-val bad">$7 per missed payment</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Authorization<span>// at checkout</span></div>
+      <div class="ssbs-val ok">N card auths (atomic)</div>
+      <div class="ssbs-val mid">Soft credit pull</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Merchant settlement<span>// when do you get paid</span></div>
+      <div class="ssbs-val ok">Through Stripe (your timing)</div>
+      <div class="ssbs-val mid">Klarna disburses</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Best for AOV<span>// where it shines</span></div>
+      <div class="ssbs-val neutral">$1,500+</div>
+      <div class="ssbs-val neutral">$50–$1,500</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Best for vertical<span>// strongest fit</span></div>
+      <div class="ssbs-val neutral">Travel · pro · health · home</div>
+      <div class="ssbs-val neutral">Fashion · beauty · home</div>
+    </div>
+  </div>
+
+  <!-- ─ SECTION 3 — Cost scenario ─────────────────────────────────── -->
+  <h2>Cost scenario: $2,400 purchase</h2>
+
+  <div class="scenario-block">
+    <div class="scenario-head">
+      <span class="scenario-amount">$2,400</span>
+      <span class="scenario-name">cart · customer has $1,800 + $1,400 across two cards</span>
+    </div>
+
+    <div class="scenario-grid">
+
+      <div class="scenario-card q">
+        <div class="top">// VIA QUARVO</div>
+        <div class="total">$0</div>
+        <p style="font-size:13px;color:var(--soft);margin:8px 0 0;">customer cost</p>
+        <div class="breakdown">
+          <div class="b-row"><span>Card 1</span><span>$1,800</span></div>
+          <div class="b-row"><span>Card 2</span><span>$600</span></div>
+          <div class="b-row"><span>Customer fee</span><span>$0</span></div>
+          <div class="b-row"><span>Rewards earned</span><span style="color:var(--green)">~$48</span></div>
+        </div>
+      </div>
+
+      <div class="scenario-card o">
+        <div class="top">// VIA KLARNA P4</div>
+        <div class="total">N/A</div>
+        <p style="font-size:13px;color:var(--soft);margin:8px 0 0;">cap exceeded — Klarna Financing required</p>
+        <div class="breakdown">
+          <div class="b-row"><span>Klarna Financing principal</span><span>$2,400</span></div>
+          <div class="b-row"><span>12-month at 9.99% APR</span><span>~$132 interest</span></div>
+          <div class="b-row"><span>Hard credit pull</span><span style="color:var(--red)">Yes</span></div>
+          <div class="b-row"><span>Rewards earned</span><span style="color:var(--red)">$0</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <p>
+    Two things stand out. First: at $2,400, Klarna's Pay in 4 is past its typical cap. The customer gets routed to Klarna Financing — a different product with interest, longer terms, and credit reporting. Quarvo doesn't have that bifurcation. Whether the cart is $200 or $20,000, the mechanic is identical: split across the cards the customer already has.
+  </p>
+
+  <p>
+    Second: the rewards delta matters more than people realize. On a $2,400 travel purchase via premium cards (3–5x category bonuses), the customer earns roughly $48 in rewards if Quarvo handles the split, and zero if Klarna does. Multiplied across a year of high-ticket purchases, that's $200–$400 of value the customer keeps with Quarvo and gives up with Klarna.
+  </p>
+
+  <!-- ─ SECTION 4 — Merchant economics ────────────────────────────── -->
+  <h2>The merchant fee math, modeled honestly</h2>
+
+  <p>
+    Klarna's published merchant fee is approximately 5.99% plus $0.30 per transaction. The fee applies to <strong>every</strong> Klarna-processed sale — including transactions that would have completed without Klarna. Quarvo's 2% only applies to <strong>recovered</strong> transactions — sales that wouldn't have completed without the splitting layer.
+  </p>
+
+  <p>
+    Modeled across a representative high-AOV merchant, the difference compounds:
+  </p>
+
+  <div class="mfee-table">
+    <div class="mfee-title">Annual merchant fee — $2K AOV · 10K transactions / year</div>
+    <div class="mfee-sub">// 6.5% DECLINE COHORT · 60% RECOVERY RATE · MODEL ASSUMPTIONS BELOW</div>
+
+    <div class="mfee-row head">
+      <span>Cohort</span>
+      <span style="text-align:center;">Quarvo</span>
+      <span style="text-align:center;">Klarna</span>
+    </div>
+    <div class="mfee-row">
+      <div class="mfee-name">Successful checkouts via tool<span style="display:block;color:var(--muted);font-size:11px;font-family:'SFMono-Regular',monospace;margin-top:3px;">declines × 60% recovery</span></div>
+      <div class="mfee-q">390 (recovered)</div>
+      <div class="mfee-o">390 (same)</div>
+    </div>
+    <div class="mfee-row">
+      <div class="mfee-name">GMV processed via tool<span style="display:block;color:var(--muted);font-size:11px;font-family:'SFMono-Regular',monospace;margin-top:3px;">at $2K AOV</span></div>
+      <div class="mfee-q">$780,000</div>
+      <div class="mfee-o">$780,000</div>
+    </div>
+    <div class="mfee-row">
+      <div class="mfee-name">Fee rate<span style="display:block;color:var(--muted);font-size:11px;font-family:'SFMono-Regular',monospace;margin-top:3px;">% of GMV</span></div>
+      <div class="mfee-q">2.00%</div>
+      <div class="mfee-o">5.99% + $0.30</div>
+    </div>
+    <div class="mfee-row total">
+      <div class="mfee-name b">Annual merchant fee</div>
+      <div class="mfee-q">$15,600</div>
+      <div class="mfee-o">$46,839</div>
+    </div>
+  </div>
+
+  <p>
+    The same recovery cohort, processed through Quarvo, costs the merchant <strong>~$31K less per year</strong> than through Klarna. The savings scale linearly with GMV. For a $20M-revenue merchant doing equivalent volume, the gap is ~$310K annually — the price of an engineer hire.
+  </p>
+
+  <div class="callout">
+    <div class="label">// HONEST ASTERISK</div>
+    <p>This comparison assumes Klarna and Quarvo recover the <em>same</em> cohort. In practice they don't — Klarna can capture some declines that Quarvo can't (customers without sufficient combined credit), and vice versa. The right setup for most high-AOV merchants is to run Quarvo as primary recovery (its cohort is larger and cheaper) and Klarna as secondary fallback. The compounded savings vs. Klarna-only are still substantial.</p>
+  </div>
+
+  <!-- ─ INLINE CTA ─────────────────────────────────────────────────── -->
+  <div class="inline-cta">
+    <h3>Run Quarvo first. Klarna for the rest.</h3>
+    <p>The right setup at high AOV: Quarvo as the primary layer (2% only on what's recovered, no new debt), Klarna as the fallback for genuinely undercredited customers. Maximum coverage, minimum cost.</p>
+    <a href="/for-merchants" class="cta-btn">See how Quarvo runs alongside Klarna →</a>
+    <p class="cta-note">// PILOT · Q2 2026 · STRIPE CONNECT · NO REPLATFORMING</p>
+  </div>
+
+  <!-- ─ SECTION 5 — When each wins ────────────────────────────────── -->
+  <h2>When Klarna is the right answer</h2>
+
+  <div class="win-block other">
+    <div class="win-label">// KLARNA WINS</div>
+    <h3>AOV under $500 with high-volume, low-margin SKUs</h3>
+    <p>Klarna's strongest fit is fashion, beauty, and accessories at $50–$500 cart values. Pay in 4 is well-suited to lower-AOV impulse purchases where credit-limit constraints aren't binding and the customer just wants a small cash-flow buffer. Quarvo doesn't help here — there's no credit-fragmentation problem to solve at that AOV.</p>
+  </div>
+
+  <div class="win-block other">
+    <div class="win-label">// KLARNA WINS</div>
+    <h3>The customer wants a structured payment schedule</h3>
+    <p>Some buyers genuinely prefer the discipline of biweekly payments, even when they have credit available. "Pay in 4" is a framing that converts — and that's a real product benefit Klarna delivers. Quarvo posts as a normal card transaction; if a customer wants installments by design, Klarna fits better.</p>
+  </div>
+
+  <h2>When Quarvo is the right answer</h2>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>AOV is above $1,500 — past Klarna's Pay in 4 cap</h3>
+    <p>Above ~$1,500–$2,000, Klarna routes customers to Klarna Financing — a different product with interest charges, longer terms, and credit-bureau reporting. Quarvo's mechanic is identical at every AOV: split across the cards the customer already has. No bifurcation, no credit pull, no APR.</p>
+  </div>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>Audience is rewards-savvy, premium-card holders</h3>
+    <p>Customers carrying Chase Sapphire, Amex Platinum, Capital One Venture, etc. care about preserving rewards. Klarna strips all rewards from the transaction. Quarvo preserves them on each card, accruing as if the customer paid normally on a single card. For premium-card cohorts, this is the dominant decision factor.</p>
+  </div>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>Merchant doesn't want to give up 5.99% on every Klarna sale</h3>
+    <p>Klarna charges merchants on every transaction — including sales that would have happened without Klarna's involvement. Quarvo charges 2% only on incremental recoveries. For high-AOV merchants where margin is tight, this fee structure is meaningfully friendlier.</p>
+  </div>
+
+  <!-- ─ FOOTER CTA ────────────────────────────────────────────────── -->
+  <div class="footer-cta">
+    <h2>Lower fees. No new debt.<br/>Higher recovery cohort.</h2>
+    <p>Quarvo addresses the largest single decline cohort at high AOV — the one Klarna's Pay in 4 cap excludes. 2% per recovered, no monthly minimum, runs alongside any BNPL setup.</p>
+    <a href="/for-merchants" class="cta-btn">Get on the merchant pilot list →</a>
+    <p style="font-size:12px; color:var(--muted); margin-top:14px; font-family:'SFMono-Regular',monospace;">// 2% PER RECOVERED · STRIPE CONNECT · NO REPLATFORMING</p>
+  </div>
+
+  <!-- ─ FAQ ────────────────────────────────────────────────────────── -->
+  <div class="faq-section">
+    <div class="faq-label">// FREQUENTLY ASKED QUESTIONS</div>
+
+    <details>
+      <summary>Is Quarvo cheaper for merchants than Klarna?</summary>
+      <div class="faq-answer">Yes, structurally. Klarna charges merchants approximately 5.99% + $0.30 per transaction on every Klarna-processed sale. Quarvo charges 2% only on transactions it recovered. On equivalent recovery volume, Quarvo's effective merchant cost is roughly one-third of Klarna's. Klarna takes a percentage of the entire transaction; Quarvo takes a percentage only on incremental revenue it created.</div>
+    </details>
+
+    <details>
+      <summary>Does Klarna report to credit bureaus?</summary>
+      <div class="faq-answer">Klarna's Pay in 4 product does not currently report to US credit bureaus (as of 2026). Klarna Financing — the longer-term installment product — does report. Quarvo does not report to credit bureaus at all. For customers planning a mortgage, auto loan, or new credit card application within 12 months, this is a meaningful difference.</div>
+    </details>
+
+    <details>
+      <summary>What happens if a customer misses a Klarna payment?</summary>
+      <div class="faq-answer">Klarna charges $7 per missed installment, capped at 25% of the order value. The missed payment also blocks the customer from making future Klarna purchases until paid. Quarvo has no concept of missed payments — each card in a split posts as a normal card charge to the issuer; the customer's relationship with each card issuer continues unchanged.</div>
+    </details>
+
+    <details>
+      <summary>Can high-AOV customers always use Klarna?</summary>
+      <div class="faq-answer">Klarna's Pay in 4 typically caps at $1,500–$2,000 per order; Klarna Financing covers higher amounts but requires a soft credit pull and Klarna underwriting approval. Quarvo's multi-card splitting has no underwriting because the customer's existing card limits already gate the transaction. For large purchases ($3,000+), Quarvo's coverage is structurally broader.</div>
+    </details>
+
+    <details>
+      <summary>Should a merchant offer both Quarvo and Klarna?</summary>
+      <div class="faq-answer">For most high-AOV merchants, yes. Quarvo recovers customers who have sufficient combined credit; Klarna captures customers who need new short-term credit. Stacking them maximizes recovery without increasing customer friction (each tool only appears when it's the right answer).</div>
+    </details>
+  </div>
+
+  <!-- ─ RELATED ────────────────────────────────────────────────────── -->
+  <div class="related">
+    <div class="related-label">// MORE COMPARISONS</div>
+    <div class="related-grid">
+      <a href="/compare/bnpl" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">BNPL <span>→</span></div>
+      </a>
+      <a href="/compare/affirm" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">Affirm <span>→</span></div>
+      </a>
+      <a href="/compare/afterpay" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">Afterpay <span>→</span></div>
+      </a>
+    </div>
+  </div>
+
+</article>
+</body>
+</html>
