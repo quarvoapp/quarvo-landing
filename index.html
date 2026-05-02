@@ -43,7 +43,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Tomorrow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="styles.css?v=5.0"/>
   <style>
     @media (max-width: 768px) {
       .hero-visual { display: none !important; }
@@ -582,6 +582,326 @@
     </div>
   </section>
 
+
+  <!-- DEMO — Interactive split simulation (Phase 5) -->
+  <section class="demo-section" id="demo" data-demo aria-labelledby="demo-title">
+    <div class="section-inner">
+      <header class="demo-header reveal">
+        <div class="section-tag">// SEE IT WORK</div>
+        <h2 class="section-title" id="demo-title">
+          Watch a $2,400 sale<br/>
+          <span class="title-muted">complete in 0.86 seconds.</span>
+        </h2>
+        <p class="demo-intro">
+          A real-time simulation of what your customer experiences when their card declines and Quarvo recovers the transaction. Drag the sliders to allocate the split — or hit replay to watch the full flow.
+        </p>
+      </header>
+
+      <div class="demo-frame reveal">
+
+        <!-- Stage: phone-style checkout mockup -->
+        <div class="demo-stage" data-demo-stage>
+
+          <!-- Top status bar -->
+          <div class="demo-statusbar">
+            <span class="demo-status-time">9:41</span>
+            <div class="demo-status-icons">
+              <span class="demo-signal"></span>
+              <span class="demo-wifi"></span>
+              <span class="demo-battery"></span>
+            </div>
+          </div>
+
+          <!-- Browser chrome -->
+          <div class="demo-browser">
+            <div class="demo-url-bar">
+              <span class="demo-lock">&#x1F512;</span>
+              <span class="demo-url">premiumcamera.co/checkout</span>
+            </div>
+          </div>
+
+          <!-- ────── STATE: READY (initial checkout) ────── -->
+          <div class="demo-screen" data-screen="ready">
+            <div class="demo-merchant-head">
+              <div class="demo-merchant-logo">PC</div>
+              <div class="demo-merchant-name">Premium Camera Co.</div>
+              <div class="demo-step-pill">Checkout</div>
+            </div>
+
+            <div class="demo-product">
+              <div class="demo-product-thumb">
+                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+              </div>
+              <div class="demo-product-info">
+                <div class="demo-product-name">Sony A7 IV Body</div>
+                <div class="demo-product-meta">Mirrorless · Black · 1y warranty</div>
+              </div>
+              <div class="demo-product-price">$2,400</div>
+            </div>
+
+            <div class="demo-summary">
+              <div class="demo-summary-row"><span>Subtotal</span><span>$2,400.00</span></div>
+              <div class="demo-summary-row"><span>Shipping</span><span style="color:var(--data-green)">Free</span></div>
+              <div class="demo-summary-row demo-summary-total"><span>Total</span><span>$2,400.00</span></div>
+            </div>
+
+            <div class="demo-card-input">
+              <div class="demo-card-label">Card</div>
+              <div class="demo-card-mock">
+                <span class="demo-card-brand">VISA</span>
+                <span class="demo-card-num">···· ···· ···· 4242</span>
+                <span class="demo-card-exp">04/27</span>
+              </div>
+            </div>
+
+            <button class="demo-pay-btn" data-demo-pay>
+              <span class="demo-btn-label">Pay $2,400</span>
+              <span class="demo-btn-arrow">&rarr;</span>
+            </button>
+          </div>
+
+          <!-- ────── STATE: DECLINING (overlay) ────── -->
+          <div class="demo-screen demo-decline-screen" data-screen="decline">
+            <div class="demo-decline-icon" aria-hidden="true">
+              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="15" y1="9" x2="9" y2="15"/>
+                <line x1="9" y1="9" x2="15" y2="15"/>
+              </svg>
+            </div>
+            <div class="demo-decline-title">Card declined</div>
+            <div class="demo-decline-reason">
+              <code>insufficient_credit</code>
+              <span>Card has $1,800 of $2,400 needed.</span>
+            </div>
+            <div class="demo-decline-pulse"></div>
+          </div>
+
+          <!-- ────── STATE: QUARVO RECOVERY ────── -->
+          <div class="demo-screen demo-quarvo-screen" data-screen="quarvo">
+            <div class="demo-quarvo-head">
+              <div class="demo-quarvo-badge">
+                <svg width="14" height="14" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="dQ" x1="0" y1="0" x2="64" y2="64">
+                      <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+                    </linearGradient>
+                    <mask id="dM"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+                  </defs>
+                  <circle cx="30" cy="30" r="22" fill="url(#dQ)" mask="url(#dM)"/>
+                  <line x1="44" y1="44" x2="57" y2="57" stroke="url(#dQ)" stroke-width="8" stroke-linecap="round"/>
+                </svg>
+                Powered by Quarvo
+              </div>
+              <h3 class="demo-quarvo-title">Split across your cards</h3>
+              <p class="demo-quarvo-sub">Use credit you already have — no new debt, no fee, all rewards preserved.</p>
+            </div>
+
+            <div class="demo-cards" data-demo-cards>
+
+              <div class="demo-card-row" data-card="visa">
+                <div class="demo-card-row-head">
+                  <div class="demo-card-info">
+                    <span class="demo-card-brand-mini">VISA</span>
+                    <span class="demo-card-id">····4242</span>
+                  </div>
+                  <span class="demo-card-avail">$1,800 available</span>
+                </div>
+                <div class="demo-slider-wrap">
+                  <input type="range" class="demo-slider" min="0" max="1800" value="1800" step="50"
+                         data-card-key="visa" data-card-max="1800"
+                         aria-label="Allocate to Visa ····4242"/>
+                </div>
+                <div class="demo-card-amount" data-card-amount="visa">$1,800</div>
+              </div>
+
+              <div class="demo-card-row" data-card="amex">
+                <div class="demo-card-row-head">
+                  <div class="demo-card-info">
+                    <span class="demo-card-brand-mini brand-amex">AMEX</span>
+                    <span class="demo-card-id">····7321</span>
+                  </div>
+                  <span class="demo-card-avail">$1,400 available</span>
+                </div>
+                <div class="demo-slider-wrap">
+                  <input type="range" class="demo-slider" min="0" max="1400" value="600" step="50"
+                         data-card-key="amex" data-card-max="1400"
+                         aria-label="Allocate to Amex ····7321"/>
+                </div>
+                <div class="demo-card-amount" data-card-amount="amex">$600</div>
+              </div>
+
+            </div>
+
+            <div class="demo-totals">
+              <div class="demo-totals-row">
+                <span>Allocated</span>
+                <span class="demo-allocated" data-demo-allocated>$2,400</span>
+              </div>
+              <div class="demo-totals-row">
+                <span>Required</span>
+                <span class="demo-required">$2,400</span>
+              </div>
+              <div class="demo-totals-row">
+                <span>Customer fee</span>
+                <span class="demo-customer-fee" data-demo-fee>$0</span>
+              </div>
+            </div>
+
+            <button class="demo-confirm-btn" data-demo-confirm>
+              <span class="demo-btn-label">Confirm split &mdash; $0 fee</span>
+              <span class="demo-btn-arrow">&rarr;</span>
+            </button>
+            <p class="demo-confirm-warn" data-demo-warn>Allocate exactly $2,400 to confirm.</p>
+          </div>
+
+          <!-- ────── STATE: PROCESSING ────── -->
+          <div class="demo-screen demo-processing-screen" data-screen="processing">
+            <div class="demo-proc-head">
+              <div class="demo-proc-spinner" aria-hidden="true"></div>
+              <div class="demo-proc-title">Processing split</div>
+              <div class="demo-proc-sub">Two-phase atomic commit · Stripe Connect</div>
+            </div>
+
+            <div class="demo-auths">
+
+              <div class="demo-auth-step" data-auth="1">
+                <div class="demo-auth-num">01</div>
+                <div class="demo-auth-body">
+                  <div class="demo-auth-title">Authorizing $1,800 on Visa ····4242</div>
+                  <div class="demo-auth-meta" data-auth-meta="1">requires_capture &middot; <span class="demo-timing">~620ms</span></div>
+                </div>
+                <div class="demo-auth-status" data-auth-status="1">
+                  <svg class="demo-spinner-small" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="40 60" stroke-linecap="round"/></svg>
+                </div>
+              </div>
+
+              <div class="demo-auth-step" data-auth="2">
+                <div class="demo-auth-num">02</div>
+                <div class="demo-auth-body">
+                  <div class="demo-auth-title">Authorizing $600 on Amex ····7321</div>
+                  <div class="demo-auth-meta" data-auth-meta="2">requires_capture &middot; <span class="demo-timing">~640ms</span></div>
+                </div>
+                <div class="demo-auth-status" data-auth-status="2">
+                  <svg class="demo-spinner-small" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="40 60" stroke-linecap="round"/></svg>
+                </div>
+              </div>
+
+              <div class="demo-auth-step" data-auth="3">
+                <div class="demo-auth-num">03</div>
+                <div class="demo-auth-body">
+                  <div class="demo-auth-title">Capturing both authorizations in parallel</div>
+                  <div class="demo-auth-meta" data-auth-meta="3">capture &middot; <span class="demo-timing">~110ms</span></div>
+                </div>
+                <div class="demo-auth-status" data-auth-status="3">
+                  <svg class="demo-spinner-small" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="40 60" stroke-linecap="round"/></svg>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="demo-proc-clock" data-demo-clock>
+              <span class="demo-clock-num" data-demo-clock-num>0.00</span>
+              <span class="demo-clock-unit">s</span>
+              <span class="demo-clock-label">// total elapsed</span>
+            </div>
+          </div>
+
+          <!-- ────── STATE: SUCCESS ────── -->
+          <div class="demo-screen demo-success-screen" data-screen="success">
+            <div class="demo-success-mark" aria-hidden="true">
+              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="demo-success-title">Order placed</div>
+            <div class="demo-success-sub">Settled in 0.86 seconds &middot; both cards charged atomically</div>
+
+            <div class="demo-receipt">
+
+              <div class="demo-receipt-row">
+                <span class="demo-receipt-key">Visa ····4242</span>
+                <span class="demo-receipt-val">$1,800.00</span>
+              </div>
+              <div class="demo-receipt-row">
+                <span class="demo-receipt-key">Amex ····7321</span>
+                <span class="demo-receipt-val">$600.00</span>
+              </div>
+              <div class="demo-receipt-divider"></div>
+              <div class="demo-receipt-row">
+                <span class="demo-receipt-key">Total charged</span>
+                <span class="demo-receipt-val demo-receipt-emph">$2,400.00</span>
+              </div>
+              <div class="demo-receipt-row">
+                <span class="demo-receipt-key">Quarvo fee (2%, paid by merchant)</span>
+                <span class="demo-receipt-val">−$48.00</span>
+              </div>
+              <div class="demo-receipt-row">
+                <span class="demo-receipt-key">Merchant net settlement</span>
+                <span class="demo-receipt-val demo-receipt-success">$2,352.00</span>
+              </div>
+              <div class="demo-receipt-row">
+                <span class="demo-receipt-key">Customer rewards earned</span>
+                <span class="demo-receipt-val demo-receipt-success">~$48 in points</span>
+              </div>
+
+            </div>
+
+            <div class="demo-success-meta">
+              <span class="demo-success-pill">Customer: $0 fee</span>
+              <span class="demo-success-pill">No new debt</span>
+              <span class="demo-success-pill">No credit pull</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Side commentary panel -->
+        <aside class="demo-side">
+          <div class="demo-side-head">
+            <div class="demo-side-tag">// LIVE COMMENTARY</div>
+            <div class="demo-side-title" data-demo-commentary-title>What you're seeing</div>
+          </div>
+          <div class="demo-side-body" data-demo-commentary>
+            <p>The customer reaches your checkout with a $2,400 cart. Their best card has $1,800 of available credit. The straight charge is going to fail.</p>
+          </div>
+
+          <div class="demo-side-meta">
+            <div class="demo-side-meta-row">
+              <span class="demo-side-meta-key">// State</span>
+              <span class="demo-side-meta-val" data-demo-state-name>ready</span>
+            </div>
+            <div class="demo-side-meta-row">
+              <span class="demo-side-meta-key">// Step</span>
+              <span class="demo-side-meta-val" data-demo-step>1 / 5</span>
+            </div>
+          </div>
+
+          <div class="demo-controls">
+            <button class="demo-control-btn demo-control-replay" data-demo-replay>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Replay
+            </button>
+            <button class="demo-control-btn demo-control-try" data-demo-try>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Try interactively
+            </button>
+          </div>
+        </aside>
+
+      </div>
+
+      <p class="demo-foot reveal">
+        <span class="demo-foot-emph">All animations represent actual production timing.</span>
+        Median wall-clock for a 2-card split is 0.85–0.95s end-to-end. Customer never sees a partial charge —
+        if any auth fails, all are voided atomically before the error is shown.
+      </p>
+
+    </div>
+  </section>
 
   <!-- INTEGRATIONS — 3 tiles (Phase 2.5) -->
   <section class="integ" id="integrations" aria-labelledby="integ-title">
@@ -1256,8 +1576,9 @@
     </div>
   </footer>
 
-  <script src="main.js?v=2.8"></script>
-  <script src="motion.js?v=2.8" defer></script>
+  <script src="main.js?v=5.0"></script>
+  <script src="motion.js?v=5.0" defer></script>
+  <script src="demo.js?v=5.0" defer></script>
   <script>
     function handleSubmit(e) {
       e.preventDefault();
