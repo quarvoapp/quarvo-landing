@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Quarvo Changelog</title>
+    <link>https://quarvo.io/changelog</link>
+    <description>What we shipped, when we shipped it. Public log of Quarvo updates — features, improvements, security advisories, and architectural changes.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 02 May 2026 18:00:00 +0000</lastBuildDate>
+    <atom:link href="https://quarvo.io/changelog/feed.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>Trust &amp; launch assets shipped (Phase 6)</title>
+      <link>https://quarvo.io/changelog#may-02-2026-trust-launch</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-05-02-trust</guid>
+      <pubDate>Sat, 02 May 2026 18:00:00 +0000</pubDate>
+      <description><![CDATA[Three new pages live: /security with full data-flow diagrams and SOC 2 roadmap, /changelog (this page), and /brand with downloadable logo assets. The security page in particular is built for high-AOV merchant due diligence.]]></description>
+      <category>Brand</category>
+      <category>Docs</category>
+      <category>Security</category>
+    </item>
+
+    <item>
+      <title>Interactive split-payment demo on the home page (Phase 5)</title>
+      <link>https://quarvo.io/changelog#may-02-2026-demo</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-05-02-demo</guid>
+      <pubDate>Sat, 02 May 2026 14:00:00 +0000</pubDate>
+      <description><![CDATA[Added a new #demo section that simulates the customer experience end-to-end. Auto-plays once when section enters viewport. Two manual modes: Replay and Try interactively. Two-phase commit visualization with live clock 0.00 → 0.86s.]]></description>
+      <category>Feature</category>
+    </item>
+
+    <item>
+      <title>Comparison pages: Quarvo vs BNPL, Klarna, Affirm, Afterpay (Phase 4)</title>
+      <link>https://quarvo.io/changelog#may-02-2026-compare</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-05-02-compare</guid>
+      <pubDate>Sat, 02 May 2026 12:00:00 +0000</pubDate>
+      <description><![CDATA[Five new pages under /compare with side-by-side breakdowns of every meaningful dimension — customer cost, merchant fees, credit reporting, late-fee mechanics, AOV-band fit. Three rules: numbers sourced and dated, where competitors win we say so, structural not adversarial.]]></description>
+      <category>Feature</category>
+      <category>Docs</category>
+    </item>
+
+    <item>
+      <title>Launch polish — sitemap, robots, branded 404, OG tags (Phase 2.9)</title>
+      <link>https://quarvo.io/changelog#may-02-2026-polish</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-05-02-polish</guid>
+      <pubDate>Sat, 02 May 2026 10:00:00 +0000</pubDate>
+      <description><![CDATA[Polish pass to make the site feel ready to ship. sitemap.xml with all 22 indexable URLs, robots.txt, branded 404 with suggested routes, and og:image + twitter:image meta tags added to every blog post.]]></description>
+      <category>Improvement</category>
+      <category>Infra</category>
+    </item>
+
+    <item>
+      <title>Five merchant-angle blog posts (Phase 3)</title>
+      <link>https://quarvo.io/changelog#may-02-2026-merchant-blog</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-05-02-merchant-blog</guid>
+      <pubDate>Sat, 02 May 2026 08:00:00 +0000</pubDate>
+      <description><![CDATA[Five new deep-dives for high-AOV merchants: Hidden Cost of Declined Sales, Why $2K+ AOV Converts Worse, Stripe Connect + Multi-Card Splitting, Recovery Rate Benchmarks, and the Merchant Playbook for High-AOV Recovery.]]></description>
+      <category>Feature</category>
+      <category>Docs</category>
+    </item>
+
+    <item>
+      <title>/pay-with-quarvo integration docs (Phase 2.8)</title>
+      <link>https://quarvo.io/changelog#apr-30-2026-docs</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-04-30-docs</guid>
+      <pubDate>Wed, 30 Apr 2026 18:00:00 +0000</pubDate>
+      <description><![CDATA[End-to-end developer documentation: API reference, Stripe Connect setup, drop-in JS snippets for Shopify and WooCommerce, server SDK examples, webhook signatures, and brand kit.]]></description>
+      <category>Feature</category>
+      <category>API</category>
+    </item>
+
+    <item>
+      <title>/for-merchants pricing tiers + lead capture (Phase 2.8)</title>
+      <link>https://quarvo.io/changelog#apr-30-2026-merchants</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-04-30-merchants</guid>
+      <pubDate>Wed, 30 Apr 2026 16:00:00 +0000</pubDate>
+      <description><![CDATA[Pricing section added to /for-merchants with two tiers: Direct API (2% per recovered, no monthly minimum) and Shopify+Woo (managed integration). Lead capture form posts to app.quarvo.io/api/merchants/register.]]></description>
+      <category>Feature</category>
+    </item>
+
+    <item>
+      <title>Section reorder + SEO refresh (Phase 2.6 + 2.7)</title>
+      <link>https://quarvo.io/changelog#apr-28-2026-seo</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-04-28-seo</guid>
+      <pubDate>Mon, 28 Apr 2026 18:00:00 +0000</pubDate>
+      <description><![CDATA[Cut the dual consumer/merchant flow on the home page in favor of single merchant-first narrative. Reorganized sections so value proposition compounds. Refreshed all meta titles and OG tags to match Architecture 2 framing.]]></description>
+      <category>Improvement</category>
+      <category>Infra</category>
+    </item>
+
+    <item>
+      <title>Integrations + Trust/Security sections (Phase 2.5)</title>
+      <link>https://quarvo.io/changelog#apr-27-2026-integrations</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-04-27-integrations</guid>
+      <pubDate>Sun, 27 Apr 2026 16:00:00 +0000</pubDate>
+      <description><![CDATA[Three integration tiles for Shopify, WooCommerce, and Direct API. Trust/Security section featuring Stripe Connect, atomic commitment, and PCI scope reduction.]]></description>
+      <category>Feature</category>
+    </item>
+
+    <item>
+      <title>How it works — sticky-scroll narrative (Phase 2.4)</title>
+      <link>https://quarvo.io/changelog#apr-27-2026-how</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-04-27-how</guid>
+      <pubDate>Sun, 27 Apr 2026 14:00:00 +0000</pubDate>
+      <description><![CDATA[Sticky-scroll storytelling section where the visual on the left changes as the user scrolls through three steps on the right.]]></description>
+      <category>Feature</category>
+    </item>
+
+    <item>
+      <title>Live ROI calculator (Phase 2.3)</title>
+      <link>https://quarvo.io/changelog#apr-27-2026-roi</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-04-27-roi</guid>
+      <pubDate>Sun, 27 Apr 2026 12:00:00 +0000</pubDate>
+      <description><![CDATA[Two-input ROI calculator (AOV × monthly orders) with bidirectional slider sync, animated number ticking, and yearly projection. Models industry-blend recovery economics.]]></description>
+      <category>Feature</category>
+    </item>
+
+    <item>
+      <title>Hero redesign + motion infrastructure (Phase 2.1 + 2.2)</title>
+      <link>https://quarvo.io/changelog#apr-27-2026-hero</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-04-27-hero</guid>
+      <pubDate>Sun, 27 Apr 2026 10:00:00 +0000</pubDate>
+      <description><![CDATA[New hero with word-stagger entrance, shimmer-text gradient, and atmospheric orb background. Built motion.js as shared motion infrastructure (reveal observer, magnetic hover, tilt, spotlight, kinetic numbers).]]></description>
+      <category>Feature</category>
+    </item>
+
+    <item>
+      <title>UI/UX overhaul — accessibility, SVG icons, structural cleanup</title>
+      <link>https://quarvo.io/changelog#apr-26-2026-uiux</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-04-26-uiux</guid>
+      <pubDate>Sat, 26 Apr 2026 18:00:00 +0000</pubDate>
+      <description><![CDATA[Comprehensive accessibility pass: ARIA semantic markup, mobile meta tags, focus states. Migrated all emoji icons to inline SVG. Extracted ~127 inline styles to scoped CSS classes.]]></description>
+      <category>Improvement</category>
+    </item>
+
+    <item>
+      <title>First five blog posts (consumer-angle)</title>
+      <link>https://quarvo.io/changelog#apr-22-2026-blog</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-04-22-blog</guid>
+      <pubDate>Tue, 22 Apr 2026 12:00:00 +0000</pubDate>
+      <description><![CDATA[Initial editorial drop targeting consumer search intent: split payments, multi-card workarounds, BNPL alternatives, large-purchase how-tos.]]></description>
+      <category>Feature</category>
+      <category>Docs</category>
+    </item>
+
+    <item>
+      <title>Loops API integration + waitlist deploy</title>
+      <link>https://quarvo.io/changelog#apr-20-2026-loops</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-04-20-loops</guid>
+      <pubDate>Sun, 20 Apr 2026 12:00:00 +0000</pubDate>
+      <description><![CDATA[Initial waitlist live. Email capture posts to /api/subscribe, syncs to Loops with mailing-list segmentation.]]></description>
+      <category>Infra</category>
+    </item>
+
+    <item>
+      <title>Initial deploy to Vercel — quarvo.io live</title>
+      <link>https://quarvo.io/changelog#apr-18-2026-launch</link>
+      <guid isPermaLink="false">quarvo-changelog-2026-04-18-launch</guid>
+      <pubDate>Fri, 18 Apr 2026 12:00:00 +0000</pubDate>
+      <description><![CDATA[Vanilla HTML/CSS/JS landing page deployed to Vercel. Domain wired (quarvo.io + www.quarvo.io with proper redirects). Brand identity, color tokens, and typography system established.]]></description>
+      <category>Infra</category>
+    </item>
+
+  </channel>
+</rss>

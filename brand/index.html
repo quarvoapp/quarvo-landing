@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Brand Kit · Quarvo</title>
+  <meta name="description" content="Quarvo logo files, color palette, typography rules, and press contact. Everything you need to write about us, link to us, or use our brand correctly." />
+  <meta name="keywords" content="quarvo brand, quarvo logo, quarvo press kit, quarvo media, quarvo brand guidelines" />
+  <link rel="canonical" href="https://quarvo.io/brand" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://quarvo.io/brand" />
+  <meta property="og:title" content="Quarvo Brand Kit" />
+  <meta property="og:description" content="Logo files, colors, typography. Everything you need to write about us or link to us." />
+  <meta property="og:image" content="https://quarvo.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Quarvo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://quarvo.io/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060A;
+      --surface: #0E0E18;
+      --card: #101018;
+      --border: #1A1A2E;
+      --violet: #7B2FFF;
+      --cyan: #00F5FF;
+      --teal: #00C8CC;
+      --green: #34D399;
+      --gold: #F5C518;
+      --orange: #F97316;
+      --red: #F75454;
+      --pink: #F472B6;
+      --text: #F0F0F8;
+      --soft: #9090B0;
+      --muted: #6A6A88;
+      --max: 980px;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ─── BG ─── */
+    .bg-fx { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; }
+    .orb-1 { top: 10%; left: -10%; width: 440px; height: 440px; background: rgba(123,47,255,0.16); }
+    .orb-2 { bottom: 10%; right: -10%; width: 480px; height: 480px; background: rgba(0,245,255,0.12); }
+    .grid-overlay {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    }
+
+    /* ─── NAV ─── */
+    nav.tiny-nav {
+      position: relative; z-index: 5;
+      padding: 24px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 34px; height: 34px; background: linear-gradient(135deg, var(--violet), var(--cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; font-family: 'Syne', sans-serif; }
+    .logo-text { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.06em; font-family: 'Syne', sans-serif; }
+    .nav-back {
+      font-size: 12px; color: var(--soft);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.08em;
+      padding: 7px 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-back:hover { border-color: rgba(0,245,255,0.4); color: var(--cyan); }
+
+    main { position: relative; z-index: 2; }
+
+    /* ─── HEADER ─── */
+    .br-header {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 24px 40px;
+      text-align: center;
+    }
+    .br-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(0,245,255,0.06);
+      border: 1px solid rgba(0,245,255,0.25);
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 5.6vw, 56px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+    h1 em { font-style: normal; background: linear-gradient(135deg, var(--cyan), var(--violet)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .br-deck {
+      font-size: 17px;
+      color: var(--soft);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ─── SECTION ─── */
+    .br-article {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(24px, 3vw, 30px);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      margin: 64px 0 22px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    h2:first-of-type { border-top: none; padding-top: 0; }
+    h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      margin: 24px 0 12px;
+      color: var(--text);
+    }
+    p { margin-bottom: 16px; color: var(--text); }
+    p strong { color: #fff; font-weight: 700; }
+    a { color: var(--cyan); text-decoration: none; transition: opacity 0.15s; }
+    a:hover { opacity: 0.8; text-decoration: underline; text-underline-offset: 3px; }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92em;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--cyan);
+    }
+
+    /* ─── LOGO SHOWCASE ─── */
+    .br-logos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .br-logo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .br-logo-card.light { background: #F5F5FA; }
+    .br-logo-display {
+      padding: 56px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+    }
+    .br-logo-display svg { max-width: 100%; height: auto; }
+    .br-logo-meta {
+      padding: 16px 22px;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      letter-spacing: 0.04em;
+    }
+    .br-logo-card.light .br-logo-meta { background: #fff; border-top-color: rgba(0,0,0,0.08); color: #4A4A6A; }
+    .br-logo-name {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .br-logo-card.light .br-logo-name { color: #1A1A2E; }
+    .br-logo-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--cyan);
+      text-decoration: none;
+      padding: 4px 10px;
+      border: 1px solid rgba(0,245,255,0.25);
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .br-logo-dl:hover { background: rgba(0,245,255,0.06); }
+    .br-logo-card.light .br-logo-dl {
+      color: #4F6EF7;
+      border-color: rgba(79,110,247,0.3);
+    }
+    .br-logo-card.light .br-logo-dl:hover { background: rgba(79,110,247,0.06); }
+
+    /* ─── COLOR SWATCHES ─── */
+    .br-colors {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 28px 0;
+    }
+    .br-color {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .br-swatch {
+      height: 100px;
+      position: relative;
+    }
+    .br-swatch.violet { background: var(--violet); }
+    .br-swatch.cyan { background: var(--cyan); }
+    .br-swatch.teal { background: var(--teal); }
+    .br-swatch.bg-deep { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .br-swatch.surface { background: var(--surface); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .br-swatch.green { background: var(--green); }
+    .br-swatch.orange { background: var(--orange); }
+    .br-swatch.red { background: var(--red); }
+    .br-swatch.gold { background: var(--gold); }
+    .br-swatch.gradient {
+      background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 100%);
+    }
+    .br-color-meta {
+      padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      line-height: 1.6;
+    }
+    .br-color-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+    .br-color-hex {
+      color: var(--cyan);
+      letter-spacing: 0.04em;
+    }
+    .br-color-token {
+      color: var(--muted);
+      margin-top: 4px;
+      font-size: 10.5px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    .br-fonts {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .br-font {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+    }
+    .br-font-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .br-font-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--text);
+    }
+    .br-font-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--cyan);
+      padding: 3px 10px;
+      background: rgba(0,245,255,0.06);
+      border: 1px solid rgba(0,245,255,0.25);
+      border-radius: 20px;
+    }
+    .br-font-sample {
+      padding: 18px 0 6px;
+      border-top: 1px dashed rgba(255,255,255,0.08);
+    }
+    .br-font-sample.syne { font-family: 'Syne', sans-serif; }
+    .br-font-sample.dm-sans { font-family: 'DM Sans', sans-serif; }
+    .br-font-sample.jetbrains { font-family: 'JetBrains Mono', monospace; }
+    .br-font-display {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .br-font-display.dm-sans { font-weight: 500; }
+    .br-font-display.jetbrains { font-size: 26px; font-weight: 500; }
+    .br-font-glyphs {
+      font-size: 14px;
+      color: var(--soft);
+      letter-spacing: 0.02em;
+      margin-top: 6px;
+    }
+    .br-font-spec {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255,255,255,0.06);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── DO / DON'T ─── */
+    .br-rules {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    @media (max-width: 700px) { .br-rules { grid-template-columns: 1fr; } }
+    .br-rule {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+    }
+    .br-rule.do { border-left: 3px solid var(--green); }
+    .br-rule.dont { border-left: 3px solid var(--red); }
+    .br-rule-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .br-rule.do .br-rule-label { color: var(--green); }
+    .br-rule.dont .br-rule-label { color: var(--red); }
+    .br-rule ul { padding-left: 18px; margin: 0; }
+    .br-rule li { color: var(--soft); margin-bottom: 8px; font-size: 14.5px; line-height: 1.6; }
+    .br-rule li:last-child { margin-bottom: 0; }
+    .br-rule li strong { color: var(--text); }
+
+    /* ─── ABOUT BLOCK ─── */
+    .br-about {
+      background: linear-gradient(135deg, rgba(123,47,255,0.06), rgba(0,245,255,0.03));
+      border: 1px solid rgba(123,47,255,0.25);
+      border-radius: 18px;
+      padding: 28px 32px;
+      margin: 28px 0;
+    }
+    .br-about p { font-size: 14.5px; color: var(--soft); line-height: 1.75; }
+    .br-about p:last-child { margin-bottom: 0; }
+    .br-about strong { color: var(--text); font-weight: 700; }
+
+    /* ─── CONTACT ─── */
+    .br-contact {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px 36px;
+      margin: 36px 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    @media (max-width: 700px) { .br-contact { grid-template-columns: 1fr; padding: 26px; } }
+    .br-contact-col h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-family: 'Syne', sans-serif;
+    }
+    .br-contact-col p {
+      font-size: 14px;
+      color: var(--soft);
+      margin-bottom: 12px;
+      line-height: 1.65;
+    }
+    .br-contact-email {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--cyan);
+      padding: 8px 14px;
+      background: rgba(0,245,255,0.06);
+      border: 1px solid rgba(0,245,255,0.25);
+      border-radius: 8px;
+      letter-spacing: 0.02em;
+      transition: background 0.2s;
+    }
+    .br-contact-email:hover { background: rgba(0,245,255,0.12); text-decoration: none; }
+
+    /* ─── DOWNLOAD ALL ─── */
+    .br-dl-all {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .br-dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      color: #fff !important;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .br-dl-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 32px rgba(123,47,255,0.3);
+      text-decoration: none;
+      opacity: 1;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative; z-index: 5;
+      padding: 32px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    footer a { color: var(--soft); }
+    footer a:hover { color: var(--cyan); }
+
+    @media (max-width: 600px) {
+      .br-header { padding: 56px 20px 28px; }
+      .br-article { padding: 0 20px 60px; }
+      .br-logo-display { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-fx" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <nav class="tiny-nav">
+    <a href="/" class="logo">
+      <div class="logo-mark">Q</div>
+      <span class="logo-text">QUARVO</span>
+    </a>
+    <a href="/" class="nav-back">// HOME</a>
+  </nav>
+
+  <main>
+
+    <header class="br-header">
+      <span class="br-tag">// BRAND KIT &amp; PRESS</span>
+      <h1>Use Quarvo's brand<br/><em>like we'd use it.</em></h1>
+      <p class="br-deck">
+        Logo files, color palette, typography rules, and press contact. Everything you need to write about us, link to us, or use our brand correctly.
+      </p>
+    </header>
+
+    <article class="br-article">
+
+      <!-- ─── ABOUT QUARVO (BOILERPLATE) ──────────────────────────────── -->
+      <h2>About Quarvo</h2>
+
+      <div class="br-about">
+        <p><strong>Boilerplate (short, ~50 words):</strong></p>
+        <p>Quarvo is a payment infrastructure company that lets shoppers complete high-AOV purchases by splitting a single transaction across multiple credit cards they already hold. Built on Stripe Connect, Quarvo recovers declined high-ticket sales for merchants — without new debt for customers and without replatforming for merchants.</p>
+      </div>
+
+      <div class="br-about">
+        <p><strong>Boilerplate (long, ~120 words):</strong></p>
+        <p>Quarvo is a payment infrastructure company solving one of the largest unmonetized cohorts in high-AOV e-commerce: the 6.5%+ of $1,500+ checkouts that decline because a single card doesn't have enough room — even when the customer's combined credit across all their cards comfortably does. Quarvo runs as a Stripe Connect platform that orchestrates atomic two-phase commits across N customer cards, recovering 50–70% of declined transactions at the moment of decline. Customers pay nothing extra, take on no new debt, and earn rewards on each card normally. Merchants pay 2% only on recovered transactions and never replatform — Quarvo settles in full through the merchant's existing Stripe account.</p>
+      </div>
+
+      <!-- ─── LOGO ASSETS ─────────────────────────────────────────────── -->
+      <h2>Logo</h2>
+
+      <p>The Quarvo logomark is a violet→cyan gradient orb with a magnifier-style stroke. The wordmark uses Syne ExtraBold at 0.04em letter-spacing. Always preserve the gradient direction (top-left violet → bottom-right cyan).</p>
+
+      <div class="br-logos">
+
+        <div class="br-logo-card">
+          <div class="br-logo-display">
+            <svg width="240" height="64" viewBox="0 0 240 64" fill="none" aria-label="Quarvo wordmark on dark">
+              <defs>
+                <linearGradient id="brLDk" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+                </linearGradient>
+                <mask id="brMDk"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+              </defs>
+              <circle cx="30" cy="30" r="22" fill="url(#brLDk)" mask="url(#brMDk)"/>
+              <line x1="44" y1="44" x2="57" y2="57" stroke="url(#brLDk)" stroke-width="8" stroke-linecap="round"/>
+              <text x="80" y="42" font-family="'Syne', sans-serif" font-weight="800" font-size="28" fill="#F0F0F8" letter-spacing="0.04em">QUARVO</text>
+            </svg>
+          </div>
+          <div class="br-logo-meta">
+            <span class="br-logo-name">Wordmark · Dark</span>
+            <a href="/brand/quarvo-logo.svg" class="br-logo-dl" download>↓ SVG</a>
+          </div>
+        </div>
+
+        <div class="br-logo-card light">
+          <div class="br-logo-display">
+            <svg width="240" height="64" viewBox="0 0 240 64" fill="none" aria-label="Quarvo wordmark on light">
+              <defs>
+                <linearGradient id="brLLt" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00C8CC"/>
+                </linearGradient>
+                <mask id="brMLt"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+              </defs>
+              <circle cx="30" cy="30" r="22" fill="url(#brLLt)" mask="url(#brMLt)"/>
+              <line x1="44" y1="44" x2="57" y2="57" stroke="url(#brLLt)" stroke-width="8" stroke-linecap="round"/>
+              <text x="80" y="42" font-family="'Syne', sans-serif" font-weight="800" font-size="28" fill="#0E0E18" letter-spacing="0.04em">QUARVO</text>
+            </svg>
+          </div>
+          <div class="br-logo-meta">
+            <span class="br-logo-name">Wordmark · Light</span>
+            <a href="/brand/quarvo-logo-light.svg" class="br-logo-dl" download>↓ SVG</a>
+          </div>
+        </div>
+
+        <div class="br-logo-card">
+          <div class="br-logo-display">
+            <svg width="80" height="80" viewBox="0 0 64 64" fill="none" aria-label="Quarvo mark only">
+              <defs>
+                <linearGradient id="brMk1" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#7B2FFF"/><stop offset="100%" stop-color="#00F5FF"/>
+                </linearGradient>
+                <mask id="brMk2"><rect width="64" height="64" fill="white"/><circle cx="30" cy="30" r="13" fill="black"/></mask>
+              </defs>
+              <circle cx="30" cy="30" r="22" fill="url(#brMk1)" mask="url(#brMk2)"/>
+              <line x1="44" y1="44" x2="57" y2="57" stroke="url(#brMk1)" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="br-logo-meta">
+            <span class="br-logo-name">Mark only</span>
+            <a href="/brand/quarvo-mark.svg" class="br-logo-dl" download>↓ SVG</a>
+          </div>
+        </div>
+
+      </div>
+
+      <h3>Clear space &amp; minimum size</h3>
+      <p>Maintain clear space equal to the height of the "Q" character around all sides of the logo. Minimum size: 24px tall for the wordmark, 16px tall for the mark only. Below those sizes the gradient compresses too tightly to read.</p>
+
+      <!-- ─── DO / DON'T ─── -->
+      <div class="br-rules">
+
+        <div class="br-rule do">
+          <div class="br-rule-label">// DO</div>
+          <ul>
+            <li><strong>Use the gradient direction</strong> as provided (top-left violet → bottom-right cyan).</li>
+            <li><strong>Keep at least 1× the Q-height</strong> of clear space around the logo.</li>
+            <li><strong>Use the dark version</strong> on backgrounds darker than 50% lightness; light version on lighter.</li>
+            <li><strong>Scale uniformly.</strong> SVGs preserve crispness at any size.</li>
+          </ul>
+        </div>
+
+        <div class="br-rule dont">
+          <div class="br-rule-label">// DON'T</div>
+          <ul>
+            <li><strong>Don't recolor the gradient</strong> outside of the approved violet→cyan or violet→teal pairs.</li>
+            <li><strong>Don't stretch or skew</strong> the logo. Preserve aspect ratio always.</li>
+            <li><strong>Don't add effects</strong> like outer shadow, bevel, or extra strokes.</li>
+            <li><strong>Don't place on busy backgrounds</strong> without enough contrast — gradients lose against gradients.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ─── COLORS ─── -->
+      <h2>Color palette</h2>
+
+      <p>The Quarvo palette is built around a violet→cyan signature gradient on a deep-space dark background, with semantic accents for data states (green positive, orange warning, red critical, gold attention).</p>
+
+      <h3>Brand colors</h3>
+      <div class="br-colors">
+
+        <div class="br-color">
+          <div class="br-swatch gradient"></div>
+          <div class="br-color-meta">
+            <div class="br-color-name">Signature gradient</div>
+            <div class="br-color-hex">violet → cyan · 135°</div>
+            <div class="br-color-token">--gradient-signature</div>
+          </div>
+        </div>
+
+        <div class="br-color">
+          <div class="br-swatch violet"></div>
+          <div class="br-color-meta">
+            <div class="br-color-name">Quantum Violet</div>
+            <div class="br-color-hex">#7B2FFF</div>
+            <div class="br-color-token">--violet</div>
+          </div>
+        </div>
+
+        <div class="br-color">
+          <div class="br-swatch cyan"></div>
+          <div class="br-color-meta">
+            <div class="br-color-name">Plasma Cyan</div>
+            <div class="br-color-hex">#00F5FF</div>
+            <div class="br-color-token">--cyan</div>
+          </div>
+        </div>
+
+        <div class="br-color">
+          <div class="br-swatch teal"></div>
+          <div class="br-color-meta">
+            <div class="br-color-name">Deep Teal</div>
+            <div class="br-color-hex">#00C8CC</div>
+            <div class="br-color-token">--teal · light bg pair</div>
+          </div>
+        </div>
+
+      </div>
+
+      <h3>Surface colors</h3>
+      <div class="br-colors">
+
+        <div class="br-color">
+          <div class="br-swatch bg-deep"></div>
+          <div class="br-color-meta">
+            <div class="br-color-name">Deep Space</div>
+            <div class="br-color-hex">#06060A</div>
+            <div class="br-color-token">--bg · primary background</div>
+          </div>
+        </div>
+
+        <div class="br-color">
+          <div class="br-swatch surface"></div>
+          <div class="br-color-meta">
+            <div class="br-color-name">Surface Dark</div>
+            <div class="br-color-hex">#0E0E18</div>
+            <div class="br-color-token">--surface · cards, blocks</div>
+          </div>
+        </div>
+
+      </div>
+
+      <h3>Data accents</h3>
+      <div class="br-colors">
+
+        <div class="br-color">
+          <div class="br-swatch green"></div>
+          <div class="br-color-meta">
+            <div class="br-color-name">Data Green</div>
+            <div class="br-color-hex">#34D399</div>
+            <div class="br-color-token">--data-green · positive</div>
+          </div>
+        </div>
+
+        <div class="br-color">
+          <div class="br-swatch gold"></div>
+          <div class="br-color-meta">
+            <div class="br-color-name">Signal Gold</div>
+            <div class="br-color-hex">#F5C518</div>
+            <div class="br-color-token">--gold · attention</div>
+          </div>
+        </div>
+
+        <div class="br-color">
+          <div class="br-swatch orange"></div>
+          <div class="br-color-meta">
+            <div class="br-color-name">Warn Orange</div>
+            <div class="br-color-hex">#F97316</div>
+            <div class="br-color-token">--orange · warning</div>
+          </div>
+        </div>
+
+        <div class="br-color">
+          <div class="br-swatch red"></div>
+          <div class="br-color-meta">
+            <div class="br-color-name">Critical Red</div>
+            <div class="br-color-hex">#F75454</div>
+            <div class="br-color-token">--red · critical</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ─── TYPOGRAPHY ─── -->
+      <h2>Typography</h2>
+
+      <p>Three families do all the work. <strong>Syne</strong> for display and headlines (geometric, characterful, distinctively non-AI). <strong>DM Sans</strong> for body copy (refined, readable, paired with Syne's geometry). <strong>JetBrains Mono</strong> for code, data, and labels (technical credibility).</p>
+
+      <div class="br-fonts">
+
+        <div class="br-font">
+          <div class="br-font-meta">
+            <div class="br-font-name">Syne</div>
+            <span class="br-font-tag">// DISPLAY</span>
+          </div>
+          <div class="br-font-sample syne">
+            <div class="br-font-display">Recover the high-ticket sales your checkout is losing.</div>
+            <div class="br-font-glyphs">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 — &amp; ! ?</div>
+          </div>
+          <div class="br-font-spec">// WEIGHTS: 400, 600, 700, 800 · USED FOR: H1–H3, BUTTONS, NAV, BRAND</div>
+        </div>
+
+        <div class="br-font">
+          <div class="br-font-meta">
+            <div class="br-font-name">DM Sans</div>
+            <span class="br-font-tag">// BODY</span>
+          </div>
+          <div class="br-font-sample dm-sans">
+            <div class="br-font-display dm-sans">Body copy carries the long-form work — readable at length, paired with Syne's geometry.</div>
+            <div class="br-font-glyphs">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</div>
+          </div>
+          <div class="br-font-spec">// WEIGHTS: 300, 400, 500 · USED FOR: PARAGRAPHS, LISTS, SECONDARY UI</div>
+        </div>
+
+        <div class="br-font">
+          <div class="br-font-meta">
+            <div class="br-font-name">JetBrains Mono</div>
+            <span class="br-font-tag">// MONO</span>
+          </div>
+          <div class="br-font-sample jetbrains">
+            <div class="br-font-display jetbrains">// CODE_BLOCKS · DATA_LABELS · TIMESTAMPS · 2.4_BILLION_USD</div>
+            <div class="br-font-glyphs">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 → ←</div>
+          </div>
+          <div class="br-font-spec">// WEIGHTS: 400, 500 · USED FOR: CODE, DATA TABLES, LABELS, TAGS</div>
+        </div>
+
+      </div>
+
+      <!-- ─── DOWNLOAD ─── -->
+      <div class="br-dl-all">
+        <a href="/brand/quarvo-mark.svg" download class="br-dl-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download mark (SVG)
+        </a>
+      </div>
+
+      <!-- ─── PRESS CONTACT ─── -->
+      <h2>Press &amp; partnerships</h2>
+
+      <div class="br-contact">
+
+        <div class="br-contact-col">
+          <h3>Press inquiries</h3>
+          <p>Coverage requests, founder interviews, expert commentary on payments infrastructure or BNPL trends. We aim to respond within 1 business day.</p>
+          <a href="mailto:press@quarvo.io" class="br-contact-email">press@quarvo.io</a>
+        </div>
+
+        <div class="br-contact-col">
+          <h3>Partnerships</h3>
+          <p>Integration partners, platform partners, channel partners, design partners. Particularly interested in high-AOV verticals (travel, professional equipment, healthcare, B2B procurement).</p>
+          <a href="mailto:partners@quarvo.io" class="br-contact-email">partners@quarvo.io</a>
+        </div>
+
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer>
+    © 2026 QUARVO ·
+    <a href="/">Home</a> ·
+    <a href="/for-merchants">For merchants</a> ·
+    <a href="/security">Security</a> ·
+    <a href="/changelog">Changelog</a> ·
+    <a href="/privacy">Privacy</a> ·
+    <a href="/terms">Terms</a>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="64" viewBox="0 0 240 64" fill="none">
+  <defs>
+    <linearGradient id="quarvoLogoLG" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7B2FFF"/>
+      <stop offset="100%" stop-color="#00C8CC"/>
+    </linearGradient>
+    <mask id="quarvoLogoLM">
+      <rect width="64" height="64" fill="white"/>
+      <circle cx="30" cy="30" r="13" fill="black"/>
+    </mask>
+  </defs>
+  <circle cx="30" cy="30" r="22" fill="url(#quarvoLogoLG)" mask="url(#quarvoLogoLM)"/>
+  <line x1="44" y1="44" x2="57" y2="57" stroke="url(#quarvoLogoLG)" stroke-width="8" stroke-linecap="round"/>
+  <text x="80" y="42" font-family="'Syne', 'Inter', sans-serif" font-weight="800" font-size="28" fill="#0E0E18" letter-spacing="0.04em">QUARVO</text>
+</svg>

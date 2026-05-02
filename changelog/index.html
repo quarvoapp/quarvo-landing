@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Changelog · Quarvo</title>
+  <meta name="description" content="What we shipped, when we shipped it. Public log of Quarvo updates — features, improvements, security advisories, and architectural changes." />
+  <meta name="keywords" content="quarvo changelog, quarvo updates, quarvo release notes, quarvo build log" />
+  <link rel="canonical" href="https://quarvo.io/changelog" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="alternate" type="application/rss+xml" title="Quarvo Changelog" href="/changelog/feed.xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://quarvo.io/changelog" />
+  <meta property="og:title" content="Quarvo Changelog" />
+  <meta property="og:description" content="Public log of every release, improvement, and architectural change. Built in the open." />
+  <meta property="og:image" content="https://quarvo.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Quarvo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://quarvo.io/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060A;
+      --surface: #0E0E18;
+      --card: #101018;
+      --border: #1A1A2E;
+      --violet: #7B2FFF;
+      --cyan: #00F5FF;
+      --green: #34D399;
+      --gold: #F5C518;
+      --orange: #F97316;
+      --red: #F75454;
+      --pink: #F472B6;
+      --teal: #2DD4BF;
+      --text: #F0F0F8;
+      --soft: #9090B0;
+      --muted: #6A6A88;
+      --max: 820px;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ─── BG ─── */
+    .bg-fx { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; }
+    .orb-1 { top: 5%; left: -8%; width: 400px; height: 400px; background: rgba(123,47,255,0.14); }
+    .orb-2 { bottom: 5%; right: -8%; width: 460px; height: 460px; background: rgba(0,245,255,0.1); }
+    .grid-overlay {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    }
+
+    /* ─── NAV ─── */
+    nav.tiny-nav {
+      position: relative; z-index: 5;
+      padding: 24px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 34px; height: 34px; background: linear-gradient(135deg, var(--violet), var(--cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; font-family: 'Syne', sans-serif; }
+    .logo-text { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.06em; font-family: 'Syne', sans-serif; }
+    .nav-back {
+      font-size: 12px; color: var(--soft);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.08em;
+      padding: 7px 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-back:hover { border-color: rgba(0,245,255,0.4); color: var(--cyan); }
+
+    main { position: relative; z-index: 2; }
+
+    /* ─── HEADER ─── */
+    .cl-header {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 24px 32px;
+    }
+    .cl-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(0,245,255,0.06);
+      border: 1px solid rgba(0,245,255,0.25);
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 5.6vw, 56px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+    h1 em { font-style: normal; background: linear-gradient(135deg, var(--cyan), var(--violet)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .cl-deck {
+      font-size: 17px;
+      color: var(--soft);
+      max-width: 580px;
+      line-height: 1.65;
+      margin-bottom: 22px;
+    }
+
+    .cl-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .cl-rss {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--orange);
+      background: rgba(249,115,22,0.06);
+      border: 1px solid rgba(249,115,22,0.25);
+      padding: 6px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .cl-rss:hover { background: rgba(249,115,22,0.12); }
+
+    /* ─── FILTER PILLS ─── */
+    .cl-filters {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px 20px;
+    }
+    .cl-filter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--soft);
+    }
+
+    /* ─── ENTRIES ─── */
+    .cl-list {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px 24px 100px;
+      position: relative;
+    }
+    .cl-list::before {
+      content: "";
+      position: absolute;
+      top: 24px;
+      bottom: 80px;
+      left: 152px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(0,245,255,0.2) 10%, rgba(0,245,255,0.2) 90%, transparent);
+    }
+    @media (max-width: 720px) { .cl-list::before { display: none; } }
+
+    .cl-entry {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 22px;
+      padding: 28px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .cl-entry:last-child { border-bottom: none; }
+
+    .cl-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-align: right;
+      padding-top: 2px;
+    }
+    .cl-date strong {
+      display: block;
+      font-weight: 600;
+      color: var(--cyan);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .cl-date span {
+      display: block;
+      font-size: 10.5px;
+    }
+
+    .cl-body {
+      position: relative;
+    }
+    .cl-body::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: -36px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 0 4px rgba(0,245,255,0.12);
+    }
+    @media (max-width: 720px) {
+      .cl-entry { grid-template-columns: 1fr; gap: 8px; }
+      .cl-date { text-align: left; }
+      .cl-body::before { display: none; }
+    }
+
+    .cl-tags {
+      display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap;
+    }
+    .cl-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .cl-pill.feature { background: rgba(123,47,255,0.1); color: #B09FFF; border: 1px solid rgba(123,47,255,0.3); }
+    .cl-pill.improvement { background: rgba(0,245,255,0.08); color: var(--cyan); border: 1px solid rgba(0,245,255,0.3); }
+    .cl-pill.fix { background: rgba(52,211,153,0.08); color: var(--green); border: 1px solid rgba(52,211,153,0.3); }
+    .cl-pill.security { background: rgba(247,84,84,0.08); color: var(--red); border: 1px solid rgba(247,84,84,0.3); }
+    .cl-pill.api { background: rgba(245,197,24,0.08); color: var(--gold); border: 1px solid rgba(245,197,24,0.3); }
+    .cl-pill.docs { background: rgba(244,114,182,0.08); color: var(--pink); border: 1px solid rgba(244,114,182,0.3); }
+    .cl-pill.infra { background: rgba(45,212,191,0.08); color: var(--teal); border: 1px solid rgba(45,212,191,0.3); }
+    .cl-pill.brand { background: rgba(249,115,22,0.08); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+
+    .cl-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .cl-text {
+      font-size: 14.5px;
+      color: var(--soft);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .cl-text p { margin-bottom: 12px; }
+    .cl-text p:last-child { margin-bottom: 0; }
+    .cl-text strong { color: var(--text); font-weight: 700; }
+    .cl-text code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--cyan);
+    }
+    .cl-text a { color: var(--cyan); text-decoration: none; transition: opacity 0.15s; }
+    .cl-text a:hover { opacity: 0.8; text-decoration: underline; text-underline-offset: 3px; }
+    .cl-text ul { padding-left: 20px; margin-bottom: 12px; }
+    .cl-text li { color: var(--soft); margin-bottom: 6px; }
+
+    .cl-links {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .cl-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--cyan);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      padding: 5px 10px;
+      border: 1px solid rgba(0,245,255,0.2);
+      border-radius: 6px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .cl-link:hover { background: rgba(0,245,255,0.06); border-color: rgba(0,245,255,0.4); }
+
+    /* ─── PHASE BADGE ─── */
+    .cl-phase {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--violet);
+      background: rgba(123,47,255,0.06);
+      border: 1px solid rgba(123,47,255,0.2);
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative; z-index: 5;
+      padding: 32px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    footer a { color: var(--soft); text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--cyan); }
+
+    @media (max-width: 600px) {
+      .cl-header { padding: 56px 20px 24px; }
+      .cl-list { padding: 16px 20px 60px; }
+      .cl-title { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-fx" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <nav class="tiny-nav">
+    <a href="/" class="logo">
+      <div class="logo-mark">Q</div>
+      <span class="logo-text">QUARVO</span>
+    </a>
+    <a href="/" class="nav-back">// HOME</a>
+  </nav>
+
+  <main>
+
+    <header class="cl-header">
+      <span class="cl-tag">// CHANGELOG</span>
+      <h1>What we shipped,<br/><em>when we shipped it.</em></h1>
+      <p class="cl-deck">
+        Public build log. Every meaningful change to Quarvo — features, fixes, security advisories, architecture decisions. Built in the open because that's how trust gets earned in fintech.
+      </p>
+      <div class="cl-controls">
+        <a href="/changelog/feed.xml" class="cl-rss">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 5v3c8.284 0 15 6.716 15 15h3c0-9.941-8.059-18-18-18zm0 7v3c4.418 0 8 3.582 8 8h3c0-6.075-4.925-11-11-11zm0 7v3h3v-3H5z"/></svg>
+          RSS feed
+        </a>
+        <a href="mailto:hello@quarvo.io?subject=Subscribe%20to%20Quarvo%20updates" class="cl-rss" style="color: var(--cyan); background: rgba(0,245,255,0.06); border-color: rgba(0,245,255,0.25);">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email digest
+        </a>
+      </div>
+    </header>
+
+    <div class="cl-filters">
+      <span class="cl-filter">All</span>
+      <span class="cl-pill feature">Feature</span>
+      <span class="cl-pill improvement">Improvement</span>
+      <span class="cl-pill api">API</span>
+      <span class="cl-pill security">Security</span>
+      <span class="cl-pill docs">Docs</span>
+      <span class="cl-pill infra">Infra</span>
+      <span class="cl-pill brand">Brand</span>
+      <span class="cl-pill fix">Fix</span>
+    </div>
+
+    <div class="cl-list">
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>May 02</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill brand">Brand</span>
+            <span class="cl-pill docs">Docs</span>
+            <span class="cl-pill security">Security</span>
+          </div>
+          <h2 class="cl-title">Trust &amp; launch assets shipped <span class="cl-phase">PHASE 6</span></h2>
+          <div class="cl-text">
+            <p>Three new pages live: <a href="/security">/security</a> with full data-flow diagrams and the SOC 2 roadmap, <a href="/changelog">/changelog</a> (this page), and <a href="/brand">/brand</a> with downloadable logo assets, color tokens, and typography rules.</p>
+            <p>The security page in particular is built for high-AOV merchant due diligence — covering PCI scope, encryption, subprocessors, incident response, and our coordinated vulnerability disclosure program.</p>
+          </div>
+          <div class="cl-links">
+            <a href="/security" class="cl-link">→ /security</a>
+            <a href="/brand" class="cl-link">→ /brand</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>May 02</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill feature">Feature</span>
+          </div>
+          <h2 class="cl-title">Interactive split-payment demo on the home page <span class="cl-phase">PHASE 5</span></h2>
+          <div class="cl-text">
+            <p>Added a new <code>#demo</code> section between "How it works" and "Integrations" that simulates the customer experience end-to-end: ready → declining → Quarvo recovery → processing → success.</p>
+            <p>Auto-plays once when the section enters viewport. Two manual modes: <strong>Replay</strong> (re-run sequence) and <strong>Try interactively</strong> (drag sliders to allocate the $2,400 split yourself).</p>
+            <ul>
+              <li>Two-phase commit visualization with live clock 0.00 → 0.86s</li>
+              <li>Bidirectional slider ↔ amount sync with confirm-button gating</li>
+              <li><code>prefers-reduced-motion</code> bypass</li>
+            </ul>
+          </div>
+          <div class="cl-links">
+            <a href="/#demo" class="cl-link">→ See it live</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>May 02</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill feature">Feature</span>
+            <span class="cl-pill docs">Docs</span>
+          </div>
+          <h2 class="cl-title">Comparison pages: Quarvo vs BNPL, Klarna, Affirm, Afterpay <span class="cl-phase">PHASE 4</span></h2>
+          <div class="cl-text">
+            <p>Five new pages under <code>/compare</code> with side-by-side breakdowns of every meaningful dimension — customer cost, merchant fees, credit reporting, late-fee mechanics, AOV-band fit.</p>
+            <p>Each page commits to three rules: numbers are sourced and dated, where competitors win we say so, the bias is structural not adversarial.</p>
+          </div>
+          <div class="cl-links">
+            <a href="/compare" class="cl-link">→ /compare</a>
+            <a href="/compare/bnpl" class="cl-link">vs BNPL</a>
+            <a href="/compare/klarna" class="cl-link">vs Klarna</a>
+            <a href="/compare/affirm" class="cl-link">vs Affirm</a>
+            <a href="/compare/afterpay" class="cl-link">vs Afterpay</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>May 02</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill improvement">Improvement</span>
+            <span class="cl-pill infra">Infra</span>
+          </div>
+          <h2 class="cl-title">Launch polish — sitemap, robots, branded 404, OG tags <span class="cl-phase">PHASE 2.9</span></h2>
+          <div class="cl-text">
+            <p>Polish pass to make the site feel like it's ready to ship. <code>sitemap.xml</code> with all 22 indexable URLs, <code>robots.txt</code> with sitemap reference, branded 404 page with suggested routes, and <code>og:image</code> + <code>twitter:image</code> meta tags added to every blog post.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>May 02</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill feature">Feature</span>
+            <span class="cl-pill docs">Docs</span>
+          </div>
+          <h2 class="cl-title">Five merchant-angle blog posts <span class="cl-phase">PHASE 3</span></h2>
+          <div class="cl-text">
+            <p>New deep-dives for high-AOV merchants:</p>
+            <ul>
+              <li><strong>Hidden Cost of Declined High-Ticket Sales</strong> — CFO-level decline ledger</li>
+              <li><strong>Why $2K+ AOV Checkouts Convert Worse</strong> — the conversion knee diagnosis</li>
+              <li><strong>Stripe Connect + Multi-Card Splitting</strong> — the payment graph architecture</li>
+              <li><strong>Recovery Rate Benchmarks</strong> — segmented numbers with variance bands</li>
+              <li><strong>The Merchant Playbook for High-AOV Recovery</strong> — 4-step / 60-day operational framework</li>
+            </ul>
+          </div>
+          <div class="cl-links">
+            <a href="/blog" class="cl-link">→ /blog</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>Apr 30</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill feature">Feature</span>
+            <span class="cl-pill api">API</span>
+          </div>
+          <h2 class="cl-title">/pay-with-quarvo integration docs <span class="cl-phase">PHASE 2.8</span></h2>
+          <div class="cl-text">
+            <p>End-to-end developer documentation: API reference, Stripe Connect setup, drop-in JS snippets for Shopify and WooCommerce, server SDK examples, webhook signatures, and brand kit.</p>
+            <p>Two endpoints, atomic two-phase commit, no replatforming.</p>
+          </div>
+          <div class="cl-links">
+            <a href="/pay-with-quarvo" class="cl-link">→ /pay-with-quarvo</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>Apr 30</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill feature">Feature</span>
+          </div>
+          <h2 class="cl-title">/for-merchants pricing tiers + lead capture <span class="cl-phase">PHASE 2.8</span></h2>
+          <div class="cl-text">
+            <p>Pricing section added to <code>/for-merchants</code>: Direct API tier (2% per recovered, no monthly minimum) and Shopify+Woo tier with managed integration. Lead capture form posts to <code>app.quarvo.io/api/merchants/register</code>.</p>
+          </div>
+          <div class="cl-links">
+            <a href="/for-merchants" class="cl-link">→ /for-merchants</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>Apr 28</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill improvement">Improvement</span>
+            <span class="cl-pill infra">Infra</span>
+          </div>
+          <h2 class="cl-title">Section reorder + SEO refresh <span class="cl-phase">PHASE 2.6 + 2.7</span></h2>
+          <div class="cl-text">
+            <p>Cut the dual consumer/merchant flow on the home page in favor of a single merchant-first narrative. Reorganized sections so the value proposition compounds: hero → ROI calc → trusted-by → how it works → integrations → security → consumer-divider → about.</p>
+            <p>Refreshed all meta titles, descriptions, and Open Graph tags to match the Architecture 2 framing ("Recover the high-ticket sales your checkout is losing").</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>Apr 27</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill feature">Feature</span>
+          </div>
+          <h2 class="cl-title">Integrations + Trust/Security sections <span class="cl-phase">PHASE 2.5</span></h2>
+          <div class="cl-text">
+            <p>Three integration tiles for Shopify, WooCommerce, and Direct API. Trust/Security section featuring Stripe Connect, atomic commitment, and PCI scope reduction.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>Apr 27</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill feature">Feature</span>
+          </div>
+          <h2 class="cl-title">How it works — sticky-scroll narrative <span class="cl-phase">PHASE 2.4</span></h2>
+          <div class="cl-text">
+            <p>Sticky-scroll storytelling section where the visual on the left changes as the user scrolls through three steps on the right. Tuned with <code>rootMargin: -40% 0px -50% 0px</code> so each step activates near viewport center.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>Apr 27</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill feature">Feature</span>
+          </div>
+          <h2 class="cl-title">Live ROI calculator <span class="cl-phase">PHASE 2.3</span></h2>
+          <div class="cl-text">
+            <p>Two-input ROI calculator (AOV × monthly orders) with bidirectional slider sync, animated number ticking, and yearly projection. Models industry-blend recovery economics: 6.5% decline rate, 60% recovery rate, 2% Quarvo fee.</p>
+          </div>
+          <div class="cl-links">
+            <a href="/#roi" class="cl-link">→ Try it</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>Apr 27</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill feature">Feature</span>
+          </div>
+          <h2 class="cl-title">Hero redesign + motion infrastructure <span class="cl-phase">PHASE 2.1 + 2.2</span></h2>
+          <div class="cl-text">
+            <p>New hero with word-stagger entrance, shimmer-text gradient on "high-ticket sales", and atmospheric orb background with parallax. Built <code>motion.js</code> as the shared motion infrastructure (reveal observer, magnetic hover, tilt, spotlight, kinetic numbers).</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>Apr 26</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill improvement">Improvement</span>
+          </div>
+          <h2 class="cl-title">UI/UX overhaul — accessibility, SVG icons, structural cleanup</h2>
+          <div class="cl-text">
+            <p>Comprehensive accessibility pass: ARIA semantic markup, mobile meta tags, focus states. Migrated all emoji icons to inline SVG. Extracted ~127 inline styles to scoped CSS classes.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>Apr 22</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill feature">Feature</span>
+            <span class="cl-pill docs">Docs</span>
+          </div>
+          <h2 class="cl-title">First five blog posts (consumer-angle)</h2>
+          <div class="cl-text">
+            <p>Initial editorial drop targeting consumer search intent: split payments, multi-card workarounds, BNPL alternatives, large-purchase how-tos.</p>
+          </div>
+          <div class="cl-links">
+            <a href="/blog" class="cl-link">→ /blog</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>Apr 20</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill infra">Infra</span>
+          </div>
+          <h2 class="cl-title">Loops API integration + waitlist deploy</h2>
+          <div class="cl-text">
+            <p>Initial waitlist live. Email capture posts to <code>/api/subscribe</code>, syncs to Loops with mailing-list segmentation. Confirmation flows working end-to-end.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ────────────────────────────────────────────────────────── -->
+      <article class="cl-entry">
+        <div class="cl-date">
+          <strong>Apr 18</strong>
+          <span>2026</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-tags">
+            <span class="cl-pill infra">Infra</span>
+          </div>
+          <h2 class="cl-title">Initial deploy to Vercel — quarvo.io live</h2>
+          <div class="cl-text">
+            <p>Vanilla HTML/CSS/JS landing page deployed to Vercel. Domain wired (quarvo.io + www.quarvo.io with proper redirects). Brand identity, color tokens, and typography system established.</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 QUARVO ·
+    <a href="/">Home</a> ·
+    <a href="/for-merchants">For merchants</a> ·
+    <a href="/security">Security</a> ·
+    <a href="/brand">Brand</a> ·
+    <a href="/privacy">Privacy</a> ·
+    <a href="/terms">Terms</a>
+  </footer>
+
+</body>
+</html>
