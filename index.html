@@ -760,104 +760,117 @@
   </section>
 
   <!-- FAQ -->
-  <section class="faq" id="faq">
-    <div class="section-inner">
-      <div class="section-tag">FAQ</div>
-      <h2 class="section-title">Questions, answered.</h2>
 
-      <div class="faq-grid">
-        <div class="faq-item">
-          <div class="faq-q">Is this a new loan?</div>
-          <div class="faq-a">No. QUARVO doesn't lend you money. It helps you use the credit you already have across your existing cards. No new debt. No interest on new credit lines.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">Do I need to open new accounts?</div>
-          <div class="faq-a">Never. QUARVO works with the cards already in your wallet. We just help them work together for the first time.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">Will this affect my credit score?</div>
-          <div class="faq-a">No hard credit pulls. No new inquiries. Your credit profile stays exactly as it is — we're just optimizing how you use existing available credit.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">What kinds of purchases can I make?</div>
-          <div class="faq-a">Any high-value purchase where one card's limit falls short — travel, electronics, furniture, experiences, medical, and more. If it matters, QUARVO can help.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">How is QUARVO different from BNPL?</div>
-          <div class="faq-a">BNPL services like Klarna or Affirm give you new credit and charge interest or fees. QUARVO activates credit you already own. Fundamentally different — and fundamentally better.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">When will it launch?</div>
-          <div class="faq-a">Quarvo is live now at app.quarvo.io. Create your first split today — no account needed to get started.</div>
-        </div>
+  <!-- CONSUMER DIVIDER (Phase 2.7) — transition from merchant funnel to shopper education -->
+  <section class="consumer-divider reveal" aria-label="For shoppers">
+    <div class="section-inner">
+      <div class="consumer-divider-inner">
+        <span class="consumer-divider-tag">
+          <span class="consumer-divider-dot"></span>
+          For shoppers
+        </span>
+        <p class="consumer-divider-line">
+          About to checkout somewhere that uses Quarvo? <span class="consumer-divider-em">You don't pay a cent extra.</span>
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- WAITLIST -->
-
-  <section class="waitlist" id="waitlist">
-    <div class="waitlist-bg">
-      <div class="wl-orb wl-orb-1"></div>
-      <div class="wl-orb wl-orb-2"></div>
-    </div>
+  <!-- WHAT IS QUARVO — consumer education (Phase 2.7) -->
+  <section class="what-is" id="what-is-quarvo" aria-labelledby="what-is-title">
     <div class="section-inner">
-      <div class="waitlist-content">
-        <div class="waitlist-badge">
-          <span class="badge-dot badge-dot--pulse"></span>
-          Live now &mdash; no account needed
-        </div>
-        <h2 class="waitlist-title">
-          That purchase you've been<br/>
-          <span class="title-accent">putting off? Do it today.</span>
+      <header class="what-is-header reveal">
+        <div class="section-tag">What is Quarvo?</div>
+        <h2 class="section-title" id="what-is-title">
+          A new way to use<br/>
+          <span class="title-accent shimmer-text">the credit you already have.</span>
         </h2>
-        <p class="waitlist-sub">
-          Quarvo is live. Split your first purchase today &mdash;<br/>
-          works with any merchant, any card, right now.
-        </p>
+        <p class="what-is-sub">No new cards. No new debt. No new accounts. Just your existing wallet, working together for the first time &mdash; at any merchant who's wired up Quarvo.</p>
+      </header>
 
-        <!-- Social proof counter -->
-        <div class="social-proof" role="group" aria-label="Founding members progress">
-          <div class="social-proof-row">
-            <span class="social-proof-count">847 people already waiting</span>
-            <span class="social-proof-percent">69% full</span>
-          </div>
-          <div class="social-proof-bar">
-            <div class="social-proof-fill" role="progressbar" aria-valuenow="69" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <div class="social-proof-meta">
-            <span class="social-proof-spots">500 founding spots</span>
-            <span class="social-proof-remaining">153 remaining</span>
-          </div>
-        </div>
+      <div class="what-is-grid reveal-group">
 
-        <form id="waitlistForm" onsubmit="handleSubmit(event)" class="wl-form" novalidate>
-          <label for="emailInput" class="sr-only">Email address</label>
-          <div class="wl-form-row">
-            <input type="email" id="emailInput" name="email" required placeholder="your@email.com" class="wl-input" autocomplete="email"/>
-            <button type="submit" class="wl-submit">
-              <span id="btnText">Get early access</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
+        <!-- Panel 1 -->
+        <article class="what-is-panel">
+          <div class="what-is-panel-num">01</div>
+          <div class="what-is-panel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="6" width="20" height="12" rx="2"/>
+              <rect x="2" y="9" width="20" height="3" fill="currentColor" stroke="none"/>
+              <rect x="6" y="14" width="3" height="2" fill="currentColor" stroke="none"/>
+              <rect x="11" y="14" width="3" height="2" fill="currentColor" stroke="none"/>
+              <rect x="16" y="14" width="3" height="2" fill="currentColor" stroke="none"/>
+            </svg>
           </div>
-          <p class="wl-fineprint">No spam. Unsubscribe anytime. We'll email you when your access is ready.</p>
-          <div id="formSuccess" class="wl-success" role="status" aria-live="polite">
-            &#x2713; You're on the list! Check your inbox.
-          </div>
-        </form>
+          <h3 class="what-is-panel-title">Your cards have more credit than you think</h3>
+          <p class="what-is-panel-body">The average American holds <strong>$12,000+ in available credit across 3&ndash;4 cards.</strong> But every checkout can only see one card at a time. So your real buying power stays invisible to the system.</p>
+        </article>
 
-        <div class="waitlist-trust" style="margin-top:36px;">
-          <div class="trust-item">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.5 3.5L13 5.5 10.5 8l.5 3.5L8 10.5 5 12l.5-3.5L3 6l3.5-.5L8 2z" stroke="#00F5FF" stroke-width="1.2" stroke-linejoin="round"/></svg>
-            No account needed
+        <!-- Panel 2 -->
+        <article class="what-is-panel">
+          <div class="what-is-panel-num">02</div>
+          <div class="what-is-panel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="6" cy="6" r="3"/>
+              <circle cx="18" cy="6" r="3"/>
+              <circle cx="12" cy="18" r="3"/>
+              <line x1="6" y1="9" x2="11" y2="15.5"/>
+              <line x1="18" y1="9" x2="13" y2="15.5"/>
+            </svg>
           </div>
-          <div class="trust-item">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#00F5FF" stroke-width="1.2"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#00F5FF" stroke-width="1.2" stroke-linecap="round"/></svg>
-            Stripe secured
+          <h3 class="what-is-panel-title">Quarvo combines them at checkout</h3>
+          <p class="what-is-panel-body">When the merchant supports Quarvo, you'll see <strong>"Split with Quarvo"</strong> at checkout. Connect your cards via Plaid. QuantumSplit&trade; divides the purchase optimally across the credit you already own.</p>
+        </article>
+
+        <!-- Panel 3 -->
+        <article class="what-is-panel what-is-panel--highlight">
+          <div class="what-is-panel-num">03</div>
+          <div class="what-is-panel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/>
+              <path d="M12 8v8M8 12h8"/>
+            </svg>
           </div>
-          <div class="trust-item">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#00F5FF" stroke-width="1.2"/><path d="M5.5 8l2 2 3-3" stroke="#00F5FF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            No new credit
+          <h3 class="what-is-panel-title">You always pay $0.</h3>
+          <p class="what-is-panel-body">All your card rewards still apply. No fees, no interest on new credit, no hard pulls, no new accounts. <strong>Quarvo is free for shoppers</strong> &mdash; the merchant covers the cost so the sale doesn't slip away.</p>
+        </article>
+
+      </div>
+
+      <!-- Find stores CTA + Loops form repurposed for store-discovery alerts -->
+      <div class="what-is-cta reveal">
+        <div class="what-is-cta-content">
+          <div class="what-is-cta-tag">
+            <span class="what-is-cta-tag-dot"></span>
+            Find stores
+          </div>
+          <h3 class="what-is-cta-title">
+            Get notified when more stores
+            <span class="title-accent">accept Quarvo.</span>
+          </h3>
+          <p class="what-is-cta-sub">We'll email you the directory as merchants come online &mdash; one update per month, never more.</p>
+
+          <form id="waitlistForm" onsubmit="handleSubmit(event)" class="wl-form" novalidate>
+            <label for="emailInput" class="sr-only">Email address</label>
+            <div class="wl-form-row">
+              <input type="email" id="emailInput" name="email" required placeholder="your@email.com" class="wl-input" autocomplete="email"/>
+              <button type="submit" class="wl-submit cta-glow magnetic" data-magnetic="0.18" data-magnetic-max="8">
+                <span id="btnText">Notify me</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <p class="wl-fineprint">No spam. Unsubscribe anytime.</p>
+            <div id="formSuccess" class="wl-success" role="status" aria-live="polite">
+              &#x2713; You're on the list. We'll email you when more stores come online.
+            </div>
+          </form>
+
+          <div class="what-is-cta-trust">
+            <span>Free for shoppers</span>
+            <span class="trust-dot">&middot;</span>
+            <span>No new credit</span>
+            <span class="trust-dot">&middot;</span>
+            <span>Cards stay at your bank</span>
           </div>
         </div>
       </div>
@@ -871,62 +884,62 @@
         <div class="amb-left">
           <div class="amb-tag">
             <svg class="tag-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><ellipse cx="12" cy="12" rx="11" ry="4"/><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(120 12 12)"/></svg>
-            Spread the word
+            Refer a merchant
           </div>
           <h2 class="amb-title">
-            Is your favorite merchant<br/>
-            <span class="grad">not on Quarvo yet?</span>
+            Your favorite merchant<br/>
+            <span class="grad">doesn't accept Quarvo yet?</span>
           </h2>
           <p class="amb-body">
-            When a merchant joins Quarvo, every customer gets $0 in fees. Share Quarvo with the merchants you love — hotels, travel agencies, luxury retailers — and help everyone unlock their full purchasing power.
+            Network effect: the more merchants join, the more places you can split. Tell them about Quarvo &mdash; setup is 5 minutes via Stripe Connect, $0 monthly on Direct API, and they recover ~60% of high-ticket declines they were silently losing.
           </p>
           <div class="amb-steps">
             <div class="amb-step">
               <div class="amb-step-n">01</div>
               <div>
-                <div class="amb-step-title">Share with your merchant</div>
-                <div class="amb-step-body">Send them to quarvo.io/merchants to register</div>
+                <div class="amb-step-title">Share the merchant page</div>
+                <div class="amb-step-body">Send them to quarvo.io/for-merchants &mdash; ROI calc + integration docs</div>
               </div>
             </div>
             <div class="amb-step">
               <div class="amb-step-n">02</div>
               <div>
-                <div class="amb-step-title">They connect with Stripe</div>
-                <div class="amb-step-body">Takes 2 minutes. No code changes required</div>
+                <div class="amb-step-title">They connect via Stripe</div>
+                <div class="amb-step-body">5-minute setup. Zero changes to their existing checkout flow</div>
               </div>
             </div>
             <div class="amb-step">
               <div class="amb-step-n">03</div>
               <div>
-                <div class="amb-step-title">You pay $0 in fees — forever</div>
-                <div class="amb-step-body">Merchant covers Quarvo fees. You split for free</div>
+                <div class="amb-step-title">You split your next purchase there</div>
+                <div class="amb-step-body">Always free for shoppers. The merchant covers Quarvo's 2%.</div>
               </div>
             </div>
           </div>
-          <div class="share-label">Share Quarvo with your merchant</div>
+          <div class="share-label">Share Quarvo with the merchant</div>
           <div class="share-buttons">
             <!-- WhatsApp -->
-            <a href="https://api.whatsapp.com/send?text=Hey%2C%20check%20out%20Quarvo%20%E2%80%94%20it%20lets%20customers%20split%20high-value%20purchases%20across%20their%20existing%20cards%20at%20zero%20cost%20to%20them.%20Register%20as%20a%20merchant%20here%3A%20https%3A%2F%2Fquarvo.io%2Fmerchants" target="_blank" class="share-btn share-btn--whatsapp" title="Share on WhatsApp">
+            <a href="https://api.whatsapp.com/send?text=Hey%2C%20you%20should%20check%20out%20Quarvo%20%E2%80%94%20it%20lets%20your%20customers%20split%20high-ticket%20purchases%20across%20multiple%20cards%20they%20already%20own.%20Stripe%20Connect%20handles%20the%20money%2C%205-min%20setup%2C%202%25%20per%20recovered%20sale%20%2B%20%240%20monthly%20on%20Direct%20API.%20Worth%20a%20look%3A%20https%3A%2F%2Fquarvo.io%2Ffor-merchants" target="_blank" rel="noopener" class="share-btn share-btn--whatsapp" title="Share on WhatsApp">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               WhatsApp
             </a>
             <!-- Email -->
-            <a href="mailto:?subject=Join%20Quarvo%20as%20a%20merchant&body=Hi%2C%0A%0AI%20wanted%20to%20share%20Quarvo%20with%20you%20%E2%80%94%20it%27s%20a%20platform%20that%20lets%20your%20customers%20split%20high-value%20purchases%20across%20their%20existing%20cards.%20No%20new%20credit%2C%20no%20loans.%20You%20only%20pay%20when%20a%20transaction%20completes.%0A%0ALearn%20more%20and%20register%20here%3A%20https%3A%2F%2Fquarvo.io%2Fmerchants%0A%0ABest" class="share-btn share-btn--email" title="Share via Email">
+            <a href="mailto:?subject=You%20should%20check%20out%20Quarvo&body=Hi%2C%0A%0AYou%20should%20check%20out%20Quarvo%20%E2%80%94%20it%20lets%20your%20customers%20split%20high-ticket%20purchases%20across%20multiple%20cards%20they%20already%20own.%20Stripe%20Connect%20handles%20the%20money.%205-minute%20setup%2C%20zero%20checkout%20changes.%202%25%20per%20recovered%20sale%2C%20%240%20monthly%20on%20Direct%20API.%0A%0AHere%27s%20the%20ROI%20calc%20+%20docs%3A%20https%3A%2F%2Fquarvo.io%2Ffor-merchants%0A%0ABest" class="share-btn share-btn--email" title="Share via Email">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               Email
             </a>
             <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fquarvo.io%2Fmerchants" target="_blank" class="share-btn share-btn--linkedin" title="Share on LinkedIn">
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fquarvo.io%2Ffor-merchants" target="_blank" rel="noopener" class="share-btn share-btn--linkedin" title="Share on LinkedIn">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               LinkedIn
             </a>
             <!-- Twitter/X -->
-            <a href="https://twitter.com/intent/tweet?text=Just%20discovered%20Quarvo%20%E2%80%94%20lets%20customers%20split%20any%20high-value%20purchase%20across%20their%20existing%20cards.%20Zero%20new%20debt.%20Perfect%20for%20hotels%2C%20travel%20%26%20retail.%20%40quarvoapp&url=https%3A%2F%2Fquarvo.io%2Fmerchants" target="_blank" class="share-btn share-btn--twitter" title="Share on X">
+            <a href="https://twitter.com/intent/tweet?text=Hey%20%40merchant%20%E2%80%94%20you%20should%20check%20out%20Quarvo.%20Customers%20split%20high-ticket%20purchases%20across%20cards%20they%20already%20own%20via%20Stripe%20Connect.%20You%20recover%20declined%20sales.%20%40quarvoapp&url=https%3A%2F%2Fquarvo.io%2Ffor-merchants" target="_blank" rel="noopener" class="share-btn share-btn--twitter" title="Share on X">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.26 5.632 5.904-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               X
             </a>
             <!-- Copy link -->
-            <button onclick="copyMerchantLink()" class="share-btn share-btn--copy" id="copyBtn" title="Copy merchant link">
+            <button type="button" onclick="copyMerchantLink()" class="share-btn share-btn--copy" id="copyBtn" title="Copy merchant link">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
               Copy link
             </button>
@@ -935,14 +948,84 @@
         <div class="amb-right">
           <div class="amb-stat-card">
             <div class="amb-stat-icon">$0</div>
-            <div class="amb-stat-label">Fees for you when merchant is registered</div>
+            <div class="amb-stat-label">Always your cost as a shopper, on every Quarvo merchant</div>
           </div>
           <div class="amb-quote">
             <span class="amb-quote-mark">&ldquo;</span>
-            The more merchants that join, the more everyone saves. It&rsquo;s a network built on shared benefit.
+            The more merchants that join, the more places you can use the credit you already have. Network effect built on shared benefit.
             <span class="amb-quote-mark">&rdquo;</span>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="section-inner">
+      <header class="faq-header reveal">
+        <div class="section-tag">FAQ</div>
+        <h2 class="section-title">Questions, answered.</h2>
+        <p class="faq-sub">Mixed for merchants and shoppers. Email <a href="mailto:support@quarvo.io">support@quarvo.io</a> if yours isn't here.</p>
+      </header>
+
+      <div class="faq-cols">
+
+        <!-- MERCHANT COLUMN -->
+        <div class="faq-col">
+          <div class="faq-col-label">
+            <span class="faq-col-dot"></span>
+            For merchants
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">How long does setup take?</div>
+            <div class="faq-a">5 minutes for Shopify or WooCommerce (one-click install + Stripe Connect OAuth). 30 minutes for Direct API integration. Your existing checkout stays untouched &mdash; Quarvo appears as one extra payment option.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">When and how does Quarvo's 2% get charged?</div>
+            <div class="faq-a">Auto-deducted via Stripe Connect when a customer completes a Quarvo split. You see it as a transparent line item on the same payout as the sale. No invoices, no monthly bill, no reconciliation. Failed splits cost you $0.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Will Quarvo touch my customers' card data?</div>
+            <div class="faq-a">No. Card numbers never reach our servers. Card authorization is handled by Plaid + Stripe tokens. PCI-DSS Level 1 compliance is inherited from Stripe; Quarvo's scope is reduced to orchestration only &mdash; no SAQ on you.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">What if a split fails halfway?</div>
+            <div class="faq-a">Stripe Connect rolls back automatically. None of the cards get charged unless every leg succeeds. The customer sees a clear failure state and can retry with a different card combination. You never see a half-paid order.</div>
+          </div>
+        </div>
+
+        <!-- CONSUMER COLUMN -->
+        <div class="faq-col">
+          <div class="faq-col-label faq-col-label--cyan">
+            <span class="faq-col-dot"></span>
+            For shoppers
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">How much does Quarvo cost me?</div>
+            <div class="faq-a"><strong>Nothing.</strong> The merchant covers Quarvo's 2% so the sale doesn't slip away. You pay exactly the cart total &mdash; split across the cards you already have.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Will this affect my credit score?</div>
+            <div class="faq-a">No hard pulls. No new inquiries. No new accounts. Quarvo uses your <em>existing</em> available credit through Plaid (read-only) &mdash; your credit profile stays exactly as it is.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Do my card rewards still apply?</div>
+            <div class="faq-a">Yes. Each card you split across is charged normally by its issuer, so you earn your usual cashback / points / miles. Quarvo just decides how much goes on each.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">How is this different from Klarna / Affirm / BNPL?</div>
+            <div class="faq-a">BNPL <em>lends you new credit</em> and charges interest or fees. Quarvo <em>activates credit you already own</em> across your existing cards. No new debt, no new interest, no new accounts. Fundamentally different.</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1173,8 +1256,8 @@
     </div>
   </footer>
 
-  <script src="main.js?v=2.6"></script>
-  <script src="motion.js?v=2.6" defer></script>
+  <script src="main.js?v=2.7"></script>
+  <script src="motion.js?v=2.7" defer></script>
   <script>
     function handleSubmit(e) {
       e.preventDefault();

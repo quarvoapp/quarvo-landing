@@ -228,7 +228,7 @@ function handleSubmit(e) {
 
 // COPY MERCHANT LINK
 function copyMerchantLink() {
-  const url = 'https://quarvo.io/merchants';
+  const url = 'https://quarvo.io/for-merchants';
   navigator.clipboard.writeText(url).then(() => {
     const btn = document.getElementById('copyBtn');
     if (btn) {
