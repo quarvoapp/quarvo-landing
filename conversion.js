@@ -97,7 +97,8 @@
       function (el) { el.addEventListener('click', close); }
     );
 
-    // Form submit — same Loops endpoint as the main waitlist
+    // Form submit — canonical lead-capture endpoint on app.quarvo.io
+    // (Loops fan-out + Supabase write happen server-side)
     var form = modal.querySelector('[data-modal-form]');
     var success = modal.querySelector('[data-modal-success]');
     if (form) {
@@ -107,9 +108,7 @@
         if (!emailInput || !emailInput.value || !emailInput.value.includes('@')) return;
 
         var email = emailInput.value.trim();
-        var apiUrl = window.location.hostname === 'localhost'
-          ? '/api/subscribe'
-          : 'https://www.quarvo.io/api/subscribe';
+        var apiUrl = 'https://app.quarvo.io/api/leads/checklist';
 
         // Optimistic UI — show success immediately, retry in background
         if (success) {
@@ -121,7 +120,13 @@
         fetch(apiUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, source: 'exit-modal-merchant' })
+          body: JSON.stringify({
+            email: email,
+            metadata: {
+              source: 'exit-modal-merchant',
+              page: window.location.pathname
+            }
+          })
         }).catch(function (err) {
           console.error('Exit modal subscribe error:', err);
         });
