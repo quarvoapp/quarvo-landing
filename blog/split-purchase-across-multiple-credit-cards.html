@@ -247,6 +247,35 @@
     .author-role { font-size: 12px; color: var(--muted); }
 
     @media (max-width: 600px) { .article-wrapper { padding: 32px 16px 60px; } h1 { font-size: 24px; } }
+  
+    /* ─── SPRINT I PHASE 2 — Status notice (Modelo B disclosure) ─── */
+    .blog-status-notice {
+      display: block;
+      border-left: 3px solid var(--teal, #2DD4BF);
+      background: rgba(45, 212, 191, 0.05);
+      padding: 14px 18px;
+      margin: 0 0 28px;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--soft, #9090B0);
+      border-radius: 0 8px 8px 0;
+    }
+    .blog-status-notice strong {
+      display: block;
+      color: var(--text, #E8E8F2);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+    .blog-status-notice a {
+      color: var(--teal, #2DD4BF);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .blog-status-notice a:hover { opacity: 0.85; }
+
   </style>
 </head>
 <body>
@@ -256,10 +285,15 @@
     <div class="logo-mark">Q</div>
     <span class="logo-text">QUARVO</span>
   </a>
-  <a href="https://quarvo.io#waitlist" class="nav-cta">Get early access →</a>
+  <a href="https://quarvo.io/for-merchants" class="nav-cta">For merchants →</a>
 </header>
 
 <article class="article-wrapper">
+  <aside class="blog-status-notice">
+    <strong>Status notice</strong>
+    Quarvo currently operates B2B-only. The consumer split-pay product described in this article is on the roadmap. In the meantime, see <a href="/for-merchants">how Quarvo runs at your favorite store's checkout</a>.
+  </aside>
+
 
   <div class="article-meta">
     <span class="tag tag-guide">Complete Guide</span>
@@ -455,7 +489,7 @@
   <div class="inline-cta">
     <h3>Stop choosing between your cards.</h3>
     <p>Quarvo combines your available credit across multiple cards in one purchase. No new debt. No new account. First split free for early users.</p>
-    <a href="https://quarvo.io#waitlist" class="cta-btn">Join the waitlist — it's free →</a>
+    <a href="https://quarvo.io/for-merchants" class="cta-btn">Join the waitlist — it's free →</a>
     <p class="cta-note">500 early access spots · First split free · Beta opens Q2 2026</p>
   </div>
 
@@ -636,7 +670,7 @@
   <div class="footer-cta">
     <h2>You have the credit.<br/>Now you have the tool.</h2>
     <p>Join the Quarvo waitlist. First 500 users get their first split free. No credit card required to register.</p>
-    <a href="https://quarvo.io#waitlist" class="cta-btn">Get early access — first split free →</a>
+    <a href="https://quarvo.io/for-merchants" class="cta-btn">Get early access — first split free →</a>
     <p style="font-size:12px; color:var(--muted); margin-top:12px;">Beta opens Q2 2026 · $5.99 per split after the first · No subscription required</p>
   </div>
 

@@ -4751,3 +4751,115 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .demo-controls { flex-direction: column; }
   .demo-control-btn { justify-content: center; }
 }
+
+/* =============================================
+   SPRINT I PHASE 2 — pricing reconciliation
+   Hero kicker, integration trial sub, FAQ list, blog status notice
+   ============================================= */
+
+/* ─── Hero kicker (above H1) ───────────────────────────────────────── */
+.hero-kicker {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  font-family: 'JetBrains Mono', 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted, #9090B0);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+.hero-kicker strong {
+  font-weight: 700;
+  color: var(--text, #F0F0F8);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.hero-kicker-tail {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-muted, #9090B0);
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  font-family: 'DM Sans', sans-serif;
+}
+@media (max-width: 640px) {
+  .hero-kicker { font-size: 11px; }
+  .hero-kicker-tail { font-size: 11.5px; }
+}
+
+/* ─── Integration tile: trial sub line ─────────────────────────────── */
+.integ-price-trial {
+  display: block;
+  font-family: 'JetBrains Mono', 'DM Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--text-muted, #9090B0);
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+/* ─── FAQ: single-column list (collapsed from .faq-cols) ───────────── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.faq-list .faq-item {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 18px 22px;
+  transition: border-color 0.2s ease;
+}
+.faq-list .faq-item:hover {
+  border-color: rgba(123, 47, 255, 0.25);
+}
+.faq-list .faq-q {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text, #F0F0F8);
+  margin-bottom: 8px;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+}
+.faq-list .faq-a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px;
+  color: var(--text-muted, #9090B0);
+  line-height: 1.7;
+}
+.faq-list .faq-a strong { color: var(--text, #F0F0F8); font-weight: 600; }
+.faq-list .faq-a em { color: var(--text-muted, #9090B0); font-style: italic; }
+
+/* ─── Blog status notice (Modelo A consumer-product banner) ────────── */
+.blog-status-notice {
+  display: block;
+  border-left: 3px solid var(--cyan, #00F5FF);
+  background: rgba(0, 245, 255, 0.04);
+  padding: 14px 18px;
+  margin: 0 0 28px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-muted, #9090B0);
+  border-radius: 0 8px 8px 0;
+}
+.blog-status-notice strong {
+  color: var(--text, #F0F0F8);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+.blog-status-notice a {
+  color: var(--cyan, #00F5FF);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.blog-status-notice a:hover { opacity: 0.85; }
