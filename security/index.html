@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Security & Compliance · Quarvo</title>
+  <meta name="description" content="How Quarvo handles data, PCI scope, encryption, subprocessors, SOC 2 roadmap, and vulnerability disclosure. Built for high-AOV merchant due diligence." />
+  <meta name="keywords" content="quarvo security, quarvo compliance, quarvo PCI scope, quarvo SOC 2, quarvo subprocessors, fintech security" />
+  <link rel="canonical" href="https://quarvo.io/security" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://quarvo.io/security" />
+  <meta property="og:title" content="Quarvo · Security & Compliance" />
+  <meta property="og:description" content="Stripe Connect under the hood. We never store card data. Full transparency on data flows, encryption, and compliance roadmap." />
+  <meta property="og:image" content="https://quarvo.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Quarvo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://quarvo.io/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060A;
+      --surface: #0E0E18;
+      --card: #101018;
+      --border: #1A1A2E;
+      --violet: #7B2FFF;
+      --cyan: #00F5FF;
+      --green: #34D399;
+      --gold: #F5C518;
+      --orange: #F97316;
+      --red: #F75454;
+      --teal: #2DD4BF;
+      --text: #F0F0F8;
+      --soft: #9090B0;
+      --muted: #6A6A88;
+      --max: 880px;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ─── ATMOSPHERIC BACKGROUND ─── */
+    .bg-fx { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; }
+    .orb-1 { top: 10%; left: -8%; width: 420px; height: 420px; background: rgba(123,47,255,0.15); }
+    .orb-2 { bottom: 10%; right: -10%; width: 480px; height: 480px; background: rgba(0,245,255,0.12); }
+    .grid-overlay {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    }
+
+    /* ─── NAV ─── */
+    nav.tiny-nav {
+      position: relative; z-index: 5;
+      padding: 24px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 34px; height: 34px; background: linear-gradient(135deg, var(--violet), var(--cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; font-family: 'Syne', sans-serif; }
+    .logo-text { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.06em; font-family: 'Syne', sans-serif; }
+    .nav-back { font-size: 12px; color: var(--soft); text-decoration: none; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; padding: 7px 14px; border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; transition: border-color 0.2s, color 0.2s; }
+    .nav-back:hover { border-color: rgba(0,245,255,0.4); color: var(--cyan); }
+
+    main { position: relative; z-index: 2; }
+
+    /* ─── HEADER ─── */
+    .sec-header {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 24px 48px;
+      text-align: center;
+    }
+    .sec-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(0,245,255,0.06);
+      border: 1px solid rgba(0,245,255,0.25);
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 5.6vw, 56px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 18px;
+    }
+    h1 em { font-style: normal; background: linear-gradient(135deg, var(--cyan), var(--violet)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .sec-deck {
+      font-size: 17px;
+      color: var(--soft);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+    .sec-meta {
+      display: inline-flex;
+      gap: 10px;
+      margin-top: 22px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .sec-meta-pill {
+      padding: 4px 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+    }
+
+    /* ─── ARTICLE WRAP ─── */
+    .sec-article {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(24px, 3vw, 30px);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      margin: 64px 0 22px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    h2:first-of-type { border-top: none; padding-top: 0; }
+    h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 32px 0 14px;
+      color: var(--text);
+    }
+    p {
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    p strong { color: #fff; font-weight: 700; }
+    ul, ol { padding-left: 24px; margin-bottom: 18px; }
+    li { color: var(--soft); margin-bottom: 8px; line-height: 1.7; }
+    li strong { color: var(--text); }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--cyan);
+    }
+    a { color: var(--cyan); text-decoration: none; transition: opacity 0.15s; }
+    a:hover { opacity: 0.8; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ─── HIGHLIGHT BLOCK ─── */
+    .pillar {
+      background: linear-gradient(135deg, rgba(0,245,255,0.04), rgba(123,47,255,0.04));
+      border: 1px solid rgba(0,245,255,0.2);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 14px 14px 0;
+      padding: 22px 26px;
+      margin: 28px 0;
+    }
+    .pillar .pillar-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .pillar h3 { margin: 0 0 10px; font-size: 18px; }
+    .pillar p { font-size: 15px; color: var(--soft); margin: 0; line-height: 1.7; }
+
+    /* ─── DATA FLOW DIAGRAM ─── */
+    .flow {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px;
+      margin: 28px 0;
+    }
+    .flow-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .flow-sub {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.06em;
+      margin-bottom: 22px;
+    }
+    .flow-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 640px) { .flow-row { grid-template-columns: 1fr 1fr; gap: 10px; } }
+    .flow-node {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 12px;
+      text-align: center;
+      position: relative;
+    }
+    .flow-node.customer { border-color: rgba(123,47,255,0.35); background: rgba(123,47,255,0.04); }
+    .flow-node.quarvo { border-color: rgba(0,245,255,0.35); background: rgba(0,245,255,0.04); }
+    .flow-node.stripe { border-color: rgba(99,91,255,0.35); background: rgba(99,91,255,0.04); }
+    .flow-node.merchant { border-color: rgba(52,211,153,0.35); background: rgba(52,211,153,0.04); }
+    .flow-node-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .flow-node-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .flow-node-data {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--soft);
+      line-height: 1.5;
+    }
+    .flow-arrow {
+      text-align: center;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1;
+      margin: 8px 0;
+    }
+    .flow-cap {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border);
+      font-size: 12.5px;
+      color: var(--soft);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.02em;
+    }
+    .flow-cap strong { color: var(--cyan); font-family: 'JetBrains Mono', monospace; }
+
+    /* ─── COMPLIANCE TABLE ─── */
+    .comp-table {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+    .comp-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr auto;
+      gap: 16px;
+      padding: 16px 22px;
+      border-bottom: 1px dashed rgba(255,255,255,0.06);
+      align-items: center;
+    }
+    .comp-row.head {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+    .comp-row.head span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .comp-name span {
+      display: block;
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 11.5px;
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 3px;
+      letter-spacing: 0.02em;
+    }
+    .comp-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .comp-status.live { color: var(--green); }
+    .comp-status.progress { color: var(--gold); }
+    .comp-status.planned { color: var(--soft); }
+    .comp-eta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 600px) {
+      .comp-row { grid-template-columns: 1fr; gap: 6px; padding: 16px 18px; }
+    }
+
+    /* ─── SUBPROCESSORS ─── */
+    .subproc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .sub-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+    .sub-card:hover { border-color: rgba(0,245,255,0.35); }
+    .sub-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .sub-purpose {
+      font-size: 12.5px;
+      color: var(--soft);
+      margin-bottom: 10px;
+      line-height: 1.55;
+    }
+    .sub-meta {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .sub-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .sub-pill.region { color: var(--cyan); border-color: rgba(0,245,255,0.2); background: rgba(0,245,255,0.04); }
+
+    /* ─── DISCLOSURE BOX ─── */
+    .disclosure {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin: 28px 0;
+    }
+    .disclosure h3 { margin-top: 0; }
+    .disclosure-meta {
+      display: flex;
+      gap: 16px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+    .disclosure-meta span {
+      padding: 6px 12px;
+      background: rgba(0,245,255,0.05);
+      border: 1px solid rgba(0,245,255,0.2);
+      border-radius: 6px;
+      color: var(--cyan);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── FOOTER CTA ─── */
+    .sec-footer-cta {
+      background: linear-gradient(135deg, rgba(123,47,255,0.1), rgba(0,245,255,0.05));
+      border: 1px solid rgba(123,47,255,0.3);
+      border-radius: 18px;
+      padding: 36px;
+      margin-top: 60px;
+      text-align: center;
+    }
+    .sec-footer-cta h3 {
+      font-size: 24px;
+      margin: 0 0 12px;
+      line-height: 1.25;
+    }
+    .sec-footer-cta p {
+      color: var(--soft);
+      max-width: 420px;
+      margin: 0 auto 22px;
+    }
+    .cta-link {
+      display: inline-block;
+      padding: 13px 28px;
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      color: #fff !important;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 10px;
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .cta-link:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(123,47,255,0.3); text-decoration: none; opacity: 1; }
+
+    /* ─── PAGE FOOTER ─── */
+    footer {
+      position: relative; z-index: 5;
+      padding: 32px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    footer a { color: var(--soft); }
+    footer a:hover { color: var(--cyan); }
+
+    @media (max-width: 600px) {
+      .sec-header { padding: 56px 20px 36px; }
+      .sec-article { padding: 0 20px 60px; }
+      .sec-footer-cta { padding: 28px 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb { animation: none; }
+    }
+  </style>
+</head>
+<body data-floating-cta="true">
+
+  <div class="bg-fx" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <nav class="tiny-nav">
+    <a href="/" class="logo">
+      <div class="logo-mark">Q</div>
+      <span class="logo-text">QUARVO</span>
+    </a>
+    <a href="/" class="nav-back">// HOME</a>
+  </nav>
+
+  <main>
+
+    <header class="sec-header">
+      <span class="sec-tag">// SECURITY &amp; COMPLIANCE</span>
+      <h1>The smaller our<br/><em>data footprint</em>,<br/>the safer everyone is.</h1>
+      <p class="sec-deck">
+        Quarvo is built on a deliberate architectural choice: we never custody funds, we never store card numbers, and we sit alongside your existing Stripe account rather than between you and it. The result is a security posture that's smaller than it looks on first glance — and easier to audit.
+      </p>
+      <div class="sec-meta">
+        <span class="sec-meta-pill">// LAST UPDATED · MAY 2 · 2026</span>
+        <span class="sec-meta-pill">// VERSION · 1.2</span>
+      </div>
+    </header>
+
+    <article class="sec-article">
+
+      <!-- ─── PILLARS ─────────────────────────────────────────────────── -->
+      <h2>Three architectural choices that define our security posture</h2>
+
+      <div class="pillar">
+        <div class="pillar-label">// PILLAR 01 · NEVER A MONEY TRANSMITTER</div>
+        <h3>Funds never touch Quarvo's accounts</h3>
+        <p>We run as a Stripe Connect platform. Every payment intent is created on the merchant's own Stripe account. Quarvo's fee is collected via <code>application_fee_amount</code>, deducted from the merchant's settlement — we never act as an intermediary holding customer funds. This is a deliberate choice that keeps us out of the money-transmission compliance category and reduces every operational risk that comes with custodying money.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-label">// PILLAR 02 · ZERO RAW PAN STORAGE</div>
+        <h3>We never see, store, or process raw card numbers</h3>
+        <p>Card data is captured by Stripe Elements (PCI-DSS Level 1 compliant) directly in the customer's browser, tokenized to a <code>pm_xxx</code> token, and only the token ever touches Quarvo infrastructure. The raw PAN, CVV, and full expiry are out of scope for our environment. Stripe carries the PCI burden; we benefit from inheriting their controls without inheriting their attack surface.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-label">// PILLAR 03 · ATOMIC OR NOTHING</div>
+        <h3>Customers never see partial charges</h3>
+        <p>The two-phase commit pattern guarantees that all N card authorizations either complete together or none commit. If any auth fails or times out in Phase 1, every successful auth is voided before the customer sees the error. The customer's available credit on each card is restored within minutes. This is a security property as much as a UX one — partial-state failures are how trust is broken.</p>
+      </div>
+
+      <!-- ─── DATA FLOWS ──────────────────────────────────────────────── -->
+      <h2>How data actually flows</h2>
+
+      <p>The simplest way to understand our security model is to see what data goes where. Card data never touches Quarvo. Personal data is minimal. Merchant funds always settle through the merchant's own infrastructure.</p>
+
+      <div class="flow">
+        <div class="flow-title">Quarvo data flow — single transaction</div>
+        <div class="flow-sub">// HAPPY PATH · 2-CARD SPLIT · CUSTOMER → MERCHANT</div>
+
+        <div class="flow-row">
+          <div class="flow-node customer">
+            <div class="flow-node-label">// 01</div>
+            <div class="flow-node-name">Customer browser</div>
+            <div class="flow-node-data">card data (transient)</div>
+          </div>
+          <div class="flow-node stripe">
+            <div class="flow-node-label">// 02</div>
+            <div class="flow-node-name">Stripe Elements</div>
+            <div class="flow-node-data">pm_xxx tokens</div>
+          </div>
+          <div class="flow-node quarvo">
+            <div class="flow-node-label">// 03</div>
+            <div class="flow-node-name">Quarvo coordinator</div>
+            <div class="flow-node-data">tokens + amounts</div>
+          </div>
+          <div class="flow-node merchant">
+            <div class="flow-node-label">// 04</div>
+            <div class="flow-node-name">Merchant Stripe</div>
+            <div class="flow-node-data">N PaymentIntents</div>
+          </div>
+        </div>
+
+        <div class="flow-cap">
+          <strong>What Quarvo stores:</strong> tokenized references (<code>pm_xxx</code>), transaction amounts, session IDs, merchant account IDs.
+          <strong>What Quarvo never stores:</strong> card numbers, CVVs, customer SSN, customer addresses (those stay with Stripe and the merchant).
+        </div>
+      </div>
+
+      <h3>What we collect from merchants</h3>
+      <ul>
+        <li><strong>Account identifiers</strong> — Stripe Connect account ID, merchant business name, contact email.</li>
+        <li><strong>Configuration</strong> — webhook URLs, supported card networks, integration mode (Shopify / Woo / API).</li>
+        <li><strong>Aggregate metrics</strong> — recovery rate, GMV recovered, decline counts. Used for billing and dashboard reporting.</li>
+      </ul>
+
+      <h3>What we collect from customers</h3>
+      <ul>
+        <li><strong>Tokenized card references</strong> — Stripe-issued <code>pm_xxx</code> tokens. No raw PAN, ever.</li>
+        <li><strong>Session metadata</strong> — transaction amount, allocation per card, success/failure outcome.</li>
+        <li><strong>Browser context (minimal)</strong> — IP address (for fraud screening), user-agent. No tracking pixels, no third-party advertising IDs.</li>
+      </ul>
+
+      <!-- ─── ENCRYPTION ─────────────────────────────────────────────── -->
+      <h2>Encryption</h2>
+
+      <h3>In transit</h3>
+      <p>All Quarvo APIs require TLS 1.2 or higher. Internal service-to-service communication uses mutual TLS (mTLS) where possible, plain TLS otherwise. Customer-facing endpoints enforce HSTS with a 12-month max-age and the <code>preload</code> directive.</p>
+
+      <h3>At rest</h3>
+      <p>Database storage uses AES-256-GCM. Encryption keys are managed in a hardware security module (HSM) rotated quarterly. Sensitive fields (merchant API keys, webhook signing secrets) are wrapped with envelope encryption — even a database breach exposes only ciphertext.</p>
+
+      <h3>Backups</h3>
+      <p>Encrypted at rest with separate key material from the primary database. Backup access requires multi-party authorization (no single engineer can decrypt). Retention: 30 days hot, 90 days cold.</p>
+
+      <!-- ─── COMPLIANCE TABLE ────────────────────────────────────────── -->
+      <h2>Compliance roadmap</h2>
+
+      <p>We're transparent about where we are on each compliance track. Some are in place, some are in progress, and some are planned for once the platform reaches the volume tier where they're required.</p>
+
+      <div class="comp-table">
+        <div class="comp-row head">
+          <span>Standard / Framework</span>
+          <span>Status</span>
+          <span>ETA</span>
+        </div>
+        <div class="comp-row">
+          <div class="comp-name">PCI DSS scope reduction<span>via Stripe Elements tokenization</span></div>
+          <div class="comp-status live">// LIVE</div>
+          <div class="comp-eta">SAQ A</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-name">SOC 2 Type II<span>annual audit, full report on request</span></div>
+          <div class="comp-status progress">// IN PROGRESS</div>
+          <div class="comp-eta">Q4 2026</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-name">CCPA / CPRA compliance<span>California consumer privacy act</span></div>
+          <div class="comp-status live">// LIVE</div>
+          <div class="comp-eta">DSAR portal active</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-name">GDPR compliance<span>EU general data protection regulation</span></div>
+          <div class="comp-status live">// LIVE</div>
+          <div class="comp-eta">DPO appointed</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-name">ISO 27001<span>information security management</span></div>
+          <div class="comp-status planned">// PLANNED</div>
+          <div class="comp-eta">2027</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-name">PCI DSS Level 1 (merchant)<span>required only if we expand PAN scope</span></div>
+          <div class="comp-status planned">// NOT REQUIRED</div>
+          <div class="comp-eta">Stripe carries scope</div>
+        </div>
+      </div>
+
+      <!-- ─── SUBPROCESSORS ───────────────────────────────────────────── -->
+      <h2>Subprocessors</h2>
+
+      <p>The full list of vendors that may process Quarvo customer or merchant data. We notify customers 30 days in advance of any addition. Last reviewed: May 2026.</p>
+
+      <div class="subproc">
+        <div class="sub-card">
+          <div class="sub-name">Stripe</div>
+          <div class="sub-purpose">Payment processing, card tokenization, Connect platform infrastructure.</div>
+          <div class="sub-meta">
+            <span class="sub-pill region">US · IRELAND</span>
+            <span class="sub-pill">PCI L1</span>
+            <span class="sub-pill">SOC 2</span>
+          </div>
+        </div>
+
+        <div class="sub-card">
+          <div class="sub-name">Vercel</div>
+          <div class="sub-purpose">Frontend hosting, edge functions, static asset delivery.</div>
+          <div class="sub-meta">
+            <span class="sub-pill region">US</span>
+            <span class="sub-pill">SOC 2</span>
+          </div>
+        </div>
+
+        <div class="sub-card">
+          <div class="sub-name">Supabase</div>
+          <div class="sub-purpose">Postgres database, application data, encrypted at rest.</div>
+          <div class="sub-meta">
+            <span class="sub-pill region">US · EU</span>
+            <span class="sub-pill">SOC 2</span>
+          </div>
+        </div>
+
+        <div class="sub-card">
+          <div class="sub-name">Cloudflare</div>
+          <div class="sub-purpose">DNS, DDoS mitigation, WAF on customer-facing surfaces.</div>
+          <div class="sub-meta">
+            <span class="sub-pill region">GLOBAL</span>
+            <span class="sub-pill">SOC 2</span>
+          </div>
+        </div>
+
+        <div class="sub-card">
+          <div class="sub-name">Loops</div>
+          <div class="sub-purpose">Transactional and waitlist email delivery.</div>
+          <div class="sub-meta">
+            <span class="sub-pill region">US</span>
+            <span class="sub-pill">SOC 2</span>
+          </div>
+        </div>
+
+        <div class="sub-card">
+          <div class="sub-name">Plaid</div>
+          <div class="sub-purpose">Bank-level card auth (read-only available-credit data).</div>
+          <div class="sub-meta">
+            <span class="sub-pill region">US</span>
+            <span class="sub-pill">SOC 2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── INCIDENT RESPONSE ───────────────────────────────────────── -->
+      <h2>Incident response</h2>
+
+      <p>If we detect a security incident affecting customer or merchant data, we follow a documented response plan:</p>
+
+      <ol>
+        <li><strong>Hour 0–1</strong> — Containment. Affected systems are isolated; on-call engineer paged; incident commander assigned.</li>
+        <li><strong>Hour 1–4</strong> — Triage. Scope of impact determined; preserved evidence collected; preliminary root cause identified.</li>
+        <li><strong>Hour 4–24</strong> — Customer notification. Affected merchants notified by email and in-dashboard banner. Initial public statement on status page if widely material.</li>
+        <li><strong>Days 1–7</strong> — Remediation. Root cause fixed in production; controls added to prevent recurrence; post-mortem published internally.</li>
+        <li><strong>Days 7–14</strong> — Public post-mortem. For incidents affecting more than 5 merchants or any customer card data, we publish a detailed post-mortem on the changelog.</li>
+      </ol>
+
+      <p>Regulatory notification (GDPR Article 33: 72 hours; state-level breach laws: varies) is handled in parallel with customer notification.</p>
+
+      <!-- ─── DISCLOSURE ──────────────────────────────────────────────── -->
+      <h2>Vulnerability disclosure</h2>
+
+      <div class="disclosure">
+        <h3>If you find a vulnerability, please tell us.</h3>
+        <p>We operate a coordinated vulnerability disclosure (CVD) program. Researchers who report security issues responsibly will receive prompt acknowledgment, regular updates on remediation progress, and (where applicable) public credit in our changelog.</p>
+        <p><strong>Out of scope:</strong> social engineering, physical attacks, third-party services not operated by Quarvo, denial-of-service attacks against production.</p>
+        <p><strong>Safe harbor:</strong> We will not pursue legal action against researchers acting in good faith and within the program's rules.</p>
+
+        <div class="disclosure-meta">
+          <span>// EMAIL: security@quarvo.io</span>
+          <span>// PGP: available on request</span>
+          <span>// MEDIAN RESPONSE: &lt; 24h</span>
+        </div>
+      </div>
+
+      <!-- ─── FOOTER CTA ──────────────────────────────────────────────── -->
+      <div class="sec-footer-cta">
+        <h3>Need a security questionnaire filled out?</h3>
+        <p>For high-AOV merchants in regulated verticals (healthcare, finance, B2B procurement), we maintain a pre-completed CAIQ-Lite and SIG-Lite ready to share under NDA.</p>
+        <a href="mailto:security@quarvo.io" class="cta-link">Email security@quarvo.io →</a>
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer>
+    © 2026 QUARVO ·
+    <a href="/">Home</a> ·
+    <a href="/for-merchants">For merchants</a> ·
+    <a href="/changelog">Changelog</a> ·
+    <a href="/brand">Brand</a> ·
+    <a href="/privacy">Privacy</a> ·
+    <a href="/terms">Terms</a>
+  </footer>
+
+
+  <!-- Vercel Analytics + Speed Insights -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script src="/conversion.js?v=8.0" defer></script>
+</body>
+</html>

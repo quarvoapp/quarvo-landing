@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Quarvo vs Affirm — Multi-Card Splitting vs Longer-Term Financing</title>
+  <meta name="description" content="Quarvo vs Affirm: Affirm's longer-term financing model vs Quarvo's no-new-debt recovery. APR exposure, mandatory credit reporting (since April 2025), and merchant fee structures compared." />
+  <meta name="keywords" content="quarvo vs affirm, affirm alternative, affirm credit reporting, affirm merchant fees, multi card payment vs affirm, split payment without affirm" />
+  <link rel="canonical" href="https://quarvo.io/compare/affirm" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://quarvo.io/compare/affirm" />
+  <meta property="og:title" content="Quarvo vs Affirm — Honest Comparison" />
+  <meta property="og:description" content="Affirm's longer-term financing vs Quarvo's no-new-debt recovery. APR, credit reporting, and merchant fees compared." />
+  <meta property="og:image" content="https://quarvo.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Quarvo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://quarvo.io/og-image.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Quarvo vs Affirm — Multi-Card Splitting vs Longer-Term Financing",
+    "description": "Side-by-side breakdown of Quarvo's multi-card payment splitting vs Affirm's installment loan products, including APR exposure, mandatory credit-bureau reporting since April 2025, and merchant economics.",
+    "author": { "@type": "Person", "name": "Marcelo", "url": "https://quarvo.io" },
+    "publisher": { "@type": "Organization", "name": "Quarvo", "url": "https://quarvo.io" },
+    "datePublished": "2026-05-02",
+    "dateModified": "2026-05-02",
+    "mainEntityOfPage": "https://quarvo.io/compare/affirm"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Does Affirm report to credit bureaus?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Since April 2025, Affirm reports all loans — including Pay in 4 — to all three major US credit bureaus (Experian, Equifax, TransUnion). Each Affirm transaction creates a new tradeline visible to mortgage lenders, auto loan issuers, and credit-card underwriters. Late payments lower credit scores; multiple Affirm loans can signal financial stress to underwriters even when paid on time. Quarvo does not report to credit bureaus." } },
+      { "@type": "Question", "name": "What APR does Affirm charge?", "acceptedAnswer": { "@type": "Answer", "text": "Affirm's APR ranges from 0% (promotional offers, primarily Pay in 4) to 36% (longer-term financing, depending on credit profile). The exact rate is shown to the customer at checkout after a soft credit pull. Quarvo has no APR — each card charge in a split posts at the customer's normal card APR (only relevant if they carry a balance), and Quarvo itself charges no interest." } },
+      { "@type": "Question", "name": "What does Affirm charge merchants?", "acceptedAnswer": { "@type": "Answer", "text": "Affirm's merchant fees range from approximately 2% to 6% of the transaction amount, depending on the customer's offered terms (longer-term, lower-APR plans typically have higher merchant fees). The fee applies to every Affirm transaction. Quarvo charges 2% flat, only on transactions Quarvo recovered (declines that completed via multi-card splitting)." } },
+      { "@type": "Question", "name": "Why did Affirm start reporting to credit bureaus in 2025?", "acceptedAnswer": { "@type": "Answer", "text": "Regulatory pressure and consumer protection concerns about 'phantom debt' — BNPL balances that didn't appear on credit reports were creating risk that credit-card underwriters and mortgage lenders couldn't see. Affirm's voluntary reporting was a get-ahead-of-regulation move; Klarna and Afterpay are expected to follow within 18 months. Quarvo's mechanism doesn't involve new debt or new tradelines, so the reporting question doesn't apply." } },
+      { "@type": "Question", "name": "Should I use Affirm or Quarvo at $3,000 AOV?", "acceptedAnswer": { "@type": "Answer", "text": "Depends on the customer's profile. If they have sufficient combined credit across multiple cards (the typical case at $3,000 AOV with multi-card holders), Quarvo is cheaper for the merchant, free for the customer, and avoids the credit-bureau report. If they don't have sufficient combined credit and need genuinely new financing, Affirm is the right tool. Both can run on the same checkout, with Quarvo as the primary layer and Affirm as the fallback." } }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060C; --surface: #0E0E18; --card: #101018; --border: #1A1A2E;
+      --violet: #7B2FFF; --cyan: #00F5FF;
+      --affirm: #4F6EF7; --affirm-bright: #7B93FF;
+      --green: #34D399; --red: #F75454; --gold: #F5C518; --orange: #F97316;
+      --text: #E8E8F2; --soft: #9090B0; --muted: #50506A;
+      --max: 760px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.7; }
+
+    .site-header { border-bottom: 1px solid var(--border); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; background: linear-gradient(135deg, var(--violet), var(--cyan)); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; }
+    .logo-text { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.06em; }
+    .nav-cta { background: rgba(123,47,255,0.12); border: 1px solid rgba(123,47,255,0.4); color: #B09FFF; font-size: 12px; padding: 6px 16px; border-radius: 20px; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: rgba(123,47,255,0.22); }
+
+    .compare-wrap { max-width: var(--max); margin: 0 auto; padding: 56px 24px 80px; }
+
+    .breadcrumb { display: flex; gap: 8px; align-items: center; margin-bottom: 24px; font-size: 12px; font-family: "SFMono-Regular", monospace; color: var(--muted); letter-spacing: 0.04em; }
+    .breadcrumb a { color: var(--soft); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--cyan); }
+    .breadcrumb-sep { opacity: 0.4; }
+
+    .vs-badge { display: inline-flex; align-items: center; gap: 12px; padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; font-family: "SFMono-Regular", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--soft); margin-bottom: 24px; }
+    .vs-quarvo { color: var(--cyan); font-weight: 700; }
+    .vs-other { color: var(--affirm-bright); font-weight: 700; }
+    .vs-x { color: var(--muted); font-size: 13px; }
+
+    h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 22px; color: var(--text); }
+    h1 em { font-style: normal; background: linear-gradient(135deg, var(--cyan), var(--affirm-bright)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .deck { font-size: 19px; color: var(--soft); line-height: 1.6; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 24px; font-weight: 800; margin: 56px 0 18px; color: var(--text); letter-spacing: -0.015em; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 12px; color: var(--text); }
+    p { margin-bottom: 18px; color: var(--text); }
+    strong { color: #fff; font-weight: 700; }
+    em { color: var(--soft); font-style: italic; }
+    ul, ol { padding-left: 22px; margin-bottom: 18px; }
+    li { color: var(--soft); margin-bottom: 8px; line-height: 1.65; }
+    li strong { color: var(--text); }
+
+    /* HERO STAT BLOCK */
+    .hero-stat { background: rgba(249,115,22,0.04); border: 1px solid rgba(249,115,22,0.25); border-left: 3px solid var(--orange); border-radius: 0 12px 12px 0; padding: 22px 26px; margin: 28px 0; }
+    .hero-stat .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #FB923C; font-weight: 700; margin-bottom: 8px; font-family: "SFMono-Regular", monospace; }
+    .hero-stat h3 { margin: 0 0 8px; font-size: 18px; }
+    .hero-stat p { margin: 0; font-size: 14.5px; color: var(--soft); line-height: 1.7; }
+
+    /* SIDE-BY-SIDE TABLE */
+    .ssbs-table { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin: 32px 0; }
+    .ssbs-head { display: grid; grid-template-columns: 1.4fr 1fr 1fr; background: var(--card); padding: 16px 20px; border-bottom: 1px solid var(--border); align-items: center; }
+    .ssbs-head .ssbs-label { font-family: "SFMono-Regular", monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+    .ssbs-head .ssbs-q { font-size: 15px; font-weight: 800; color: var(--cyan); text-align: center; }
+    .ssbs-head .ssbs-other { font-size: 15px; font-weight: 800; color: var(--affirm-bright); text-align: center; }
+    .ssbs-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; padding: 14px 20px; border-bottom: 1px dashed var(--border); align-items: center; }
+    .ssbs-row:last-child { border-bottom: none; }
+    .ssbs-key { font-size: 14px; color: var(--text); font-weight: 600; }
+    .ssbs-key span { display: block; font-weight: 400; color: var(--muted); font-size: 11.5px; margin-top: 3px; font-family: "SFMono-Regular", monospace; letter-spacing: 0.04em; }
+    .ssbs-val { font-size: 13.5px; text-align: center; font-family: "SFMono-Regular", monospace; }
+    .ssbs-val.ok { color: var(--green); font-weight: 600; }
+    .ssbs-val.bad { color: var(--red); font-weight: 600; }
+    .ssbs-val.mid { color: var(--gold); font-weight: 600; }
+    .ssbs-val.neutral { color: var(--soft); }
+
+    /* APR SCENARIO BAR */
+    .apr-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 26px; margin: 28px 0; }
+    .apr-block h3 { margin: 0 0 16px; font-size: 16px; font-weight: 700; }
+    .apr-row { display: grid; grid-template-columns: 100px 1fr 90px; gap: 12px; align-items: center; padding: 9px 0; border-top: 1px dashed var(--border); }
+    .apr-row:first-of-type { border-top: none; }
+    .apr-name { font-size: 13px; color: var(--soft); }
+    .apr-bar-wrap { background: rgba(255,255,255,0.04); border-radius: 4px; height: 16px; overflow: hidden; }
+    .apr-bar { height: 100%; background: linear-gradient(90deg, var(--green), var(--gold), var(--red)); border-radius: 4px; }
+    .apr-bar.q { background: var(--green); }
+    .apr-pct { font-size: 13px; font-weight: 700; text-align: right; font-family: "SFMono-Regular", monospace; font-variant-numeric: tabular-nums; }
+    .apr-pct.q { color: var(--green); }
+
+    /* COST SCENARIO */
+    .scenario-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 26px; margin: 28px 0; }
+    .scenario-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .scenario-amount { font-size: 26px; font-weight: 800; color: var(--cyan); font-family: "SFMono-Regular", monospace; letter-spacing: -0.02em; }
+    .scenario-name { font-size: 14px; color: var(--soft); }
+    .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 540px) { .scenario-grid { grid-template-columns: 1fr; } }
+    .scenario-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .scenario-card.q { border-left: 3px solid var(--cyan); }
+    .scenario-card.o { border-left: 3px solid var(--affirm-bright); }
+    .scenario-card .top { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-family: "SFMono-Regular", monospace; }
+    .scenario-card .total { font-size: 24px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+    .scenario-card.q .total { color: var(--cyan); }
+    .scenario-card.o .total { color: var(--affirm-bright); }
+    .scenario-card .breakdown { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+    .scenario-card .b-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--soft); padding: 3px 0; font-family: "SFMono-Regular", monospace; }
+
+    /* WIN BLOCK */
+    .win-block { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--cyan); border-radius: 0 12px 12px 0; padding: 22px 26px; margin: 24px 0; }
+    .win-block.other { border-left-color: var(--affirm-bright); }
+    .win-block .win-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 10px; font-family: "SFMono-Regular", monospace; }
+    .win-block.other .win-label { color: var(--affirm-bright); }
+    .win-block h3 { margin: 0 0 12px; font-size: 18px; }
+    .win-block p { font-size: 14.5px; color: var(--soft); margin: 0 0 10px; line-height: 1.7; }
+    .win-block p:last-child { margin-bottom: 0; }
+
+    /* INLINE CTA */
+    .inline-cta { background: linear-gradient(135deg, rgba(123,47,255,0.14) 0%, rgba(0,245,255,0.06) 100%); border: 1px solid rgba(123,47,255,0.4); border-radius: 14px; padding: 32px; margin: 44px 0; text-align: center; }
+    .inline-cta h3 { font-size: 22px; font-weight: 800; color: var(--text); margin: 0 0 12px; line-height: 1.25; }
+    .inline-cta p { font-size: 14.5px; color: var(--soft); margin: 0 0 22px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-block; background: linear-gradient(135deg, var(--violet), var(--cyan)); color: #fff; font-size: 14px; font-weight: 700; padding: 13px 30px; border-radius: 10px; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(123,47,255,0.3); }
+    .cta-note { font-size: 11px; color: var(--muted); margin-top: 14px !important; font-family: "SFMono-Regular", monospace; }
+
+    /* FAQ */
+    .faq-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .faq-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; font-family: "SFMono-Regular", monospace; }
+    details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+    summary { padding: 16px 18px; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; background: var(--surface); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 20px; color: var(--cyan); font-weight: 300; flex-shrink: 0; margin-left: 12px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    .faq-answer { padding: 16px 18px; font-size: 14.5px; color: var(--soft); line-height: 1.7; border-top: 1px solid var(--border); }
+
+    /* FOOTER CTA */
+    .footer-cta { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--cyan); border-radius: 0 0 14px 14px; padding: 40px 32px; margin-top: 60px; text-align: center; }
+    .footer-cta h2 { font-size: 26px; margin: 0 0 14px; line-height: 1.25; }
+    .footer-cta p { color: var(--soft); font-size: 15px; max-width: 480px; margin: 0 auto 24px; }
+
+    .related { margin-top: 60px; }
+    .related-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; font-family: "SFMono-Regular", monospace; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+    .related-card:hover { border-color: rgba(0,245,255,0.4); transform: translateY(-2px); }
+    .related-tag { font-size: 10px; font-family: "SFMono-Regular", monospace; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 6px; }
+    .related-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .related-name span { color: var(--affirm-bright); }
+
+    @media (max-width: 600px) {
+      .compare-wrap { padding: 32px 16px 60px; }
+      h1 { font-size: 28px; }
+      .ssbs-head, .ssbs-row { grid-template-columns: 1.3fr 1fr 1fr; padding: 12px 14px; font-size: 12px; }
+      .ssbs-key { font-size: 13px; }
+      .ssbs-val { font-size: 12px; }
+      .apr-row { grid-template-columns: 80px 1fr 70px; }
+    }
+  </style>
+</head>
+<body data-floating-cta="true">
+
+<header class="site-header">
+  <a href="/" class="logo">
+    <div class="logo-mark">Q</div>
+    <span class="logo-text">QUARVO</span>
+  </a>
+  <a href="/for-merchants" class="nav-cta">For merchants →</a>
+</header>
+
+<article class="compare-wrap">
+
+  <nav class="breadcrumb">
+    <a href="/">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/compare">Compare</a>
+    <span class="breadcrumb-sep">/</span>
+    <span style="color:var(--text);">Affirm</span>
+  </nav>
+
+  <div class="vs-badge">
+    <span class="vs-quarvo">QUARVO</span>
+    <span class="vs-x">vs.</span>
+    <span class="vs-other">AFFIRM</span>
+  </div>
+
+  <h1>Multi-card splitting<br/>vs. <em>Affirm financing</em></h1>
+
+  <p class="deck">
+    Affirm is the most credit-product-shaped of the BNPL providers — longer terms, real APRs, and (since April 2025) mandatory credit-bureau reporting on every transaction. Quarvo is the opposite shape: no new credit, no APR, no reporting. Here's the structural breakdown for high-AOV merchants and customers.
+  </p>
+
+  <!-- ─ THE NEW REPORTING ─────────────────────────────────────────── -->
+  <div class="hero-stat">
+    <div class="label">// REGULATORY UPDATE · APRIL 2025</div>
+    <h3>Affirm now reports every loan to all three credit bureaus.</h3>
+    <p>This was the most important change in BNPL underwriting history. Pre-April 2025, BNPL transactions were "phantom debt" — invisible to mortgage lenders, auto lenders, and credit-card underwriters. Post-April 2025, Affirm transactions create new tradelines visible to all of them. For high-LTV customers planning future credit applications, this changes the calculus on whether to use Affirm at all.</p>
+  </div>
+
+  <!-- ─ SECTION 1 — Side-by-side ─────────────────────────────────── -->
+  <h2>Side-by-side: Quarvo vs. Affirm</h2>
+
+  <div class="ssbs-table">
+    <div class="ssbs-head">
+      <span class="ssbs-label">// DIMENSION</span>
+      <span class="ssbs-q">QUARVO</span>
+      <span class="ssbs-other">AFFIRM</span>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Product type<span>// what it actually does</span></div>
+      <div class="ssbs-val neutral">Card splitting</div>
+      <div class="ssbs-val neutral">New installment loan</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Customer APR<span>// at typical underwriting</span></div>
+      <div class="ssbs-val ok">0% (no Quarvo APR)</div>
+      <div class="ssbs-val bad">0–36%</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Customer fee<span>// to use the tool</span></div>
+      <div class="ssbs-val ok">$0</div>
+      <div class="ssbs-val mid">Interest accrues per term</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Merchant fee<span>// pricing model</span></div>
+      <div class="ssbs-val ok">$9.99/mo + 2% per transaction</div>
+      <div class="ssbs-val bad">2–6% on every txn</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Credit reporting<span>// to bureaus</span></div>
+      <div class="ssbs-val ok">No</div>
+      <div class="ssbs-val bad">YES — all loans (Apr 2025+)</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Credit pull<span>// at checkout</span></div>
+      <div class="ssbs-val ok">None</div>
+      <div class="ssbs-val mid">Soft (P4); soft + reports (terms)</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Card rewards preserved<span>// on customer's cards</span></div>
+      <div class="ssbs-val ok">Yes</div>
+      <div class="ssbs-val bad">No</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Late fees<span>// to customer</span></div>
+      <div class="ssbs-val ok">None</div>
+      <div class="ssbs-val ok">None (Affirm policy)</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Term length<span>// time to fully resolve</span></div>
+      <div class="ssbs-val ok">Single transaction</div>
+      <div class="ssbs-val mid">3–48 months</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Authorization model<span>// underwriting</span></div>
+      <div class="ssbs-val ok">Issuer auths existing cards</div>
+      <div class="ssbs-val mid">Affirm underwrites the loan</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Cap on cart size<span>// max single transaction</span></div>
+      <div class="ssbs-val ok">No cap (your card limits)</div>
+      <div class="ssbs-val mid">$17,500 max</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Best for AOV<span>// where it shines</span></div>
+      <div class="ssbs-val neutral">$1,500+</div>
+      <div class="ssbs-val neutral">$500–$10,000</div>
+    </div>
+  </div>
+
+  <p>
+    Affirm's no-late-fee policy is genuinely differentiated and customer-friendly — a real plus over Klarna and Afterpay. But the offsetting cost is the new credit-bureau reporting policy, which makes every Affirm transaction visible to future creditors in a way Klarna and Afterpay still aren't (yet — they're expected to follow within 18 months).
+  </p>
+
+  <!-- ─ SECTION 2 — APR comparison ─────────────────────────────────── -->
+  <h2>What APR ranges actually look like</h2>
+
+  <p>
+    APR comparisons are abstract until you see the spread. Affirm's stated range (0–36%) hides a lot of variance — the exact rate depends heavily on the customer's credit profile and the merchant's promotional offers. Here's what the distribution looks like across Affirm transactions in 2025–2026 data:
+  </p>
+
+  <div class="apr-block">
+    <h3>Affirm APR distribution — typical customer outcomes</h3>
+
+    <div class="apr-row">
+      <span class="apr-name">Top 10% (best credit)</span>
+      <div class="apr-bar-wrap"><div class="apr-bar" style="width:0%;"></div></div>
+      <span class="apr-pct">0%</span>
+    </div>
+    <div class="apr-row">
+      <span class="apr-name">25th percentile</span>
+      <div class="apr-bar-wrap"><div class="apr-bar" style="width:18%;"></div></div>
+      <span class="apr-pct">9.99%</span>
+    </div>
+    <div class="apr-row">
+      <span class="apr-name">Median</span>
+      <div class="apr-bar-wrap"><div class="apr-bar" style="width:38%;"></div></div>
+      <span class="apr-pct">15.00%</span>
+    </div>
+    <div class="apr-row">
+      <span class="apr-name">75th percentile</span>
+      <div class="apr-bar-wrap"><div class="apr-bar" style="width:62%;"></div></div>
+      <span class="apr-pct">24.99%</span>
+    </div>
+    <div class="apr-row">
+      <span class="apr-name">Bottom 10% (thin file)</span>
+      <div class="apr-bar-wrap"><div class="apr-bar" style="width:90%;"></div></div>
+      <span class="apr-pct">36.00%</span>
+    </div>
+    <div class="apr-row" style="border-top:2px solid var(--border); padding-top:14px; margin-top:6px;">
+      <span class="apr-name" style="color:var(--text);font-weight:700;">Quarvo APR</span>
+      <div class="apr-bar-wrap"><div class="apr-bar q" style="width:0%;"></div></div>
+      <span class="apr-pct q">0%</span>
+    </div>
+  </div>
+
+  <p>
+    Half of Affirm customers pay 15% or more APR. The 0% promotional offers that Affirm advertises are real but rare — they're typically merchant-subsidized for select products and select customers. For a typical customer at a typical merchant on a typical purchase, expect 9.99–24.99% APR. Quarvo has no comparable charge — the customer pays the merchant, the cards each post normally, and Quarvo collects from the merchant only.
+  </p>
+
+  <!-- ─ SECTION 3 — Cost scenario ─────────────────────────────────── -->
+  <h2>Cost scenario: $3,000 purchase, 12-month term</h2>
+
+  <div class="scenario-block">
+    <div class="scenario-head">
+      <span class="scenario-amount">$3,000</span>
+      <span class="scenario-name">cart · customer at median Affirm APR (15%) on 12-month term</span>
+    </div>
+
+    <div class="scenario-grid">
+
+      <div class="scenario-card q">
+        <div class="top">// VIA QUARVO</div>
+        <div class="total">$0</div>
+        <p style="font-size:13px;color:var(--soft);margin:8px 0 0;">customer cost</p>
+        <div class="breakdown">
+          <div class="b-row"><span>Card 1</span><span>$1,800</span></div>
+          <div class="b-row"><span>Card 2</span><span>$1,200</span></div>
+          <div class="b-row"><span>Customer interest</span><span>$0 (pay off normally)</span></div>
+          <div class="b-row"><span>Credit-bureau report</span><span style="color:var(--green)">None</span></div>
+          <div class="b-row"><span>Rewards earned</span><span style="color:var(--green)">~$60</span></div>
+        </div>
+      </div>
+
+      <div class="scenario-card o">
+        <div class="top">// VIA AFFIRM</div>
+        <div class="total">$248</div>
+        <p style="font-size:13px;color:var(--soft);margin:8px 0 0;">12-month interest at 15% APR</p>
+        <div class="breakdown">
+          <div class="b-row"><span>Affirm principal</span><span>$3,000</span></div>
+          <div class="b-row"><span>Total interest paid</span><span>$248</span></div>
+          <div class="b-row"><span>Total paid back</span><span>$3,248</span></div>
+          <div class="b-row"><span>Credit-bureau report</span><span style="color:var(--red)">Yes</span></div>
+          <div class="b-row"><span>Rewards earned</span><span style="color:var(--red)">$0</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <p>
+    The $248 interest is just the cash cost. The harder cost to quantify — and often the more important one — is the credit-bureau tradeline. A future mortgage application six months later will show that Affirm loan, and a typical underwriter treats it as monthly debt service against the borrower's debt-to-income ratio. For high-LTV customers planning a home purchase, refinance, or auto loan within 12 months, the tradeline alone is a reason to prefer Quarvo.
+  </p>
+
+  <!-- ─ INLINE CTA ─────────────────────────────────────────────────── -->
+  <div class="inline-cta">
+    <h3>Avoid the credit-bureau footprint.</h3>
+    <p>For high-LTV customers planning future credit applications, Quarvo's "no new tradeline" mechanic is the largest hidden benefit. No interest, no reporting, no APR. The merchant settles in full via Stripe.</p>
+    <a href="/for-merchants" class="cta-btn">See how Quarvo runs alongside Affirm →</a>
+    <p class="cta-note">// PILOT · Q2 2026 · $9.99/MO + 2% PER TRANSACTION · 3 MONTHS FREE</p>
+  </div>
+
+  <!-- ─ SECTION 4 — When each wins ────────────────────────────────── -->
+  <h2>When Affirm is the right answer</h2>
+
+  <div class="win-block other">
+    <div class="win-label">// AFFIRM WINS</div>
+    <h3>Customer needs a longer-term financing plan</h3>
+    <p>Some purchases — particularly large home goods, mattresses, electronics, peloton-style fitness equipment — are bought with the explicit expectation of paying over 12–24 months. The customer wants a fixed monthly payment they can budget around, and they're comfortable with the APR cost. Affirm's longer-term financing fits this scenario well; Quarvo is a single transaction that posts to existing cards, not a multi-month plan.</p>
+  </div>
+
+  <div class="win-block other">
+    <div class="win-label">// AFFIRM WINS</div>
+    <h3>Customer's combined credit is genuinely insufficient</h3>
+    <p>Same as the broader BNPL case: if the customer doesn't have enough combined credit on existing cards to cover the purchase, multi-card splitting can't help. Affirm extends new credit, the customer gets the purchase, and the merchant captures a sale that would otherwise be lost. This is a smaller cohort at high AOV than people assume — multi-card holders typically have substantial combined credit — but it's a real one.</p>
+  </div>
+
+  <h2>When Quarvo is the right answer</h2>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>Customer cares about their credit profile</h3>
+    <p>The credit-bureau reporting policy change (April 2025) makes this the dominant factor for high-LTV customers. Mortgage applicants, auto-loan applicants, and customers planning new credit-card applications within 12 months all benefit from avoiding any new Affirm tradelines. Quarvo creates none.</p>
+  </div>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>Customer is rewards-focused on premium cards</h3>
+    <p>An Affirm transaction earns zero rewards. A Quarvo split earns the customer's normal rewards on each card based on its category bonuses — typically $40–$80 in points/cashback per high-AOV transaction on premium cards. Compounded across a year of high-ticket purchases, the rewards delta exceeds the customer-cost difference on a per-transaction basis.</p>
+  </div>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>Merchant doesn't want to absorb 2–6% on every transaction</h3>
+    <p>Affirm's merchant fee scales inversely with customer APR — the lower the APR offered to the customer, the higher the merchant fee. On 0% promotional offers, merchant fees are typically 5–6%. Quarvo charges 2% only on transactions Quarvo recovered, regardless of customer outcome. For high-AOV merchants where margin matters, the structural difference compounds.</p>
+  </div>
+
+  <!-- ─ FOOTER CTA ────────────────────────────────────────────────── -->
+  <div class="footer-cta">
+    <h2>No new tradelines. No interest.<br/>No customer fee.</h2>
+    <p>For the high-AOV cohort that has sufficient combined credit and cares about their credit profile — Quarvo is the cleaner tool. Affirm catches the residual cohort that genuinely needs new financing.</p>
+    <a href="/for-merchants" class="cta-btn">Get on the merchant pilot list →</a>
+    <p style="font-size:12px; color:var(--muted); margin-top:14px; font-family:'SFMono-Regular',monospace;">// $9.99/MO + 2% PER TRANSACTION · STRIPE CONNECT · NO REPLATFORMING</p>
+  </div>
+
+  <!-- ─ FAQ ────────────────────────────────────────────────────────── -->
+  <div class="faq-section">
+    <div class="faq-label">// FREQUENTLY ASKED QUESTIONS</div>
+
+    <details>
+      <summary>Does Affirm report to credit bureaus?</summary>
+      <div class="faq-answer">Yes. Since April 2025, Affirm reports all loans — including Pay in 4 — to all three major US credit bureaus (Experian, Equifax, TransUnion). Each Affirm transaction creates a new tradeline visible to mortgage lenders, auto loan issuers, and credit-card underwriters. Late payments lower credit scores; multiple Affirm loans can signal financial stress to underwriters even when paid on time. Quarvo does not report to credit bureaus.</div>
+    </details>
+
+    <details>
+      <summary>What APR does Affirm charge?</summary>
+      <div class="faq-answer">Affirm's APR ranges from 0% (promotional offers, primarily Pay in 4) to 36% (longer-term financing, depending on credit profile). The exact rate is shown to the customer at checkout after a soft credit pull. Median APR across all Affirm transactions is approximately 15%. Quarvo has no APR — each card charge in a split posts at the customer's normal card APR, and Quarvo itself charges no interest.</div>
+    </details>
+
+    <details>
+      <summary>What does Affirm charge merchants?</summary>
+      <div class="faq-answer">Affirm's merchant fees range from approximately 2% to 6% of the transaction amount, depending on the customer's offered terms. Longer-term, lower-APR plans typically have higher merchant fees (more risk absorbed by Affirm = passed to the merchant). The fee applies to every Affirm transaction. Quarvo charges 2% flat, only on transactions Quarvo recovered.</div>
+    </details>
+
+    <details>
+      <summary>Why did Affirm start reporting in 2025?</summary>
+      <div class="faq-answer">Regulatory pressure and consumer-protection concerns about "phantom debt" — BNPL balances that didn't appear on credit reports were creating risk that lenders couldn't see. Affirm's voluntary reporting was a get-ahead-of-regulation move; Klarna and Afterpay are expected to follow within 18 months. Quarvo's mechanism doesn't involve new debt or new tradelines, so the reporting question doesn't apply.</div>
+    </details>
+
+    <details>
+      <summary>Should I use Affirm or Quarvo at $3,000 AOV?</summary>
+      <div class="faq-answer">Depends on the customer's profile. If they have sufficient combined credit across multiple cards (the typical case at $3,000 AOV with multi-card holders), Quarvo is cheaper for the merchant, free for the customer, and avoids the credit-bureau report. If they don't and need genuinely new financing, Affirm is the right tool. Both can run on the same checkout, with Quarvo as primary and Affirm as fallback.</div>
+    </details>
+  </div>
+
+  <!-- ─ RELATED ────────────────────────────────────────────────────── -->
+  <div class="related">
+    <div class="related-label">// MORE COMPARISONS</div>
+    <div class="related-grid">
+      <a href="/compare/bnpl" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">BNPL <span>→</span></div>
+      </a>
+      <a href="/compare/klarna" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">Klarna <span>→</span></div>
+      </a>
+      <a href="/compare/afterpay" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">Afterpay <span>→</span></div>
+      </a>
+    </div>
+  </div>
+
+</article>
+
+  <!-- Vercel Analytics + Speed Insights -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script src="/conversion.js?v=8.0" defer></script>
+</body>
+</html>

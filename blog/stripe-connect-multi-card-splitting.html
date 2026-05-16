@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SEO META ═══════════════════════════════════════════════════════ -->
+  <title>Stripe Connect + Multi-Card Splitting: How the Quarvo Payment Graph Works</title>
+  <meta name="description" content="A technical walkthrough of how Quarvo splits a single $2,400 transaction across 2–4 customer cards, settles atomically to one merchant, and runs as a Stripe Connect platform — with worked examples." />
+  <meta name="keywords" content="stripe connect multi card payment, atomic payment authorization, split payment architecture, multi card checkout API, payment graph engineering" />
+  <link rel="canonical" href="https://quarvo.io/blog/stripe-connect-multi-card-splitting" />
+
+  <meta property="og:title" content="Stripe Connect + Multi-Card Splitting: How the Quarvo Payment Graph Works" />
+  <meta property="og:description" content="The architecture behind splitting one purchase across multiple cards atomically — with Stripe Connect, atomic auth, and a reconciliation layer." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://quarvo.io/blog/stripe-connect-multi-card-splitting" />
+  <meta property="og:image" content="https://quarvo.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Quarvo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://quarvo.io/og-image.png" />
+  <meta name="twitter:title" content="How the Quarvo Payment Graph Works" />
+  <meta name="twitter:description" content="Stripe Connect + atomic multi-card auth + reconciliation. Architecture deep-dive." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Stripe Connect + Multi-Card Splitting: How the Quarvo Payment Graph Works",
+    "description": "Technical architecture of a multi-card split-payment system built on Stripe Connect, including atomic authorization, reconciliation, and merchant settlement.",
+    "author": { "@type": "Person", "name": "Marcelo", "url": "https://quarvo.io" },
+    "publisher": { "@type": "Organization", "name": "Quarvo", "url": "https://quarvo.io" },
+    "datePublished": "2026-05-02",
+    "dateModified": "2026-05-02",
+    "mainEntityOfPage": "https://quarvo.io/blog/stripe-connect-multi-card-splitting",
+    "proficiencyLevel": "Expert"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does multi-card splitting work technically?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Multi-card splitting executes N concurrent partial authorizations — one per customer card — and treats them as a single atomic unit. If all N succeed within the auth window, all are captured and the merchant receives one consolidated settlement. If any single auth fails or times out, all prior auths are immediately voided. The customer is never charged unless the full transaction completes. Quarvo coordinates this through a payment graph layer running on top of Stripe Connect's platform model."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why use Stripe Connect for split-card payments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Stripe Connect's platform model lets a service like Quarvo orchestrate payments on behalf of merchants without holding merchant funds, without becoming a money transmitter, and without making merchants change processors. The merchant keeps their existing Stripe account, their existing settlement timing, and their existing dispute infrastructure. Quarvo runs as a Connect platform that creates payment intents on the merchant's account, with Quarvo's fee deducted via application_fee_amount."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does atomic commitment work across multiple authorizations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Quarvo uses a two-phase commit pattern. Phase 1 (prepare): all card authorizations are created in parallel as PaymentIntents in 'requires_capture' state. The system holds each authorization for a short window (typically 60–120 seconds). Phase 2 (commit): once all authorizations succeed, all are captured in parallel. If any authorization fails or times out during Phase 1, all successful authorizations are immediately voided via the Stripe cancel API. The merchant only ever sees a successful capture or no charge at all."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if one card fails after others have authorized?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Quarvo's coordination layer detects the failure and immediately voids all previously successful authorizations on the other cards. The customer's available credit on those cards is restored within minutes (issuer-dependent). The customer is shown an inline message describing which card failed, and they can swap in a different card to retry. The merchant is not charged a fee for failed splits. No partial captures ever post."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the merchant need to change their payment processor to use Quarvo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Quarvo is built as a Stripe Connect platform, which means it integrates on top of the merchant's existing Stripe account. The merchant keeps their current account, current settlement timing, current chargeback handling, and current banking arrangements. Integration is a JavaScript drop-in (Shopify/Woo) or a server-side API call (custom). For non-Stripe merchants, Quarvo will support Adyen and Braintree as additional platform substrates in subsequent releases."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060C;
+      --surface: #0E0E18;
+      --card: #101018;
+      --border: #1A1A2E;
+      --accent: #4F6EF7;
+      --bright: #7B93FF;
+      --gold: #F5C518;
+      --green: #34D399;
+      --red: #F75454;
+      --teal: #2DD4BF;
+      --violet: #7B2FFF;
+      --cyan: #00F5FF;
+      --text: #E8E8F2;
+      --soft: #9090B0;
+      --muted: #50506A;
+      --max: 760px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.75; }
+
+    .site-header { border-bottom: 1px solid var(--border); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; background: linear-gradient(135deg, var(--violet), var(--cyan)); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; }
+    .logo-text { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.06em; }
+    .nav-cta { background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.35); color: var(--cyan); font-size: 12px; padding: 6px 16px; border-radius: 20px; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: rgba(0,245,255,0.15); }
+
+    .article-wrapper { max-width: var(--max); margin: 0 auto; padding: 56px 24px 80px; }
+
+    .article-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+    .tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; font-weight: 700; }
+    .tag-eng { background: rgba(0,245,255,0.08); color: var(--cyan); border: 1px solid rgba(0,245,255,0.3); }
+    .tag-updated { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+    .reading-time { font-size: 12px; color: var(--muted); font-family: "SFMono-Regular", monospace; }
+
+    h1 { font-size: clamp(28px, 4.6vw, 42px); font-weight: 800; line-height: 1.12; letter-spacing: -0.025em; margin-bottom: 22px; color: var(--text); }
+    h1 em { font-style: normal; background: linear-gradient(135deg, var(--cyan) 0%, #4F6EF7 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .deck { font-size: 18px; color: var(--soft); line-height: 1.6; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 23px; font-weight: 800; margin: 56px 0 18px; color: var(--text); letter-spacing: -0.015em; }
+    h3 { font-size: 17px; font-weight: 700; margin: 32px 0 12px; color: var(--text); }
+    p { margin-bottom: 18px; color: var(--text); }
+    strong { color: #fff; font-weight: 700; }
+    em { color: var(--soft); font-style: italic; }
+    ul, ol { padding-left: 22px; margin-bottom: 18px; }
+    li { color: var(--soft); margin-bottom: 8px; line-height: 1.65; }
+    li strong { color: var(--text); }
+    code { font-family: "SFMono-Regular", "Consolas", monospace; font-size: 0.92em; background: var(--card); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; color: var(--cyan); }
+
+    /* ARCHITECTURE DIAGRAM */
+    .arch { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 28px 0; }
+    .arch-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; letter-spacing: 0.04em; }
+    .arch-sub { font-size: 11px; color: var(--muted); font-family: monospace; margin-bottom: 22px; letter-spacing: 0.06em; }
+    .arch-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+    .arch-node { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; position: relative; }
+    .arch-node.merchant { border-color: rgba(123,47,255,0.4); background: rgba(123,47,255,0.04); }
+    .arch-node.quarvo { border-color: rgba(0,245,255,0.4); background: rgba(0,245,255,0.04); }
+    .arch-node.stripe { border-color: rgba(99,91,255,0.35); background: rgba(99,91,255,0.04); }
+    .arch-node.cards { border-color: rgba(52,211,153,0.35); background: rgba(52,211,153,0.04); }
+    .arch-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .arch-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .arch-detail { font-size: 11px; color: var(--soft); margin-top: 4px; font-family: monospace; }
+    .arch-arrow { text-align: center; color: var(--muted); font-size: 18px; margin: 4px 0; line-height: 1; }
+
+    /* CODE BLOCK */
+    .code-block { background: #02020A; border: 1px solid var(--border); border-radius: 10px; padding: 0; margin: 24px 0; overflow: hidden; }
+    .code-head { background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; }
+    .code-lang { font-size: 11px; font-family: monospace; color: var(--cyan); letter-spacing: 0.08em; }
+    .code-fname { font-size: 11px; font-family: monospace; color: var(--muted); }
+    .code-body { padding: 16px 18px; font-family: "SFMono-Regular", "Consolas", monospace; font-size: 13px; line-height: 1.65; color: var(--text); overflow-x: auto; }
+    .code-body .kw { color: #C586C0; }
+    .code-body .str { color: #A6D8A8; }
+    .code-body .num { color: #FBBF24; }
+    .code-body .com { color: #6A6A88; font-style: italic; }
+    .code-body .fn { color: var(--cyan); }
+    .code-body .var { color: #9B6FFF; }
+    .code-body pre { margin: 0; white-space: pre; }
+
+    /* TIMELINE */
+    .timeline { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 28px 0; }
+    .tl-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; letter-spacing: 0.04em; }
+    .tl-sub { font-size: 11px; color: var(--muted); font-family: monospace; margin-bottom: 18px; letter-spacing: 0.06em; }
+    .tl-step { display: grid; grid-template-columns: 70px 1fr; gap: 14px; padding: 10px 0; border-top: 1px dashed var(--border); }
+    .tl-step:first-of-type { border-top: none; }
+    .tl-time { font-size: 11px; font-family: monospace; color: var(--cyan); padding-top: 2px; letter-spacing: 0.04em; }
+    .tl-action { font-size: 14px; color: var(--text); font-weight: 600; }
+    .tl-action span { display: block; color: var(--soft); font-weight: 400; font-size: 13px; margin-top: 4px; line-height: 1.55; }
+
+    /* PROPERTIES TABLE */
+    .props { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 22px; margin: 24px 0; }
+    .props-row { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 9px 0; border-bottom: 1px dashed var(--border); }
+    .props-row:last-child { border-bottom: none; }
+    .props-key { font-size: 13px; color: var(--soft); }
+    .props-val { font-size: 13px; font-family: monospace; color: var(--cyan); font-weight: 600; }
+    .props-val.green { color: var(--green); }
+
+    /* CALLOUT */
+    .callout { background: rgba(0,245,255,0.04); border: 1px solid rgba(0,245,255,0.22); border-left: 3px solid var(--cyan); border-radius: 0 8px 8px 0; padding: 18px 22px; margin: 28px 0; }
+    .callout .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 8px; font-family: monospace; }
+    .callout p { color: var(--soft); font-size: 14.5px; margin: 0; line-height: 1.7; }
+
+    /* WARNING */
+    .warn { background: rgba(249,115,22,0.05); border: 1px solid rgba(249,115,22,0.25); border-left: 3px solid #F97316; border-radius: 0 8px 8px 0; padding: 18px 22px; margin: 28px 0; }
+    .warn .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #FB923C; font-weight: 700; margin-bottom: 8px; font-family: monospace; }
+    .warn p { color: var(--soft); font-size: 14.5px; margin: 0; line-height: 1.7; }
+
+    /* INLINE CTA */
+    .inline-cta { background: linear-gradient(135deg, rgba(0,245,255,0.1) 0%, rgba(123,47,255,0.06) 100%); border: 1px solid rgba(0,245,255,0.35); border-radius: 14px; padding: 32px; margin: 44px 0; text-align: center; }
+    .inline-cta h3 { font-size: 22px; font-weight: 800; color: var(--text); margin: 0 0 12px; line-height: 1.25; }
+    .inline-cta p { font-size: 14.5px; color: var(--soft); margin: 0 0 22px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-block; background: linear-gradient(135deg, var(--cyan), var(--violet)); color: #fff; font-size: 14px; font-weight: 700; padding: 13px 30px; border-radius: 10px; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(0,245,255,0.25); }
+    .cta-note { font-size: 11px; color: var(--muted); margin-top: 14px !important; font-family: monospace; }
+
+    /* FAQ */
+    .faq-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .faq-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; font-family: monospace; }
+    details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+    summary { padding: 16px 18px; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; background: var(--surface); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 20px; color: var(--cyan); font-weight: 300; flex-shrink: 0; margin-left: 12px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    .faq-answer { padding: 16px 18px; font-size: 14.5px; color: var(--soft); line-height: 1.7; border-top: 1px solid var(--border); }
+
+    /* FOOTER CTA */
+    .footer-cta { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--cyan); border-radius: 0 0 14px 14px; padding: 40px 32px; margin-top: 60px; text-align: center; }
+    .footer-cta h2 { font-size: 26px; margin: 0 0 14px; line-height: 1.25; }
+    .footer-cta p { color: var(--soft); font-size: 15px; max-width: 480px; margin: 0 auto 24px; }
+
+    .article-footer { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 14px; }
+    .author-avatar { width: 44px; height: 44px; background: linear-gradient(135deg, var(--cyan), var(--violet)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .author-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .author-role { font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .article-wrapper { padding: 32px 16px 60px; }
+      h1 { font-size: 26px; }
+      .arch-row { grid-template-columns: 1fr; }
+      .footer-cta h2 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="https://quarvo.io" class="logo">
+    <div class="logo-mark">Q</div>
+    <span class="logo-text">QUARVO</span>
+  </a>
+  <a href="https://quarvo.io/pay-with-quarvo" class="nav-cta">Integration docs →</a>
+</header>
+
+<article class="article-wrapper">
+
+  <div class="article-meta">
+    <span class="tag tag-eng">Engineering</span>
+    <span class="tag tag-updated">May 2026</span>
+    <span class="reading-time">12 min read · 3,000 words</span>
+  </div>
+
+  <h1>Stripe Connect + Multi-Card Splitting:<br/>How the <em>Quarvo Payment Graph</em> Works</h1>
+
+  <p class="deck">
+    A walkthrough of the architecture behind splitting a single $2,400 customer transaction across 2–4 cards atomically, settling in full to one merchant, and shipping as a Stripe Connect platform — without the merchant changing processors. Real code, real failure modes, real timing.
+  </p>
+
+  <!-- ── SECTION 1 ─────────────────────────────────────────────────────── -->
+  <h2>The shape of the problem</h2>
+
+  <p>
+    A customer hits checkout with a $2,400 cart. Their best card has $1,800 of available credit. The straight charge fails. Their second card has $1,400 available. Their combined credit is $3,200 — enough — but no checkout in commerce is built to use both cards on one transaction.
+  </p>
+
+  <p>
+    The technical reason isn't capability. Card networks have supported partial authorizations for decades. The reason is coordination: there is no consumer-facing layer that <em>schedules N partial authorizations against N cards, holds them simultaneously, and commits or rolls back atomically</em>. That coordination layer is what we call the <strong>payment graph</strong>.
+  </p>
+
+  <p>
+    Quarvo is the payment graph. The rest of this post is how it's built.
+  </p>
+
+  <!-- ── SECTION 2 ─────────────────────────────────────────────────────── -->
+  <h2>Why Stripe Connect is the right substrate</h2>
+
+  <p>
+    The first design decision is what runs underneath the graph. Three options exist for a payment-orchestration layer:
+  </p>
+
+  <ul>
+    <li><strong>Become a money transmitter.</strong> Get state-by-state MT licenses in the US plus equivalents internationally, hold customer funds, settle to merchants ourselves. 18-month minimum to launch. Massive compliance overhead. Wrong tradeoff for the problem.</li>
+    <li><strong>Build directly against card networks.</strong> Become a card acquirer, work with banks, certify with Visa/Mastercard. 2-year minimum. Wrong tradeoff for the same reason.</li>
+    <li><strong>Run as a Stripe Connect platform.</strong> The merchant keeps their existing Stripe account. Quarvo orchestrates payments on the merchant's account using the platform model. Funds never touch Quarvo. Quarvo's fee comes through <code>application_fee_amount</code>. Ships in months, not years.</li>
+  </ul>
+
+  <p>
+    Stripe Connect was built for marketplaces where a platform processes payments on behalf of sellers (Lyft, DoorDash, Substack). The pattern fits split-card recovery exactly: Quarvo is a "platform" whose value is the orchestration of multiple authorizations on behalf of a merchant. The merchant sees a single PaymentIntent on their dashboard and a single net deposit.
+  </p>
+
+  <div class="callout">
+    <div class="label">// CONNECT MODEL CHOICE</div>
+    <p>Quarvo runs as a <strong>Standard Connect platform</strong> with destination charges and an explicit <code>application_fee_amount</code>. Merchants keep ownership of their Stripe account, dispute responsibility, and settlement timing. Quarvo never custodies funds. Compliance-wise, this puts Quarvo in the same category as e-commerce SaaS that uses Stripe billing — not in the money-transmission category.</p>
+  </div>
+
+  <!-- ── SECTION 3 ─────────────────────────────────────────────────────── -->
+  <h2>Architecture in one diagram</h2>
+
+  <div class="arch">
+    <div class="arch-title">Quarvo payment graph — request flow</div>
+    <div class="arch-sub">// SINGLE TRANSACTION · N CARDS · ATOMIC COMMIT</div>
+
+    <div class="arch-row">
+      <div class="arch-node merchant">
+        <div class="arch-label">// 01</div>
+        <div class="arch-name">Merchant checkout</div>
+        <div class="arch-detail">creates session</div>
+      </div>
+      <div class="arch-node quarvo">
+        <div class="arch-label">// 02</div>
+        <div class="arch-name">Quarvo coordinator</div>
+        <div class="arch-detail">/api/checkout/session</div>
+      </div>
+      <div class="arch-node cards">
+        <div class="arch-label">// 03</div>
+        <div class="arch-name">Customer card vault</div>
+        <div class="arch-detail">tokenized · PCI-DSS</div>
+      </div>
+    </div>
+
+    <div class="arch-arrow">↓</div>
+
+    <div class="arch-row">
+      <div class="arch-node quarvo" style="grid-column: 1 / span 3;">
+        <div class="arch-label">// 04 · TWO-PHASE COMMIT</div>
+        <div class="arch-name">PaymentIntent fan-out — N parallel auths in <code>requires_capture</code></div>
+        <div class="arch-detail">phase 1: prepare · ~600–1100ms · all-or-nothing</div>
+      </div>
+    </div>
+
+    <div class="arch-arrow">↓</div>
+
+    <div class="arch-row">
+      <div class="arch-node stripe">
+        <div class="arch-label">// 05a</div>
+        <div class="arch-name">Stripe (Card 1)</div>
+        <div class="arch-detail">$1,800 captured</div>
+      </div>
+      <div class="arch-node stripe">
+        <div class="arch-label">// 05b</div>
+        <div class="arch-name">Stripe (Card 2)</div>
+        <div class="arch-detail">$600 captured</div>
+      </div>
+      <div class="arch-node stripe">
+        <div class="arch-label">// 05c</div>
+        <div class="arch-name">Stripe (Card N)</div>
+        <div class="arch-detail">parallel capture</div>
+      </div>
+    </div>
+
+    <div class="arch-arrow">↓</div>
+
+    <div class="arch-row">
+      <div class="arch-node merchant" style="grid-column: 1 / span 3;">
+        <div class="arch-label">// 06 · SETTLEMENT</div>
+        <div class="arch-name">Merchant Stripe account</div>
+        <div class="arch-detail">net $2,400 − application_fee_amount → merchant payout schedule</div>
+      </div>
+    </div>
+  </div>
+
+  <p>
+    Six conceptual nodes, three architectural layers: a thin coordinator (Quarvo's API), a vault (PCI-scoped customer card storage), and the merchant's existing Stripe Connect account where authorizations and capture happen. The coordinator orchestrates; Stripe processes; the merchant receives one consolidated settlement.
+  </p>
+
+  <!-- ── SECTION 4 ─────────────────────────────────────────────────────── -->
+  <h2>The two-phase commit, in detail</h2>
+
+  <p>
+    The hardest engineering problem in a multi-card transaction is partial failure. If you authorize Card A successfully and then Card B fails, the customer's available credit on Card A is still being held — they will be confused, and the merchant has nothing to capture against. The naive sequential approach is unsafe.
+  </p>
+
+  <p>
+    Quarvo uses a two-phase commit pattern, the same primitive that distributed databases use to ensure atomicity across multiple resource managers. Phase 1 prepares all authorizations. Phase 2 commits all of them, or none.
+  </p>
+
+  <h3>Phase 1 — Prepare</h3>
+
+  <p>
+    All N authorizations are launched in parallel as PaymentIntents in <code>requires_capture</code> state with <code>capture_method: "manual"</code>. This holds the funds without charging the customer. The system waits for all N to either succeed or fail.
+  </p>
+
+  <div class="code-block">
+    <div class="code-head">
+      <span class="code-lang">// NODE.JS</span>
+      <span class="code-fname">phase1.prepare.js</span>
+    </div>
+    <div class="code-body"><pre><span class="com">// Phase 1: launch N parallel authorizations on the merchant's Stripe account</span>
+<span class="kw">const</span> <span class="var">authorizations</span> = <span class="kw">await</span> <span class="fn">Promise.allSettled</span>(
+  splits.<span class="fn">map</span>((split) =>
+    stripe.paymentIntents.<span class="fn">create</span>(
+      {
+        amount: split.amount,                <span class="com">// in cents</span>
+        currency: <span class="str">'usd'</span>,
+        payment_method: split.cardToken,
+        confirm: <span class="kw">true</span>,
+        capture_method: <span class="str">'manual'</span>,    <span class="com">// HOLD, don't capture</span>
+        application_fee_amount: <span class="fn">computeFee</span>(split.amount),
+        metadata: {
+          quarvo_session_id: session.id,
+          split_index: split.index,
+          split_total: splits.length,
+        },
+      },
+      { stripeAccount: merchant.stripeAccountId }
+    )
+  )
+);
+
+<span class="kw">const</span> <span class="var">failures</span> = authorizations.<span class="fn">filter</span>(a => a.status === <span class="str">'rejected'</span> || a.value.status !== <span class="str">'requires_capture'</span>);
+<span class="kw">if</span> (failures.length > <span class="num">0</span>) {
+  <span class="kw">await</span> <span class="fn">rollbackAll</span>(authorizations);
+  <span class="kw">throw</span> <span class="kw">new</span> <span class="fn">SplitFailedError</span>(failures);
+}</pre></div>
+  </div>
+
+  <p>
+    Two key properties: <code>Promise.allSettled</code> rather than <code>Promise.all</code> (we want partial success info, not early termination), and <code>capture_method: 'manual'</code> on every intent (so we can void cleanly if anything fails). The window during which authorizations are held is bounded by Stripe's auth-hold window (typically 7 days for most issuers, but Quarvo enforces a much shorter internal window — see below).
+  </p>
+
+  <h3>Phase 2 — Commit</h3>
+
+  <p>
+    If all N authorizations are in <code>requires_capture</code> state, the commit phase fires N captures in parallel. Each capture finalizes its respective authorization. The merchant's Stripe account ends up with N successful charges, all linked to the same Quarvo session via metadata.
+  </p>
+
+  <div class="code-block">
+    <div class="code-head">
+      <span class="code-lang">// NODE.JS</span>
+      <span class="code-fname">phase2.commit.js</span>
+    </div>
+    <div class="code-body"><pre><span class="com">// Phase 2: capture all authorizations in parallel</span>
+<span class="kw">const</span> <span class="var">captures</span> = <span class="kw">await</span> <span class="fn">Promise.allSettled</span>(
+  authorizations.<span class="fn">map</span>(a =>
+    stripe.paymentIntents.<span class="fn">capture</span>(a.value.id, {}, { stripeAccount: merchant.stripeAccountId })
+  )
+);
+
+<span class="kw">const</span> <span class="var">capFailures</span> = captures.<span class="fn">filter</span>(c => c.status === <span class="str">'rejected'</span>);
+<span class="kw">if</span> (capFailures.length > <span class="num">0</span>) {
+  <span class="com">// rare — capture after successful auth almost never fails</span>
+  <span class="com">// when it does, refund any successful captures and surface the error</span>
+  <span class="kw">await</span> <span class="fn">refundCapturedSplits</span>(captures);
+  <span class="kw">throw</span> <span class="kw">new</span> <span class="fn">CaptureFailedError</span>(capFailures);
+}
+
+<span class="kw">return</span> { sessionId: session.id, status: <span class="str">'succeeded'</span>, captures };</pre></div>
+  </div>
+
+  <h3>The rollback path</h3>
+
+  <p>
+    If Phase 1 returns any failure, we cancel every successful authorization immediately. This is the most important code path in the system — partial holds are the worst possible state from a customer-trust perspective.
+  </p>
+
+  <div class="code-block">
+    <div class="code-head">
+      <span class="code-lang">// NODE.JS</span>
+      <span class="code-fname">rollback.js</span>
+    </div>
+    <div class="code-body"><pre><span class="kw">async function</span> <span class="fn">rollbackAll</span>(authorizations) {
+  <span class="com">// cancel all successful holds; failed ones don't need cancellation</span>
+  <span class="kw">const</span> <span class="var">toCancel</span> = authorizations
+    .<span class="fn">filter</span>(a => a.status === <span class="str">'fulfilled'</span> && a.value.status === <span class="str">'requires_capture'</span>);
+
+  <span class="kw">await</span> <span class="fn">Promise.allSettled</span>(
+    toCancel.<span class="fn">map</span>(a =>
+      stripe.paymentIntents.<span class="fn">cancel</span>(a.value.id, {}, { stripeAccount: a.value.transfer_data.destination })
+    )
+  );
+
+  <span class="com">// available credit on each card is restored within minutes</span>
+  <span class="com">// customer is shown which card failed and offered to swap</span>
+}</pre></div>
+  </div>
+
+  <div class="warn">
+    <div class="label">// CRITICAL INVARIANT</div>
+    <p>The customer must never see a partial charge. If Phase 1 fails on any card, every successful authorization on every other card must be voided before the customer is shown the error. Quarvo's coordinator runs a strict 5-second timeout on Phase 1; if any card hasn't responded by then, it counts as a failure and triggers the rollback path.</p>
+  </div>
+
+  <!-- ── SECTION 5 ─────────────────────────────────────────────────────── -->
+  <h2>Timing characteristics</h2>
+
+  <div class="timeline">
+    <div class="tl-title">End-to-end transaction timing</div>
+    <div class="tl-sub">// HAPPY PATH · 2 CARDS · MEDIAN VALUES FROM PRE-LAUNCH PILOTS</div>
+
+    <div class="tl-step">
+      <div class="tl-time">t=0ms</div>
+      <div class="tl-action">Customer confirms split<span>Drop-in widget posts to <code>/api/checkout/session</code> with split intent.</span></div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-time">+45ms</div>
+      <div class="tl-action">Coordinator validates session<span>Cards still mapped to vault, amounts add to total, merchant account active. Issues N parallel <code>paymentIntents.create</code> calls.</span></div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-time">+650ms</div>
+      <div class="tl-action">All N authorizations return<span>Median Stripe + issuer round-trip is ~600ms per card; running them in parallel keeps the wall-clock at ~650ms regardless of N (up to ~6 cards).</span></div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-time">+750ms</div>
+      <div class="tl-action">Phase 2 captures fire<span>N parallel <code>paymentIntents.capture</code> calls. Captures are fast — typically <code>~100ms</code> each.</span></div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-time">+860ms</div>
+      <div class="tl-action">All captures confirmed<span>Coordinator emits <code>checkout.session.completed</code> webhook to merchant. UI shows success.</span></div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-time">+1.0s</div>
+      <div class="tl-action">Customer sees confirmation<span>Total wall-clock for the customer: under 1 second from confirmation tap to success state, indistinguishable from a single-card checkout.</span></div>
+    </div>
+  </div>
+
+  <p>
+    Parallel execution is what makes this feel like a single-card checkout. The temptation in early designs is to authorize cards sequentially — "if Card 1 succeeds, then try Card 2" — but that adds a full round-trip per card and degrades the customer experience. Parallel + atomic commit is the only design that holds latency flat as N grows.
+  </p>
+
+  <!-- ── SECTION 6 ─────────────────────────────────────────────────────── -->
+  <h2>The reconciliation layer</h2>
+
+  <p>
+    Each split shows up on the merchant's Stripe dashboard as a separate charge — same customer name, same order ID via metadata, but distinct PaymentIntents. This is correct behavior (each card is a separate authorization), but it creates a reconciliation problem: the merchant's order management system expects one charge per order.
+  </p>
+
+  <p>
+    Quarvo emits a single <code>checkout.session.completed</code> webhook with all N charges grouped under one session. The merchant's webhook handler treats the session as one logical order and writes one row to its OMS. The N underlying Stripe charges are linked via the <code>quarvo_session_id</code> metadata field.
+  </p>
+
+  <div class="props">
+    <div class="props-row">
+      <span class="props-key">Session-level identifier</span>
+      <span class="props-val">cs_qrv_xxx</span>
+    </div>
+    <div class="props-row">
+      <span class="props-key">Stripe charges per session</span>
+      <span class="props-val">N (1–6)</span>
+    </div>
+    <div class="props-row">
+      <span class="props-key">Merchant settlement rows</span>
+      <span class="props-val green">1 (consolidated)</span>
+    </div>
+    <div class="props-row">
+      <span class="props-key">Quarvo fee model</span>
+      <span class="props-val">application_fee_amount</span>
+    </div>
+    <div class="props-row">
+      <span class="props-key">Dispute responsibility</span>
+      <span class="props-val">Merchant's account</span>
+    </div>
+    <div class="props-row">
+      <span class="props-key">Refund flow</span>
+      <span class="props-val green">Atomic, all-card</span>
+    </div>
+  </div>
+
+  <p>
+    Refunds are also atomic. If a customer requests a refund post-fulfillment, the merchant calls <code>POST /api/checkout/session/:id/refund</code> with the amount. Quarvo distributes the refund proportionally across the N original cards — Card 1 receives 75% of the refund, Card 2 receives 25%, matching the original split — and emits a single <code>checkout.session.refunded</code> webhook. The merchant never has to think about which card to refund.
+  </p>
+
+  <!-- ── INLINE CTA ──────────────────────────────────────────────────────── -->
+  <div class="inline-cta">
+    <h3>Read the full integration docs.</h3>
+    <p>End-to-end API reference, drop-in JS snippets, server SDK examples, webhook signatures, and brand kit. Ships as a Stripe Connect platform — no replatforming required.</p>
+    <a href="https://quarvo.io/pay-with-quarvo" class="cta-btn">Open the integration guide →</a>
+    <p class="cta-note">// PILOT · Q2 2026 · STRIPE · ADYEN AND BRAINTREE TO FOLLOW</p>
+  </div>
+
+  <!-- ── SECTION 7 ─────────────────────────────────────────────────────── -->
+  <h2>What "graph" means in payments</h2>
+
+  <p>
+    The word <em>graph</em> is doing real work in the name "payment graph." It's not branding — it describes the data structure underneath the orchestration.
+  </p>
+
+  <p>
+    A traditional payment is a tuple: <code>(customer_card, merchant_account, amount)</code>. A linear, single-edge relationship. There's nothing to coordinate.
+  </p>
+
+  <p>
+    A Quarvo payment is a graph. Nodes: a customer, N customer cards, one merchant. Edges: N partial payments connecting customer cards to the merchant, plus one logical "session" node tying them together. Every operation — authorize, capture, refund, void, dispute — has to traverse the graph atomically.
+  </p>
+
+  <p>
+    The coordinator's job is to maintain this graph as a consistent unit. The cards don't know about each other. The merchant doesn't see N transactions; it sees one session. The customer doesn't manage allocation themselves; the system does. The graph is what abstracts away the multi-party complexity.
+  </p>
+
+  <blockquote>
+    <p>Most payment infrastructure assumes one customer, one card, one merchant. Quarvo assumes one customer, N cards, one merchant — and treats the relationship as a graph the platform owns. That's the only architectural change. Everything else is conventional Stripe.</p>
+  </blockquote>
+
+  <!-- ── SECTION 8 ─────────────────────────────────────────────────────── -->
+  <h2>Edge cases the system has to handle</h2>
+
+  <p>Three failure modes are interesting enough to call out:</p>
+
+  <h3>Card-on-file expiration mid-session</h3>
+  <p>If a customer's vaulted card expires between when the session is created and when Phase 1 fires, that card's PaymentIntent will fail. Quarvo's coordinator catches the specific Stripe error code (<code>expired_card</code>), prompts the customer to update the card in-flow, and retries that single split without affecting the others.</p>
+
+  <h3>Issuer step-up authentication (3DS)</h3>
+  <p>Some issuers will require 3DS challenge mid-authorization. When that happens on one of N cards in a split, Quarvo's coordinator pauses Phase 1 — the other N-1 authorizations have already completed and are held. The customer is shown the 3DS challenge; once they pass, Phase 1 resolves and Phase 2 fires normally. If they cancel or fail, we roll back.</p>
+
+  <h3>Network partition between Phase 1 and Phase 2</h3>
+  <p>The least likely but most operationally important failure: all N Phase 1 auths succeed, then the coordinator loses connectivity before Phase 2 fires. Quarvo's coordinator persists Phase 1 state to a transactional queue; on recovery, it resumes from the persisted state and either commits or rolls back. The Stripe-side authorizations remain valid for ~7 days (the issuer-side hold window), giving operations far more headroom than they need.</p>
+
+  <!-- ── FOOTER CTA ──────────────────────────────────────────────────────── -->
+  <div class="footer-cta">
+    <h2>One transaction. N cards.<br/>Atomic commit. Stripe under the hood.</h2>
+    <p>Quarvo is the payment graph for high-AOV checkouts. Drops in via Stripe Connect, runs on existing merchant accounts, settles in full. 2% per recovered sale.</p>
+    <a href="https://quarvo.io/for-merchants" class="cta-btn">Get on the merchant pilot list →</a>
+    <p style="font-size:12px; color:var(--muted); margin-top:14px; font-family:'SFMono-Regular',monospace;">// SHOPIFY · WOO · DIRECT API · CUSTOM</p>
+  </div>
+
+  <!-- ── FAQ ─────────────────────────────────────────────────────────────── -->
+  <div class="faq-section">
+    <div class="faq-label">// FREQUENTLY ASKED QUESTIONS</div>
+
+    <details>
+      <summary>How does multi-card splitting work technically?</summary>
+      <div class="faq-answer">It executes N concurrent partial authorizations — one per customer card — and treats them as a single atomic unit. If all N succeed within the auth window, all are captured and the merchant receives one consolidated settlement. If any single auth fails or times out, all prior auths are immediately voided. The customer is never charged unless the full transaction completes. Quarvo coordinates this through a payment graph layer running on top of Stripe Connect's platform model.</div>
+    </details>
+
+    <details>
+      <summary>Why use Stripe Connect for split-card payments?</summary>
+      <div class="faq-answer">Stripe Connect's platform model lets a service like Quarvo orchestrate payments on behalf of merchants without holding merchant funds, becoming a money transmitter, or making merchants change processors. The merchant keeps their existing Stripe account, settlement timing, and dispute infrastructure. Quarvo runs as a Connect platform that creates PaymentIntents on the merchant's account, with Quarvo's fee deducted via <code>application_fee_amount</code>.</div>
+    </details>
+
+    <details>
+      <summary>How does atomic commitment work across multiple authorizations?</summary>
+      <div class="faq-answer">Quarvo uses a two-phase commit. Phase 1 (prepare): all card authorizations are created in parallel as PaymentIntents in <code>requires_capture</code> state. Phase 2 (commit): once all authorizations succeed, all are captured in parallel. If any authorization fails or times out during Phase 1, all successful authorizations are immediately voided via the Stripe cancel API. The merchant only ever sees a successful capture or no charge at all.</div>
+    </details>
+
+    <details>
+      <summary>What happens if one card fails after others have authorized?</summary>
+      <div class="faq-answer">The coordinator detects the failure and immediately voids all previously successful authorizations on the other cards. Available credit on those cards is restored within minutes (issuer-dependent). The customer is shown an inline message describing which card failed, and they can swap in a different card to retry. The merchant is not charged a fee for failed splits. No partial captures ever post.</div>
+    </details>
+
+    <details>
+      <summary>Does the merchant need to change their payment processor?</summary>
+      <div class="faq-answer">No. Quarvo runs as a Stripe Connect platform on top of the merchant's existing Stripe account. The merchant keeps their current account, settlement timing, chargeback handling, and banking arrangements. Integration is a JavaScript drop-in (Shopify/Woo) or a server-side API call (custom). For non-Stripe merchants, Quarvo will support Adyen and Braintree as additional platform substrates in subsequent releases.</div>
+    </details>
+  </div>
+
+  <div class="article-footer">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Marcelo</div>
+      <div class="author-role">Founder, Quarvo · Building Credit Combination Infrastructure</div>
+    </div>
+  </div>
+
+</article>
+</body>
+</html>

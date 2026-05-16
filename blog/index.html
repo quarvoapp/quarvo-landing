@@ -3,18 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quarvo Blog — Credit cards, split payments, and smarter spending</title>
-  <meta name="description" content="Deep-dives on credit limits, checkout failures, and how to use the buying power you already have across multiple cards."/>
+  <title>Quarvo Blog — High-AOV decline recovery, multi-card payments, and the math behind it</title>
+  <meta name="description" content="Deep-dives on high-AOV checkout recovery, multi-card payment infrastructure, and the economics of declined sales — for merchants and the customers who buy from them."/>
   <link rel="canonical" href="https://quarvo.io/blog"/>
   <link rel="icon" type="image/svg+xml" href="/icon.svg"/>
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://quarvo.io/blog"/>
+  <meta property="og:title" content="Quarvo Blog — High-AOV decline recovery, multi-card payments, and the math behind it"/>
+  <meta property="og:description" content="Deep-dives on high-AOV checkout recovery, multi-card payment infrastructure, and the economics of declined sales — for merchants and the customers who buy from them."/>
+  <meta property="og:image" content="https://quarvo.io/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Quarvo"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Quarvo Blog — Decline recovery and multi-card payments"/>
+  <meta name="twitter:description" content="Deep-dives for merchants on high-AOV decline recovery — the cohort, the math, the architecture, and the playbook."/>
+  <meta name="twitter:image" content="https://quarvo.io/og-image.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css"/>
   <style>
-    .blog-hero { padding: 100px 0 60px; text-align: center; }
-    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 48px; }
-    .article-card { text-decoration: none; display: flex; flex-direction: column; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+    .blog-hero { padding: 100px 0 40px; text-align: center; }
+    .blog-section { padding: 24px 0 32px; }
+    .blog-section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; gap: 16px; flex-wrap: wrap; }
+    .blog-section-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; color: #F0F0F8; letter-spacing: -0.01em; }
+    .blog-section-tag { font-family: 'DM Mono', monospace; font-size: 11px; color: #6A6A88; letter-spacing: 0.12em; text-transform: uppercase; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .article-card { text-decoration: none; display: flex; flex-direction: column; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; transition: border-color 0.2s ease, transform 0.2s ease; }
     .article-card:hover { border-color: rgba(123,47,255,0.45); transform: translateY(-3px); }
     .article-thumb { aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 28px; }
     .article-body { padding: 22px 24px; flex: 1; display: flex; flex-direction: column; }
@@ -27,9 +44,14 @@
     .tag-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; }
     .tag-text { font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
     .orb { position: absolute; border-radius: 50%; filter: blur(40px); pointer-events: none; }
+    .audience-toggle { display: inline-flex; gap: 4px; padding: 4px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; margin-bottom: 32px; }
+    .audience-toggle a { padding: 8px 16px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #6A6A88; text-decoration: none; border-radius: 8px; transition: background 0.2s, color 0.2s; }
+    .audience-toggle a:hover { color: #F0F0F8; }
+    .audience-toggle a.active { background: rgba(123,47,255,0.18); color: #B09FFF; }
+    .merchant-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent); margin: 32px 0 0; }
   </style>
 </head>
-<body>
+<body data-floating-cta="true">
 
   <nav class="nav" id="nav">
     <div class="nav-inner">
@@ -48,26 +70,166 @@
       </a>
       <div class="nav-links">
         <a href="/#how">How it works</a>
-        <a href="/#solution">Why Quarvo</a>
+        <a href="/for-merchants">For merchants</a>
         <a href="/blog" style="color:var(--cyan);">Blog</a>
+        <a href="/pay-with-quarvo">Docs</a>
         <a href="/#faq">FAQ</a>
-        <a href="https://app.quarvo.io/merchants" style="color:var(--cyan);">For Merchants</a>
       </div>
       <div style="display:flex;gap:10px;align-items:center;">
-        <a href="https://app.quarvo.io/auth" class="btn-nav" style="background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--text-muted);">Sign in</a>
-        <a href="https://app.quarvo.io" class="btn-nav">Get started</a>
+        <a href="/#waitlist" class="btn-nav">Join the waitlist</a>
       </div>
     </div>
   </nav>
 
   <section class="blog-hero">
     <div class="section-inner">
-      <div class="section-tag">From the blog</div>
+      <div class="section-tag">// FROM THE BLOG</div>
       <h1 class="section-title" style="margin-bottom:12px;">
-        The real reason your card<br/>
-        <span class="title-muted">keeps getting declined.</span>
+        Recover the high-ticket sales<br/>
+        <span class="title-muted">your checkout is losing.</span>
       </h1>
-      <p style="color:#9090B0;font-size:1rem;max-width:520px;margin:0 auto;">Deep-dives on credit limits, checkout failures, and how to use the buying power you already have.</p>
+      <p style="color:#9090B0;font-size:1rem;max-width:560px;margin:0 auto;">Deep-dives on high-AOV decline recovery, multi-card payment infrastructure, and the economics behind every declined cart — for merchants and customers.</p>
+
+      <div class="audience-toggle" style="margin-top:32px;">
+        <a href="#for-merchants" class="active">// For merchants</a>
+        <a href="#for-customers">// For customers</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOR MERCHANTS ════════════════════════════════════════════════════ -->
+  <section class="blog-section" id="for-merchants">
+    <div class="section-inner">
+      <div class="blog-section-head">
+        <h2 class="blog-section-title">For merchants — the recovery economics</h2>
+        <span class="blog-section-tag">// 5 articles</span>
+      </div>
+
+      <div class="blog-grid">
+
+        <a href="/blog/hidden-cost-declined-high-ticket-sales" class="article-card">
+          <div class="article-thumb" style="background:linear-gradient(135deg,#1A0E05 0%,#2A1808 100%);">
+            <div class="orb" style="top:-40px;right:-40px;width:160px;height:160px;background:rgba(249,115,22,0.18);"></div>
+            <div style="text-align:center;position:relative;z-index:1;">
+              <div style="font-family:'DM Mono',monospace;font-size:32px;font-weight:800;color:#FB923C;line-height:1;margin-bottom:8px;letter-spacing:-0.02em;">6.5%</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:220px;">The Hidden Cost of Declines</div>
+              <div class="tag-badge" style="background:rgba(249,115,22,0.12);border:1px solid rgba(249,115,22,0.35);">
+                <span class="tag-dot" style="background:#FB923C;"></span>
+                <span class="tag-text" style="color:#FB923C;">ANALYSIS</span>
+              </div>
+            </div>
+          </div>
+          <div class="article-body">
+            <h2 class="article-title">The Hidden Cost of Declined High-Ticket Sales</h2>
+            <p class="article-desc">6.5% of $2K+ checkouts decline. Most merchants book that as "card issue" and move on. The CFO-level math says otherwise — and it's the largest unmonetized cohort in the funnel.</p>
+            <div class="article-meta">
+              <span class="article-time">9 min read</span>
+              <span class="article-cta" style="color:#FB923C;">Read &#x2192;</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/blog/high-aov-checkouts-convert-worse" class="article-card">
+          <div class="article-thumb" style="background:linear-gradient(135deg,#1F0A1A 0%,#2D0E26 100%);">
+            <div class="orb" style="bottom:-40px;left:-40px;width:160px;height:160px;background:rgba(236,72,153,0.18);"></div>
+            <div style="text-align:center;position:relative;z-index:1;">
+              <div style="font-family:'DM Mono',monospace;font-size:28px;font-weight:800;color:#F472B6;line-height:1;margin-bottom:8px;letter-spacing:-0.02em;">−21pts</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:220px;">The Conversion Knee at $2K AOV</div>
+              <div class="tag-badge" style="background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.35);">
+                <span class="tag-dot" style="background:#F472B6;"></span>
+                <span class="tag-text" style="color:#F472B6;">CONVERSION</span>
+              </div>
+            </div>
+          </div>
+          <div class="article-body">
+            <h2 class="article-title">Why Your $2K+ AOV Checkout Converts Worse Than Your $200 One</h2>
+            <p class="article-desc">It isn't price sensitivity. The conversion curve has a knee at $1,500–$2,000 — and the binding constraint underneath it is one most merchants never diagnose.</p>
+            <div class="article-meta">
+              <span class="article-time">8 min read</span>
+              <span class="article-cta" style="color:#F472B6;">Read &#x2192;</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/blog/stripe-connect-multi-card-splitting" class="article-card">
+          <div class="article-thumb" style="background:linear-gradient(135deg,#031E25 0%,#062A33 100%);">
+            <div class="orb" style="top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:130px;background:rgba(0,245,255,0.14);"></div>
+            <div style="text-align:center;position:relative;z-index:1;">
+              <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:600;color:#00F5FF;line-height:1.3;margin-bottom:6px;letter-spacing:0.08em;">// PHASE_1 → PHASE_2</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:220px;">The Quarvo Payment Graph</div>
+              <div class="tag-badge" style="background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.3);">
+                <span class="tag-dot" style="background:#00F5FF;"></span>
+                <span class="tag-text" style="color:#00F5FF;">ENGINEERING</span>
+              </div>
+            </div>
+          </div>
+          <div class="article-body">
+            <h2 class="article-title">Stripe Connect + Multi-Card Splitting: How the Payment Graph Works</h2>
+            <p class="article-desc">Architecture deep-dive: atomic two-phase commit across N cards, settled to one merchant via Stripe Connect. Real code, real failure modes, real timing.</p>
+            <div class="article-meta">
+              <span class="article-time">12 min read</span>
+              <span class="article-cta" style="color:#00F5FF;">Read &#x2192;</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/blog/recovery-rate-benchmarks" class="article-card">
+          <div class="article-thumb" style="background:linear-gradient(135deg,#031509 0%,#062018 100%);">
+            <div class="orb" style="bottom:-30px;right:-30px;width:170px;height:170px;background:rgba(52,211,153,0.16);"></div>
+            <div style="text-align:center;position:relative;z-index:1;">
+              <div style="font-family:'DM Mono',monospace;font-size:36px;font-weight:800;color:#34D399;line-height:1;margin-bottom:6px;letter-spacing:-0.02em;">60%</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:220px;">Recovery Rate Benchmarks</div>
+              <div class="tag-badge" style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);">
+                <span class="tag-dot" style="background:#34D399;"></span>
+                <span class="tag-text" style="color:#34D399;">BENCHMARKS</span>
+              </div>
+            </div>
+          </div>
+          <div class="article-body">
+            <h2 class="article-title">Recovery Rate Benchmarks: What to Expect After Installing Quarvo</h2>
+            <p class="article-desc">Honest numbers, segmented properly — by AOV band, vertical, and traffic source. The ramp curve from month 1 to steady-state, with variance bands.</p>
+            <div class="article-meta">
+              <span class="article-time">8 min read</span>
+              <span class="article-cta" style="color:#34D399;">Read &#x2192;</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/blog/merchant-playbook-high-aov-recovery" class="article-card">
+          <div class="article-thumb" style="background:linear-gradient(135deg,#1F1605 0%,#2B1F08 100%);">
+            <div class="orb" style="top:-30px;left:30%;width:180px;height:130px;background:rgba(245,197,24,0.15);"></div>
+            <div style="text-align:center;position:relative;z-index:1;">
+              <div style="font-family:'DM Mono',monospace;font-size:14px;font-weight:600;color:#F5C518;line-height:1.3;margin-bottom:6px;letter-spacing:0.08em;">// 4 STEPS · 60 DAYS</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;line-height:1.3;max-width:220px;">The Merchant Playbook</div>
+              <div class="tag-badge" style="background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.3);">
+                <span class="tag-dot" style="background:#F5C518;"></span>
+                <span class="tag-text" style="color:#F5C518;">PLAYBOOK</span>
+              </div>
+            </div>
+          </div>
+          <div class="article-body">
+            <h2 class="article-title">From Declined to Delivered: The Merchant Playbook for High-AOV Recovery</h2>
+            <p class="article-desc">Audit, segment, install, measure. A 60-day operational framework for high-AOV merchants — written for ops leaders, not theorists.</p>
+            <div class="article-meta">
+              <span class="article-time">11 min read</span>
+              <span class="article-cta" style="color:#F5C518;">Read &#x2192;</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="merchant-divider"></div>
+
+  <!-- ═══ FOR CUSTOMERS ════════════════════════════════════════════════════ -->
+  <section class="blog-section" id="for-customers" style="padding-top:48px;">
+    <div class="section-inner">
+      <div class="blog-section-head">
+        <h2 class="blog-section-title">For customers — using the credit you already have</h2>
+        <span class="blog-section-tag">// 5 articles</span>
+      </div>
 
       <div class="blog-grid">
 
@@ -200,14 +362,14 @@
         </svg>
         <span class="logo-wordmark">QUARVO</span>
       </div>
-      <div class="footer-tagline">Your credit was always enough. Now it works like it.</div>
+      <div class="footer-tagline">Split smart. Buy bold.</div>
       <div class="footer-links">
         <a href="/">Home</a>
-        <a href="/#solution">Why Quarvo</a>
+        <a href="/for-merchants">For merchants</a>
         <a href="/blog">Blog</a>
+        <a href="/pay-with-quarvo">Docs</a>
         <a href="/#faq">FAQ</a>
-        <a href="https://app.quarvo.io">Launch App</a>
-        <a href="https://app.quarvo.io/merchants">For Merchants</a>
+        <a href="/#waitlist">Join waitlist</a>
       </div>
       <div class="footer-legal">
         © 2026 QUARVO. All rights reserved. · QUARVO is not a lender. No new credit is issued. ·
@@ -218,5 +380,11 @@
   </footer>
 
   <script src="/main.js"></script>
+
+  <!-- Vercel Analytics + Speed Insights -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script src="/conversion.js?v=8.0" defer></script>
 </body>
 </html>

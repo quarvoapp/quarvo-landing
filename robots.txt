@@ -1,0 +1,12 @@
+# Quarvo — robots.txt
+# https://quarvo.io
+
+User-agent: *
+Allow: /
+
+# Disallow internal/admin paths (none yet, reserved)
+Disallow: /api/
+Disallow: /_next/
+
+# Sitemap
+Sitemap: https://quarvo.io/sitemap.xml

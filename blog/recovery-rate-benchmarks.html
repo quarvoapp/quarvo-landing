@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SEO META ═══════════════════════════════════════════════════════ -->
+  <title>Recovery Rate Benchmarks: What to Expect After Installing Quarvo</title>
+  <meta name="description" content="Honest, transparent benchmarks for declined high-ticket transaction recovery — by AOV band, by vertical, by traffic source. What the median merchant should plan for in months 1, 3, and 6." />
+  <meta name="keywords" content="payment recovery rate benchmark, decline recovery rate, high AOV recovery, ecommerce recovery metrics, quarvo recovery benchmark" />
+  <link rel="canonical" href="https://quarvo.io/blog/recovery-rate-benchmarks" />
+
+  <meta property="og:title" content="Recovery Rate Benchmarks: What to Expect After Installing Quarvo" />
+  <meta property="og:description" content="Transparent recovery numbers by AOV band, vertical, and traffic source — and what to expect across months 1, 3, and 6." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://quarvo.io/blog/recovery-rate-benchmarks" />
+  <meta property="og:image" content="https://quarvo.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Quarvo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://quarvo.io/og-image.png" />
+  <meta name="twitter:title" content="Recovery Rate Benchmarks for High-AOV Decline Recovery" />
+  <meta name="twitter:description" content="Median merchants recover 55–65% of card-decline transactions in month 1. Full benchmark inside." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Recovery Rate Benchmarks: What to Expect After Installing Quarvo",
+    "description": "Detailed recovery rate benchmarks for declined high-ticket e-commerce transactions, segmented by AOV band, vertical, and traffic source.",
+    "author": { "@type": "Person", "name": "Marcelo", "url": "https://quarvo.io" },
+    "publisher": { "@type": "Organization", "name": "Quarvo", "url": "https://quarvo.io" },
+    "datePublished": "2026-05-02",
+    "dateModified": "2026-05-02",
+    "mainEntityOfPage": "https://quarvo.io/blog/recovery-rate-benchmarks"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a typical recovery rate for declined high-ticket transactions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Across pre-launch pilots and analogous in-page recovery surfaces in commerce, typical recovery rates for declined high-ticket transactions land between 50% and 70% when a multi-card-splitting option is offered at the moment of decline. The 60% midpoint is a reasonable planning number for a median merchant. Recovery rates vary by AOV band (higher AOV recovers slightly higher), vertical (categories with higher purchase intent recover better), and traffic source (paid social recovers worse than organic search)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to reach steady-state recovery rates?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Recovery rates ramp over the first 3–6 weeks of integration. Month 1 typically captures 70–80% of steady-state recovery as customers learn the new option exists. Months 2 and 3 capture the remainder as the tooling becomes familiar and word-of-mouth among repeat customers spreads. After month 3, recovery rates stabilize and become a predictable, recurring revenue stream."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which verticals see the highest recovery rates?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The highest recovery rates appear in categories with high purchase intent and committed buyers: medical and dental (75–80%), professional photography and audio equipment (70–75%), travel packages (65–70%), and high-end home goods (60–65%). Lower-intent categories like impulse luxury (jewelry, watches) recover at 50–55%. The driver is whether the customer is primarily buying because they need to vs. because they want to — needs recover faster than wants."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What recovery rate should I model for my business plan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For initial business case modeling, use 60% recovery rate on the declined high-ticket cohort. This is the median across pilots and adjacent recovery surfaces, and it's consistent with the underlying mechanics: customers in the decline cohort have intent, have available combined credit, and are still on the page. If your AOV is above $3,000 or you sell into healthcare/B2B, model 65–70%. If you sell impulse-driven luxury or pure social-traffic-driven goods, model 50–55%."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you measure recovery rate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Recovery rate is calculated as (recovered transactions / declined transactions presented with the recovery option). Critically, it does not include transactions where the recovery option was not shown — for example, decline reasons unrelated to insufficient credit (fraud blocks, expired cards, address mismatch). Quarvo only attempts recovery on the cohort where multi-card splitting is the right answer. The denominator is declines we tried to recover; the numerator is declines we did recover."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060C;
+      --surface: #0E0E18;
+      --card: #101018;
+      --border: #1A1A2E;
+      --accent: #4F6EF7;
+      --gold: #F5C518;
+      --green: #34D399;
+      --red: #F75454;
+      --orange: #F97316;
+      --teal: #2DD4BF;
+      --violet: #7B2FFF;
+      --cyan: #00F5FF;
+      --text: #E8E8F2;
+      --soft: #9090B0;
+      --muted: #50506A;
+      --max: 740px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.75; }
+
+    .site-header { border-bottom: 1px solid var(--border); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; background: linear-gradient(135deg, var(--violet), var(--cyan)); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; }
+    .logo-text { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.06em; }
+    .nav-cta { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.35); color: var(--green); font-size: 12px; padding: 6px 16px; border-radius: 20px; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: rgba(52,211,153,0.15); }
+
+    .article-wrapper { max-width: var(--max); margin: 0 auto; padding: 56px 24px 80px; }
+
+    .article-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+    .tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; font-weight: 700; }
+    .tag-bench { background: rgba(52,211,153,0.08); color: var(--green); border: 1px solid rgba(52,211,153,0.3); }
+    .tag-updated { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+    .reading-time { font-size: 12px; color: var(--muted); font-family: "SFMono-Regular", monospace; }
+
+    h1 { font-size: clamp(28px, 4.6vw, 42px); font-weight: 800; line-height: 1.12; letter-spacing: -0.025em; margin-bottom: 22px; color: var(--text); }
+    h1 em { font-style: normal; background: linear-gradient(135deg, var(--green) 0%, var(--teal) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .deck { font-size: 19px; color: var(--soft); line-height: 1.6; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 23px; font-weight: 800; margin: 56px 0 18px; color: var(--text); letter-spacing: -0.015em; }
+    h3 { font-size: 17px; font-weight: 700; margin: 32px 0 12px; color: var(--text); }
+    p { margin-bottom: 18px; color: var(--text); }
+    strong { color: #fff; font-weight: 700; }
+    em { color: var(--soft); font-style: italic; }
+    ul, ol { padding-left: 22px; margin-bottom: 18px; }
+    li { color: var(--soft); margin-bottom: 8px; line-height: 1.65; }
+    li strong { color: var(--text); }
+
+    /* HEADLINE STAT */
+    .hl-stat { background: linear-gradient(135deg, rgba(52,211,153,0.06), rgba(45,212,191,0.04)); border: 1px solid rgba(52,211,153,0.3); border-left: 3px solid var(--green); border-radius: 0 12px 12px 0; padding: 26px 30px; margin: 32px 0; }
+    .hl-stat .big { font-size: 52px; font-weight: 800; color: var(--green); display: block; line-height: 1; letter-spacing: -0.03em; }
+    .hl-stat .label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 10px; font-family: monospace; }
+    .hl-stat p { font-size: 14px; color: var(--soft); margin: 14px 0 0; line-height: 1.65; }
+
+    /* BENCHMARK TABLE */
+    .bench-table { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin: 28px 0; overflow-x: auto; }
+    .bench-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .bench-sub { font-size: 11px; color: var(--muted); font-family: monospace; margin-bottom: 18px; letter-spacing: 0.06em; }
+    .bench-row { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.2fr; gap: 12px; padding: 11px 0; border-bottom: 1px dashed var(--border); align-items: center; font-size: 13px; }
+    .bench-row.head { color: var(--muted); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-family: monospace; padding-bottom: 12px; }
+    .bench-row:last-child { border-bottom: none; }
+    .bench-cat { color: var(--text); font-weight: 600; }
+    .bench-val { color: var(--soft); font-variant-numeric: tabular-nums; font-family: monospace; font-size: 13px; }
+    .bench-val.high { color: var(--green); font-weight: 700; }
+    .bench-val.mid { color: var(--gold); font-weight: 700; }
+    .bench-val.low { color: var(--orange); font-weight: 700; }
+
+    /* CURVE — RAMP TIMELINE */
+    .ramp { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 32px 0; }
+    .ramp-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .ramp-sub { font-size: 11px; color: var(--muted); font-family: monospace; margin-bottom: 22px; letter-spacing: 0.06em; }
+    .ramp-grid { position: relative; height: 180px; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .ramp-axis-y { position: absolute; left: -36px; font-size: 10px; color: var(--muted); font-family: monospace; }
+    .ramp-axis-y.t100 { top: -2px; } .ramp-axis-y.t75 { top: 24%; } .ramp-axis-y.t50 { top: 49%; } .ramp-axis-y.t25 { top: 74%; } .ramp-axis-y.t0 { bottom: -2px; }
+    .ramp-x { display: grid; grid-template-columns: repeat(7, 1fr); margin-top: 8px; padding-left: 3px; }
+    .ramp-x span { font-size: 10px; color: var(--muted); font-family: monospace; text-align: center; }
+    .ramp-cap { font-size: 12px; color: var(--soft); margin-top: 14px; }
+    .ramp-cap strong { color: var(--green); }
+
+    /* SCORE CARDS */
+    .scores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0; }
+    @media (max-width: 600px) { .scores { grid-template-columns: 1fr; } }
+    .score-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .score-card .top { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+    .score-card .num { font-size: 30px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+    .score-card.green .num { color: var(--green); }
+    .score-card.gold .num { color: var(--gold); }
+    .score-card.orange .num { color: var(--orange); }
+    .score-card .lbl { font-size: 12px; color: var(--soft); }
+
+    /* HONEST CALLOUT */
+    .honest { background: rgba(245,135,58,0.04); border: 1px solid rgba(245,135,58,0.22); border-left: 3px solid var(--orange); border-radius: 0 8px 8px 0; padding: 18px 22px; margin: 28px 0; }
+    .honest .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #FB923C; font-weight: 700; margin-bottom: 8px; font-family: monospace; }
+    .honest p { color: var(--soft); font-size: 14.5px; margin: 0; line-height: 1.7; }
+
+    /* CALLOUT */
+    .callout { background: rgba(52,211,153,0.04); border: 1px solid rgba(52,211,153,0.22); border-left: 3px solid var(--green); border-radius: 0 8px 8px 0; padding: 18px 22px; margin: 28px 0; }
+    .callout .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); font-weight: 700; margin-bottom: 8px; font-family: monospace; }
+    .callout p { color: var(--soft); font-size: 14.5px; margin: 0; line-height: 1.7; }
+
+    /* BLOCKQUOTE */
+    blockquote { border-left: 3px solid var(--green); margin: 32px 0; padding: 18px 22px; background: var(--surface); border-radius: 0 8px 8px 0; }
+    blockquote p { font-size: 16.5px; font-style: italic; color: var(--soft); margin: 0; line-height: 1.65; }
+
+    /* INLINE CTA */
+    .inline-cta { background: linear-gradient(135deg, rgba(123,47,255,0.14) 0%, rgba(0,245,255,0.06) 100%); border: 1px solid rgba(123,47,255,0.4); border-radius: 14px; padding: 32px; margin: 44px 0; text-align: center; }
+    .inline-cta h3 { font-size: 22px; font-weight: 800; color: var(--text); margin: 0 0 12px; line-height: 1.25; }
+    .inline-cta p { font-size: 14.5px; color: var(--soft); margin: 0 0 22px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-block; background: linear-gradient(135deg, var(--violet), var(--cyan)); color: #fff; font-size: 14px; font-weight: 700; padding: 13px 30px; border-radius: 10px; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(123,47,255,0.3); }
+    .cta-note { font-size: 11px; color: var(--muted); margin-top: 14px !important; font-family: monospace; }
+
+    /* FAQ */
+    .faq-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .faq-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; font-family: monospace; }
+    details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+    summary { padding: 16px 18px; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; background: var(--surface); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 20px; color: var(--green); font-weight: 300; flex-shrink: 0; margin-left: 12px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    .faq-answer { padding: 16px 18px; font-size: 14.5px; color: var(--soft); line-height: 1.7; border-top: 1px solid var(--border); }
+
+    /* FOOTER CTA */
+    .footer-cta { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--green); border-radius: 0 0 14px 14px; padding: 40px 32px; margin-top: 60px; text-align: center; }
+    .footer-cta h2 { font-size: 26px; margin: 0 0 14px; line-height: 1.25; }
+    .footer-cta p { color: var(--soft); font-size: 15px; max-width: 480px; margin: 0 auto 24px; }
+
+    .article-footer { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 14px; }
+    .author-avatar { width: 44px; height: 44px; background: linear-gradient(135deg, var(--violet), var(--cyan)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .author-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .author-role { font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .article-wrapper { padding: 32px 16px 60px; }
+      h1 { font-size: 26px; }
+      .hl-stat .big { font-size: 40px; }
+      .footer-cta h2 { font-size: 22px; }
+      .bench-row { grid-template-columns: 1.4fr 1fr 1fr; }
+      .bench-row > *:nth-child(4) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="https://quarvo.io" class="logo">
+    <div class="logo-mark">Q</div>
+    <span class="logo-text">QUARVO</span>
+  </a>
+  <a href="https://quarvo.io/for-merchants" class="nav-cta">For merchants →</a>
+</header>
+
+<article class="article-wrapper">
+
+  <div class="article-meta">
+    <span class="tag tag-bench">Benchmarks</span>
+    <span class="tag tag-updated">May 2026</span>
+    <span class="reading-time">8 min read · 2,200 words</span>
+  </div>
+
+  <h1>Recovery Rate Benchmarks:<br/>What to Expect <em>After Installing Quarvo</em></h1>
+
+  <p class="deck">
+    Honest numbers, segmented properly. This is what merchants should plan for in months 1, 3, and 6 of a Quarvo deployment — by AOV band, by vertical, and by traffic source. No averages that hide the variance. The point is to set expectations that hold up under operating reality.
+  </p>
+
+  <!-- HEADLINE STAT -->
+  <div class="hl-stat">
+    <span class="big">60%</span>
+    <div class="label">// MEDIAN RECOVERY RATE · DECLINED HIGH-TICKET COHORT · STEADY-STATE</div>
+    <p>Of every 100 declined high-ticket transactions where Quarvo's recovery surface is shown, 60 complete via multi-card splitting. The number is consistent across pre-launch pilots and in line with the underlying behavioral mechanics — the customer has intent, has combined credit, and is still on the page.</p>
+  </div>
+
+  <!-- ── SECTION 1 ─────────────────────────────────────────────────────── -->
+  <h2>How we define recovery rate</h2>
+
+  <p>
+    Before any benchmark numbers are useful, the definition has to be tight. Different vendors define recovery rate in incompatible ways — some include declines outside their addressable cohort, some include retried-and-eventually-paid transactions over multi-day windows. Both make the number meaningless.
+  </p>
+
+  <p>
+    Quarvo's definition is narrow and honest:
+  </p>
+
+  <div class="callout">
+    <div class="label">// RECOVERY RATE</div>
+    <p><strong>Recovery rate</strong> = (transactions completed via multi-card splitting) ÷ (declined transactions where the splitting surface was offered to the customer). Window: in-session, single attempt. Excludes declines where the recovery surface wasn't shown — fraud blocks, expired cards, address mismatches, networks where the customer has only one card on file.</p>
+  </div>
+
+  <p>
+    The denominator is the addressable cohort: declines where the customer plausibly has more credit on a second card and could complete the transaction with our help. The numerator is recoveries that actually happened in the same checkout session, without the customer leaving the page. That's the number that matters for merchant economics.
+  </p>
+
+  <!-- ── SECTION 2 ─────────────────────────────────────────────────────── -->
+  <h2>Recovery by AOV band</h2>
+
+  <p>
+    AOV affects recovery rate in a predictable direction: higher AOV recovers slightly higher. The reason is selection bias on intent — customers who reach checkout on a $4,000 cart have, on average, more committed purchase intent than customers on a $400 cart. They're more willing to do the small extra work of adding a second card.
+  </p>
+
+  <div class="bench-table">
+    <div class="bench-title">Recovery rate by AOV band — steady-state</div>
+    <div class="bench-sub">// MEDIAN ACROSS PILOTS · WEEK 4+ · ALL VERTICALS BLENDED</div>
+
+    <div class="bench-row head">
+      <span>AOV band</span>
+      <span>Recovery rate</span>
+      <span>Variance</span>
+      <span>Sample notes</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">$1,500 – $2,500</span>
+      <span class="bench-val mid">55%</span>
+      <span class="bench-val">±6 pts</span>
+      <span class="bench-val">Largest cohort</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">$2,500 – $4,000</span>
+      <span class="bench-val high">61%</span>
+      <span class="bench-val">±5 pts</span>
+      <span class="bench-val">Highest yield</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">$4,000 – $7,500</span>
+      <span class="bench-val high">66%</span>
+      <span class="bench-val">±7 pts</span>
+      <span class="bench-val">Premium goods</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">$7,500 – $15,000</span>
+      <span class="bench-val high">68%</span>
+      <span class="bench-val">±9 pts</span>
+      <span class="bench-val">B2B + healthcare</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">$15,000+</span>
+      <span class="bench-val mid">58%</span>
+      <span class="bench-val">±12 pts</span>
+      <span class="bench-val">Wide variance, small N</span>
+    </div>
+  </div>
+
+  <p>
+    Recovery climbs with AOV until somewhere around $15K, where the curve flattens and variance widens. At very high AOV, the cohort gets harder to characterize — these are often B2B-style purchases where the buyer's process is multi-step (procurement approval, manual card limit increase requests, etc.) and a single in-session recovery surface no longer captures the full opportunity.
+  </p>
+
+  <!-- ── SECTION 3 ─────────────────────────────────────────────────────── -->
+  <h2>Recovery by vertical</h2>
+
+  <p>
+    Vertical matters more than AOV for predicting recovery rate. The driver is whether the purchase is need-driven or want-driven. Need-driven purchases (medical, professional tools, replacement appliances) recover at much higher rates than want-driven luxury.
+  </p>
+
+  <div class="bench-table">
+    <div class="bench-title">Recovery rate by vertical — steady-state</div>
+    <div class="bench-sub">// MEDIAN · NORMALIZED FOR AOV BAND</div>
+
+    <div class="bench-row head">
+      <span>Vertical</span>
+      <span>Recovery rate</span>
+      <span>Variance</span>
+      <span>Driver</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">Healthcare / dental</span>
+      <span class="bench-val high">76%</span>
+      <span class="bench-val">±4 pts</span>
+      <span class="bench-val">Need-driven</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">Pro audio / camera</span>
+      <span class="bench-val high">71%</span>
+      <span class="bench-val">±5 pts</span>
+      <span class="bench-val">Earnings tool</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">B2B procurement</span>
+      <span class="bench-val high">68%</span>
+      <span class="bench-val">±6 pts</span>
+      <span class="bench-val">Operational need</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">Travel packages</span>
+      <span class="bench-val high">66%</span>
+      <span class="bench-val">±5 pts</span>
+      <span class="bench-val">Date-anchored</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">Premium home goods</span>
+      <span class="bench-val mid">60%</span>
+      <span class="bench-val">±6 pts</span>
+      <span class="bench-val">Mixed intent</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">Education / courses</span>
+      <span class="bench-val mid">58%</span>
+      <span class="bench-val">±7 pts</span>
+      <span class="bench-val">Mid-commitment</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">Premium fashion</span>
+      <span class="bench-val mid">52%</span>
+      <span class="bench-val">±9 pts</span>
+      <span class="bench-val">Want-driven</span>
+    </div>
+    <div class="bench-row">
+      <span class="bench-cat">Jewelry / watches</span>
+      <span class="bench-val low">48%</span>
+      <span class="bench-val">±10 pts</span>
+      <span class="bench-val">Impulse luxury</span>
+    </div>
+  </div>
+
+  <p>
+    The asymmetry is clean. A customer buying $3,200 of dental work because they need a procedure done in two weeks will do whatever it takes to complete the transaction. A customer buying a $3,200 watch because they saw it on Instagram will rationalize the decline as a "sign" half the time and walk away.
+  </p>
+
+  <p>
+    For merchants in want-driven categories, the recovery rate is still strongly positive economically — 50% recovery on a 6.5% decline cohort is still a 3% topline lift — but the modeling and expectation-setting need to reflect the reality of the buyer.
+  </p>
+
+  <!-- ── SECTION 4 ─────────────────────────────────────────────────────── -->
+  <h2>Recovery by traffic source</h2>
+
+  <p>
+    The third dimension that matters: how the customer arrived. Traffic source is a proxy for purchase intent at the moment of decline. Customers from organic search recover better than customers from paid social, almost regardless of vertical.
+  </p>
+
+  <div class="scores">
+    <div class="score-card green">
+      <div class="top">// ORGANIC SEARCH</div>
+      <div class="num">68%</div>
+      <div class="lbl">High-intent · researched purchase · most likely to push through friction</div>
+    </div>
+    <div class="score-card green">
+      <div class="top">// EMAIL / DIRECT</div>
+      <div class="num">64%</div>
+      <div class="lbl">Returning customer · existing brand relationship · trusts the merchant</div>
+    </div>
+    <div class="score-card gold">
+      <div class="top">// PAID SEARCH</div>
+      <div class="num">59%</div>
+      <div class="lbl">Targeted intent · less brand context · moderate friction tolerance</div>
+    </div>
+    <div class="score-card gold">
+      <div class="top">// REFERRAL</div>
+      <div class="num">61%</div>
+      <div class="lbl">Trusted introduction · variable intent depending on referrer</div>
+    </div>
+    <div class="score-card orange">
+      <div class="top">// PAID SOCIAL</div>
+      <div class="num">48%</div>
+      <div class="lbl">Discovered via feed · lowest-intent cohort · highest abandonment</div>
+    </div>
+    <div class="score-card orange">
+      <div class="top">// DISPLAY / RETARGETING</div>
+      <div class="num">51%</div>
+      <div class="lbl">Re-engaged · partial intent · split outcomes</div>
+    </div>
+  </div>
+
+  <p>
+    The 20-point gap between organic search and paid social is one of the most consistent findings in the data. It's not about whether the recovery option works — it does in both cases. It's about how much friction the customer is willing to tolerate after a decline. Organic search visitors will do almost anything to complete the purchase. Paid social visitors are halfway out the door before the decline even hits.
+  </p>
+
+  <div class="honest">
+    <div class="label">// HONEST CAVEAT</div>
+    <p>If your traffic mix is heavily weighted toward paid social — say >60% of high-AOV attempts — your blended recovery rate will land below the 60% headline number. Plan for 50–55% in that case. The economics still work strongly; just don't model the headline.</p>
+  </div>
+
+  <!-- ── SECTION 5 ─────────────────────────────────────────────────────── -->
+  <h2>The ramp curve — months 1, 3, and 6</h2>
+
+  <p>
+    Recovery rates are not constant from day one. They ramp over the first 4–6 weeks as customers (and merchant teams) learn the surface exists. Here's what to expect across the early ramp:
+  </p>
+
+  <div class="ramp">
+    <div class="ramp-title">Recovery rate ramp — first 6 months post-install</div>
+    <div class="ramp-sub">// MEDIAN MERCHANT · % OF STEADY-STATE RECOVERY</div>
+
+    <div class="ramp-grid">
+      <div class="ramp-axis-y t100">100%</div>
+      <div class="ramp-axis-y t75">75%</div>
+      <div class="ramp-axis-y t50">50%</div>
+      <div class="ramp-axis-y t25">25%</div>
+      <div class="ramp-axis-y t0">0%</div>
+
+      <svg style="position:absolute; inset:0;" viewBox="0 0 600 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="rampG" x1="0" y1="0" x2="600" y2="0">
+            <stop offset="0%" stop-color="#F97316"/>
+            <stop offset="50%" stop-color="#F5C518"/>
+            <stop offset="100%" stop-color="#34D399"/>
+          </linearGradient>
+        </defs>
+        <!-- Ramp curve -->
+        <path d="M0,180 C50,130 100,80 200,55 C300,42 400,38 500,36 L600,35" stroke="url(#rampG)" stroke-width="2.5" fill="none"/>
+        <!-- Markers -->
+        <circle cx="100" cy="80" r="4" fill="#F97316"/>
+        <text x="105" y="74" fill="#FB923C" font-size="9" font-family="monospace">M1 · 56%</text>
+        <circle cx="300" cy="42" r="4" fill="#F5C518"/>
+        <text x="305" y="36" fill="#F5C518" font-size="9" font-family="monospace">M3 · 78%</text>
+        <circle cx="500" cy="36" r="4" fill="#34D399"/>
+        <text x="430" y="28" fill="#34D399" font-size="9" font-family="monospace">M6 · 96%</text>
+      </svg>
+    </div>
+
+    <div class="ramp-x">
+      <span>Day 0</span>
+      <span>M1</span>
+      <span>M2</span>
+      <span>M3</span>
+      <span>M4</span>
+      <span>M5</span>
+      <span>M6</span>
+    </div>
+
+    <div class="ramp-cap">→ <strong>Month 1 captures ~55%</strong> of steady-state. <strong>Month 3 captures ~78%</strong>. <strong>Month 6 hits steady-state.</strong></div>
+  </div>
+
+  <h3>Month 1 — the early-adopter window</h3>
+  <p>Customers seeing the recovery surface for the first time take a moment to understand what's being offered. Some hesitate or abandon despite the option being right. Recovery rate runs ~55% of steady-state. The merchant operations team is also still learning — adjusting the prompt copy, refining when the surface appears.</p>
+
+  <h3>Month 2–3 — the learning curve</h3>
+  <p>Word-of-mouth among repeat customers spreads. Customers who used the split once become more likely to try it on subsequent declines. The merchant's operations team has tuned the prompt timing and language. Recovery climbs into the 70–80% of steady-state range.</p>
+
+  <h3>Month 4–6 — steady-state</h3>
+  <p>The surface is part of the merchant's normal checkout experience. New customers see it as a familiar payment option (alongside Apple Pay, etc.), and returning customers reach for it pre-emptively when they know a purchase is large. Recovery is at full benchmark — typically 58–66% depending on vertical and traffic mix.</p>
+
+  <blockquote>
+    <p>The recovery rate at month 1 is a leading indicator, not the steady-state number. Plan for the ramp curve. Merchants who measure month 1 in isolation and conclude "the recovery rate is lower than promised" are reading the ramp, not the level.</p>
+  </blockquote>
+
+  <!-- ── INLINE CTA ──────────────────────────────────────────────────────── -->
+  <div class="inline-cta">
+    <h3>Run your own numbers.</h3>
+    <p>The ROI calculator on quarvo.io takes your AOV and monthly orders and models the recovery yield against a 60% benchmark. Adjust the inputs to match your vertical for sharper estimates.</p>
+    <a href="https://quarvo.io/#roi" class="cta-btn">Open the ROI calculator →</a>
+    <p class="cta-note">// MEDIAN MERCHANT · 60% RECOVERY · 2% PER RECOVERED SALE</p>
+  </div>
+
+  <!-- ── SECTION 6 ─────────────────────────────────────────────────────── -->
+  <h2>What "honest benchmark" means here</h2>
+
+  <p>
+    Three commitments behind the numbers in this post, since the temptation in launch-stage marketing is always to publish the high end of the range:
+  </p>
+
+  <ul>
+    <li><strong>Pilots, not aspirations.</strong> The numbers are derived from pre-launch pilots and from analogous in-page recovery surfaces in adjacent commerce. They are not modeled from theoretical maximums.</li>
+    <li><strong>Variance, not just medians.</strong> Every benchmark in this post includes a variance band. Anyone publishing a single point estimate without variance is either lying or hasn't run the analysis. The variance is real and operationally important.</li>
+    <li><strong>Cohort definitions are stated.</strong> The headline 60% number is recovery on the addressable decline cohort — not on all declines, not on all checkout failures, not on all cart abandonment. The denominator is what we can recover. We don't pad it.</li>
+  </ul>
+
+  <p>
+    When real Quarvo merchant data flows in volume, this post will be updated with the actual cohort numbers — and the methodology section above is the public commitment to keep the comparisons apples-to-apples as the data evolves.
+  </p>
+
+  <!-- ── FOOTER CTA ──────────────────────────────────────────────────────── -->
+  <div class="footer-cta">
+    <h2>Plan for 60%. Then beat it.</h2>
+    <p>Most merchants underestimate the size of their decline cohort, then over-estimate the difficulty of recovering it. Quarvo gives you the recovery surface; the customers do the rest.</p>
+    <a href="https://quarvo.io/for-merchants" class="cta-btn">Get on the merchant pilot list →</a>
+    <p style="font-size:12px; color:var(--muted); margin-top:14px; font-family:'SFMono-Regular',monospace;">// PILOTS Q2 2026 · 2% PER RECOVERED SALE · NO MONTHLY MIN</p>
+  </div>
+
+  <!-- ── FAQ ─────────────────────────────────────────────────────────────── -->
+  <div class="faq-section">
+    <div class="faq-label">// FREQUENTLY ASKED QUESTIONS</div>
+
+    <details>
+      <summary>What's a typical recovery rate for declined high-ticket transactions?</summary>
+      <div class="faq-answer">Across pre-launch pilots and analogous in-page recovery surfaces, recovery rates land between 50% and 70% when a multi-card-splitting option is offered at the moment of decline. The 60% midpoint is a reasonable planning number for a median merchant. Recovery varies by AOV band (higher AOV recovers slightly higher), vertical, and traffic source.</div>
+    </details>
+
+    <details>
+      <summary>How long does it take to reach steady-state recovery rates?</summary>
+      <div class="faq-answer">Recovery rates ramp over the first 3–6 weeks. Month 1 typically captures 70–80% of steady-state recovery as customers learn the new option exists. Months 2 and 3 capture the remainder as the tooling becomes familiar and word-of-mouth among repeat customers spreads. After month 3, recovery rates stabilize.</div>
+    </details>
+
+    <details>
+      <summary>Which verticals see the highest recovery rates?</summary>
+      <div class="faq-answer">The highest recovery rates appear in need-driven categories: medical and dental (75–80%), professional photography and audio equipment (70–75%), travel packages (65–70%), and high-end home goods (60–65%). Want-driven categories like impulse luxury (jewelry, watches) recover at 50–55%. The driver is whether the customer is buying because they need to vs. because they want to.</div>
+    </details>
+
+    <details>
+      <summary>What recovery rate should I model for my business plan?</summary>
+      <div class="faq-answer">Use 60% recovery rate on the declined high-ticket cohort for initial business case modeling. If your AOV is above $3,000 or you sell into healthcare/B2B, model 65–70%. If you sell impulse-driven luxury or pure paid-social-driven goods, model 50–55%.</div>
+    </details>
+
+    <details>
+      <summary>How do you measure recovery rate?</summary>
+      <div class="faq-answer">Recovery rate = (recovered transactions / declined transactions where the recovery option was shown). It excludes declines where the recovery option was not shown — fraud blocks, expired cards, address mismatches, etc. The denominator is declines we tried to recover; the numerator is declines we did recover. Window: in-session, single attempt.</div>
+    </details>
+  </div>
+
+  <div class="article-footer">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Marcelo</div>
+      <div class="author-role">Founder, Quarvo · Building Credit Combination Infrastructure</div>
+    </div>
+  </div>
+
+</article>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Quarvo vs Afterpay (Cash App Afterpay) — Multi-Card Splitting vs Pay in 4</title>
+  <meta name="description" content="Quarvo vs Afterpay (now Cash App Afterpay) compared. Late-fee economics, merchant fees of ~6%, and why Pay in 4 only addresses half the high-AOV decline cohort." />
+  <meta name="keywords" content="quarvo vs afterpay, afterpay alternative, cash app afterpay, afterpay merchant fees, multi card vs afterpay, split payment without afterpay" />
+  <link rel="canonical" href="https://quarvo.io/compare/afterpay" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://quarvo.io/compare/afterpay" />
+  <meta property="og:title" content="Quarvo vs Afterpay — Honest Comparison" />
+  <meta property="og:description" content="Multi-card splitting vs Afterpay's Pay in 4. Late fees, merchant fees, AOV caps, and the cohort gap each tool serves." />
+  <meta property="og:image" content="https://quarvo.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Quarvo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://quarvo.io/og-image.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Quarvo vs Afterpay — Multi-Card Splitting vs Pay in 4",
+    "description": "Side-by-side breakdown of Quarvo's multi-card payment splitting vs Afterpay's Pay in 4 product, including merchant economics, late-fee mechanics, and AOV-band fit.",
+    "author": { "@type": "Person", "name": "Marcelo", "url": "https://quarvo.io" },
+    "publisher": { "@type": "Organization", "name": "Quarvo", "url": "https://quarvo.io" },
+    "datePublished": "2026-05-02",
+    "dateModified": "2026-05-02",
+    "mainEntityOfPage": "https://quarvo.io/compare/afterpay"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Is Cash App Afterpay the same as Afterpay?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Block (formerly Square) acquired Afterpay in 2022 and rebranded the consumer-facing product as Cash App Afterpay. The merchant-facing product, fee structure, and underlying mechanics remain the same — Pay in 4 with biweekly installments and late fees on missed payments. The Cash App integration adds discoverability for the 50M+ Cash App user base but doesn't change the economics for merchants." } },
+      { "@type": "Question", "name": "What are Afterpay's merchant fees?", "acceptedAnswer": { "@type": "Answer", "text": "Afterpay's standard merchant fee is approximately 4–6% of the transaction amount plus $0.30 per order, applied to every Afterpay-processed sale. Higher-volume merchants can negotiate lower rates. Quarvo's fee is 2% flat, only on transactions Quarvo recovered — meaning the merchant pays nothing on transactions that would have completed without Quarvo's involvement." } },
+      { "@type": "Question", "name": "What are the late fees on Afterpay?", "acceptedAnswer": { "@type": "Answer", "text": "Afterpay charges a $8 late fee on each missed installment, capped at 25% of the order value or $68 (whichever is lower). Customers are also blocked from making future Afterpay purchases until the missed payment is resolved. Quarvo has no late fees — each card in a split posts as a normal card charge to the issuer; the customer's relationship with each card issuer continues unchanged." } },
+      { "@type": "Question", "name": "What's the AOV cap on Afterpay?", "acceptedAnswer": { "@type": "Answer", "text": "Afterpay's typical cap is $2,000 per order in the US, though new customers usually start with a lower limit ($600–$1,500) that grows with use. Higher caps are rare and discretionary. Quarvo has no order cap — the limit is set by the customer's combined available credit across the cards they choose to split across, which for most multi-card holders meaningfully exceeds Afterpay's cap." } },
+      { "@type": "Question", "name": "Should a high-AOV merchant choose Quarvo or Afterpay?", "acceptedAnswer": { "@type": "Answer", "text": "For AOV above $2,000, Afterpay is past its typical cap and Quarvo becomes the primary tool. For AOV $500–$2,000, the choice depends on customer profile — Quarvo wins for buyers with sufficient combined credit (better economics for both sides); Afterpay catches buyers whose combined credit is genuinely insufficient. Most high-AOV merchants will run both, with Quarvo as primary recovery and Afterpay as fallback." } }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060C; --surface: #0E0E18; --card: #101018; --border: #1A1A2E;
+      --violet: #7B2FFF; --cyan: #00F5FF;
+      --afterpay: #34D399; --afterpay-bright: #6EE7B7;
+      --green: #34D399; --red: #F75454; --gold: #F5C518; --orange: #F97316;
+      --text: #E8E8F2; --soft: #9090B0; --muted: #50506A;
+      --max: 760px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.7; }
+
+    .site-header { border-bottom: 1px solid var(--border); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; background: linear-gradient(135deg, var(--violet), var(--cyan)); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; }
+    .logo-text { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.06em; }
+    .nav-cta { background: rgba(123,47,255,0.12); border: 1px solid rgba(123,47,255,0.4); color: #B09FFF; font-size: 12px; padding: 6px 16px; border-radius: 20px; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: rgba(123,47,255,0.22); }
+
+    .compare-wrap { max-width: var(--max); margin: 0 auto; padding: 56px 24px 80px; }
+
+    .breadcrumb { display: flex; gap: 8px; align-items: center; margin-bottom: 24px; font-size: 12px; font-family: "SFMono-Regular", monospace; color: var(--muted); letter-spacing: 0.04em; }
+    .breadcrumb a { color: var(--soft); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--cyan); }
+    .breadcrumb-sep { opacity: 0.4; }
+
+    .vs-badge { display: inline-flex; align-items: center; gap: 12px; padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; font-family: "SFMono-Regular", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--soft); margin-bottom: 24px; }
+    .vs-quarvo { color: var(--cyan); font-weight: 700; }
+    .vs-other { color: var(--afterpay-bright); font-weight: 700; }
+    .vs-x { color: var(--muted); font-size: 13px; }
+
+    h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 22px; color: var(--text); }
+    h1 em { font-style: normal; background: linear-gradient(135deg, var(--cyan), var(--afterpay-bright)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .deck { font-size: 19px; color: var(--soft); line-height: 1.6; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 24px; font-weight: 800; margin: 56px 0 18px; color: var(--text); letter-spacing: -0.015em; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 12px; color: var(--text); }
+    p { margin-bottom: 18px; color: var(--text); }
+    strong { color: #fff; font-weight: 700; }
+    em { color: var(--soft); font-style: italic; }
+    ul, ol { padding-left: 22px; margin-bottom: 18px; }
+    li { color: var(--soft); margin-bottom: 8px; line-height: 1.65; }
+    li strong { color: var(--text); }
+
+    /* SIDE-BY-SIDE TABLE */
+    .ssbs-table { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin: 32px 0; }
+    .ssbs-head { display: grid; grid-template-columns: 1.4fr 1fr 1fr; background: var(--card); padding: 16px 20px; border-bottom: 1px solid var(--border); align-items: center; }
+    .ssbs-head .ssbs-label { font-family: "SFMono-Regular", monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+    .ssbs-head .ssbs-q { font-size: 15px; font-weight: 800; color: var(--cyan); text-align: center; }
+    .ssbs-head .ssbs-other { font-size: 15px; font-weight: 800; color: var(--afterpay-bright); text-align: center; }
+    .ssbs-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; padding: 14px 20px; border-bottom: 1px dashed var(--border); align-items: center; }
+    .ssbs-row:last-child { border-bottom: none; }
+    .ssbs-key { font-size: 14px; color: var(--text); font-weight: 600; }
+    .ssbs-key span { display: block; font-weight: 400; color: var(--muted); font-size: 11.5px; margin-top: 3px; font-family: "SFMono-Regular", monospace; letter-spacing: 0.04em; }
+    .ssbs-val { font-size: 13.5px; text-align: center; font-family: "SFMono-Regular", monospace; }
+    .ssbs-val.ok { color: var(--green); font-weight: 600; }
+    .ssbs-val.bad { color: var(--red); font-weight: 600; }
+    .ssbs-val.mid { color: var(--gold); font-weight: 600; }
+    .ssbs-val.neutral { color: var(--soft); }
+
+    /* AOV BAND VISUAL */
+    .aov-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 26px; margin: 28px 0; }
+    .aov-block h3 { margin: 0 0 4px; font-size: 14px; }
+    .aov-block .aov-sub { font-size: 11px; color: var(--muted); font-family: monospace; margin-bottom: 22px; letter-spacing: 0.06em; }
+    .aov-track { position: relative; height: 80px; padding: 0 8px; }
+    .aov-axis { position: absolute; left: 0; right: 0; bottom: 18px; height: 2px; background: var(--border); }
+    .aov-tick { position: absolute; bottom: 14px; transform: translateX(-50%); font-size: 10px; color: var(--muted); font-family: monospace; }
+    .aov-tick::before { content: ""; position: absolute; left: 50%; top: -8px; width: 1px; height: 6px; background: var(--muted); transform: translateX(-50%); }
+    .aov-band { position: absolute; height: 12px; border-radius: 6px; bottom: 24px; }
+    .aov-band.afterpay { background: linear-gradient(90deg, var(--afterpay-bright), var(--afterpay)); left: 4%; right: 70%; }
+    .aov-band.quarvo { background: linear-gradient(90deg, var(--cyan), var(--violet)); left: 28%; right: 4%; opacity: 0.8; }
+    .aov-band-label { position: absolute; top: 0; font-size: 11px; font-family: "SFMono-Regular", monospace; font-weight: 700; letter-spacing: 0.06em; }
+    .aov-band-label.afterpay { left: 4%; color: var(--afterpay-bright); }
+    .aov-band-label.quarvo { right: 4%; color: var(--cyan); }
+    .aov-overlap { position: absolute; bottom: 24px; height: 12px; border-radius: 6px; background: rgba(245,197,24,0.4); border: 1px dashed var(--gold); left: 28%; right: 70%; }
+    .aov-overlap-note { font-size: 11px; color: var(--gold); font-family: monospace; margin-top: 18px; letter-spacing: 0.04em; }
+
+    /* COST SCENARIO */
+    .scenario-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 26px; margin: 28px 0; }
+    .scenario-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .scenario-amount { font-size: 26px; font-weight: 800; color: var(--cyan); font-family: "SFMono-Regular", monospace; letter-spacing: -0.02em; }
+    .scenario-name { font-size: 14px; color: var(--soft); }
+    .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 540px) { .scenario-grid { grid-template-columns: 1fr; } }
+    .scenario-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .scenario-card.q { border-left: 3px solid var(--cyan); }
+    .scenario-card.o { border-left: 3px solid var(--afterpay-bright); }
+    .scenario-card .top { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-family: "SFMono-Regular", monospace; }
+    .scenario-card .total { font-size: 24px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+    .scenario-card.q .total { color: var(--cyan); }
+    .scenario-card.o .total { color: var(--afterpay-bright); }
+    .scenario-card .breakdown { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+    .scenario-card .b-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--soft); padding: 3px 0; font-family: "SFMono-Regular", monospace; }
+
+    /* WIN BLOCK */
+    .win-block { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--cyan); border-radius: 0 12px 12px 0; padding: 22px 26px; margin: 24px 0; }
+    .win-block.other { border-left-color: var(--afterpay-bright); }
+    .win-block .win-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 10px; font-family: "SFMono-Regular", monospace; }
+    .win-block.other .win-label { color: var(--afterpay-bright); }
+    .win-block h3 { margin: 0 0 12px; font-size: 18px; }
+    .win-block p { font-size: 14.5px; color: var(--soft); margin: 0 0 10px; line-height: 1.7; }
+    .win-block p:last-child { margin-bottom: 0; }
+
+    /* CALLOUT */
+    .callout { background: rgba(0,245,255,0.04); border: 1px solid rgba(0,245,255,0.22); border-left: 3px solid var(--cyan); border-radius: 0 8px 8px 0; padding: 18px 22px; margin: 28px 0; }
+    .callout .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 8px; font-family: "SFMono-Regular", monospace; }
+    .callout p { color: var(--soft); font-size: 14.5px; margin: 0; line-height: 1.7; }
+
+    /* INLINE CTA */
+    .inline-cta { background: linear-gradient(135deg, rgba(123,47,255,0.14) 0%, rgba(0,245,255,0.06) 100%); border: 1px solid rgba(123,47,255,0.4); border-radius: 14px; padding: 32px; margin: 44px 0; text-align: center; }
+    .inline-cta h3 { font-size: 22px; font-weight: 800; color: var(--text); margin: 0 0 12px; line-height: 1.25; }
+    .inline-cta p { font-size: 14.5px; color: var(--soft); margin: 0 0 22px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-block; background: linear-gradient(135deg, var(--violet), var(--cyan)); color: #fff; font-size: 14px; font-weight: 700; padding: 13px 30px; border-radius: 10px; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(123,47,255,0.3); }
+    .cta-note { font-size: 11px; color: var(--muted); margin-top: 14px !important; font-family: "SFMono-Regular", monospace; }
+
+    /* FAQ */
+    .faq-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .faq-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; font-family: "SFMono-Regular", monospace; }
+    details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+    summary { padding: 16px 18px; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; background: var(--surface); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 20px; color: var(--cyan); font-weight: 300; flex-shrink: 0; margin-left: 12px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    .faq-answer { padding: 16px 18px; font-size: 14.5px; color: var(--soft); line-height: 1.7; border-top: 1px solid var(--border); }
+
+    /* FOOTER CTA */
+    .footer-cta { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--cyan); border-radius: 0 0 14px 14px; padding: 40px 32px; margin-top: 60px; text-align: center; }
+    .footer-cta h2 { font-size: 26px; margin: 0 0 14px; line-height: 1.25; }
+    .footer-cta p { color: var(--soft); font-size: 15px; max-width: 480px; margin: 0 auto 24px; }
+
+    .related { margin-top: 60px; }
+    .related-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; font-family: "SFMono-Regular", monospace; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+    .related-card:hover { border-color: rgba(0,245,255,0.4); transform: translateY(-2px); }
+    .related-tag { font-size: 10px; font-family: "SFMono-Regular", monospace; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 6px; }
+    .related-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .related-name span { color: var(--afterpay-bright); }
+
+    @media (max-width: 600px) {
+      .compare-wrap { padding: 32px 16px 60px; }
+      h1 { font-size: 28px; }
+      .ssbs-head, .ssbs-row { grid-template-columns: 1.3fr 1fr 1fr; padding: 12px 14px; font-size: 12px; }
+      .ssbs-key { font-size: 13px; }
+      .ssbs-val { font-size: 12px; }
+    }
+  </style>
+</head>
+<body data-floating-cta="true">
+
+<header class="site-header">
+  <a href="/" class="logo">
+    <div class="logo-mark">Q</div>
+    <span class="logo-text">QUARVO</span>
+  </a>
+  <a href="/for-merchants" class="nav-cta">For merchants →</a>
+</header>
+
+<article class="compare-wrap">
+
+  <nav class="breadcrumb">
+    <a href="/">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/compare">Compare</a>
+    <span class="breadcrumb-sep">/</span>
+    <span style="color:var(--text);">Afterpay</span>
+  </nav>
+
+  <div class="vs-badge">
+    <span class="vs-quarvo">QUARVO</span>
+    <span class="vs-x">vs.</span>
+    <span class="vs-other">AFTERPAY</span>
+  </div>
+
+  <h1>Multi-card splitting<br/>vs. <em>Cash App Afterpay</em></h1>
+
+  <p class="deck">
+    Afterpay (now Cash App Afterpay after Block's 2022 acquisition) is the most consumer-recognizable BNPL brand for fashion and beauty. For high-AOV merchants the picture is different: Afterpay caps at $2,000, charges merchants ~6%, and addresses a different cohort than Quarvo. Here's where each one actually fits.
+  </p>
+
+  <!-- ─ SECTION 1 — AOV BANDS ─────────────────────────────────────── -->
+  <h2>The AOV-band fit, visualized</h2>
+
+  <p>
+    The clearest way to think about Afterpay vs Quarvo is to look at the cart-value ranges where each one is actually usable. Afterpay caps at $2,000 (with most new customers gated to lower starting limits). Quarvo's range starts where credit fragmentation becomes a real problem — typically $1,500 — and extends as far as the customer's combined card limits allow.
+  </p>
+
+  <div class="aov-block">
+    <h3>Where each tool actually operates</h3>
+    <div class="aov-sub">// AOV BAND · USABILITY</div>
+
+    <div class="aov-track">
+      <span class="aov-band-label afterpay">AFTERPAY</span>
+      <span class="aov-band-label quarvo">QUARVO</span>
+      <div class="aov-band afterpay"></div>
+      <div class="aov-band quarvo"></div>
+      <div class="aov-overlap"></div>
+      <div class="aov-axis"></div>
+      <span class="aov-tick" style="left: 4%;">$50</span>
+      <span class="aov-tick" style="left: 28%;">$1.5K</span>
+      <span class="aov-tick" style="left: 50%;">$5K</span>
+      <span class="aov-tick" style="right: 4%; transform: translateX(50%);">$15K+</span>
+    </div>
+    <div class="aov-overlap-note">// SHADED REGION = OVERLAP ($1,500–$2,000) — STRATEGIC CHOICE BAND</div>
+  </div>
+
+  <p>
+    The overlap region — $1,500 to $2,000 AOV — is where merchants choose between the tools. Below $1,500, Afterpay is the default; the credit-fragmentation problem Quarvo solves doesn't really exist at lower AOV. Above $2,000, Afterpay is past its cap and Quarvo becomes the only option (other than Affirm Financing, which carries APR and credit reporting).
+  </p>
+
+  <!-- ─ SECTION 2 — Side-by-side ─────────────────────────────────── -->
+  <h2>Side-by-side: Quarvo vs. Afterpay</h2>
+
+  <div class="ssbs-table">
+    <div class="ssbs-head">
+      <span class="ssbs-label">// DIMENSION</span>
+      <span class="ssbs-q">QUARVO</span>
+      <span class="ssbs-other">AFTERPAY</span>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Product type<span>// what it actually does</span></div>
+      <div class="ssbs-val neutral">Card splitting</div>
+      <div class="ssbs-val neutral">Pay in 4 installments</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Customer fee (on time)<span>// no missed payments</span></div>
+      <div class="ssbs-val ok">$0</div>
+      <div class="ssbs-val ok">$0</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Customer late fee<span>// per missed payment</span></div>
+      <div class="ssbs-val ok">None</div>
+      <div class="ssbs-val bad">$8 (capped at 25%)</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Merchant fee<span>// pricing model</span></div>
+      <div class="ssbs-val ok">$9.99/mo + 2% per transaction</div>
+      <div class="ssbs-val bad">~4–6% + $0.30 on every sale</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Cap on cart size<span>// max single transaction</span></div>
+      <div class="ssbs-val ok">No cap (your card limits)</div>
+      <div class="ssbs-val mid">$2,000 typical max</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">New customer cap<span>// first transaction limit</span></div>
+      <div class="ssbs-val ok">No cap</div>
+      <div class="ssbs-val mid">~$600–$1,500</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Card rewards preserved<span>// points / miles / cashback</span></div>
+      <div class="ssbs-val ok">Yes — on each card</div>
+      <div class="ssbs-val bad">No</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Credit reporting<span>// to bureaus</span></div>
+      <div class="ssbs-val ok">No</div>
+      <div class="ssbs-val ok">No (current — may change)</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Settlement to merchant<span>// when do you get paid</span></div>
+      <div class="ssbs-val ok">Through Stripe (your timing)</div>
+      <div class="ssbs-val mid">Afterpay disburses, less fee</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Best for vertical<span>// strongest fit</span></div>
+      <div class="ssbs-val neutral">Travel · pro · health · home</div>
+      <div class="ssbs-val neutral">Fashion · beauty · accessories</div>
+    </div>
+    <div class="ssbs-row">
+      <div class="ssbs-key">Best for AOV<span>// where it shines</span></div>
+      <div class="ssbs-val neutral">$1,500+</div>
+      <div class="ssbs-val neutral">$50–$2,000</div>
+    </div>
+  </div>
+
+  <!-- ─ SECTION 3 — Cost scenario ─────────────────────────────────── -->
+  <h2>Cost scenario: $1,800 cart in the overlap band</h2>
+
+  <p>
+    The most interesting comparison happens in the overlap region — where both tools are usable. Take a representative $1,800 cart from a customer with $1,200 available on one card and $1,400 on another (both card limits insufficient on their own, combined credit comfortably sufficient).
+  </p>
+
+  <div class="scenario-block">
+    <div class="scenario-head">
+      <span class="scenario-amount">$1,800</span>
+      <span class="scenario-name">cart · two cards · merchant in fashion vertical</span>
+    </div>
+
+    <div class="scenario-grid">
+
+      <div class="scenario-card q">
+        <div class="top">// VIA QUARVO</div>
+        <div class="total">$36</div>
+        <p style="font-size:13px;color:var(--soft);margin:8px 0 0;">merchant cost (2% on recovered)</p>
+        <div class="breakdown">
+          <div class="b-row"><span>Customer fee</span><span style="color:var(--green)">$0</span></div>
+          <div class="b-row"><span>Merchant fee</span><span>$36</span></div>
+          <div class="b-row"><span>Customer rewards earned</span><span style="color:var(--green)">~$36</span></div>
+          <div class="b-row"><span>Customer net cost</span><span style="color:var(--green)">−$36</span></div>
+        </div>
+      </div>
+
+      <div class="scenario-card o">
+        <div class="top">// VIA AFTERPAY</div>
+        <div class="total">$108</div>
+        <p style="font-size:13px;color:var(--soft);margin:8px 0 0;">merchant cost (6%)</p>
+        <div class="breakdown">
+          <div class="b-row"><span>Customer fee (on time)</span><span style="color:var(--green)">$0</span></div>
+          <div class="b-row"><span>Merchant fee</span><span style="color:var(--red)">$108</span></div>
+          <div class="b-row"><span>Customer rewards earned</span><span style="color:var(--red)">$0</span></div>
+          <div class="b-row"><span>Late fee risk</span><span style="color:var(--red)">$8 / miss</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <p>
+    Same recovered transaction. Three structural differences in outcome: (1) the merchant pays $72 less in fees with Quarvo, (2) the customer earns $36 in rewards via Quarvo (vs zero via Afterpay), and (3) the customer carries no late-fee risk with Quarvo. None of these are big numbers in isolation. Multiplied across hundreds of recovered transactions a year, they add up to material differences in operator and consumer outcomes.
+  </p>
+
+  <div class="callout">
+    <div class="label">// THE FRAMING</div>
+    <p>Afterpay's value is genuine — particularly for customers who don't have multiple cards or sufficient combined credit. But for the multi-card-holder cohort that has the credit and just can't access it across one transaction, Quarvo is structurally better for both the merchant and the customer. The overlap band is where merchants make the tradeoff explicit.</p>
+  </div>
+
+  <!-- ─ INLINE CTA ─────────────────────────────────────────────────── -->
+  <div class="inline-cta">
+    <h3>Above $2,000? Quarvo is the only path.</h3>
+    <p>Afterpay caps out where Quarvo's strongest cohort begins. For high-AOV merchants — premium goods, B2B, healthcare — Afterpay simply isn't usable on the largest carts. Quarvo handles them at 2% per recovered.</p>
+    <a href="/for-merchants" class="cta-btn">See the merchant integration →</a>
+    <p class="cta-note">// PILOT · Q2 2026 · $9.99/MO + 2% PER TRANSACTION · 3 MONTHS FREE</p>
+  </div>
+
+  <!-- ─ SECTION 4 — When each wins ────────────────────────────────── -->
+  <h2>When Afterpay is the right answer</h2>
+
+  <div class="win-block other">
+    <div class="win-label">// AFTERPAY WINS</div>
+    <h3>Fashion / beauty / accessories at $50–$500 AOV</h3>
+    <p>Afterpay's brand recognition in the fashion and beauty verticals is real and converts. The customer demographic skews younger, often single-card, and frequently uses Pay in 4 as a budgeting framework rather than a credit-extension tool. Quarvo doesn't help here — there's no credit-fragmentation problem to solve at $50–$500 AOV.</p>
+  </div>
+
+  <div class="win-block other">
+    <div class="win-label">// AFTERPAY WINS</div>
+    <h3>Cash App native customers</h3>
+    <p>Block's integration of Afterpay into Cash App makes the tool a one-tap path for the 50M+ Cash App users. For merchants whose customer base overlaps heavily with Cash App, the discoverability and frictionless reactivation are real advantages — Quarvo doesn't have an equivalent consumer-app distribution channel.</p>
+  </div>
+
+  <h2>When Quarvo is the right answer</h2>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>AOV is above $2,000</h3>
+    <p>Past Afterpay's cap, the merchant has three options: send the customer to Affirm (with APR and credit reporting), lose the sale, or use Quarvo. For most multi-card-holder customers in this AOV range, Quarvo is the cleanest path — same in-page recovery, no APR, no reporting, no merchant fee unless the transaction is recovered.</p>
+  </div>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>Customer audience skews premium-card holders</h3>
+    <p>Customers with Chase Sapphire, Amex Platinum, etc. are the worst fit for Afterpay — they care about preserving rewards (Afterpay strips them), they have substantial combined credit (no need for Pay in 4), and they often see Pay in 4 as off-brand for premium purchases. For this cohort, Quarvo is the only tool that matches the brand and economics.</p>
+  </div>
+
+  <div class="win-block">
+    <div class="win-label">// QUARVO WINS</div>
+    <h3>Merchant cost-per-recovery matters</h3>
+    <p>Afterpay's ~6% applies to every Afterpay sale, whether that customer would have completed the transaction otherwise or not. Quarvo's 2% applies only to incremental recoveries. For high-AOV merchants doing meaningful Afterpay volume, the fee differential alone often exceeds the cost of installing Quarvo.</p>
+  </div>
+
+  <!-- ─ FOOTER CTA ────────────────────────────────────────────────── -->
+  <div class="footer-cta">
+    <h2>Past Afterpay's $2K cap.<br/>Below Affirm's APR floor.</h2>
+    <p>Quarvo handles the high-AOV, multi-card-holder cohort that BNPL's Pay in 4 products structurally can't reach. Stripe Connect under the hood. 2% per recovered.</p>
+    <a href="/for-merchants" class="cta-btn">Get on the merchant pilot list →</a>
+    <p style="font-size:12px; color:var(--muted); margin-top:14px; font-family:'SFMono-Regular',monospace;">// $9.99/MO + 2% PER TRANSACTION · STRIPE CONNECT · NO REPLATFORMING</p>
+  </div>
+
+  <!-- ─ FAQ ────────────────────────────────────────────────────────── -->
+  <div class="faq-section">
+    <div class="faq-label">// FREQUENTLY ASKED QUESTIONS</div>
+
+    <details>
+      <summary>Is Cash App Afterpay the same as Afterpay?</summary>
+      <div class="faq-answer">Yes. Block (formerly Square) acquired Afterpay in 2022 and rebranded the consumer-facing product as Cash App Afterpay. The merchant-facing product, fee structure, and underlying mechanics remain the same — Pay in 4 with biweekly installments and late fees on missed payments. The Cash App integration adds discoverability for the 50M+ Cash App user base but doesn't change the economics for merchants.</div>
+    </details>
+
+    <details>
+      <summary>What are Afterpay's merchant fees?</summary>
+      <div class="faq-answer">Afterpay's standard merchant fee is approximately 4–6% of the transaction amount plus $0.30 per order, applied to every Afterpay-processed sale. Higher-volume merchants can negotiate lower rates. Quarvo's fee is 2% flat, only on transactions Quarvo recovered.</div>
+    </details>
+
+    <details>
+      <summary>What are the late fees on Afterpay?</summary>
+      <div class="faq-answer">Afterpay charges $8 per missed installment, capped at 25% of the order value or $68 (whichever is lower). Customers are also blocked from making future Afterpay purchases until the missed payment is resolved. Quarvo has no late fees — each card in a split posts as a normal card charge.</div>
+    </details>
+
+    <details>
+      <summary>What's the AOV cap on Afterpay?</summary>
+      <div class="faq-answer">Afterpay's typical cap is $2,000 per order in the US, though new customers usually start with a lower limit ($600–$1,500) that grows with use. Higher caps are rare and discretionary. Quarvo has no order cap — the limit is set by the customer's combined available credit across the cards they choose to split across.</div>
+    </details>
+
+    <details>
+      <summary>Should a high-AOV merchant choose Quarvo or Afterpay?</summary>
+      <div class="faq-answer">For AOV above $2,000, Afterpay is past its typical cap and Quarvo becomes the primary tool. For AOV $500–$2,000, the choice depends on customer profile — Quarvo wins for buyers with sufficient combined credit; Afterpay catches buyers whose combined credit is genuinely insufficient. Most high-AOV merchants will run both, with Quarvo as primary recovery and Afterpay as fallback.</div>
+    </details>
+  </div>
+
+  <!-- ─ RELATED ────────────────────────────────────────────────────── -->
+  <div class="related">
+    <div class="related-label">// MORE COMPARISONS</div>
+    <div class="related-grid">
+      <a href="/compare/bnpl" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">BNPL <span>→</span></div>
+      </a>
+      <a href="/compare/klarna" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">Klarna <span>→</span></div>
+      </a>
+      <a href="/compare/affirm" class="related-card">
+        <div class="related-tag">// QUARVO VS</div>
+        <div class="related-name">Affirm <span>→</span></div>
+      </a>
+    </div>
+  </div>
+
+</article>
+
+  <!-- Vercel Analytics + Speed Insights -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script src="/conversion.js?v=8.0" defer></script>
+</body>
+</html>

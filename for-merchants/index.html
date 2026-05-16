@@ -432,6 +432,14 @@
       gap: 20px;
       margin-bottom: 32px;
     }
+    .m-pricing-grid--single {
+      grid-template-columns: minmax(0, 520px);
+      justify-content: center;
+    }
+    .m-pricing-card--solo {
+      max-width: 520px;
+      margin: 0 auto;
+    }
     .m-pricing-card {
       position: relative;
       padding: 36px 32px 28px;
@@ -706,7 +714,7 @@
     }
   </style>
 </head>
-<body>
+<body data-exit-modal="true">
 
   <a class="skip-link" href="#m-main">Skip to main content</a>
 
@@ -732,6 +740,7 @@
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
+        <a href="#pricing">Pricing</a>
         <a href="/pay-with-quarvo">Docs</a>
         <a href="/#blog">Blog</a>
         <a href="/#faq">FAQ</a>
@@ -793,7 +802,7 @@
           <svg class="m-bullets-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/></svg>
           <span>
             <strong>2% per recovered sale.</strong> Auto-deducted via Stripe
-            <span class="m-bullets-meta">No monthly fee on Direct API plan</span>
+            <span class="m-bullets-meta">$9.99/mo &mdash; 3 months free, no setup fee, no minimum volume</span>
           </span>
         </li>
       </ul>
@@ -897,7 +906,7 @@
           </div>
 
           <button type="submit" class="m-submit cta-glow magnetic" id="merchantSubmit" data-magnetic="0.25" data-magnetic-max="10">
-            <span id="merchantSubmitText">Connect your store — Free</span>
+            <span id="merchantSubmitText">Connect your store</span>
             <span class="m-submit-spinner" aria-hidden="true"></span>
             <svg class="m-submit-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
@@ -925,7 +934,7 @@
 
   </main>
 
-  <!-- PRICING (Phase 2.8) — merchant tiers -->
+  <!-- PRICING (Sprint I Phase 2) — single tier across all integrations -->
   <section class="m-pricing reveal" id="pricing" aria-labelledby="m-pricing-title">
     <div class="m-pricing-inner">
       <header class="m-pricing-head">
@@ -934,65 +943,38 @@
           Pricing
         </div>
         <h2 class="m-pricing-h2" id="m-pricing-title">
-          Two tiers. <span class="m-h1-accent">Both pay only when you do.</span>
+          One price. <span class="m-h1-accent">Every integration.</span>
         </h2>
-        <p class="m-pricing-sub">No setup fee. No minimum volume. Failed splits cost you nothing. Pick your stack.</p>
+        <p class="m-pricing-sub">Shopify, WooCommerce, BigCommerce (Q2 2026), or Direct API &mdash; all ship at the same rate.</p>
       </header>
 
-      <div class="m-pricing-grid reveal-group">
+      <div class="m-pricing-grid m-pricing-grid--single reveal-group">
 
-        <!-- Direct API tier (FEATURED) -->
-        <article class="m-pricing-card m-pricing-card--featured">
-          <span class="m-pricing-tag">
-            <span class="m-pricing-tag-dot"></span>
-            Recommended
-          </span>
-          <div class="m-pricing-tier">Direct API</div>
-          <div class="m-pricing-price">
-            <span class="m-pricing-price-amount">$0</span>
-            <span class="m-pricing-price-unit">/ month</span>
-          </div>
-          <div class="m-pricing-fee">
-            <span class="m-pricing-fee-amount">+ 2%</span>
-            <span class="m-pricing-fee-unit">per recovered sale</span>
-          </div>
-          <ul class="m-pricing-features">
-            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Stripe Connect OAuth setup</li>
-            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg><code class="m-pricing-code">POST /api/checkout/session</code></li>
-            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Webhook + per-card breakdown</li>
-            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Test mode + live mode keys</li>
-            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Email support</li>
-          </ul>
-          <a href="/pay-with-quarvo" class="m-pricing-cta m-pricing-cta--featured">
-            Read the docs
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <p class="m-pricing-foot">Best for custom checkouts, marketplaces, B2B platforms.</p>
-        </article>
-
-        <!-- Shopify + WooCommerce tier -->
-        <article class="m-pricing-card">
-          <div class="m-pricing-tier">Shopify &amp; WooCommerce</div>
+        <!-- Single canonical tier -->
+        <article class="m-pricing-card m-pricing-card--solo">
+          <div class="m-pricing-tier">Standard</div>
           <div class="m-pricing-price">
             <span class="m-pricing-price-amount">$9.99</span>
             <span class="m-pricing-price-unit">/ month</span>
           </div>
           <div class="m-pricing-fee">
             <span class="m-pricing-fee-amount">+ 2%</span>
-            <span class="m-pricing-fee-unit">per recovered sale</span>
+            <span class="m-pricing-fee-unit">per transaction</span>
           </div>
           <ul class="m-pricing-features">
-            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Native Shopify App + Woo Plugin</li>
-            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>One-click install, zero code</li>
-            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Order webhooks pre-wired</li>
-            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Compatible with Shopify Payments</li>
-            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Priority email support</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>3 months free on the subscription</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>2% applies from day 1</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>No setup fee</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>No minimum volume</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Failed transactions cost you nothing</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Cancel anytime</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3 3 7-8"/></svg>Same price for every integration</li>
           </ul>
-          <a href="#merchantForm" class="m-pricing-cta">
-            Connect your store
+          <a href="#merchantForm" class="m-pricing-cta m-pricing-cta--featured">
+            Start free 3-month trial
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <p class="m-pricing-foot">Best for established stores. BigCommerce coming Q2 2026.</p>
+          <p class="m-pricing-foot">Best for travel &middot; pro audio &middot; jewelry &middot; high-AOV electronics &middot; B2B equipment.</p>
         </article>
 
       </div>
@@ -1029,7 +1011,13 @@
     <p style="margin-top:8px;">© 2026 QUARVO LLC · Credit Combination Technology™</p>
   </footer>
 
-  <script src="/motion.js?v=2.8" defer></script>
+  <script src="/motion.js?v=7.0" defer></script>
+  <script src="/conversion.js?v=8.0" defer></script>
+
+  <!-- Vercel Analytics + Speed Insights -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
   <script>
     (function () {
       var form    = document.getElementById('merchantForm');
@@ -1136,7 +1124,7 @@
           .finally(function () {
             submit.disabled = false;
             submit.classList.remove('m-submit--loading');
-            btnText.textContent = 'Connect your store — Free';
+            btnText.textContent = 'Connect your store';
           });
       });
     })();
