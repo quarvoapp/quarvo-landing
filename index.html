@@ -577,7 +577,7 @@
 
       <div class="how-cta-row reveal">
         <a href="/for-merchants" class="btn-primary btn-primary--hero cta-glow magnetic" data-magnetic="0.20" data-magnetic-max="8">
-          Start recovering sales — Free
+          Start recovering sales
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="/pay-with-quarvo" class="btn-ghost">Read the integration docs &rarr;</a>
@@ -1089,59 +1089,65 @@
       <header class="faq-header reveal">
         <div class="section-tag">FAQ</div>
         <h2 class="section-title">Questions, answered.</h2>
-        <p class="faq-sub">Email <a href="mailto:support@quarvo.io">support@quarvo.io</a> if yours isn't here.</p>
+        <p class="faq-sub">Mixed for merchants and shoppers. Email <a href="mailto:support@quarvo.io">support@quarvo.io</a> if yours isn't here.</p>
       </header>
 
-      <div class="faq-list">
+      <div class="faq-cols">
 
-        <div class="faq-item">
-          <div class="faq-q">How long does setup take?</div>
-          <div class="faq-a">5 minutes for Shopify or WooCommerce (one-click install + Stripe Connect OAuth). 30 minutes for Direct API integration. Your existing checkout stays untouched &mdash; Quarvo appears as one extra payment option.</div>
+        <!-- MERCHANT COLUMN -->
+        <div class="faq-col">
+          <div class="faq-col-label">
+            <span class="faq-col-dot"></span>
+            For merchants
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">How long does setup take?</div>
+            <div class="faq-a">5 minutes for Shopify or WooCommerce (one-click install + Stripe Connect OAuth). 30 minutes for Direct API integration. Your existing checkout stays untouched &mdash; Quarvo appears as one extra payment option.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">When and how does Quarvo's 2% get charged?</div>
+            <div class="faq-a">Auto-deducted via Stripe Connect when a customer completes a Quarvo split. You see it as a transparent line item on the same payout as the sale. No invoices, no monthly bill, no reconciliation. Failed splits cost you $0.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Will Quarvo touch my customers' card data?</div>
+            <div class="faq-a">No. Card numbers never reach our servers. Card authorization is handled by Plaid + Stripe tokens. PCI-DSS Level 1 compliance is inherited from Stripe; Quarvo's scope is reduced to orchestration only &mdash; no SAQ on you.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">What if a split fails halfway?</div>
+            <div class="faq-a">Stripe Connect rolls back automatically. None of the cards get charged unless every leg succeeds. The customer sees a clear failure state and can retry with a different card combination. You never see a half-paid order.</div>
+          </div>
         </div>
 
-        <div class="faq-item">
-          <div class="faq-q">When and how does Quarvo's 2% get charged?</div>
-          <div class="faq-a">Auto-deducted via Stripe Connect when a customer completes a Quarvo split. You see it as a transparent line item on the same payout as the sale. No invoices, no reconciliation. Failed splits cost you nothing. Your $9.99 subscription is billed separately on a single monthly invoice.</div>
-        </div>
+        <!-- CONSUMER COLUMN -->
+        <div class="faq-col">
+          <div class="faq-col-label faq-col-label--cyan">
+            <span class="faq-col-dot"></span>
+            For shoppers
+          </div>
 
-        <div class="faq-item">
-          <div class="faq-q">Will Quarvo touch my customers' card data?</div>
-          <div class="faq-a">No. Card numbers never reach our servers. Card authorization is handled by Plaid + Stripe tokens. PCI-DSS Level 1 compliance is inherited from Stripe; Quarvo's scope is reduced to orchestration only &mdash; no SAQ on you.</div>
-        </div>
+          <div class="faq-item">
+            <div class="faq-q">How much does Quarvo cost me?</div>
+            <div class="faq-a"><strong>Nothing.</strong> The merchant covers Quarvo's 2% so the sale doesn't slip away. You pay exactly the cart total &mdash; split across the cards you already have.</div>
+          </div>
 
-        <div class="faq-item">
-          <div class="faq-q">What if a split fails halfway?</div>
-          <div class="faq-a">Stripe Connect rolls back automatically. None of the cards get charged unless every leg succeeds. The customer sees a clear failure state and can retry with a different card combination. You never see a half-paid order.</div>
-        </div>
+          <div class="faq-item">
+            <div class="faq-q">Will this affect my credit score?</div>
+            <div class="faq-a">No hard pulls. No new inquiries. No new accounts. Quarvo uses your <em>existing</em> available credit through Plaid (read-only) &mdash; your credit profile stays exactly as it is.</div>
+          </div>
 
-        <div class="faq-item">
-          <div class="faq-q">How much does Quarvo cost?</div>
-          <div class="faq-a">$9.99/month for the subscription, plus 2% per transaction Quarvo recovers for you. Same price whether you integrate via Shopify, WooCommerce, or our Direct API. The first 3 months of the subscription are free &mdash; the 2% applies from day 1.</div>
-        </div>
+          <div class="faq-item">
+            <div class="faq-q">Do my card rewards still apply?</div>
+            <div class="faq-a">Yes. Each card you split across is charged normally by its issuer, so you earn your usual cashback / points / miles. Quarvo just decides how much goes on each.</div>
+          </div>
 
-        <div class="faq-item">
-          <div class="faq-q">Is there a free trial?</div>
-          <div class="faq-a">Yes &mdash; 3 months free on the $9.99/mo subscription. You start with full access, full support, and zero subscription cost. The 2% per-transaction fee is never waived; it applies whenever Quarvo actually recovers a sale that would have declined.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q">What happens after the trial ends?</div>
-          <div class="faq-a">Your $9.99/month subscription kicks in. We email you 14 days before the trial ends. If Quarvo hasn't recovered enough revenue to make it obvious it's earning its keep, cancel in one click &mdash; no clawback, no minimum commitment.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q">What's the per-transaction fee?</div>
-          <div class="faq-a">2% of the recovered transaction. Auto-deducted via Stripe Connect on the same payout as the sale. Failed splits and declined retries cost you $0 &mdash; the 2% only triggers when the customer actually completes the purchase.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q">Are there setup fees or hidden costs?</div>
-          <div class="faq-a">No. The $9.99/mo subscription and the 2% per-transaction fee are the entire cost. No setup fee, no minimum volume, no integration fee, no annual contract. Stripe's standard processing fees apply to each card charge &mdash; those go to Stripe, not us, and are the same fees you already pay today.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q">How does the subscription billing work?</div>
-          <div class="faq-a">Billed monthly via Stripe on the day you onboard. Single transparent invoice. Cancel from your Quarvo dashboard at any time &mdash; service stays active until the end of the current billing cycle. The 3-month free trial starts the moment your Stripe Connect account is verified, not when you sign up.</div>
+          <div class="faq-item">
+            <div class="faq-q">How is this different from Klarna / Affirm / BNPL?</div>
+            <div class="faq-a">BNPL <em>lends you new credit</em> and charges interest or fees. Quarvo <em>activates credit you already own</em> across your existing cards. No new debt, no new interest, no new accounts. Fundamentally different.</div>
+          </div>
         </div>
 
       </div>
